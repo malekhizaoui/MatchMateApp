@@ -61,7 +61,10 @@ import {
   width:150px;
   border-radius:75px;
   backgroundColor:${MatchMatePalette.primaryColor};
-  margin-bottom:20px
+  margin-bottom:20px;
+  display:flex;
+  justify-content:center;
+  align-items:center
   `
 
   export const TextpasswordForgotten=styled.Text`
@@ -91,6 +94,7 @@ import {
   `
 
 
+
   export const ContainerScreenMethod=styled.View`
   display:flex;
   flex:1;
@@ -108,3 +112,12 @@ import {
   align-self:center;
   margin-bottom:20px
   `
+
+
+  export const TextValidationCode=styled.Text`
+  color:white;
+  font-size:15px;
+  margin-top:20px;
+  margin-bottom:20px;
+  `
+

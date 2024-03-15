@@ -60,8 +60,11 @@ import {
   align-items:center;
   border-radius: 5px;
   margin-bottom:5px;
-  
+  flex-direction:row
   `
   export const TextButton =styled.Text`
-  color:white
+  color:white;
+  margin-left:10px
   `
+
+  //navigateBack style

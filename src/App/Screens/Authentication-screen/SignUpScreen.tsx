@@ -1,4 +1,4 @@
-import {  StatusBar } from 'react-native';
+import {  StatusBar, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import {
   ContainerApp,
@@ -14,6 +14,11 @@ import {InputAuthComponent} from '../../../Components/AuthComponents/InputAuthCo
 import useAuth from './useAuth/useAuth';
 import UserNameIconSVG from '../../../assets/Icons/svg/UsernameIconSVG';
 import PasswordIconSVG from '../../../assets/Icons/svg/PasswordIconSVG';
+import MailIconSVG from '../../../assets/Icons/svg/MailIconSVG';
+import AgeIconSVG from '../../../assets/Icons/svg/AgeIconSV';
+import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
+import NavigateBack from '../../../Components/NavigateBack';
+
 const SignUpScreen = ({navigation}: any) => {
   const {
     email,
@@ -26,6 +31,7 @@ const SignUpScreen = ({navigation}: any) => {
     setLastName,
     age,
     setAge,
+    registerUser
   } = useAuth(navigation);
   
   return (
@@ -36,16 +42,20 @@ const SignUpScreen = ({navigation}: any) => {
       />
       <ContainerScreen showsVerticalScrollIndicator={false}>
         <HeaderRegisterScreen>
+          <View style={{marginBottom:20}}>
+          <NavigateBack navigation={navigation}/>
+          </View>
           <HeaderText>S'inscrire</HeaderText>
           <HeaderText>Rapide et facile</HeaderText>
         </HeaderRegisterScreen>
+        
         <ContainerForm>
           <InputAuthComponent
             placeholder="Ex : email@example.com"
             inputName="Adresse mail"
             setValue={setEmail}
             valueInput={email}
-            iconComponent={ <UserNameIconSVG color={MatchMatePalette.primaryColor} />}
+            iconComponent={ <MailIconSVG color={MatchMatePalette.primaryColor} />}
 
           />
           <InputAuthComponent
@@ -78,14 +88,15 @@ const SignUpScreen = ({navigation}: any) => {
             inputName="AGE"
             setValue={setAge}
             valueInput={age}
-            iconComponent={ <UserNameIconSVG color={MatchMatePalette.primaryColor} />}
+            iconComponent={ <AgeIconSVG color={MatchMatePalette.primaryColor} />}
 
           />
           <ButtonAuthComponent
             btnText="Créer un compte"
             backgroundColor={MatchMatePalette.primaryColor}
             btnTextColor="white"
-            btnClicked={()=>{}}
+            btnClicked={registerUser}
+            iconComponent={""}
           />
         </ContainerForm>
       </ContainerScreen>

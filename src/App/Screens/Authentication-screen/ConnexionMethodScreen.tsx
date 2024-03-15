@@ -22,6 +22,8 @@ import {
   
   import {MatchMatePalette} from '../../../assets/color-palette';
   import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
+  import FacebookIconSVG from '../../../assets/Icons/svg/FacebookIconSVG';
+  import GoogleIconSVG from '../../../assets/Icons/svg/GoogleIconSVG';
   const ConnexionMethodScreen = ({navigation}: any) => {
     return (
       <ContainerApp>
@@ -37,9 +39,9 @@ import {
           <ContainerBtnMethod>  
             <TextDescription>Inscrivez-vous ou connectez-vous en utilisant l'une de ces méthodes de connexion</TextDescription>
 
-             <ButtonAuthComponent btnText='Connexion avec Facebook' backgroundColor="#1d5dc4" btnTextColor='white' btnClicked={()=>{}} />
-             <ButtonAuthComponent btnText='Connexion avec Google' backgroundColor="white" btnTextColor='black' btnClicked={()=>{}}/>
-             <ButtonAuthComponent btnText='Connexion avec MatchMate' backgroundColor={MatchMatePalette.primaryColor} btnTextColor='white' btnClicked={()=>navigation.navigate('Signin')}/>
+             <ButtonAuthComponent btnText='Connexion avec Facebook' backgroundColor="#1d5dc4" btnTextColor='white' btnClicked={()=>{}} iconComponent={<FacebookIconSVG color=''/>} />
+             <ButtonAuthComponent btnText='Connexion avec Google' backgroundColor="white" btnTextColor='black' btnClicked={()=>{}} iconComponent={<GoogleIconSVG color=''/>}/>
+             <ButtonAuthComponent btnText='Connexion avec MatchMate' backgroundColor={MatchMatePalette.primaryColor} btnTextColor='white' btnClicked={()=>navigation.navigate('Signin')} iconComponent={""}/>
 
           </ContainerBtnMethod>
         </ContainerScreenMethod>

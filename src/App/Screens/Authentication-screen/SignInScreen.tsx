@@ -1,4 +1,4 @@
-import {StatusBar} from 'react-native';
+import {StatusBar, TouchableOpacity,View} from 'react-native';
 import React from 'react';
 import {
   ContainerApp,
@@ -16,17 +16,13 @@ import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthCo
 import {MatchMatePalette} from '../../../assets/color-palette';
 import {InputAuthComponent} from '../../../Components/AuthComponents/InputAuthComponent';
 import useAuth from './useAuth/useAuth';
-import UserNameIconSVG from '../../../assets/Icons/svg/UsernameIconSVG';
 import PasswordIconSVG from '../../../assets/Icons/svg/PasswordIconSVG';
+import MailIconSVG from '../../../assets/Icons/svg/MailIconSVG';
+import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
+import NavigateBack from '../../../Components/NavigateBack';
 const SignInScreen = ({navigation}: any) => {
-    const {
-      email,
-      setEmail,
-      password,
-      setPassword,
-      loginUser
-    } = useAuth(navigation);
-
+  const {email, setEmail, password, setPassword, loginUser} =
+    useAuth(navigation);
 
   return (
     <ContainerApp>
@@ -35,31 +31,38 @@ const SignInScreen = ({navigation}: any) => {
         backgroundColor={MatchMatePalette.darkBackgroundColor}
       />
       <ContainerScreen showsVerticalScrollIndicator={false}>
+        <View style={{marginTop: 20}}>
+          <NavigateBack navigation={navigation} />
+        </View>
         <HeaderConnexionScreen>
           <LogoAppStyle></LogoAppStyle>
           <HeaderTitleText>Se Connecter à MatchMate</HeaderTitleText>
         </HeaderConnexionScreen>
         <ContainerForm>
-        <InputAuthComponent
+          <InputAuthComponent
             placeholder="Ex : email@example.com"
             inputName="Adresse mail"
             setValue={setEmail}
             valueInput={email}
-            iconComponent={ <UserNameIconSVG color={MatchMatePalette.primaryColor} />}
+            iconComponent={
+              <MailIconSVG color={MatchMatePalette.primaryColor} />
+            }
           />
           <InputAuthComponent
             placeholder="Choisissez un mot de passe"
             inputName="MOT DE PASSE mail"
             setValue={setPassword}
             valueInput={password}
-            iconComponent={ <PasswordIconSVG color={MatchMatePalette.primaryColor} />}
-
+            iconComponent={
+              <PasswordIconSVG color={MatchMatePalette.primaryColor} />
+            }
           />
           <ButtonAuthComponent
             btnText="Connexion"
             backgroundColor={MatchMatePalette.primaryColor}
             btnTextColor="white"
             btnClicked={loginUser}
+            iconComponent={""}
           />
           <TextpasswordForgotten>Mot de passe oublié ?</TextpasswordForgotten>
           <ContainerDivideText>
@@ -71,7 +74,10 @@ const SignInScreen = ({navigation}: any) => {
             btnText="Créer un compte"
             backgroundColor={MatchMatePalette.primaryColor}
             btnTextColor="white"
-            btnClicked={loginUser}
+            btnClicked={() => {
+              navigation.navigate('Signup');
+            }}
+            iconComponent={""}
           />
         </ContainerForm>
       </ContainerScreen>

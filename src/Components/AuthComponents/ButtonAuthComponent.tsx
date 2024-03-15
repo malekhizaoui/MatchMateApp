@@ -5,17 +5,20 @@ import {
   ButtonStyle,
   TextButton
 } from './StyledComponent/StyledComponent';
-
+import FacebookIconSVG from '../../assets/Icons/svg/FacebookIconSVG';
 interface ButtonAuthComponentProps{
     btnText:string,
     backgroundColor:string,
     btnTextColor:string,
-    btnClicked:()=>void
+    btnClicked:()=>void,
+    iconComponent :any
+
   }
 
-const ButtonAuthComponent = ({btnText,backgroundColor,btnTextColor,btnClicked}:ButtonAuthComponentProps) => {
+const ButtonAuthComponent = ({btnText,backgroundColor,btnTextColor,btnClicked,iconComponent}:ButtonAuthComponentProps) => {
   return (
     <ButtonStyle style={{backgroundColor}} onPress={btnClicked} >
+      {iconComponent}
      <TextButton style={{color:btnTextColor}}>{btnText}</TextButton>
    </ButtonStyle>
     )
