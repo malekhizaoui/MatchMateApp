@@ -47,7 +47,6 @@ import {
   width:50px;
   align-items:center;
   padding-top:2px
-  
   `
 
 

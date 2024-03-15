@@ -4,13 +4,13 @@ import {AuthContext, AuthContextProps} from '../services/Context/AuthContext';
 import UnauthenticatedStack from './Stacks/UnauthenticatedStack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {HomeScreen} from '../App/Tabs/Home-Tab/HomeScreen'
+import {HomeScreen} from '../App/Tabs/Home-Tab/HomeScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import BookingSectionStack from './Stacks/BookingSectionStack';
 import ProfileSectionStack from './Stacks/ProfileSectionStack';
 import HomeSectionStack from './Stacks/HomeSectionStack';
 import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
-import { ScreenOptions } from './ScreenOptions';
+import {ScreenOptions} from './ScreenOptions';
 function NavigationApp() {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [choix, setChoix] = useState<string>('');
@@ -56,35 +56,36 @@ function NavigationApp() {
             />
           </SplashApp.Navigator>
         ) : (
+          
           <TabBarDourbia.Navigator
-          initialRouteName={'Home'}
-          screenOptions={({ navigation, route }: any) => ({
-            ...ScreenOptions({ navigation, route }),
-            tabBarOptions: {
-              style: { backgroundColor: 'red' }, // Customize tabBar background color
-              activeTintColor: '#E59138',
-              inactiveTintColor: '#707070',
-            },
-            tabBarStyle:{backgroundColor:"lightgrey",padding:10,height:"8%",borderColor:"grey",borderRadius:50,width:"90%",alignSelf:"center"}
-          })}>
-          <TabBarDourbia.Screen
-            name="HomeTab"  
-            component={HomeSectionStack}
-          />
-          <TabBarDourbia.Screen
-            name="BookingTab"
-            component={BookingSectionStack}
-          />
-          <TabBarDourbia.Screen
-            name="LeaderboardTab"
-            component={LeaderboardSectionStack}
-          />
-          <TabBarDourbia.Screen
-            name="ProfileTab"
-            component={ProfileSectionStack}
-          />
-
-        </TabBarDourbia.Navigator>     )}
+            initialRouteName={'Home'}
+            screenOptions={({navigation, route}: any) => ({
+              ...ScreenOptions({navigation, route}),
+              tabBarStyle: {
+                backgroundColor: '#262626',
+                padding: 10,
+                height: '8%',
+                width: '100%',
+                alignSelf: 'center',
+                borderColor:'white',
+                border:1,
+              },
+              })}>
+            <TabBarDourbia.Screen name="HomeTab" component={HomeSectionStack} />
+            <TabBarDourbia.Screen
+              name="BookingTab"
+              component={BookingSectionStack}
+            />
+            <TabBarDourbia.Screen
+              name="LeaderboardTab"
+              component={LeaderboardSectionStack}
+            />
+            <TabBarDourbia.Screen
+              name="ProfileTab"
+              component={ProfileSectionStack}
+            />
+          </TabBarDourbia.Navigator>
+        )}
       </NavigationContainer>
     </AuthContext.Provider>
   );

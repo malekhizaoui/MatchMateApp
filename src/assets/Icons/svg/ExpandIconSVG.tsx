@@ -9,21 +9,20 @@ import {
   Svg,
   Path,
 } from 'react-native-svg';
-interface LeaderboardIconSCG {
+interface ExpandIconSVG {
   color: string;
 }
-const LeaderboardIconSCG = ({color}: LeaderboardIconSCG) => {
+const ExpandIconSVG = ({color}: ExpandIconSVG) => {
   return (
     <Svg
       height="24"
       viewBox="0 -960 960 960"
       width="24">
       <Path
-      
       fill={color}
-      d="M80-120v-480h220v480H80Zm290 0v-720h220v720H370Zm290 0v-400h220v400H660Z" />
+      d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z" />
     </Svg>
   );
 };
 
-export default LeaderboardIconSCG;
+export default ExpandIconSVG;
