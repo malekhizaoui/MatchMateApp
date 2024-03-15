@@ -12,34 +12,16 @@ import {
   import UsernameIconSVG from '../../../assets/Icons/svg/usernameIconSVG';
   import {
     ContainerApp,
-    ContainerScreen,
-    HeaderRegisterScreen,
     HeaderTitleText,
-    HeaderText,
-    ContainerForm,
-    ContainerInput,
-    ContentInput,
-    ContainerContentInput,
-    TextTitleInput,
-    TextInputStyle,
-    IconStyle,
-    SeperateLine,
-    ButtonStyle,
-    TextButton,
     HeaderConnexionScreen,
     LogoAppStyle,
-    TextpasswordForgotten,
-    ContainerDivideText,
-    LineStyle,
-    TextDivide,
     ContainerBtnMethod,
     ContainerScreenMethod,
     TextDescription,
-    ButtonStyleFacebook,
-    ButtonStyleGoogle,
-    TextButtonGoogle
   } from './styledComponent/StyledComponent';
+  
   import {MatchMatePalette} from '../../../assets/color-palette';
+  import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
   const ConnexionMethodScreen = ({navigation}: any) => {
     return (
       <ContainerApp>
@@ -54,15 +36,11 @@ import {
           </HeaderConnexionScreen>
           <ContainerBtnMethod>  
             <TextDescription>Inscrivez-vous ou connectez-vous en utilisant l'une de ces méthodes de connexion</TextDescription>
-            <ButtonStyleFacebook>
-              <TextButton>Connexion avec Facebook</TextButton>
-            </ButtonStyleFacebook>
-            <ButtonStyleGoogle>
-              <TextButtonGoogle>Connexion avec Google</TextButtonGoogle>
-            </ButtonStyleGoogle>
-            <ButtonStyle>
-              <TextButton>Connextion avec MatchMate</TextButton>
-            </ButtonStyle>
+
+             <ButtonAuthComponent btnText='Connexion avec Facebook' backgroundColor="#1d5dc4" btnTextColor='white' btnClicked={()=>{}} />
+             <ButtonAuthComponent btnText='Connexion avec Google' backgroundColor="white" btnTextColor='black' btnClicked={()=>{}}/>
+             <ButtonAuthComponent btnText='Connexion avec MatchMate' backgroundColor={MatchMatePalette.primaryColor} btnTextColor='white' btnClicked={()=>navigation.navigate('Signin')}/>
+
           </ContainerBtnMethod>
         </ContainerScreenMethod>
       </ContainerApp>

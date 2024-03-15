@@ -1,116 +1,92 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  StatusBar,
-  ToastAndroid,
-  Dimensions,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
-import React, {useState, useEffect, useRef, useContext} from 'react';
-import UsernameIconSVG from '../../../assets/Icons/svg/usernameIconSVG';
+import {  StatusBar } from 'react-native';
+import React from 'react';
 import {
   ContainerApp,
   ContainerScreen,
   HeaderRegisterScreen,
-  HeaderTitleText,
   HeaderText,
   ContainerForm,
-  ContainerInput,
-  ContentInput,
-  ContainerContentInput,
-  TextTitleInput,
-  TextInputStyle,
-  IconStyle,
   SeperateLine,
-  ButtonStyle,
-  TextButton
 } from './styledComponent/StyledComponent';
+import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
 import {MatchMatePalette} from '../../../assets/color-palette';
+import {InputAuthComponent} from '../../../Components/AuthComponents/InputAuthComponent';
+import useAuth from './useAuth/useAuth';
+import UserNameIconSVG from '../../../assets/Icons/svg/UsernameIconSVG';
+import PasswordIconSVG from '../../../assets/Icons/svg/PasswordIconSVG';
 const SignUpScreen = ({navigation}: any) => {
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    age,
+    setAge,
+  } = useAuth(navigation);
+  
   return (
     <ContainerApp>
       <StatusBar
         barStyle={'light-content'}
         backgroundColor={MatchMatePalette.darkBackgroundColor}
       />
-      <ContainerScreen>
+      <ContainerScreen showsVerticalScrollIndicator={false}>
         <HeaderRegisterScreen>
           <HeaderText>S'inscrire</HeaderText>
           <HeaderText>Rapide et facile</HeaderText>
         </HeaderRegisterScreen>
         <ContainerForm>
-          <ContainerInput>
-            <ContainerContentInput>
-              <IconStyle>{/* <UsernameIconSVG color='white'/> */}</IconStyle>
-              <ContentInput>
-                <TextTitleInput>Adresse mail :</TextTitleInput>
-                <TextInputStyle
-                  placeholder="Ex : email@example.com"
-                  placeholderTextColor={'grey'}></TextInputStyle>
-              </ContentInput>
-            </ContainerContentInput>
-          </ContainerInput>
-          <ContainerInput>
-            <ContainerContentInput>
-              <IconStyle>{/* <UsernameIconSVG color='white'/> */}</IconStyle>
-              <ContentInput>
-                <TextTitleInput>MOT DE PASSE :</TextTitleInput>
-                <TextInputStyle
-                  placeholder="Choisissez un mot de passe"
-                  placeholderTextColor={'grey'}></TextInputStyle>
-              </ContentInput>
-            </ContainerContentInput>
-          </ContainerInput>
+          <InputAuthComponent
+            placeholder="Ex : email@example.com"
+            inputName="Adresse mail"
+            setValue={setEmail}
+            valueInput={email}
+            iconComponent={ <UserNameIconSVG color={MatchMatePalette.primaryColor} />}
+
+          />
+          <InputAuthComponent
+            placeholder="Choisissez un mot de passe"
+            inputName="MOT DE PASSE"
+            setValue={setPassword}
+            valueInput={password}
+            iconComponent={ <PasswordIconSVG color={MatchMatePalette.primaryColor} />}
+
+          />
           <SeperateLine></SeperateLine>
-          <ContainerInput>
-            <ContainerContentInput>
-              <IconStyle>{/* <UsernameIconSVG color='white'/> */}</IconStyle>
-              <ContentInput>
-                <TextTitleInput>PRENOM :</TextTitleInput>
-                <TextInputStyle
-                  placeholder="Votre prénom"
-                  placeholderTextColor={'grey'}></TextInputStyle>
-              </ContentInput>
-            </ContainerContentInput>
-          </ContainerInput>
-          <ContainerInput>
-            <ContainerContentInput>
-              <IconStyle>{/* <UsernameIconSVG color='white'/> */}</IconStyle>
-              <ContentInput>
-                <TextTitleInput>NOM :</TextTitleInput>
-                <TextInputStyle
-                  placeholder="Votre nom"
-                  placeholderTextColor={'grey'}></TextInputStyle>
-              </ContentInput>
-            </ContainerContentInput>
-          </ContainerInput>
-          <ContainerInput>
-            <ContainerContentInput>
-              <IconStyle>{/* <UsernameIconSVG color='white'/> */}</IconStyle>
-              <ContentInput>
-                <TextTitleInput>AGE :</TextTitleInput>
-                <TextInputStyle
-                  placeholder="Ex : 09.11.2000"
-                  placeholderTextColor={'grey'}></TextInputStyle>
-              </ContentInput>
-            </ContainerContentInput>
-          </ContainerInput>
-          <ContainerInput>
-            <ContainerContentInput>
-              <IconStyle>{/* <UsernameIconSVG color='white'/> */}</IconStyle>
-              <ContentInput>
-                <TextTitleInput>REGION :</TextTitleInput>
-                <TextInputStyle
-                  placeholder="Genéve"
-                  placeholderTextColor={'grey'}></TextInputStyle>
-              </ContentInput>
-            </ContainerContentInput>
-          </ContainerInput>
-          <ButtonStyle>
-            <TextButton>Créer un compte</TextButton>
-          </ButtonStyle>
+          <InputAuthComponent
+            placeholder="Votre prénom"
+            inputName="PRENOM"
+            setValue={setFirstName}
+            valueInput={firstName}
+            iconComponent={ <UserNameIconSVG color={MatchMatePalette.primaryColor} />}
+
+          />
+          <InputAuthComponent
+            placeholder="Votre nom"
+            inputName="NOM"
+            setValue={setLastName}
+            valueInput={lastName}
+            iconComponent={ <UserNameIconSVG color={MatchMatePalette.primaryColor} />}
+
+          />
+          <InputAuthComponent
+            placeholder="Votre age"
+            inputName="AGE"
+            setValue={setAge}
+            valueInput={age}
+            iconComponent={ <UserNameIconSVG color={MatchMatePalette.primaryColor} />}
+
+          />
+          <ButtonAuthComponent
+            btnText="Créer un compte"
+            backgroundColor={MatchMatePalette.primaryColor}
+            btnTextColor="white"
+            btnClicked={()=>{}}
+          />
         </ContainerForm>
       </ContainerScreen>
     </ContainerApp>

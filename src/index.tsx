@@ -15,7 +15,7 @@ import NavigationApp from './Navigation/NavigationApp';
 import SignInScreen from './App/Screens/Authentication-screen/SignInScreen';
 import ConnexionMethodScreen from './App/Screens/Authentication-screen/ConnexionMethodScreen';
 function App(): React.JSX.Element {
-  return <SignUpScreen/>;
+  return <NavigationApp/>;
 }
 
 export default App;
