@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState,useContext} from 'react';
 import axios from 'axios'
 import {
 
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
-
+import { AuthContext } from '../../../../services/Context/AuthContext';
 const CELL_COUNT = 6;
 export const useAuth = (navigation:any,route:any=false) => {
   const [email, setEmail] = useState('');
@@ -17,9 +17,11 @@ export const useAuth = (navigation:any,route:any=false) => {
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({value,setValue,});
   const {userId,codeVerification}=route && route.params
+  const {signIn} = useContext(AuthContext);
 
   
   const loginUser=async()=> {
+    signIn()
       await axios.post('http://192.168.1.112:3009/api/v1/login',{email,password}).then((res)=>{            
             navigation.navigate('Signup')
     }).catch((err:any)=>{
@@ -28,6 +30,9 @@ export const useAuth = (navigation:any,route:any=false) => {
         })
   }
   const registerUser=async()=> {
+    console.log("ss");
+    navigation.navigate('CodeVerification',{userId:"res.data.user.id",codeVerification:"res.data.user.code_verification"})
+
       await axios.post('http://192.168.1.112:3009/api/v1/register',{email,password,firstName,lastName,age}).then((res)=>{
             console.log("response",res.data.user.id);
             

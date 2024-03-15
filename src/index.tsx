@@ -15,6 +15,7 @@ import NavigationApp from './Navigation/NavigationApp';
 import SignInScreen from './App/Screens/Authentication-screen/SignInScreen';
 import ConnexionMethodScreen from './App/Screens/Authentication-screen/ConnexionMethodScreen';
 import CodeVerificationScreen from './App/Screens/Authentication-screen/CodeVerificationScreen';
+import { HomeScreen } from './App/Tabs/Home-Tab/HomeScreen';
 function App(): React.JSX.Element {
   return <NavigationApp/>;
 }

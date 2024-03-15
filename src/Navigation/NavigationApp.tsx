@@ -4,10 +4,17 @@ import {AuthContext, AuthContextProps} from '../services/Context/AuthContext';
 import UnauthenticatedStack from './Stacks/UnauthenticatedStack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import {HomeScreen} from '../App/Tabs/Home-Tab/HomeScreen'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import BookingSectionStack from './Stacks/BookingSectionStack';
+import ProfileSectionStack from './Stacks/ProfileSectionStack';
+import HomeSectionStack from './Stacks/HomeSectionStack';
+import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
+import { ScreenOptions } from './ScreenOptions';
 function NavigationApp() {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [choix, setChoix] = useState<string>('');
+  const [sign, setSign] = useState(true);
 
   const retrieveUserSession = async () => {
     try {
@@ -25,23 +32,59 @@ function NavigationApp() {
 
   const authContext: AuthContextProps = useMemo(() => {
     return {
+      signIn: () => {
+        retrieveUserSession();
+        setSign(false);
+      },
       setChoix: setChoix,
       choix,
     };
   }, [choix]);
 
   const SplashApp = createNativeStackNavigator();
+  const TabBarDourbia = createBottomTabNavigator();
 
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <SplashApp.Navigator>
-          <SplashApp.Screen
-            name="unauthenticated"
-            component={UnauthenticatedStack}
-            options={{headerShown: false}}
+        {sign ? (
+          <SplashApp.Navigator>
+            <SplashApp.Screen
+              name="unauthenticated"
+              component={UnauthenticatedStack}
+              options={{headerShown: false}}
+            />
+          </SplashApp.Navigator>
+        ) : (
+          <TabBarDourbia.Navigator
+          initialRouteName={'Home'}
+          screenOptions={({ navigation, route }: any) => ({
+            ...ScreenOptions({ navigation, route }),
+            tabBarOptions: {
+              style: { backgroundColor: 'red' }, // Customize tabBar background color
+              activeTintColor: '#E59138',
+              inactiveTintColor: '#707070',
+            },
+            tabBarStyle:{backgroundColor:"lightgrey",padding:10,height:"8%",borderColor:"grey",borderRadius:50,width:"90%",alignSelf:"center"}
+          })}>
+          <TabBarDourbia.Screen
+            name="HomeTab"  
+            component={HomeSectionStack}
           />
-        </SplashApp.Navigator>
+          <TabBarDourbia.Screen
+            name="BookingTab"
+            component={BookingSectionStack}
+          />
+          <TabBarDourbia.Screen
+            name="LeaderboardTab"
+            component={LeaderboardSectionStack}
+          />
+          <TabBarDourbia.Screen
+            name="ProfileTab"
+            component={ProfileSectionStack}
+          />
+
+        </TabBarDourbia.Navigator>     )}
       </NavigationContainer>
     </AuthContext.Provider>
   );
