@@ -5,7 +5,6 @@ import {
   ButtonStyle,
   TextButton
 } from './StyledComponent/StyledComponent';
-import FacebookIconSVG from '../../assets/Icons/svg/FacebookIconSVG';
 interface ButtonAuthComponentProps{
     btnText:string,
     backgroundColor:string,

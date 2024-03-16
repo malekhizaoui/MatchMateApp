@@ -9,6 +9,62 @@ import {
   fontSizeTextScreen,
   ContainerAppStyle,
 } from '../../../../assets/Styles/index';
+export const stadiumsFootball = [
+  {
+    titleDescription: "Balexert",
+    backgroundImage: "https://www.realsport.ch/sites/default/files/styles/images_section_small/public/2023-09/Terrain3.png?h=8f74817f&itok=RPSY0REx"
+  },
+  {
+    titleDescription: "varembé",
+    backgroundImage: "https://www.realsport.ch/sites/default/files/styles/image_header_small/public/2022-03/DiROts9Q.jpeg?h=4521fff0&itok=s3DJdXHb"
+  },
+  {
+    titleDescription: "Trembley",
+    backgroundImage: "https://www.realsport.ch/sites/default/files/styles/image_header_small/public/2021-03/Carouge%20a%C3%A9rienne.jpg?h=2e111cc1&itok=u4s66gJj"
+  }
+];
+
+export const stadiumData = [
+  {
+    titleDescription: "Saint Jean",
+    backgroundImage: "https://cdn.shopify.com/s/files/1/0550/4237/5908/products/633wm_1.png?v=1660617305"
+  },
+  {
+    titleDescription: "Nant-Cayla",
+    backgroundImage: "https://www.shutterstock.com/image-photo/illuminated-basketball-playground-red-pavement-600nw-1221779821.jpg"
+  },
+  {
+    titleDescription: "Chemain de Tivoli",
+    backgroundImage: "https://www.sportshub.com.sg/sites/default/files/2022-09/Play%20Ground.jpg"
+  },
+  {
+    titleDescription: "Asphalte",
+    backgroundImage: "https://www.geneve.ch/sites/default/files/2022-06/asphalte-ville-geneve-cover-01%281%29.jpg"
+  },
+  {
+    titleDescription: "Franchises",
+    backgroundImage: "https://st2.depositphotos.com/2601429/9447/i/450/depositphotos_94474168-stock-photo-basketball-board-on-the-sky.jpg"
+  },
+  {
+    titleDescription: "Lancy-Florimont",
+    backgroundImage: "https://engermancontracting.com/wp/wp-content/uploads/2022/02/US_So_CA_P1195217.jpg?gid=6"
+  }
+];
+
+export const fieldData=[
+{
+  fieldName:"Basketball",
+  backgroundImage:"https://ak.picdn.net/shutterstock/videos/1104632401/thumb/1.jpg"
+},
+{
+  fieldName:"Football",
+  backgroundImage:"https://d2jx2rerrg6sh3.cloudfront.net/images/news/ImageForNews_742320_1679349106715629.jpg"
+},
+{
+  fieldName:"Beach Volley",
+  backgroundImage:"https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/beach-volleyball-leah-guo.jpg"
+},
+]
 
 export const ContainerApp = styled.SafeAreaView`
   ${ContainerAppStyle}
@@ -20,12 +76,7 @@ export const ContainerScreen = styled.ScrollView`
   flex: 1;
   width: 100%;
 `;
-export const ContainerDetailScreen = styled.ScrollView`
-  display: flex;
-  flex: 1;
-  width: 85%;
-  margin-top:20px
-`;
+
 export const HeaderContainer = styled.View`
   display: flex;
   flex-direction: row;
@@ -91,21 +142,9 @@ textDecorationLine:underline;
 export const ListContainer=styled.ScrollView`
 width:100%;
 height:250px;
-display:flex;
-flex-direction:row;
+display:wrap;
 margin-top:10px;
 `
-
-export const FieldContent=styled.TouchableOpacity`
-height:90%;
-border-radius:20px;
-margin-left:10px;
-width:185px;
-background-color:${MatchMatePalette.primaryColor};
-border:2px white;
-align-self:center;
-`
-
 export const StadiumContainer=styled.TouchableOpacity`
 height:60%;
 border-radius:20px;
@@ -139,4 +178,109 @@ font-size:10px;
 font-weight:500;
 color:${MatchMatePalette.primaryColor};
 padding-left:5px
+`
+
+//StadiumDetailDesign
+
+export const ContainerDetailScreen = styled.ScrollView`
+  display: flex;
+  flex: 1;
+  width: 90%;
+  margin-top:20px
+`;
+export const ImageStadium =styled.Image`
+  width:100%;
+  height:300px;
+  border-radius:15px;
+  margin-top:20px
+`
+
+export const HeaderStadium=styled.View`
+display:flex;
+flex-direction:row;
+justify-content:space-between;
+align-items:center;
+margin-top:10px;
+margin-bottom:20px
+`
+
+export const TitleTextStadium=styled.Text`
+  color:white;
+  font-size:25px;
+  font-weight:600;
+`
+
+export const TxtShowMap=styled.Text`
+  color:${MatchMatePalette.primaryColor};
+  font-size:15px;
+  font-weight:700;
+`
+export const StadiumDescriptionTxt=styled.Text`
+  color:white;
+  font-size:16px;
+  font-weight:400;
+  text-align:left;
+`
+
+export const ExpandMore=styled.View`
+margin-top:10px;
+flex-direction:row;
+`
+
+export const TxtContainer=styled.Text`
+color:white;
+font-size:20px;
+font-weight:600;
+margin-top:20px;
+`
+
+export const AttributContainer=styled.View`
+align-items:center;
+width:100%;
+flex-direction:row;
+margin-top:20px
+`
+export const FacilityContentContainer=styled.View`
+align-items:center;
+justify-content:center;
+width:22%;
+background-color:white;
+margin-right:15px;
+height:80px;
+border-radius:15px;
+flex-direction:column;
+`
+
+export const TextFacility=styled.Text`
+  color:#B8B8B8;
+  font-weight:400
+`
+
+export const ImageLocation=styled.View`
+margin-top:20px;
+  width:100%;
+  height:166px;
+  border-radius:30px;
+  background-color:#F1F1F1;
+  margin-bottom:20px
+`
+
+export const BtnCheck=styled.View`
+width: 90%;
+height: 50px;
+background-color: ${MatchMatePalette.primaryColor};
+justify-content: center;
+align-items: center;
+border-radius: 5px;
+margin-bottom: 5px;
+flex-direction: row;
+position: fixed;
+bottom: 10px;
+left: 0;
+right: 0;
+align-self:center
+`
+export const TextButton =styled.Text`
+color:white;
+margin-left:10px
 `

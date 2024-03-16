@@ -1,0 +1,33 @@
+import React, {useState} from 'react';
+import {StyleSheet, Dimensions, Text, View} from 'react-native';
+import {
+  StadiumContainer,
+  StadiumImage,
+  StadiumDescription,
+  TitleDescription,
+  TextDescription,
+} from './StyledComponent/StyledComponent';
+
+interface StadiumCardComponentProps {
+  titleDescription: string;
+  backgroundImage: string;
+  btnClicked: () => void;
+}
+
+const StadiumCardComponent = ({
+  titleDescription,
+  backgroundImage,
+  btnClicked,
+}: StadiumCardComponentProps) => {
+  return (
+    <StadiumContainer onPress={btnClicked}>
+      <StadiumImage source={{uri: backgroundImage}}></StadiumImage>
+      <StadiumDescription>
+        <TitleDescription>Explore {titleDescription}</TitleDescription>
+        <TextDescription>Near court</TextDescription>
+      </StadiumDescription>
+    </StadiumContainer>
+  );
+};
+
+export default StadiumCardComponent;

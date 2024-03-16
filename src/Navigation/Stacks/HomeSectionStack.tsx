@@ -5,6 +5,7 @@ import { StadiumAvailabilityScreen } from '../../App/Tabs/Home-Tab/StadiumAvaila
 import { StadiumDetailScreen } from '../../App/Tabs/Home-Tab/StadiumDetailScreen';
 import { StadiumListScreen } from '../../App/Tabs/Home-Tab/StadiumListScreen';
 import { MatchDetailScreen } from '../../App/Tabs/Home-Tab/MatchDetailScreen';
+import { FieldListScreen } from '../../App/Tabs/Home-Tab/FieldListScreen';
 const HomeStack = createNativeStackNavigator();
 
 export const HomeSectionStack = () => {
@@ -13,6 +14,11 @@ export const HomeSectionStack = () => {
       <HomeStack.Screen
         name="Home"
         component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <HomeStack.Screen
+        name="FieldList"
+        component={FieldListScreen}
         options={{ headerShown: false }}
       />
       <HomeStack.Screen

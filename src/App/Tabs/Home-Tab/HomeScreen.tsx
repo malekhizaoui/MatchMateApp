@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, StatusBar, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StatusBar, TouchableOpacity, FlatList} from 'react-native';
 import {
   ContainerApp,
   ContainerScreen,
@@ -12,20 +12,36 @@ import {
   TextInputStyle,
   ListContainer,
   TextContainer,
-  FieldContent,
   TextTitleList,
   TextCheckAllList,
   StadiumContainer,
   StadiumImage,
   StadiumDescription,
   TextDescription,
-  TitleDescription
+  TitleDescription,
+  fieldData,
+  stadiumData,
+  stadiumsFootball,
 } from './StyledComponent/StyledComponent';
+import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
 import ExpandIconSVG from '../../../assets/Icons/svg/ExpandIconSVG';
 import {MatchMatePalette} from '../../../assets/color-palette';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
-export const HomeScreen = ({navigation}:any) => {
+import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
+export const HomeScreen = ({navigation}: any) => {
+  const [fieldDataPut, setfieldDataPut] = useState(fieldData);
+  const [fieldSelected, setFieldSelected] = useState('Basketball');
+  const updateFieldData = (index: number) => {
+    const reorderedFieldData = [
+      fieldDataPut[index],
+      ...fieldDataPut.slice(0, index),
+      ...fieldDataPut.slice(index + 1),
+    ];
+    setfieldDataPut(reorderedFieldData);
+    setFieldSelected(fieldDataPut[index].fieldName);
+  };
+
   return (
     <ContainerApp>
       <StatusBar
@@ -39,7 +55,7 @@ export const HomeScreen = ({navigation}:any) => {
             <RegionTxt>Zurich</RegionTxt>
           </ExploreRegionContainer>
           <UpdateRegionContainer>
-            <PinIconSVG color={MatchMatePalette.primaryColor} />
+            <PinIconSVG color={MatchMatePalette.primaryColor} size={"15"}/>
             <RegionExploreTxt>Zurich,CH</RegionExploreTxt>
             <ExpandIconSVG color={MatchMatePalette.primaryColor} />
           </UpdateRegionContainer>
@@ -57,13 +73,20 @@ export const HomeScreen = ({navigation}:any) => {
             <TextCheckAllList>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>
-        <ListContainer
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}>
-          <FieldContent></FieldContent>
-          <FieldContent></FieldContent>
-          <FieldContent></FieldContent>
-          <FieldContent></FieldContent>
+        <ListContainer horizontal={true} showsHorizontalScrollIndicator={false}>
+          {fieldDataPut.map((field, i) => {
+            return (
+              <FieldsCardComponent
+                isSelected={i == 0 ? true : false}
+                titleText={field.fieldName}
+                backgroundImage={field.backgroundImage}
+                btnClicked={() => {
+                  // navigation.navigate('FieldList');
+                  updateFieldData(i);
+                }}
+              />
+            );
+          })}
         </ListContainer>
         <TextContainer>
           <TextTitleList>Recommended</TextTitleList>
@@ -71,37 +94,30 @@ export const HomeScreen = ({navigation}:any) => {
             <TextCheckAllList>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>
-        <ListContainer
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}>
-          <StadiumContainer>
-            <StadiumImage></StadiumImage>
-            <StadiumDescription>
-            <TitleDescription>Explore Madjen</TitleDescription>
-            <TextDescription>Near court</TextDescription>
-            </StadiumDescription>
-          </StadiumContainer>
-          <StadiumContainer>
-            <StadiumImage></StadiumImage>
-            <StadiumDescription>
-            <TitleDescription>Explore Madjen</TitleDescription>
-            <TextDescription>Near court</TextDescription>
-            </StadiumDescription>
-          </StadiumContainer>
-          <StadiumContainer>
-            <StadiumImage></StadiumImage>
-            <StadiumDescription>
-            <TitleDescription>Explore Madjen</TitleDescription>
-            <TextDescription>Near court</TextDescription>
-            </StadiumDescription>
-          </StadiumContainer>
-          <StadiumContainer onPress={()=>{navigation.navigate('StadiumDetail')}}>
-            <StadiumImage></StadiumImage>
-            <StadiumDescription>
-            <TitleDescription>Explore Madjen</TitleDescription>
-            <TextDescription>Near court</TextDescription>
-            </StadiumDescription>
-          </StadiumContainer>
+        <ListContainer horizontal={true} showsHorizontalScrollIndicator={false}>
+          {fieldSelected === 'Football'
+            ? stadiumsFootball.map((stadium, i) => {
+                return (
+                  <StadiumCardComponent
+                    titleDescription={stadium.titleDescription}
+                    backgroundImage={stadium.backgroundImage}
+                    btnClicked={() => {
+                      navigation.navigate('StadiumDetail',{stadium});
+                    }}
+                  />
+                );
+              })
+            : stadiumData.map((stadium, i) => {
+                return (
+                  <StadiumCardComponent
+                    titleDescription={stadium.titleDescription}
+                    backgroundImage={stadium.backgroundImage}
+                    btnClicked={() => {
+                      navigation.navigate('StadiumDetail',{stadium});
+                    }}
+                  />
+                );
+              })}
         </ListContainer>
       </ContainerScreen>
     </ContainerApp>
