@@ -1,12 +1,21 @@
 import React from 'react';
 import {View,Text} from 'react-native';
-
-export const StadiumDetailScreen = () => {
+import {
+  ContainerApp,
+  ContainerDetailScreen,
+} from './StyledComponent/StyledComponent';
+import { MatchMatePalette } from '../../../assets/color-palette';
+import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
+import NavigateBack from '../../../Components/NavigateBack';
+export const StadiumDetailScreen = ({navigation}:any) => {
     console.log("ddd");
     
   return (
-    <View>
-      <Text>StadiumDetailScreen</Text>
-    </View>
+    <ContainerApp>
+      <ContainerDetailScreen>
+        <NavigateBack color={MatchMatePalette.primaryColor} navigation={navigation}/>
+        
+      </ContainerDetailScreen>
+    </ContainerApp>
   );
 };

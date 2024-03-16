@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StatusBar} from 'react-native';
+import {View, Text, StatusBar, TouchableOpacity} from 'react-native';
 import {
   ContainerApp,
   ContainerScreen,
@@ -10,12 +10,22 @@ import {
   RegionTxt,
   InputContainer,
   TextInputStyle,
+  ListContainer,
+  TextContainer,
+  FieldContent,
+  TextTitleList,
+  TextCheckAllList,
+  StadiumContainer,
+  StadiumImage,
+  StadiumDescription,
+  TextDescription,
+  TitleDescription
 } from './StyledComponent/StyledComponent';
 import ExpandIconSVG from '../../../assets/Icons/svg/ExpandIconSVG';
 import {MatchMatePalette} from '../../../assets/color-palette';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
-export const HomeScreen = () => {
+export const HomeScreen = ({navigation}:any) => {
   return (
     <ContainerApp>
       <StatusBar
@@ -30,7 +40,7 @@ export const HomeScreen = () => {
           </ExploreRegionContainer>
           <UpdateRegionContainer>
             <PinIconSVG color={MatchMatePalette.primaryColor} />
-            <RegionExploreTxt>Zurich,ch</RegionExploreTxt>
+            <RegionExploreTxt>Zurich,CH</RegionExploreTxt>
             <ExpandIconSVG color={MatchMatePalette.primaryColor} />
           </UpdateRegionContainer>
         </HeaderContainer>
@@ -39,8 +49,60 @@ export const HomeScreen = () => {
           <TextInputStyle
             placeholder="things to find out"
             placeholderTextColor={'grey'}></TextInputStyle>
-          {/* <Text>Find things to do</Text> */}
         </InputContainer>
+
+        <TextContainer>
+          <TextTitleList>Most fields</TextTitleList>
+          <TouchableOpacity>
+            <TextCheckAllList>Discover All</TextCheckAllList>
+          </TouchableOpacity>
+        </TextContainer>
+        <ListContainer
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}>
+          <FieldContent></FieldContent>
+          <FieldContent></FieldContent>
+          <FieldContent></FieldContent>
+          <FieldContent></FieldContent>
+        </ListContainer>
+        <TextContainer>
+          <TextTitleList>Recommended</TextTitleList>
+          <TouchableOpacity>
+            <TextCheckAllList>Discover All</TextCheckAllList>
+          </TouchableOpacity>
+        </TextContainer>
+        <ListContainer
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}>
+          <StadiumContainer>
+            <StadiumImage></StadiumImage>
+            <StadiumDescription>
+            <TitleDescription>Explore Madjen</TitleDescription>
+            <TextDescription>Near court</TextDescription>
+            </StadiumDescription>
+          </StadiumContainer>
+          <StadiumContainer>
+            <StadiumImage></StadiumImage>
+            <StadiumDescription>
+            <TitleDescription>Explore Madjen</TitleDescription>
+            <TextDescription>Near court</TextDescription>
+            </StadiumDescription>
+          </StadiumContainer>
+          <StadiumContainer>
+            <StadiumImage></StadiumImage>
+            <StadiumDescription>
+            <TitleDescription>Explore Madjen</TitleDescription>
+            <TextDescription>Near court</TextDescription>
+            </StadiumDescription>
+          </StadiumContainer>
+          <StadiumContainer onPress={()=>{navigation.navigate('StadiumDetail')}}>
+            <StadiumImage></StadiumImage>
+            <StadiumDescription>
+            <TitleDescription>Explore Madjen</TitleDescription>
+            <TextDescription>Near court</TextDescription>
+            </StadiumDescription>
+          </StadiumContainer>
+        </ListContainer>
       </ContainerScreen>
     </ContainerApp>
   );
