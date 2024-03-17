@@ -150,7 +150,8 @@ export const TextTitleList = styled.Text`
 export const TextCheckAllList = styled.Text`
   color: ${MatchMatePalette.primaryColor};
   font-size: 15px;
-  textdecorationline: underline;
+  text-decoration-line: underline;
+  font-weight:600
 `;
 export const ListContainer = styled.ScrollView.attrs({
   horizontal: true,
