@@ -69,7 +69,7 @@ export const HomeScreen = ({navigation}: any) => {
 
         <TextContainer>
           <TextTitleList>Most fields</TextTitleList>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{navigation.navigate("FieldList")}}>
             <TextCheckAllList>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>
@@ -90,7 +90,8 @@ export const HomeScreen = ({navigation}: any) => {
         </ListContainer>
         <TextContainer>
           <TextTitleList>Recommended</TextTitleList>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>{navigation.navigate("StadiumList",{fieldDataPass:fieldSelected === 'Football'
+            ? stadiumsFootball:stadiumData})}}>
             <TextCheckAllList>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>

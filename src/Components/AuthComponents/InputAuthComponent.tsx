@@ -34,6 +34,7 @@ export const InputAuthComponent = ({placeholder,inputName,setValue,valueInput,ic
               <ContentInput>
                 <TextTitleInput>{inputName} :</TextTitleInput>
                 <TextInputStyle
+                
                   value={valueInput}
                   onChangeText={value=>setValue(value)}
                   placeholder={placeholder}
