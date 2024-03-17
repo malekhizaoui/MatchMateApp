@@ -11,10 +11,12 @@ import {
 } from 'react-native-svg';
 interface BackIconSVG {
   color: string;
+  btnClicked:()=>void
 }
-const BackIconSVG = ({color}: BackIconSVG) => {
+const BackIconSVG = ({color,btnClicked}: BackIconSVG) => {
   return (
     <Svg
+    onPress={btnClicked}
       height="24"
       viewBox="0 -960 960 960"
       width="24">

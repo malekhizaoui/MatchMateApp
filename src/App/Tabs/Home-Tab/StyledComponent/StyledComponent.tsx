@@ -26,6 +26,23 @@ export const stadiumsFootball = [
       'https://www.realsport.ch/sites/default/files/styles/image_header_small/public/2021-03/Carouge%20a%C3%A9rienne.jpg?h=2e111cc1&itok=u4s66gJj',
   },
 ];
+export const stadiumsVolley = [
+  {
+    titleDescription: 'Zermatt',
+    backgroundImage:
+      'https://db-service.toubiz.de/var/plain_site/storage/images/orte/zermatt/beachvolley/beachvolley/1404114-1-ger-DE/beachvolley_front_large.jpg',
+  },
+  {
+    titleDescription: 'Asphalt',
+    backgroundImage:
+      'https://www.genevepascher.com/wp-content/uploads/2022/06/initiations-volley-geneve-pas-cher.jpg',
+  },
+  {
+    titleDescription: 'Trembley',
+    backgroundImage:
+      'https://aweniddofq.cloudimg.io/v7/luxemburg.imxplatform.de/data/httpsappvisitluxembourgcomimages23296-resize-1680x1050x100.jpg?func=crop&width=1000&height=1000',
+  },
+];
 
 export const stadiumData = [
   {
@@ -82,7 +99,7 @@ export const fieldData = [
 ];
 
 export const ContainerApp = styled.SafeAreaView`
-  ${ContainerAppStyle}
+  ${ContainerAppStyle};
 `;
 
 export const ContainerScreen = styled.ScrollView`
@@ -116,20 +133,6 @@ export const RegionTxt = styled.Text`
   font-size: 32px;
 `;
 
-export const InputContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 85%;
-  height: 50px;
-  background-color: white;
-  border-radius: 25px;
-  align-self: center;
-  margin-top: 10px;
-`;
-export const TextInputStyle = styled.TextInput`
-  color: grey;
-`;
 
 export const TextContainer = styled.View`
   width: 85%;
@@ -149,45 +152,13 @@ export const TextCheckAllList = styled.Text`
   font-size: 15px;
   textdecorationline: underline;
 `;
-export const ListContainer = styled.ScrollView`
+export const ListContainer = styled.ScrollView.attrs({
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+})`
   width: 100%;
   height: 250px;
-  display: wrap;
   margin-top: 10px;
-`;
-export const StadiumContainer = styled.TouchableOpacity`
-  height: 60%;
-  border-radius: 20px;
-  margin-left: 10px;
-  width: 185px;
-  background-color: ${MatchMatePalette.darkBackgroundColor};
-  border: 2px white;
-  flex-direction: column;
-  margin-top: 10px;
-`;
-
-export const StadiumImage = styled.View`
-  width: 100%;
-  height: 70%;
-  border-radius: 17px;
-  background-color: ${MatchMatePalette.primaryColor};
-`;
-export const StadiumDescription = styled.View`
-  display: Flex;
-  flex-direction: column;
-  padding: 5px;
-`;
-export const TitleDescription = styled.Text`
-  font-size: 12px;
-  font-weight: 500;
-  color: white;
-  padding-left: 5px;
-`;
-export const TextDescription = styled.Text`
-  font-size: 10px;
-  font-weight: 500;
-  color: ${MatchMatePalette.primaryColor};
-  padding-left: 5px;
 `;
 
 //StadiumDetailDesign
@@ -196,27 +167,22 @@ export const ContainerDetailScreen = styled.ScrollView`
   display: flex;
   flex: 1;
   width: 90%;
-  margin-top: 10px;
-`;
-export const ImagesStadiumContainer = styled.View`
-  width: 100%;
-  height: 300px;
-  border-radius: 15px;
-  margin-top: 20px;
-`;
-export const ImageStadium = styled.Image`
-  width: 100%;
-  height: 300px;
-  border-radius: 15px;
+  margin-top: 60px;
 `;
 
-export const HeaderStadium = styled.View`
+export const InputContainer = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  width: 85%;
+  height: 50px;
+  background-color: white;
+  border-radius: 25px;
+  align-self: center;
   margin-top: 10px;
-  margin-bottom: 20px;
+`;
+export const TextInputStyle = styled.TextInput`
+  color: grey;
 `;
 
 export const TitleTextStadium = styled.Text`
@@ -230,12 +196,7 @@ export const TxtShowMap = styled.Text`
   font-size: 15px;
   font-weight: 700;
 `;
-export const StadiumDescriptionTxt = styled.Text`
-  color: white;
-  font-size: 16px;
-  font-weight: 400;
-  text-align: left;
-`;
+
 
 export const ExpandMore = styled.View`
   margin-top: 10px;
@@ -249,27 +210,6 @@ export const TxtContainer = styled.Text`
   margin-top: 20px;
 `;
 
-export const AttributContainer = styled.View`
-  align-items: center;
-  width: 100%;
-  flex-direction: row;
-  margin-top: 20px;
-`;
-export const FacilityContentContainer = styled.View`
-  align-items: center;
-  justify-content: center;
-  width: 22%;
-  background-color: white;
-  margin-right: 15px;
-  height: 80px;
-  border-radius: 15px;
-  flex-direction: column;
-`;
-
-export const TextFacility = styled.Text`
-  color: #b8b8b8;
-  font-weight: 400;
-`;
 
 export const ImageLocation = styled.View`
   margin-top: 20px;
@@ -277,26 +217,26 @@ export const ImageLocation = styled.View`
   height: 166px;
   border-radius: 30px;
   background-color: #f1f1f1;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 `;
 
 export const BtnCheck = styled.TouchableOpacity`
-  width: 33%;
-  height: 30px;
-  background-color: ${MatchMatePalette.secondaryColor};
+  width: 70%;
+  height: 40px;
+  background-color: ${MatchMatePalette.primaryColor};
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius:7px;
   margin-bottom: 5px;
   flex-direction: row;
   position: absolute;
-  right: 15px;
-  bottom: 15px;
+  bottom: 5px;
   align-self: center;
 `;
 export const TextButton = styled.Text`
   color: white;
-  font-size: 13px;
+  font-size: 15px;
+  font-weight:600
 `;
 
 //style ListStadium
@@ -318,68 +258,21 @@ export const HeaderListStadiumContainer = styled.View`
   height: 60px;
 
 `;
-export const InputHeaderContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 65%;
-  background-color: white;
-  height: 40px;
-  border-radius: 30px;
-  justify-content: space-between;
-`;
-export const InputIconContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
+
+
 
 export const TextTypeOfRender = styled.Text`
   color: ${MatchMatePalette.primaryColor};
   font-weight: 500;
   font-size: 18px;
+  width:37px
 `;
 
-export const FilterIconContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 50px;
-`;
-export const LineSperator = styled.View`
-  height: 90%;
-  width: 2px;
-  background-color: #262626;
-`;
+
 
 export const ListStadiumContainer = styled.View`
   flex: 1;
   flex-direction: column;
   margin-top: 20px;
 `;
-export const ImageContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
 
-export const StadiumImageContainer = styled.Image`
-  width: 100%;
-  height: 190px;
-  border-radius: 10px;
-  border: 1px white;
-`;
-
-export const TitleStadiumName = styled.Text`
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-
-export const NumberOfCourt = styled.Text`
-  font-size: 10px;
-  font-weight: 500;
-  color: white;
-`;

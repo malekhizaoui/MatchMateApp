@@ -1,5 +1,12 @@
-import React, {useState} from 'react';
-import {View, Text, StatusBar, TouchableOpacity, FlatList} from 'react-native';
+import React, {useState, useRef} from 'react';
+import {
+  View,
+  Text,
+  StatusBar,
+  TouchableOpacity,
+  FlatList,
+  ScrollView,
+} from 'react-native';
 import {
   ContainerApp,
   ContainerScreen,
@@ -14,14 +21,10 @@ import {
   TextContainer,
   TextTitleList,
   TextCheckAllList,
-  StadiumContainer,
-  StadiumImage,
-  StadiumDescription,
-  TextDescription,
-  TitleDescription,
   fieldData,
   stadiumData,
   stadiumsFootball,
+  stadiumsVolley,
 } from './StyledComponent/StyledComponent';
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
 import ExpandIconSVG from '../../../assets/Icons/svg/ExpandIconSVG';
@@ -30,6 +33,7 @@ import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 export const HomeScreen = ({navigation}: any) => {
+  const scrollViewRef = useRef<ScrollView>(null); // Define the type of the ref
   const [fieldDataPut, setfieldDataPut] = useState(fieldData);
   const [fieldSelected, setFieldSelected] = useState('Basketball');
   const updateFieldData = (index: number) => {
@@ -40,6 +44,7 @@ export const HomeScreen = ({navigation}: any) => {
     ];
     setfieldDataPut(reorderedFieldData);
     setFieldSelected(fieldDataPut[index].fieldName);
+    scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true }); // Use optional chaining
   };
 
   return (
@@ -55,7 +60,7 @@ export const HomeScreen = ({navigation}: any) => {
             <RegionTxt>Zurich</RegionTxt>
           </ExploreRegionContainer>
           <UpdateRegionContainer>
-            <PinIconSVG color={MatchMatePalette.primaryColor} size={"15"}/>
+            <PinIconSVG color={MatchMatePalette.primaryColor} size={'15'} />
             <RegionExploreTxt>Zurich,CH</RegionExploreTxt>
             <ExpandIconSVG color={MatchMatePalette.primaryColor} />
           </UpdateRegionContainer>
@@ -69,11 +74,17 @@ export const HomeScreen = ({navigation}: any) => {
 
         <TextContainer>
           <TextTitleList>Most fields</TextTitleList>
-          <TouchableOpacity onPress={()=>{navigation.navigate("FieldList")}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('FieldList');
+            }}>
             <TextCheckAllList>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>
-        <ListContainer horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ListContainer
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          ref={scrollViewRef}>
           {fieldDataPut.map((field, i) => {
             return (
               <FieldsCardComponent
@@ -90,8 +101,13 @@ export const HomeScreen = ({navigation}: any) => {
         </ListContainer>
         <TextContainer>
           <TextTitleList>Recommended</TextTitleList>
-          <TouchableOpacity onPress={()=>{navigation.navigate("StadiumList",{fieldDataPass:fieldSelected === 'Football'
-            ? stadiumsFootball:stadiumData})}}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('StadiumList', {
+                fieldDataPass:
+                  fieldSelected === 'Football' ? stadiumsFootball : stadiumData,
+              });
+            }}>
             <TextCheckAllList>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>
@@ -103,18 +119,30 @@ export const HomeScreen = ({navigation}: any) => {
                     titleDescription={stadium.titleDescription}
                     backgroundImage={stadium.backgroundImage}
                     btnClicked={() => {
-                      navigation.navigate('StadiumDetail',{stadium});
+                      navigation.navigate('StadiumDetail', {stadium});
                     }}
                   />
                 );
               })
-            : stadiumData.map((stadium, i) => {
+            : fieldSelected === 'Basketball'
+            ? stadiumData.map((stadium, i) => {
                 return (
                   <StadiumCardComponent
                     titleDescription={stadium.titleDescription}
                     backgroundImage={stadium.backgroundImage}
                     btnClicked={() => {
-                      navigation.navigate('StadiumDetail',{stadium});
+                      navigation.navigate('StadiumDetail', {stadium});
+                    }}
+                  />
+                );
+              })
+            : stadiumsVolley.map((stadium, i) => {
+                return (
+                  <StadiumCardComponent
+                    titleDescription={stadium.titleDescription}
+                    backgroundImage={stadium.backgroundImage}
+                    btnClicked={() => {
+                      navigation.navigate('StadiumDetail', {stadium});
                     }}
                   />
                 );
