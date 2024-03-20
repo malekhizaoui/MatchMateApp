@@ -105,7 +105,7 @@ export const HomeScreen = ({navigation}: any) => {
             onPress={() => {
               navigation.navigate('StadiumList', {
                 fieldDataPass:
-                  fieldSelected === 'Football' ? stadiumsFootball : stadiumData,
+                  fieldSelected === 'Football' ? stadiumsFootball : fieldSelected === 'Basketball'? stadiumData:stadiumsVolley,
               });
             }}>
             <TextCheckAllList>Discover All</TextCheckAllList>

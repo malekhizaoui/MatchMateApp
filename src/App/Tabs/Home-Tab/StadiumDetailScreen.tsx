@@ -34,7 +34,9 @@ export const StadiumDetailScreen = ({navigation, route}: any) => {
         <TxtContainer>Location</TxtContainer>
         <ImageLocation></ImageLocation>
       </ContainerDetailScreen>
-      <BtnCheck>
+      <BtnCheck onPress={()=>{
+        navigation.navigate('StadiumAvailability')
+      }}>
         <TextButton>Check availability</TextButton>
       </BtnCheck>
     </ContainerApp>

@@ -46,7 +46,7 @@ export const StadiumListScreen = ({navigation, route}: any) => {
               <ImageListStadiumComponent
                 stadium={stadium}
                 btnClicked={() => {
-                  navigation.navigate('');
+                  navigation.navigate('StadiumDetail',{stadium});
                 }}
               />
             );

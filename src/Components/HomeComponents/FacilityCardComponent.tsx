@@ -27,19 +27,19 @@ const FacilityCardComponent = ({
   return (
     <AttributContainer>
     <FacilityContentContainer>
-      <BasketBallHoopIconSVG color={MatchMatePalette.darkBackgroundColor} size={"45"}  />
+      <BasketBallHoopIconSVG color={MatchMatePalette.primaryColor} size={"35"}  />
       <TextFacility>2 Hoops</TextFacility>
     </FacilityContentContainer>
     <FacilityContentContainer>
-      <BasketBallCourtIconSVG color={MatchMatePalette.darkBackgroundColor} size={"45"}/>
+      <BasketBallCourtIconSVG color={MatchMatePalette.primaryColor} size={"35"}/>
       <TextFacility>1 Court</TextFacility>
     </FacilityContentContainer>
     <FacilityContentContainer>
-      <ShowerIconSVG color={MatchMatePalette.darkBackgroundColor} size={'45'} />
+      <ShowerIconSVG color={MatchMatePalette.primaryColor} size={'35'} />
       <TextFacility>None</TextFacility>
     </FacilityContentContainer>
     <FacilityContentContainer>
-      <LightningIconSVG color={MatchMatePalette.darkBackgroundColor} size={'45'} />
+      <LightningIconSVG color={MatchMatePalette.primaryColor} size={'35'} />
       <TextFacility>Lightning</TextFacility>
     </FacilityContentContainer>
   </AttributContainer>

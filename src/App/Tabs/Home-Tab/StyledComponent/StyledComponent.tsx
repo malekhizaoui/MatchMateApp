@@ -1,6 +1,9 @@
 import styled from 'styled-components/native';
 import {Dimensions} from 'react-native';
 
+const WIDTH= Dimensions.get('window').width
+const HEIGHT = Dimensions.get('window').height
+
 import {MatchMatePalette} from '../../../../assets/color-palette';
 import {
   fontSizeTitleScreen,
@@ -94,7 +97,7 @@ export const fieldData = [
     fieldName: 'Beach Volley',
     backgroundImage:
       'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/beach-volleyball-leah-guo.jpg',
-    stadiums: stadiumData,
+    stadiums: stadiumsVolley,
   },
 ];
 
@@ -275,5 +278,62 @@ export const ListStadiumContainer = styled.View`
   flex: 1;
   flex-direction: column;
   margin-top: 20px;
+  align-items:center;
+
 `;
 
+
+// 
+export const DaysContainer=styled.ScrollView`
+width:${WIDTH}px;
+display:flex;
+flex-direction:row;
+margin-top:60px;
+max-height:10%;
+`
+export const DayContent=styled.TouchableOpacity`
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100%;
+width: ${WIDTH*0.29}px;
+
+`
+
+export const DayText=styled.Text`
+color:white;
+font-size:17px;
+font-weight:500;
+`
+export const MonthText=styled.Text`
+color:${MatchMatePalette.primaryColor};
+font-size:14px;
+font-weight:500;
+`
+
+
+export const ContainerStadiumAvailability=styled.ScrollView`
+width:90%;
+align-items:center;
+`
+
+export const ImageConainer=styled.View`
+width:90%;
+align-items:center;
+`
+
+export const  ImagesContent=styled.View`
+position: relative;
+    width: 100%;
+    height: ${WIDTH*0.45}px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+`
+
+export const ImageStyle=styled.Image`
+width:100%;
+height:100%;
+resize-mode:cover;
+border-radius:20px
+`

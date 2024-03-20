@@ -151,6 +151,7 @@ export const FacilityContentContainer = styled.View`
 export const TextFacility = styled.Text`
   color: #262626;
   font-weight: 500;
+  font-size:13px
 `;
 
 
