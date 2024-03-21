@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   Animated,
   StatusBar,
@@ -19,15 +19,18 @@ import {
   ImageConainer,
   ImagesContent,
   ImageStyle,
+  TextCheckAllList
 } from './StyledComponent/StyledComponent';
-import { MatchMatePalette } from '../../../assets/color-palette';
+import {MatchMatePalette} from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
 import ImageSlideComponent from '../../../Components/HomeComponents/ImageSlideComponent';
 import DescriptionStadiumComponent from '../../../Components/HomeComponents/DescriptionStadiumComponent';
 import FacilityCardComponent from '../../../Components/HomeComponents/FacilityCardComponent';
 import PreviousIconSVG from '../../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../../assets/Icons/svg/NextIconSVG';
-
+import DayIconSVG from '../../../assets/Icons/svg/DayIconSVG';
+import DurationIconSVG from '../../../assets/Icons/svg/DurationIconSVG';
+import PlayersIconSVG from '../../../assets/Icons/svg/PlayersIconSVG';
 const scheduleData = {
   days: [
     {
@@ -75,7 +78,7 @@ const scheduleData = {
   ],
 };
 
-export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
+export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
   const [selectedDay, setSelectedDay] = useState(scheduleData.days[0]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const fadeAnim = useRef(new Animated.Value(1)).current;
@@ -89,14 +92,14 @@ export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
   }, [currentImageIndex, fadeAnim]);
 
   const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    setCurrentImageIndex(prevIndex =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1,
     );
   };
 
   const handleNextImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    setCurrentImageIndex(prevIndex =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1,
     );
   };
 
@@ -126,8 +129,8 @@ export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
       <ImageConainer>
         <ImagesContent>
           <Animated.Image
-            source={{ uri: images[currentImageIndex] }}
-            style={[styles.image, { opacity: fadeAnim }]}
+            source={{uri: images[currentImageIndex]}}
+            style={[styles.image, {opacity: fadeAnim}]}
           />
           <TouchableOpacity
             onPress={handlePrevImage}
@@ -136,34 +139,175 @@ export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={handleNextImage}
-            style={[styles.arrowButton, { right: 0 }]}>
+            style={[styles.arrowButton, {right: 0}]}>
             <NextIconSVG color="white" />
           </TouchableOpacity>
         </ImagesContent>
       </ImageConainer>
       {selectedDay && (
-        <ScrollView contentContainerStyle={{alignItems:'center'}} style={{borderColor:'#fff',borderWidth:1,maxHeight:'55%',width:'90%',}}>
-        <View style={styles.dayDetailsContainer}>
-          <Text style={styles.dayText}>{selectedDay.day}</Text>
-          <Text style={styles.timeText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
-          <Text style={styles.dayText}>{selectedDay.day}</Text>
-          <Text style={styles.timeText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
-          {/* Add more details as needed */}
-        </View>
-        <View style={styles.dayDetailsContainer}>
-          <Text style={styles.dayText}>{selectedDay.day}</Text>
-          <Text style={styles.timeText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
-          <Text style={styles.dayText}>{selectedDay.day}</Text>
-          <Text style={styles.timeText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
-          {/* Add more details as needed */}
-        </View>
-        <View style={styles.dayDetailsContainer}>
-          <Text style={styles.dayText}>{selectedDay.day}</Text>
-          <Text style={styles.timeText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
-          <Text style={styles.dayText}>{selectedDay.day}</Text>
-          <Text style={styles.timeText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
-          {/* Add more details as needed */}
-        </View>
+        <ScrollView
+          contentContainerStyle={{
+            alignItems: 'center',
+            paddingTop: 20,
+            justifyContent: 'center',
+          }}
+          style={{maxHeight: '55%', width: '100%', display: 'flex'}}>
+          <View style={styles.dayDetailsContainer}>
+            <View
+              style={{
+                width: '100%',
+                backgroundColor: "#262626",
+                borderTopEndRadius: 10,
+                borderTopStartRadius: 10,
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginBottom:15
+              }}>
+              {/* <DayIconSVG color="white" size={'25'} /> */}
+              <Text style={styles.dayText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
+            </View>
+            <View style={{width: '90%'}}>
+              {/* <Text
+                style={
+                  styles.timeText
+                }>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text> */}
+              <View style={styles.detailRow}>
+                <DurationIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+                <Text style={styles.detailLabel}>Duration:</Text>
+                <Text style={styles.detailValue}>1H30</Text>
+              </View>
+        
+              <View style={styles.detailRow}>
+                <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+                <Text style={styles.detailLabel}>Players Left:</Text>
+                <Text style={styles.detailValue}>5</Text>
+              </View>
+              <View style={styles.detailRow}>
+              <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+
+                <Text style={styles.detailLabel}>Teams:</Text>
+                <Text style={styles.detailValue}>2 teams of 5</Text>
+              </View>
+              <View style={styles.separator}></View>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom:15
+                }}>
+                  <TextCheckAllList>Join Team</TextCheckAllList>
+                  <TextCheckAllList>Match Detail</TextCheckAllList>
+                </View>
+              {/* Add more details as needed */}
+            </View>
+          </View>
+          <View style={styles.dayDetailsContainer}>
+            <View
+              style={{
+                width: '100%',
+                backgroundColor: "#262626",
+                borderTopEndRadius: 10,
+                borderTopStartRadius: 10,
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginBottom:15
+              }}>
+              {/* <DayIconSVG color="white" size={'25'} /> */}
+              <Text style={styles.dayText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
+            </View>
+            <View style={{width: '90%'}}>
+              {/* <Text
+                style={
+                  styles.timeText
+                }>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text> */}
+              <View style={styles.detailRow}>
+                <DurationIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+                <Text style={styles.detailLabel}>Duration:</Text>
+                <Text style={styles.detailValue}>1H30</Text>
+              </View>
+        
+              <View style={styles.detailRow}>
+                <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+                <Text style={styles.detailLabel}>Players Left:</Text>
+                <Text style={styles.detailValue}>5</Text>
+              </View>
+              <View style={styles.detailRow}>
+              <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+
+                <Text style={styles.detailLabel}>Teams:</Text>
+                <Text style={styles.detailValue}>2 teams of 5</Text>
+              </View>
+              <View style={styles.separator}></View>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom:15
+                }}>
+                  <TextCheckAllList>Join Team</TextCheckAllList>
+                  <TextCheckAllList>Match Detail</TextCheckAllList>
+                </View>
+              {/* Add more details as needed */}
+            </View>
+          </View>
+          <View style={styles.dayDetailsContainer}>
+            <View
+              style={{
+                width: '100%',
+                backgroundColor: "#262626",
+                borderTopEndRadius: 10,
+                borderTopStartRadius: 10,
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginBottom:15
+              }}>
+              {/* <DayIconSVG color="white" size={'25'} /> */}
+              <Text style={styles.dayText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
+            </View>
+            <View style={{width: '90%'}}>
+              {/* <Text
+                style={
+                  styles.timeText
+                }>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text> */}
+              <View style={styles.detailRow}>
+                <DurationIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+                <Text style={styles.detailLabel}>Duration:</Text>
+                <Text style={styles.detailValue}>1H30</Text>
+              </View>
+        
+              <View style={styles.detailRow}>
+                <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+                <Text style={styles.detailLabel}>Players Left:</Text>
+                <Text style={styles.detailValue}>5</Text>
+              </View>
+              <View style={styles.detailRow}>
+              <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+
+                <Text style={styles.detailLabel}>Teams:</Text>
+                <Text style={styles.detailValue}>2 teams of 5</Text>
+              </View>
+              <View style={styles.separator}></View>
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom:15
+                }}>
+                  <TextCheckAllList>Join Team</TextCheckAllList>
+                  <TextCheckAllList>Match Detail</TextCheckAllList>
+                </View>
+              {/* Add more details as needed */}
+            </View>
+          </View>
         </ScrollView>
       )}
     </ContainerApp>
@@ -193,21 +337,49 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   dayDetailsContainer: {
-    margin: 20,
-    padding: 10,
-    backgroundColor: '#fff',
     borderRadius: 10,
-    width:"100%",
-    maxHeight:300
+    width: '90%',
+    elevation: 3,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom:20
   },
   dayText: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 10,
+    marginTop: 10,
+    color: 'white',
+    textAlign: 'center',
+    width:"100%"
+
   },
   timeText: {
     fontSize: 16,
-    color: 'gray',
+    color: MatchMatePalette.lightBackgroundColoe,
+    marginBottom: 20,
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#EAEAEA',
+    marginBottom: 20,
+  },
+  detailRow: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    alignItems:"center"
+  },
+  detailLabel: {
+    fontWeight: 'bold',
+    color: 'white',
+    marginRight: 5,
+    marginLeft: 5,
+  },
+  detailValue: {
+    color: 'white',
   },
 });
 

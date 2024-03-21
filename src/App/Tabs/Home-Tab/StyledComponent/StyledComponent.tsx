@@ -305,6 +305,7 @@ export const DayText=styled.Text`
 color:white;
 font-size:17px;
 font-weight:500;
+
 `
 export const MonthText=styled.Text`
 color:${MatchMatePalette.primaryColor};
