@@ -288,36 +288,13 @@ export const DaysContainer=styled.ScrollView`
 width:${WIDTH}px;
 display:flex;
 flex-direction:row;
-margin-top:60px;
-max-height:10%;
-`
-export const DayContent=styled.TouchableOpacity`
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-height:100%;
-width: ${WIDTH*0.29}px;
-
+margin-top:70px;
+max-height:17%;
+background-color:#262626;
+padding:5px;
+border-radius:5px
 `
 
-export const DayText=styled.Text`
-color:white;
-font-size:17px;
-font-weight:500;
-
-`
-export const MonthText=styled.Text`
-color:${MatchMatePalette.primaryColor};
-font-size:14px;
-font-weight:500;
-`
-
-
-export const ContainerStadiumAvailability=styled.ScrollView`
-width:90%;
-align-items:center;
-`
 
 export const ImageConainer=styled.View`
 width:90%;
@@ -330,11 +307,4 @@ position: relative;
     height: ${WIDTH*0.45}px;
     margin-top: 10px;
     margin-bottom: 10px;
-`
-
-export const ImageStyle=styled.Image`
-width:100%;
-height:100%;
-resize-mode:cover;
-border-radius:20px
 `

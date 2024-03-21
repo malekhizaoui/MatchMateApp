@@ -1,86 +1,82 @@
 import styled from 'styled-components/native';
 import {Dimensions} from 'react-native';
 
-import { MatchMatePalette } from '../../../assets/color-palette/index';
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
+import {MatchMatePalette} from '../../../assets/color-palette/index';
 import {
-    fontSizeTitleScreen,
-    fontSizeLegendIcon,
-    fontSizeSubTitleScreen,
-    fontSizeTextScreen,
-    ContainerAppStyle
-  } from '../../../assets/Styles/index';
+  fontSizeTitleScreen,
+  fontSizeLegendIcon,
+  fontSizeSubTitleScreen,
+  fontSizeTextScreen,
+  ContainerAppStyle,
+} from '../../../assets/Styles/index';
 
-  export const FieldContent=styled.TouchableOpacity`
-height:100%;
-border-radius:20px;
-margin-left:10px;
-width:185px;
-align-self:center;
-`
+export const FieldContent = styled.TouchableOpacity`
+  height: 100%;
+  border-radius: 20px;
+  margin-left: 10px;
+  width: 185px;
+  align-self: center;
+`;
 
-export const ImageField =styled.Image`
-height:92%;
-border-radius:20px;
-width:182px;
-align-self:center;
-border:2px;
+export const ImageField = styled.Image`
+  height: 92%;
+  border-radius: 20px;
+  width: 182px;
+  align-self: center;
+  border: 2px;
+`;
 
+export const TitleCard = styled.View`
+  position: absolute;
+  height: 27px;
+  width: 90px;
+  border-radius: 17px;
+  background-color: #454847;
+  bottom: 25px;
+  left: 12px;
+  align-items: center;
+  justify-content: center;
+`;
 
-`
+export const TxtTitle = styled.Text`
+  font-size: 13px;
+  color: white;
+`;
 
-export const TitleCard=styled.View`
-position:absolute;
-height:27px;
-width:90px;
-border-radius:17px;
-background-color:#454847;
-bottom:25px;
-left:12px;
-align-items:center;
-justify-content:center
-`
+export const StadiumContainer = styled.TouchableOpacity`
+  height: 60%;
+  border-radius: 20px;
+  margin-left: 10px;
+  width: 185px;
+  border: 2px white;
+  flex-direction: column;
+  margin-top: 10px;
+`;
 
-export const TxtTitle=styled.Text`
-font-size:13px;
-color:white;
-`
-
-
-
-
-
-export const StadiumContainer=styled.TouchableOpacity`
-height:60%;
-border-radius:20px;
-margin-left:10px;
-width:185px;
-border:2px white;
-flex-direction:column;
-margin-top:10px
-`
-
-export const StadiumImage=styled.Image`
-width:100%;
-height:70%;
-border-radius:17px;
-`
-export const StadiumDescription=styled.View`
-display:Flex;
-flex-direction:column;
-padding:5px
-`
-export const TitleDescription=styled.Text`
-font-size:12px;
-font-weight:500;
-color:white;
-padding-left:5px
-`
-export const TextDescription=styled.Text`
-font-size:10px;
-font-weight:500;
-color:${MatchMatePalette.primaryColor};
-padding-left:5px
-`
+export const StadiumImage = styled.Image`
+  width: 100%;
+  height: 70%;
+  border-radius: 17px;
+`;
+export const StadiumDescription = styled.View`
+  display: Flex;
+  flex-direction: column;
+  padding: 5px;
+`;
+export const TitleDescription = styled.Text`
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  padding-left: 5px;
+`;
+export const TextDescription = styled.Text`
+  font-size: 10px;
+  font-weight: 500;
+  color: ${MatchMatePalette.primaryColor};
+  padding-left: 5px;
+`;
 
 // ImageSlideComponent Design
 export const ImagesStadiumContainer = styled.View`
@@ -128,14 +124,13 @@ export const ExpandMore = styled.View`
   flex-direction: row;
 `;
 
-
 // FacilityCardComponent Design
 export const AttributContainer = styled.View`
-flex-wrap: wrap;
-align-items: flex-start;
-flex-direction: row;
-margin-top: 20px;
-justify-content:space-around
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-direction: row;
+  margin-top: 20px;
+  justify-content: space-around;
 `;
 export const FacilityContentContainer = styled.View`
   align-items: center;
@@ -151,9 +146,8 @@ export const FacilityContentContainer = styled.View`
 export const TextFacility = styled.Text`
   color: #262626;
   font-weight: 500;
-  font-size:13px
+  font-size: 13px;
 `;
-
 
 // SearchCardComponent Design
 export const InputHeaderContainer = styled.View`
@@ -213,3 +207,109 @@ export const NumberOfCourt = styled.Text`
   font-weight: 500;
   color: white;
 `;
+
+// design DaySelectedComponent
+
+export const DayContent = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: ${WIDTH * 0.29}px;
+`;
+export const DayText = styled.Text`
+  color: white;
+  font-size: 17px;
+  font-weight: 500;
+`;
+export const MonthText = styled.Text`
+  color: ${MatchMatePalette.primaryColor};
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+// Design MatchDetailComponent
+
+export const MatchDetailContainer = styled.View`
+  display: flex;
+  width: 90%;
+  margin-top:10px
+`;
+export const DayDetailContainer = styled.View`
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-width: 1px;
+  border-color: grey;
+  
+`;
+
+export const HeaderDetailContainer=styled.View`
+width: 100%;
+background-color: #262626;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+display: flex;
+flex-direction: row;
+align-items: center;
+margin-bottom: 15px;
+justify-content:center;
+`
+
+export const TextHeaderTime=styled.Text`
+color:white;
+font-size:17px;
+font-weight:bold;
+margin:10px
+`
+export const ContentMatchDetail=styled.View`
+width:90%;
+flex-direction:column;
+margin-bottom:10px
+`
+
+export const DescriptionContainer=styled.View`
+flex-direction:row;
+align-items:center;
+`
+export const TxtdetailLabel =styled.Text`
+  color:${MatchMatePalette.lightBackgroundColoe};
+  font-weight:bold;
+  font-size:15px;
+  margin-left:10px
+`
+export const TextDesciption=styled.Text`
+color:white;
+font-size :15px;
+margin-left:10px;
+margin-bottom:4px;
+margin-top:4px;
+font-weight:600;
+`
+
+export const Seperator= styled.View`
+width:90%;
+height:1px;
+background-color:grey;
+margin-bottom:20px
+`
+
+export const BtnTxtContainer =styled.View`
+width:90%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-direction:row;
+margin-bottom:10px
+`
+
+export const TxtButton =styled.Text`
+  color: ${MatchMatePalette.primaryColor};
+  font-size: 15px;
+  text-decoration-line: underline;
+  font-weight:600
+` 

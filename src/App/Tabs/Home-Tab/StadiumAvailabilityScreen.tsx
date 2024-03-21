@@ -11,26 +11,20 @@ import {
 } from 'react-native';
 import {
   ContainerApp,
-  ContainerStadiumAvailability,
   DaysContainer,
-  DayContent,
-  DayText,
-  MonthText,
   ImageConainer,
   ImagesContent,
-  ImageStyle,
-  TextCheckAllList
+
+
 } from './StyledComponent/StyledComponent';
+import DaySelectedComponent from '../../../Components/HomeComponents/DaySelectedComponent';
 import {MatchMatePalette} from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
-import ImageSlideComponent from '../../../Components/HomeComponents/ImageSlideComponent';
-import DescriptionStadiumComponent from '../../../Components/HomeComponents/DescriptionStadiumComponent';
-import FacilityCardComponent from '../../../Components/HomeComponents/FacilityCardComponent';
+
 import PreviousIconSVG from '../../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../../assets/Icons/svg/NextIconSVG';
-import DayIconSVG from '../../../assets/Icons/svg/DayIconSVG';
-import DurationIconSVG from '../../../assets/Icons/svg/DurationIconSVG';
-import PlayersIconSVG from '../../../assets/Icons/svg/PlayersIconSVG';
+
+import MatchDetailComponent from '../../../Components/HomeComponents/MatchDetailComponent';
 const scheduleData = {
   days: [
     {
@@ -116,14 +110,12 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
       />
       <DaysContainer horizontal showsHorizontalScrollIndicator={false}>
         {scheduleData.days.map((item, index) => (
-          <DayContent key={index} onPress={() => setSelectedDay(item)}>
-            <DayText>{item.day}</DayText>
-            <MonthText>{item.month}</MonthText>
-            <View
-              style={[
-                selectedDay === item && styles.selectedDayContainer,
-              ]}></View>
-          </DayContent>
+          <DaySelectedComponent
+            key={index}
+            item={item}
+            setSelectedDay={setSelectedDay}
+            selectedDay={selectedDay}
+          />
         ))}
       </DaysContainer>
       <ImageConainer>
@@ -144,172 +136,16 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
           </TouchableOpacity>
         </ImagesContent>
       </ImageConainer>
-      {selectedDay && (
-        <ScrollView
-          contentContainerStyle={{
-            alignItems: 'center',
-            paddingTop: 20,
-            justifyContent: 'center',
-          }}
-          style={{maxHeight: '55%', width: '100%', display: 'flex'}}>
-          <View style={styles.dayDetailsContainer}>
-            <View
-              style={{
-                width: '100%',
-                backgroundColor: "#262626",
-                borderTopEndRadius: 10,
-                borderTopStartRadius: 10,
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginBottom:15
-              }}>
-              {/* <DayIconSVG color="white" size={'25'} /> */}
-              <Text style={styles.dayText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
-            </View>
-            <View style={{width: '90%'}}>
-              {/* <Text
-                style={
-                  styles.timeText
-                }>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text> */}
-              <View style={styles.detailRow}>
-                <DurationIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
-                <Text style={styles.detailLabel}>Duration:</Text>
-                <Text style={styles.detailValue}>1H30</Text>
-              </View>
-        
-              <View style={styles.detailRow}>
-                <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
-                <Text style={styles.detailLabel}>Players Left:</Text>
-                <Text style={styles.detailValue}>5</Text>
-              </View>
-              <View style={styles.detailRow}>
-              <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
-
-                <Text style={styles.detailLabel}>Teams:</Text>
-                <Text style={styles.detailValue}>2 teams of 5</Text>
-              </View>
-              <View style={styles.separator}></View>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginBottom:15
-                }}>
-                  <TextCheckAllList>Join Team</TextCheckAllList>
-                  <TextCheckAllList>Match Detail</TextCheckAllList>
-                </View>
-              {/* Add more details as needed */}
-            </View>
-          </View>
-          <View style={styles.dayDetailsContainer}>
-            <View
-              style={{
-                width: '100%',
-                backgroundColor: "#262626",
-                borderTopEndRadius: 10,
-                borderTopStartRadius: 10,
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginBottom:15
-              }}>
-              {/* <DayIconSVG color="white" size={'25'} /> */}
-              <Text style={styles.dayText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
-            </View>
-            <View style={{width: '90%'}}>
-              {/* <Text
-                style={
-                  styles.timeText
-                }>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text> */}
-              <View style={styles.detailRow}>
-                <DurationIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
-                <Text style={styles.detailLabel}>Duration:</Text>
-                <Text style={styles.detailValue}>1H30</Text>
-              </View>
-        
-              <View style={styles.detailRow}>
-                <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
-                <Text style={styles.detailLabel}>Players Left:</Text>
-                <Text style={styles.detailValue}>5</Text>
-              </View>
-              <View style={styles.detailRow}>
-              <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
-
-                <Text style={styles.detailLabel}>Teams:</Text>
-                <Text style={styles.detailValue}>2 teams of 5</Text>
-              </View>
-              <View style={styles.separator}></View>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginBottom:15
-                }}>
-                  <TextCheckAllList>Join Team</TextCheckAllList>
-                  <TextCheckAllList>Match Detail</TextCheckAllList>
-                </View>
-              {/* Add more details as needed */}
-            </View>
-          </View>
-          <View style={styles.dayDetailsContainer}>
-            <View
-              style={{
-                width: '100%',
-                backgroundColor: "#262626",
-                borderTopEndRadius: 10,
-                borderTopStartRadius: 10,
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                marginBottom:15
-              }}>
-              {/* <DayIconSVG color="white" size={'25'} /> */}
-              <Text style={styles.dayText}>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text>
-            </View>
-            <View style={{width: '90%'}}>
-              {/* <Text
-                style={
-                  styles.timeText
-                }>{`${selectedDay.startTime} - ${selectedDay.endTime}`}</Text> */}
-              <View style={styles.detailRow}>
-                <DurationIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
-                <Text style={styles.detailLabel}>Duration:</Text>
-                <Text style={styles.detailValue}>1H30</Text>
-              </View>
-        
-              <View style={styles.detailRow}>
-                <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
-                <Text style={styles.detailLabel}>Players Left:</Text>
-                <Text style={styles.detailValue}>5</Text>
-              </View>
-              <View style={styles.detailRow}>
-              <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
-
-                <Text style={styles.detailLabel}>Teams:</Text>
-                <Text style={styles.detailValue}>2 teams of 5</Text>
-              </View>
-              <View style={styles.separator}></View>
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginBottom:15
-                }}>
-                  <TextCheckAllList>Join Team</TextCheckAllList>
-                  <TextCheckAllList>Match Detail</TextCheckAllList>
-                </View>
-              {/* Add more details as needed */}
-            </View>
-          </View>
-        </ScrollView>
-      )}
+      <ScrollView
+        contentContainerStyle={{alignItems: 'center'}}
+        horizontal={false}
+        showsVerticalScrollIndicator={false}
+        style={{width: '100%'}}>
+        <MatchDetailComponent />
+        <MatchDetailComponent />
+        <MatchDetailComponent />
+        <MatchDetailComponent />
+      </ScrollView>
     </ContainerApp>
   );
 };
@@ -321,11 +157,6 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 20,
   },
-  selectedDayContainer: {
-    width: '80%',
-    height: 2,
-    backgroundColor: '#04ADB3',
-  },
   arrowButton: {
     position: 'absolute',
     top: '50%',
@@ -335,52 +166,7 @@ const styles = StyleSheet.create({
     width: '8%',
     height: 30,
     borderRadius: 15,
-  },
-  dayDetailsContainer: {
-    borderRadius: 10,
-    width: '90%',
-    elevation: 3,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20
-  },
-  dayText: {
-    fontSize: 17,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 10,
-    color: 'white',
-    textAlign: 'center',
-    width:"100%"
-
-  },
-  timeText: {
-    fontSize: 16,
-    color: MatchMatePalette.lightBackgroundColoe,
-    marginBottom: 20,
-    textAlign: 'center',
-    marginTop: 10,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#EAEAEA',
-    marginBottom: 20,
-  },
-  detailRow: {
-    flexDirection: 'row',
-    marginBottom: 10,
-    alignItems:"center"
-  },
-  detailLabel: {
-    fontWeight: 'bold',
-    color: 'white',
-    marginRight: 5,
-    marginLeft: 5,
-  },
-  detailValue: {
-    color: 'white',
-  },
+  }
 });
 
 export default StadiumAvailabilityScreen;
