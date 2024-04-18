@@ -17,14 +17,16 @@ import {
   Seperator,
   BtnTxtContainer,
   TxtButton,
-  TxtdetailLabel
+  TxtdetailLabel,
 } from './StyledComponent/StyledComponent';
 import DurationIconSVG from '../../assets/Icons/svg/DurationIconSVG';
-import { MatchMatePalette } from '../../assets/color-palette';
+import {MatchMatePalette} from '../../assets/color-palette';
 import PlayersIconSVG from '../../assets/Icons/svg/PlayersIconSVG';
-interface MatchDetailComponentProps {}
+interface MatchDetailComponentProps {
+  navigation:any
+}
 
-const MatchDetailComponent = ({}: MatchDetailComponentProps) => {
+const MatchDetailComponent = ({navigation}: MatchDetailComponentProps) => {
   return (
     <MatchDetailContainer>
       <DayDetailContainer>
@@ -33,25 +35,38 @@ const MatchDetailComponent = ({}: MatchDetailComponentProps) => {
         </HeaderDetailContainer>
         <ContentMatchDetail>
           <DescriptionContainer>
-          <DurationIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+            <DurationIconSVG
+              color={MatchMatePalette.secondaryColor}
+              size={'25'}
+            />
             <TxtdetailLabel>Duration :</TxtdetailLabel>
             <TextDesciption>1h30</TextDesciption>
           </DescriptionContainer>
           <DescriptionContainer>
-          <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+            <PlayersIconSVG
+              color={MatchMatePalette.secondaryColor}
+              size={'25'}
+            />
             <TxtdetailLabel>Teams :</TxtdetailLabel>
             <TextDesciption>2 teams of 5</TextDesciption>
           </DescriptionContainer>
           <DescriptionContainer>
-          <PlayersIconSVG color={MatchMatePalette.secondaryColor} size={"25"}/>
+            <PlayersIconSVG
+              color={MatchMatePalette.secondaryColor}
+              size={'25'}
+            />
             <TxtdetailLabel>Players Left :</TxtdetailLabel>
             <TextDesciption>5</TextDesciption>
           </DescriptionContainer>
         </ContentMatchDetail>
         <Seperator></Seperator>
         <BtnTxtContainer>
+          <TouchableOpacity >
             <TxtButton>Join Team</TxtButton>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={()=>{navigation.navigate("MatchDetail")}}>
             <TxtButton>See Details</TxtButton>
+          </TouchableOpacity>
         </BtnTxtContainer>
       </DayDetailContainer>
     </MatchDetailContainer>

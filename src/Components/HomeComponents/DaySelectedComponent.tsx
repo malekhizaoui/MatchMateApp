@@ -26,13 +26,17 @@ const DaySelectedComponent = ({
   setSelectedDay,
   item,
 }: DaySelectedComponentProps) => {
+  // console.log("selectedDay",selectedDay);
+  // console.log("item",item);
+  
   return (
-    <DayContent onPress={() => setSelectedDay(item)}>
+    <DayContent onPress={() => {setSelectedDay(item);console.log("item",item)}
+    }>
       <DayText>{item.day}</DayText>
       <MonthText>{item.month}</MonthText>
       <View
         style={[selectedDay === item && styles.selectedDayContainer]}></View>
-    </DayContent>
+        </DayContent>
   );
 };
 const styles=StyleSheet.create({

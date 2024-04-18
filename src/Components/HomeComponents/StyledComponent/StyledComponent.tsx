@@ -25,7 +25,6 @@ export const ImageField = styled.Image`
   border-radius: 20px;
   width: 182px;
   align-self: center;
-  border: 2px;
 `;
 
 export const TitleCard = styled.View`
@@ -217,6 +216,7 @@ export const DayContent = styled.TouchableOpacity`
   align-items: center;
   height: 100%;
   width: ${WIDTH * 0.29}px;
+  background-color:transparent;
 `;
 export const DayText = styled.Text`
   color: white;

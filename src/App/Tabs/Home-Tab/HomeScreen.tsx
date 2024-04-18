@@ -88,6 +88,7 @@ export const HomeScreen = ({navigation}: any) => {
           {fieldDataPut.map((field, i) => {
             return (
               <FieldsCardComponent
+                key={i}
                 isSelected={i == 0 ? true : false}
                 titleText={field.fieldName}
                 backgroundImage={field.backgroundImage}
@@ -116,6 +117,7 @@ export const HomeScreen = ({navigation}: any) => {
             ? stadiumsFootball.map((stadium, i) => {
                 return (
                   <StadiumCardComponent
+                  key={i}
                     titleDescription={stadium.titleDescription}
                     backgroundImage={stadium.backgroundImage}
                     btnClicked={() => {
@@ -128,6 +130,8 @@ export const HomeScreen = ({navigation}: any) => {
             ? stadiumData.map((stadium, i) => {
                 return (
                   <StadiumCardComponent
+                  key={i}
+
                     titleDescription={stadium.titleDescription}
                     backgroundImage={stadium.backgroundImage}
                     btnClicked={() => {
@@ -139,6 +143,8 @@ export const HomeScreen = ({navigation}: any) => {
             : stadiumsVolley.map((stadium, i) => {
                 return (
                   <StadiumCardComponent
+                  key={i}
+
                     titleDescription={stadium.titleDescription}
                     backgroundImage={stadium.backgroundImage}
                     btnClicked={() => {

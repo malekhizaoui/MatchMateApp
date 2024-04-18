@@ -14,8 +14,6 @@ import {
   DaysContainer,
   ImageConainer,
   ImagesContent,
-
-
 } from './StyledComponent/StyledComponent';
 import DaySelectedComponent from '../../../Components/HomeComponents/DaySelectedComponent';
 import {MatchMatePalette} from '../../../assets/color-palette';
@@ -108,7 +106,12 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
         navigation={navigation}
         headerTitle={'Stadium Availability'}
       />
-      <DaysContainer horizontal showsHorizontalScrollIndicator={false}>
+      <DaysContainer horizontal showsHorizontalScrollIndicator={false}
+       contentContainerStyle={{
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      >
         {scheduleData.days.map((item, index) => (
           <DaySelectedComponent
             key={index}
@@ -118,7 +121,8 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
           />
         ))}
       </DaysContainer>
-      <ImageConainer>
+      <ImageConainer
+       >
         <ImagesContent>
           <Animated.Image
             source={{uri: images[currentImageIndex]}}
@@ -137,14 +141,14 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
         </ImagesContent>
       </ImageConainer>
       <ScrollView
-        contentContainerStyle={{alignItems: 'center'}}
+        contentContainerStyle={{alignItems: 'center', justifyContent: 'center'}}
         horizontal={false}
         showsVerticalScrollIndicator={false}
         style={{width: '100%'}}>
+        <MatchDetailComponent navigation={navigation} />
+        {/* <MatchDetailComponent />
         <MatchDetailComponent />
-        <MatchDetailComponent />
-        <MatchDetailComponent />
-        <MatchDetailComponent />
+        <MatchDetailComponent /> */}
       </ScrollView>
     </ContainerApp>
   );
@@ -166,7 +170,7 @@ const styles = StyleSheet.create({
     width: '8%',
     height: 30,
     borderRadius: 15,
-  }
+  },
 });
 
 export default StadiumAvailabilityScreen;

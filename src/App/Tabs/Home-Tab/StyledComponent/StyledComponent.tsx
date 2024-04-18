@@ -288,23 +288,72 @@ export const DaysContainer=styled.ScrollView`
 width:${WIDTH}px;
 display:flex;
 flex-direction:row;
-margin-top:70px;
-max-height:17%;
-background-color:#262626;
+margin-top:50px;
 padding:5px;
-border-radius:5px
+border-radius:5px;
+max-height:140px
 `
-
 
 export const ImageConainer=styled.View`
 width:90%;
 align-items:center;
+margin-bottom:10px
 `
 
 export const  ImagesContent=styled.View`
-position: relative;
+    position: relative;
     width: 100%;
     height: ${WIDTH*0.45}px;
     margin-top: 10px;
     margin-bottom: 10px;
+`
+
+// MatchDetail STyle
+export const MatchDetailContainer=styled.View`
+  display:flex;
+  flex-direction:column;
+  width:90%;
+  align-items:center;
+  height:100%;
+  margin-top:70px;
+`
+
+export const MatchDetailBoard=styled.View`
+display:flex;
+flex-direction:column;
+width:100%;
+justify-content:center;
+align-items:center;
+background-color:white;
+border-radius:20px;
+heigth:100px;
+padding:10px
+`
+
+export const StadiumTextname=styled.Text`
+font-size:17px;
+font-weight:bold;
+color:#262626;
+font-family:poppins
+
+`
+export const PlayerLeftText=styled.Text`
+font-weight:bold;
+color:${MatchMatePalette.primaryColor};
+font-size:12px;
+`
+
+export const MatchTimeDetailContainer=styled.View`
+display:flex;
+flex-direction:row;
+justify-content:space-between;
+align-items:center;
+width:50%
+`
+
+export const TimeText=styled.Text`
+font-size:22px;
+font-weight:bold;
+color:#262626;
+font-family:poppins
 `
