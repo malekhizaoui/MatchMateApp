@@ -313,3 +313,45 @@ export const TxtButton =styled.Text`
   text-decoration-line: underline;
   font-weight:600
 ` 
+// Design MatchDetailBoardComponent
+
+
+export const MatchDetailBoard = styled.View`
+  display: flex;
+  flex:0.75;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  heigth: 100px;
+  padding: 10px;
+`;
+
+export const StadiumTextname = styled.Text`
+  font-size: 17px;
+  font-weight: bold;
+  color: #262626;
+  font-family: poppins;
+`;
+export const PlayerLeftText = styled.Text`
+  font-weight: bold;
+  color: ${MatchMatePalette.primaryColor};
+  font-size: 12px;
+`;
+
+export const MatchTimeDetailContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+`;
+
+export const TimeText = styled.Text`
+  font-size: 22px;
+  font-weight: bold;
+  color: #262626;
+  font-family: poppins;
+`;

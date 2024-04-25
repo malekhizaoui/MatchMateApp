@@ -23,10 +23,12 @@ import DurationIconSVG from '../../assets/Icons/svg/DurationIconSVG';
 import {MatchMatePalette} from '../../assets/color-palette';
 import PlayersIconSVG from '../../assets/Icons/svg/PlayersIconSVG';
 interface MatchDetailComponentProps {
-  navigation:any
+  navigation:any,
+  stadium:any
+
 }
 
-const MatchDetailComponent = ({navigation}: MatchDetailComponentProps) => {
+const MatchDetailComponent = ({navigation,stadium}: MatchDetailComponentProps) => {
   return (
     <MatchDetailContainer>
       <DayDetailContainer>
@@ -64,7 +66,7 @@ const MatchDetailComponent = ({navigation}: MatchDetailComponentProps) => {
           <TouchableOpacity >
             <TxtButton>Join Team</TxtButton>
           </TouchableOpacity>
-          <TouchableOpacity onPress={()=>{navigation.navigate("MatchDetail")}}>
+          <TouchableOpacity onPress={()=>{navigation.navigate("MatchDetail",{stadium})}}>
             <TxtButton>See Details</TxtButton>
           </TouchableOpacity>
         </BtnTxtContainer>

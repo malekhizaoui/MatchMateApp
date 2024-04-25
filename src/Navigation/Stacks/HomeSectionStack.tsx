@@ -38,8 +38,8 @@ export const HomeSectionStack = () => {
       />
       <HomeStack.Screen
         name="MatchDetail"
-        component={MatchDetailScreen}
-        options={{ headerShown: false }}
+        component={MatchDetailScreen} 
+        options={{ headerShown: false }} 
       />
 
     </HomeStack.Navigator>

@@ -16,6 +16,8 @@ import FacilityCardComponent from '../../../Components/HomeComponents/FacilityCa
 // import CarousselComponent from '../../../Components/HomeComponents/CarousselComponent';
 export const StadiumDetailScreen = ({navigation, route}: any) => {
   const {stadium} = route.params;
+  console.log("stadium",stadium);
+  
   return (
     <ContainerApp>
       <NavigateBack
@@ -35,7 +37,7 @@ export const StadiumDetailScreen = ({navigation, route}: any) => {
         <ImageLocation></ImageLocation>
       </ContainerDetailScreen>
       <BtnCheck onPress={()=>{
-        navigation.navigate('StadiumAvailability')
+        navigation.navigate('StadiumAvailability',{stadium})
       }}>
         <TextButton>Check availability</TextButton>
       </BtnCheck>

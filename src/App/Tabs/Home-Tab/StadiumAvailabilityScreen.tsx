@@ -74,7 +74,7 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
   const [selectedDay, setSelectedDay] = useState(scheduleData.days[0]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const fadeAnim = useRef(new Animated.Value(1)).current;
-
+  const {stadium}=route.params
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
@@ -145,7 +145,9 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
         horizontal={false}
         showsVerticalScrollIndicator={false}
         style={{width: '100%'}}>
-        <MatchDetailComponent navigation={navigation} />
+        <MatchDetailComponent navigation={navigation} stadium={stadium}/>
+        <MatchDetailComponent navigation={navigation} stadium={stadium}/>
+        <MatchDetailComponent navigation={navigation} stadium={stadium}/>
         {/* <MatchDetailComponent />
         <MatchDetailComponent />
         <MatchDetailComponent /> */}
