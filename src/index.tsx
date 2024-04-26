@@ -17,6 +17,7 @@ import ConnexionMethodScreen from './App/Screens/Authentication-screen/Connexion
 import CodeVerificationScreen from './App/Screens/Authentication-screen/CodeVerificationScreen';
 import { HomeScreen } from './App/Tabs/Home-Tab/HomeScreen';
 import MatchDetailScreen from './App/Tabs/Home-Tab/MatchDetailScreen';
+import StadiumListMapScreen from './App/Tabs/Home-Tab/StadiumListMapScreen';
 function App(): React.JSX.Element {
   return <NavigationApp/>;
 }

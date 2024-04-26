@@ -15,14 +15,14 @@ import SearchIconSVG from '../../assets/Icons/svg/SearchIconSVG';
 import FilterIconSVG from '../../assets/Icons/svg/FilterIconSVG';
 import { MatchMatePalette } from '../../assets/color-palette';
 interface SearchCardComponentProps {
- 
+ showMap:boolean
 }
 
 const SearchCardComponent = ({
-
+showMap
 }: SearchCardComponentProps) => {
   return (
-    <InputHeaderContainer>
+    <InputHeaderContainer style={{borderColor: MatchMatePalette.darkBackgroundColor,borderWidth: 1 }}>
           <InputIconContainer>
             <SearchIconSVG color={'#262626'} />
             <TextInputStyle placeholder="Search ..."></TextInputStyle>

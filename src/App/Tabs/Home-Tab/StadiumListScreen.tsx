@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import React,{Fragment, useState} from 'react';
+import {View, Text, TouchableOpacity,SafeAreaView} from 'react-native';
 import {
   ContainerApp,
   ContainerListStadiumScreen,
@@ -12,26 +12,31 @@ import SearchCardComponent from '../../../Components/HomeComponents/SearchCardCo
 import ImageListStadiumComponent from '../../../Components/HomeComponents/ImageListStadiumComponent';
 import { MatchMatePalette } from '../../../assets/color-palette';
 import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
+import  StadiumListMapScreen  from './StadiumListMapScreen';
 export const StadiumListScreen = ({navigation, route}: any) => {
   const {fieldDataPass} = route.params;
   const [showMap,setShowMap]=useState(true)
   return (
-    <ContainerApp >
+    <>
       <HeaderListStadiumContainer>
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
         }}>
-        <BackIconSVG color={MatchMatePalette.primaryColor} btnClicked={()=>{navigation.goBack()}} />
+        <BackIconSVG color={showMap?MatchMatePalette.primaryColor:MatchMatePalette.darkBackgroundColor} btnClicked={()=>{navigation.goBack()}} />
       </TouchableOpacity>
 
-        <SearchCardComponent />
+        <SearchCardComponent showMap={showMap} />
         <TouchableOpacity onPress={()=>{setShowMap(!showMap)}}>
-        <TextTypeOfRender>{showMap?"Map":"list"}</TextTypeOfRender>
+        <TextTypeOfRender style={{color:showMap?MatchMatePalette.primaryColor:MatchMatePalette.darkBackgroundColor}}>{showMap?"Map":"list"}</TextTypeOfRender>
         </TouchableOpacity>
       </HeaderListStadiumContainer>
-      <ContainerListStadiumScreen showsVerticalScrollIndicator={false}>
-        {showMap&&<ListStadiumContainer>
+      {showMap?( <ContainerListStadiumScreen style={{backgroundColor:MatchMatePalette.darkBackgroundColor,marginTop:0,paddingTop:20}} showsVerticalScrollIndicator={false} 
+      contentContainerStyle={{justifyContent:"center",alignItems:"center",alignSelf:"center"
+
+      }}
+      >
+        <ListStadiumContainer>
           <Text
             style={{
               color: 'white',
@@ -51,8 +56,8 @@ export const StadiumListScreen = ({navigation, route}: any) => {
               />
             );
           })}
-        </ListStadiumContainer>}
-      </ContainerListStadiumScreen>
-    </ContainerApp>
+        </ListStadiumContainer>
+      </ContainerListStadiumScreen>):<StadiumListMapScreen/>}
+    </>
   );
 };

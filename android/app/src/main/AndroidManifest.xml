@@ -1,6 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
 
     <application
       android:name=".MainApplication"
@@ -21,5 +27,8 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+      <meta-data
+       android:name="com.yandex.mapkit.ca4f9c56-2615-48b0-ab59-28438efd4454"
+       android:value="ca4f9c56-2615-48b0-ab59-28438efd4454" />
     </application>
 </manifest>

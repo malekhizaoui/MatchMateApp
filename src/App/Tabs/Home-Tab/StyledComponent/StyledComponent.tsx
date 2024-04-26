@@ -257,8 +257,9 @@ export const TextButton = styled.Text`
 export const ContainerListStadiumScreen = styled.ScrollView`
   display: flex;
   flex: 1;
-  width: 90%;
+  width: 100%;
   margin-top: 60px;
+  
 `;
 export const HeaderListStadiumContainer = styled.View`
   flex-direction: row;
@@ -268,7 +269,6 @@ export const HeaderListStadiumContainer = styled.View`
   position: absolute;
   top: 10px;
   z-index: 9999;
-  background-color: ${MatchMatePalette.darkBackgroundColor};
   height: 60px;
 `;
 
@@ -284,6 +284,7 @@ export const ListStadiumContainer = styled.View`
   flex-direction: column;
   margin-top: 20px;
   align-items: center;
+  width:90%
 `;
 
 //

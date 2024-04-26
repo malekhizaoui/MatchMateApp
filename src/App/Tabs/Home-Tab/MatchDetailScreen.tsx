@@ -78,6 +78,7 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
     return team.map((el: object | any, index: number) => (
       <View key={index} style={el}>
         <PlayerIconSVG color="white" size="40" />
+        <Text style={{color:"white"}}>Malek</Text>
       </View>
     ));
   };
