@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  StyleSheet
 } from 'react-native';
 import {
   ContainerApp,
@@ -22,20 +23,39 @@ import {
   TextTitleList,
   TextCheckAllList,
   fieldData,
-  stadiumData,
-  stadiumsFootball,
   stadiumsVolley,
 } from './StyledComponent/StyledComponent';
+
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
 import ExpandIconSVG from '../../../assets/Icons/svg/ExpandIconSVG';
 import {MatchMatePalette} from '../../../assets/color-palette';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
+import axios from 'axios';
+import BaseUrl from '../../../services/BaseUrl';
+import { Dropdown } from 'react-native-element-dropdown';
+
 export const HomeScreen = ({navigation}: any) => {
-  const scrollViewRef = useRef<ScrollView>(null); // Define the type of the ref
-  const [fieldDataPut, setfieldDataPut] = useState(fieldData);
+  const scrollViewRef = useRef<ScrollView>(null);
+  const [basketballField, setBasketballField] = useState([]);
+  const [footballField, setFootballField] = useState([]);
+  const [volleyballField, setVolleyballField] = useState([]);
+  const [fieldDataPut, setfieldDataPut] = useState([]);
   const [fieldSelected, setFieldSelected] = useState('Basketball');
+  const [regionSelected,setRegionSelected]=useState('Lausanne')
+  const [value, setValue] = useState(null);
+    const [isFocus, setIsFocus] = useState(false);
+    const renderLabel = () => {
+      if (value || isFocus) {
+        return (
+          <Text style={[styles.label, isFocus && { color: MatchMatePalette.primaryColor }]}>
+           
+          </Text>
+        );
+      }
+      return null;
+    };
   const updateFieldData = (index: number) => {
     const reorderedFieldData = [
       fieldDataPut[index],
@@ -44,8 +64,27 @@ export const HomeScreen = ({navigation}: any) => {
     ];
     setfieldDataPut(reorderedFieldData);
     setFieldSelected(fieldDataPut[index].fieldName);
-    scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: true }); // Use optional chaining
+    scrollViewRef.current?.scrollTo({x: 0, y: 0, animated: true});
   };
+
+  const getFieldsBaseOnRegion = async () => {
+    try {
+      const res = await axios.get(`${BaseUrl}/fieldRegion/${regionSelected}`);
+      setfieldDataPut(res.data);
+      setBasketballField(res.data[0].stadiums);
+      setFootballField(res.data[1].stadiums);
+      setVolleyballField(res.data[2].stadiums)
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getFieldsBaseOnRegion();
+  }, [regionSelected]);
+  const data = [
+    { label: 'Lausanne' , value: 'Lausanne' },
+    { label:  'Geneva', value: 'Geneva' },
+   
+  ];
 
   return (
     <ContainerApp>
@@ -57,13 +96,33 @@ export const HomeScreen = ({navigation}: any) => {
         <HeaderContainer>
           <ExploreRegionContainer>
             <RegionExploreTxt>Explore</RegionExploreTxt>
-            <RegionTxt>Zurich</RegionTxt>
+            <RegionTxt>{regionSelected}</RegionTxt>
           </ExploreRegionContainer>
-          <UpdateRegionContainer>
+          <View style={styles.container}>
+        {renderLabel()}
+        <Dropdown
+          style={[styles.dropdown, isFocus && { borderColor: 'red' }]}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder={regionSelected}
+          value={regionSelected}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onChange={item => {
+            setRegionSelected(item.value);
+            setIsFocus(false);
+          }}
+          renderLeftIcon={() => (
             <PinIconSVG color={MatchMatePalette.primaryColor} size={'15'} />
-            <RegionExploreTxt>Zurich,CH</RegionExploreTxt>
-            <ExpandIconSVG color={MatchMatePalette.primaryColor} />
-          </UpdateRegionContainer>
+          )}
+        />
+      </View>
+    
         </HeaderContainer>
         <InputContainer>
           <SearchIconSVG color="grey" />
@@ -91,9 +150,8 @@ export const HomeScreen = ({navigation}: any) => {
                 key={i}
                 isSelected={i == 0 ? true : false}
                 titleText={field.fieldName}
-                backgroundImage={field.backgroundImage}
+                backgroundImage={field.imageURL}
                 btnClicked={() => {
-                  // navigation.navigate('FieldList');
                   updateFieldData(i);
                 }}
               />
@@ -106,7 +164,11 @@ export const HomeScreen = ({navigation}: any) => {
             onPress={() => {
               navigation.navigate('StadiumList', {
                 fieldDataPass:
-                  fieldSelected === 'Football' ? stadiumsFootball : fieldSelected === 'Basketball'? stadiumData:stadiumsVolley,
+                  fieldSelected === 'Football'
+                    ? footballField
+                    : fieldSelected === 'Basketball'
+                    ? basketballField
+                    : stadiumsVolley,
               });
             }}>
             <TextCheckAllList>Discover All</TextCheckAllList>
@@ -114,12 +176,12 @@ export const HomeScreen = ({navigation}: any) => {
         </TextContainer>
         <ListContainer horizontal={true} showsHorizontalScrollIndicator={false}>
           {fieldSelected === 'Football'
-            ? stadiumsFootball.map((stadium, i) => {
+            ? footballField.map((stadium, i) => {
                 return (
                   <StadiumCardComponent
-                  key={i}
-                    titleDescription={stadium.titleDescription}
-                    backgroundImage={stadium.backgroundImage}
+                    key={i}
+                    titleDescription={stadium.stadiumName}
+                    backgroundImage={stadium.imageURL}
                     btnClicked={() => {
                       navigation.navigate('StadiumDetail', {stadium});
                     }}
@@ -127,34 +189,69 @@ export const HomeScreen = ({navigation}: any) => {
                 );
               })
             : fieldSelected === 'Basketball'
-            ? stadiumData.map((stadium, i) => {
+            ? basketballField.map((stadium, i) => {
                 return (
                   <StadiumCardComponent
-                  key={i}
-
-                    titleDescription={stadium.titleDescription}
-                    backgroundImage={stadium.backgroundImage}
+                    key={i}
+                    titleDescription={stadium.stadiumName}
+                    backgroundImage={stadium.imageURL}
                     btnClicked={() => {
                       navigation.navigate('StadiumDetail', {stadium});
                     }}
                   />
                 );
               })
-            : stadiumsVolley.map((stadium, i) => {
+            : volleyballField.map((stadium, i) => {
                 return (
                   <StadiumCardComponent
-                  key={i}
-
-                    titleDescription={stadium.titleDescription}
-                    backgroundImage={stadium.backgroundImage}
+                    key={i}
+                    titleDescription={stadium.stadiumName}
+                    backgroundImage={stadium.imageURL}
                     btnClicked={() => {
                       navigation.navigate('StadiumDetail', {stadium});
                     }}
                   />
                 );
-              })}
+              })
+              
+              }
         </ListContainer>
       </ContainerScreen>
     </ContainerApp>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    padding: 0,
+    width:"44%",
+  },
+  dropdown: {
+    height: 50,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  label: {
+    position: 'absolute',
+    left: 22,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+    color:"white",
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+    color:MatchMatePalette.primaryColor,
+    
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+});

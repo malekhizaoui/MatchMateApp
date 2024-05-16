@@ -190,7 +190,6 @@ export const StadiumImageContainer = styled.Image`
   width: 100%;
   height: 190px;
   border-radius: 10px;
-  border: 1px white;
 `;
 
 export const TitleStadiumName = styled.Text`
@@ -216,7 +215,7 @@ export const DayContent = styled.TouchableOpacity`
   align-items: center;
   height: 100%;
   width: ${WIDTH * 0.29}px;
-  background-color:transparent;
+  background-color: transparent;
 `;
 export const DayText = styled.Text`
   color: white;
@@ -234,7 +233,7 @@ export const MonthText = styled.Text`
 export const MatchDetailContainer = styled.View`
   display: flex;
   width: 90%;
-  margin-top:10px
+  margin-top: 10px;
 `;
 export const DayDetailContainer = styled.View`
   border-radius: 10px;
@@ -245,80 +244,78 @@ export const DayDetailContainer = styled.View`
   margin-bottom: 20px;
   border-width: 1px;
   border-color: grey;
-  
 `;
 
-export const HeaderDetailContainer=styled.View`
-width: 100%;
-background-color: #262626;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
-display: flex;
-flex-direction: row;
-align-items: center;
-margin-bottom: 15px;
-justify-content:center;
-`
+export const HeaderDetailContainer = styled.View`
+  width: 100%;
+  background-color: #262626;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+  justify-content: center;
+`;
 
-export const TextHeaderTime=styled.Text`
-color:white;
-font-size:17px;
-font-weight:bold;
-margin:10px
-`
-export const ContentMatchDetail=styled.View`
-width:90%;
-flex-direction:column;
-margin-bottom:10px
-`
+export const TextHeaderTime = styled.Text`
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  margin: 10px;
+`;
+export const ContentMatchDetail = styled.View`
+  width: 90%;
+  flex-direction: column;
+  margin-bottom: 10px;
+`;
 
-export const DescriptionContainer=styled.View`
-flex-direction:row;
-align-items:center;
-`
-export const TxtdetailLabel =styled.Text`
-  color:${MatchMatePalette.lightBackgroundColoe};
-  font-weight:bold;
-  font-size:15px;
-  margin-left:10px
-`
-export const TextDesciption=styled.Text`
-color:white;
-font-size :15px;
-margin-left:10px;
-margin-bottom:4px;
-margin-top:4px;
-font-weight:600;
-`
+export const DescriptionContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+export const TxtdetailLabel = styled.Text`
+  color: ${MatchMatePalette.lightBackgroundColoe};
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 10px;
+`;
+export const TextDesciption = styled.Text`
+  color: white;
+  font-size: 15px;
+  margin-left: 10px;
+  margin-bottom: 4px;
+  margin-top: 4px;
+  font-weight: 600;
+`;
 
-export const Seperator= styled.View`
-width:90%;
-height:1px;
-background-color:grey;
-margin-bottom:20px
-`
+export const Seperator = styled.View`
+  width: 90%;
+  height: 1px;
+  background-color: grey;
+  margin-bottom: 20px;
+`;
 
-export const BtnTxtContainer =styled.View`
-width:90%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-direction:row;
-margin-bottom:10px
-`
+export const BtnTxtContainer = styled.View`
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 10px;
+`;
 
-export const TxtButton =styled.Text`
+export const TxtButton = styled.Text`
   color: ${MatchMatePalette.primaryColor};
   font-size: 15px;
   text-decoration-line: underline;
-  font-weight:600
-` 
+  font-weight: 600;
+`;
 // Design MatchDetailBoardComponent
-
 
 export const MatchDetailBoard = styled.View`
   display: flex;
-  flex:0.75;
+  flex: 0.75;
   flex-direction: column;
   width: 100%;
   justify-content: center;
@@ -354,4 +351,24 @@ export const TimeText = styled.Text`
   font-weight: bold;
   color: #262626;
   font-family: poppins;
+`;
+
+// StadiumCardMapComponent design
+
+export const StadiumCardContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  height: 150px;
+  border-radius: 20px;
+  background-color: ${MatchMatePalette.darkBackgroundColor};
+  margin-right: 10px;
+  padding: 10px;
+`;
+
+export const ImageContainerCard = styled.Image`
+  width: 40%;
+  height: 100%;
+  background-color: white;
+  margin-right: 10px;
 `;

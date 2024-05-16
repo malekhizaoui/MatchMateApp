@@ -25,7 +25,7 @@ const ImageListStadiumComponent = ({
     <ImageContainer>
       <StadiumImageContainer
         source={{
-          uri: stadium.backgroundImage,
+          uri: stadium.imageURL,
         }}></StadiumImageContainer>
       <TouchableOpacity
         style={{
@@ -102,7 +102,7 @@ const ImageListStadiumComponent = ({
         </Text>
       </TouchableOpacity>
     </ImageContainer>
-    <TitleStadiumName>{stadium.titleDescription}</TitleStadiumName>
+    <TitleStadiumName>{stadium.stadiumName}</TitleStadiumName>
   </TouchableOpacity>
   );
 };

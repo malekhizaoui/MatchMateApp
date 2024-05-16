@@ -1,59 +1,79 @@
-import {useEffect, useState,useContext} from 'react';
-import axios from 'axios'
+import {useEffect, useState, useContext} from 'react';
+import axios from 'axios';
 import {
-
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
-import { AuthContext } from '../../../../services/Context/AuthContext';
+import {AuthContext} from '../../../../services/Context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {handleRequests} from '../../../../services/HandleRequests';
 const CELL_COUNT = 6;
-export const useAuth = (navigation:any,route:any=false) => {
+export const useAuth = (navigation: any, route: any = false) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState('');
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({value,setValue,});
-  const {userId,codeVerification}=route && route.params
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    value,
+    setValue,
+  });
+  const {userId, codeVerification} = route && route.params;
   const {signIn} = useContext(AuthContext);
 
-  
-  const loginUser=async()=> {
-    signIn()
-      await axios.post('http://192.168.1.112:3009/api/v1/login',{email,password}).then((res)=>{            
-            navigation.navigate('Signup')
-    }).catch((err:any)=>{
+ 
 
-        console.log("err",err);
+  const loginUser = async () => {
+    signIn();
+    await axios
+      .post('http://192.168.1.112:3009/api/v1/login', {email, password})
+      .then(res => {
+        AsyncStorage.setItem('token',res.data.token)
+        signIn()
+
+      })
+      .catch((err: any) => {
+        console.log('err', err);
+      });
+  };
+  const registerUser = async () => {
+    console.log('ss');
+
+    await axios
+      .post('http://192.168.1.112:3009/api/v1/register', {
+        email,
+        password,
+        firstName,
+        lastName,
+        age,
+      })
+      .then(res => {
+        navigation.navigate('CodeVerification', {
+          userId: res.data.user.id,
+          codeVerification: res.data.user.code_verification,
+        });
+      })
+      .catch((err: any) => {
+        console.log('err', err);
+      });
+  };
+
+  const verifyCode = async () => {
+    if (Number(value) == Number(codeVerification)) {
+      await axios
+        .put(`http://192.168.1.112:3009/api/v1/user/${userId}`, {
+          is_verified: true,
         })
-  }
-  const registerUser=async()=> {
-    console.log("ss");
-    navigation.navigate('CodeVerification',{userId:"res.data.user.id",codeVerification:"res.data.user.code_verification"})
-
-      await axios.post('http://192.168.1.112:3009/api/v1/register',{email,password,firstName,lastName,age}).then((res)=>{
-            console.log("response",res.data.user.id);
-            
-            navigation.navigate('CodeVerification',{userId:res.data.user.id,codeVerification:res.data.user.code_verification})
-    }).catch((err:any)=>{
-
-        console.log("err",err);
-        })
-  }
-
-  const verifyCode=async()=>{
-    if(Number(value)==Number(codeVerification)){
-      await axios.put(`http://192.168.1.112:3009/api/v1/user/${userId}`,{is_verified:true}).then((res)=>{
-        navigation.navigate('Signin')
-    })
-    }else{
-      console.log("verification code is wrong");
-      
+        .then(res => {
+          navigation.navigate('Signin');
+        });
+    } else {
+      console.log('verification code is wrong');
     }
-   
-  }
+  };
   return {
     email,
     setEmail,
@@ -73,8 +93,7 @@ export const useAuth = (navigation:any,route:any=false) => {
     value,
     setValue,
     getCellOnLayoutHandler,
-    CELL_COUNT
-    
+    CELL_COUNT,
   };
 };
 

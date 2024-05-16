@@ -32,12 +32,12 @@ export const ScreenOptions = ({navigation, route}: any) => ({
         iconName = !focused
         ? <LeaderboardIconSCG color='white'/>
         :<LeaderboardIconSCG color={MatchMatePalette.primaryColor}/>
-        name = 'guide';
+        name = 'Leaderboard';
       } else if (route.name === 'BookingTab') {
         iconName = !focused
         ? <BookingIconSVG color='white'/>
         :<BookingIconSVG color={MatchMatePalette.primaryColor}/>
-        name = 'Notification';
+        name = 'booking';
       } 
   
       return (
@@ -57,12 +57,11 @@ export const ScreenOptions = ({navigation, route}: any) => ({
           ) : ( */}
                 {iconName}
           {/* )} */}
-          {/* {color === '#E59138' ? (
-            <Text style={{color, paddingTop: 15}}>{name}</Text>
-          ) : null} */}
+          {/* {color === '#E59138' ? ( */}
+            <Text style={{color}}>{name}</Text>
         </View>
       );
     },
-    tabBarActiveTintColor: '#E59138',
-    tabBarInactiveTintColor: '#707070',
+    tabBarActiveTintColor: MatchMatePalette.primaryColor,
+    tabBarInactiveTintColor: 'white',
   });

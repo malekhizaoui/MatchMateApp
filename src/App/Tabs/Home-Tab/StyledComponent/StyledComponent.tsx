@@ -12,6 +12,8 @@ import {
   fontSizeTextScreen,
   ContainerAppStyle,
 } from '../../../../assets/Styles/index';
+
+
 export const stadiumsFootball = [
   {
     titleDescription: 'Balexert',
@@ -32,24 +34,22 @@ export const stadiumsFootball = [
     field: 'footBall',
   },
 ];
+
+
 export const stadiumsVolley = [
   {
     titleDescription: 'Zermatt',
-
-    backgroundImage:
-      'https://db-service.toubiz.de/var/plain_site/storage/images/orte/zermatt/beachvolley/beachvolley/1404114-1-ger-DE/beachvolley_front_large.jpg',
+    backgroundImage:'https://db-service.toubiz.de/var/plain_site/storage/images/orte/zermatt/beachvolley/beachvolley/1404114-1-ger-DE/beachvolley_front_large.jpg',
     field: 'volleyBall',
   },
   {
     titleDescription: 'Asphalt',
-    backgroundImage:
-      'https://www.genevepascher.com/wp-content/uploads/2022/06/initiations-volley-geneve-pas-cher.jpg',
+    backgroundImage:'https://www.genevepascher.com/wp-content/uploads/2022/06/initiations-volley-geneve-pas-cher.jpg',
     field: 'volleyBall',
   },
   {
     titleDescription: 'Trembley',
-    backgroundImage:
-      'https://aweniddofq.cloudimg.io/v7/luxemburg.imxplatform.de/data/httpsappvisitluxembourgcomimages23296-resize-1680x1050x100.jpg?func=crop&width=1000&height=1000',
+    backgroundImage:'https://aweniddofq.cloudimg.io/v7/luxemburg.imxplatform.de/data/httpsappvisitluxembourgcomimages23296-resize-1680x1050x100.jpg?func=crop&width=1000&height=1000',
     field: 'volleyBall',
   },
 ];
@@ -284,7 +284,8 @@ export const ListStadiumContainer = styled.View`
   flex-direction: column;
   margin-top: 20px;
   align-items: center;
-  width:90%
+  width:90%;
+  padding-bottom : 50px
 `;
 
 //
@@ -296,6 +297,7 @@ export const DaysContainer = styled.ScrollView`
   padding: 5px;
   border-radius: 5px;
   max-height: 140px;
+  position:fixed
 `;
 
 export const ImageConainer = styled.View`
@@ -337,3 +339,12 @@ export const FieldImage = styled.Image`
   height: 100%;
   object-fit: fill;
 `;
+
+// 
+
+export const FlatListMapContainer = styled.ScrollView`
+  width: 95%;
+  position: absolute;
+  bottom: 15px;
+  align-self: center;
+  `;

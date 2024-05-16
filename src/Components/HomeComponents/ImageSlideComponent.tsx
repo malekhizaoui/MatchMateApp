@@ -18,7 +18,7 @@ const ImageSlideComponent = ({
   return (
     <ImagesStadiumContainer>
           
-          <ImageStadium source={{uri: stadium.backgroundImage}}></ImageStadium>
+          <ImageStadium source={{uri: stadium.imageURL}}></ImageStadium>
           <TouchableOpacity style={{position:'absolute',top:"50%",left:15,backgroundColor:"#262626",alignItems:"center",display:"flex",justifyContent:"center",width:"8%",height:30,borderRadius:15}}>
             <PreviousIconSVG color="white" />
           </TouchableOpacity>

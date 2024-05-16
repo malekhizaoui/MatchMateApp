@@ -26,7 +26,7 @@ const DescriptionStadiumComponent = ({
 return(
   <View>
     <HeaderStadium>
-          <TitleTextStadium>{stadium.titleDescription}</TitleTextStadium>
+          <TitleTextStadium>{stadium.stadiumName}</TitleTextStadium>
           <TxtShowMap>Show map</TxtShowMap>
         </HeaderStadium>
         <StadiumDescriptionTxt>

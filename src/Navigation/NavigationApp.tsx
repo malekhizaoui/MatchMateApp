@@ -20,12 +20,11 @@ function NavigationApp() {
   const [choix, setChoix] = useState<string>('');
   const [sign, setSign] = useState(true);
   const [routeName, setRouteName] = useState<string | undefined>();
-  console.log('routeName', routeName);
 
   const retrieveUserSession = async () => {
     try {
       const res = await AsyncStorage.getItem('token');
-      setIsLoggedin(!!res);
+      setSign(!res);
     } catch (error) {
       console.log(error);
     }
@@ -45,6 +44,8 @@ function NavigationApp() {
       choix,
     };
   }, [choix]);
+
+  
 
   const SplashApp = createNativeStackNavigator();
   const TabBarDourbia = createBottomTabNavigator();
@@ -80,11 +81,7 @@ function NavigationApp() {
                 return {
                   display: 'none',
                   backgroundColor: '#262626',
-                  padding: 10,
-                  height: '8%',
-                  width: '100%',
-                  alignSelf: 'center',
-                  borderColor: 'white',
+                 
                 };
               }
               return {
@@ -95,13 +92,11 @@ function NavigationApp() {
                 alignSelf: 'center',
                 borderColor: 'white',
               }
-
-              
-              ;
-              
+              ;  
             })(route),
           })}
         />
+        
         <TabBarDourbia.Screen
           name="BookingTab"
           component={BookingSectionStack}

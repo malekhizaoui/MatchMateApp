@@ -31,7 +31,7 @@ const SignUpScreen = ({navigation}: any) => {
     setLastName,
     age,
     setAge,
-    registerUser
+    registerUser,
   } = useAuth(navigation);
   
   return (
@@ -55,8 +55,8 @@ const SignUpScreen = ({navigation}: any) => {
             inputName="Adresse mail"
             setValue={setEmail}
             valueInput={email}
-            iconComponent={ <MailIconSVG color={MatchMatePalette.primaryColor} />}
-
+            iconComponent={ <MailIconSVG color={MatchMatePalette.primaryColor}
+            />}
           />
           <InputAuthComponent
             placeholder="Choisissez un mot de passe"
