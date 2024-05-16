@@ -24,20 +24,22 @@ export const useAuth = (navigation: any, route: any = false) => {
   const {userId, codeVerification} = route && route.params;
   const {signIn} = useContext(AuthContext);
 
- 
-
   const loginUser = async () => {
-    signIn();
-    await axios
-      .post('http://192.168.1.112:3009/api/v1/login', {email, password})
-      .then(res => {
-        AsyncStorage.setItem('token',res.data.token)
-        signIn()
-
-      })
-      .catch((err: any) => {
-        console.log('err', err);
-      });
+    if (email !== '' && password !== '') {
+      await axios
+        .post('http://192.168.1.112:3009/api/v1/login', {email, password})
+        .then(res => {
+          if (res.data.token) {
+            console.log('resszvdv', res.data);
+            AsyncStorage.setItem('token', res.data.token);
+            AsyncStorage.setItem('userId',JSON.stringify(res.data.findUser.id))
+            signIn();
+          }
+        })
+        .catch((err: any) => {
+          console.log('err', err);
+        });
+    }
   };
   const registerUser = async () => {
     console.log('ss');
@@ -94,6 +96,7 @@ export const useAuth = (navigation: any, route: any = false) => {
     setValue,
     getCellOnLayoutHandler,
     CELL_COUNT,
+    signIn,
   };
 };
 

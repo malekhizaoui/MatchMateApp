@@ -75,6 +75,7 @@ const SignInScreen = ({navigation}: any) => {
             backgroundColor={MatchMatePalette.primaryColor}
             btnTextColor="white"
             btnClicked={() => {
+              // signIn()
               navigation.navigate('Signup');
             }}
             iconComponent={""}

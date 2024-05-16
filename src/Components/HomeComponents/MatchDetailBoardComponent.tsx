@@ -18,6 +18,7 @@ import {MatchMatePalette} from '../../assets/color-palette';
 import PlayersIconSVG from '../../assets/Icons/svg/PlayersIconSVG';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
 interface MatchDetailComponentProps {
+  
 }
 
 const MatchDetailComponent = ({}: MatchDetailComponentProps) => {

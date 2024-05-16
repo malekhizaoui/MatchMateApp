@@ -62,7 +62,7 @@ const MatchDetailComponent = ({ navigation, timeSlot, stadium }: MatchDetailComp
           <TouchableOpacity >
             <TxtButton>Join Team</TxtButton>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { navigation.navigate("MatchDetail", { stadium }) }}>
+          <TouchableOpacity onPress={() => { navigation.navigate("MatchDetail", { stadiumFieldName:stadium.field.fieldName,timeSlot }) }}>
             <TxtButton>See Details</TxtButton>
           </TouchableOpacity>
         </BtnTxtContainer>
