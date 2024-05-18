@@ -9,15 +9,18 @@ import {
   StadiumCardContainer,
   ImageContainerCard,
 } from './StyledComponent/StyledComponent';
+import { Stadium } from '../../App/models/Stadium';
+interface StadiumCardMapComponentProps {
+  stadium:Stadium,
+  navigation:any
+}
 
-interface StadiumCardMapComponentProps {}
-
-const StadiumCardMapComponent = ({}: StadiumCardMapComponentProps) => {
+const StadiumCardMapComponent = ({stadium,navigation}: StadiumCardMapComponentProps) => {
   return (
-    <StadiumCardContainer>
+    <StadiumCardContainer onPress={()=>{navigation.navigate('StadiumDetail',{stadium})}}>
       <ImageContainerCard
         source={{
-          uri: 'https://www.geneve.ch/sites/default/files/2022-06/asphalte-ville-geneve-cover-01%281%29.jpg',
+          uri: stadium.imageURL,
         }}></ImageContainerCard>
       <View
         style={{
@@ -34,7 +37,7 @@ const StadiumCardMapComponent = ({}: StadiumCardMapComponentProps) => {
             fontWeight: '600',
             flexWrap: 'wrap',
           }}>
-          Sunset evening
+          {stadium.stadiumName}
         </Text>
         <Text
           style={{

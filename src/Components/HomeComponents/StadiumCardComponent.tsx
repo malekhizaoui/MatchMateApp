@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {StyleSheet, Dimensions, Text, View} from 'react-native';
+import React from 'react';
 import {
   StadiumContainer,
   StadiumImage,
@@ -10,7 +9,7 @@ import {
 
 interface StadiumCardComponentProps {
   titleDescription: string;
-  backgroundImage: string;
+  backgroundImage?: string;
   btnClicked: () => void;
 }
 
@@ -19,9 +18,11 @@ const StadiumCardComponent = ({
   backgroundImage,
   btnClicked,
 }: StadiumCardComponentProps) => {
+  const defaultImage = 'https://example.com/default-image.jpg'; // Provide a valid default image URL
   return (
     <StadiumContainer onPress={btnClicked}>
-      <StadiumImage source={{uri: backgroundImage}}></StadiumImage>
+      <StadiumImage
+        source={{uri: backgroundImage || defaultImage}}></StadiumImage>
       <StadiumDescription>
         <TitleDescription>Explore {titleDescription}</TitleDescription>
         <TextDescription>Near court</TextDescription>

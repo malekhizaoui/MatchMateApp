@@ -13,8 +13,9 @@ import PreviousIconSVG from '../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
 import ExpandIconSVG from '../../assets/Icons/svg/ExpandIconSVG';
 import { MatchMatePalette } from '../../assets/color-palette';
+import { Stadium } from '../../App/models/Stadium';
 interface DescriptionStadiumComponentProps {
-  stadium:any;
+  stadium:Stadium;
   btnClicked: () => void;
 }
 

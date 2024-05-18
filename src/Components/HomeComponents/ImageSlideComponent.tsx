@@ -6,8 +6,9 @@ import {
 } from './StyledComponent/StyledComponent';
 import PreviousIconSVG from '../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
+import { Stadium } from '../../App/models/Stadium';
 interface ImageSlideComponentProps {
-  stadium:any;
+  stadium:Stadium;
   btnClicked: () => void;
 }
 

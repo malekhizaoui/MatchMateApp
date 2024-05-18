@@ -23,6 +23,8 @@ import StadiumCardMapComponent from '../../../Components/HomeComponents/StadiumC
 export const StadiumListScreen = ({navigation, route}: any) => {
   const {fieldDataPass} = route.params;
   const [showMap, setShowMap] = useState(true);
+  console.log("fieldDataPass",fieldDataPass);
+  
   return (
     <>
       <HeaderListStadiumContainer>
@@ -102,14 +104,17 @@ export const StadiumListScreen = ({navigation, route}: any) => {
         </ContainerListStadiumScreen>
       ) : (
         <>
-          <StadiumListMapScreen />
+          <StadiumListMapScreen stadiums={fieldDataPass}/>
           <FlatListMapContainer
             horizontal
             showsHorizontalScrollIndicator={false}>
-            <StadiumCardMapComponent />
-            <StadiumCardMapComponent />
-            <StadiumCardMapComponent />
-            <StadiumCardMapComponent />
+            
+            {fieldDataPass.map((stadium:any)=>{
+              return(
+                <StadiumCardMapComponent stadium={stadium} navigation={navigation}/>
+              )
+            })}
+            
           </FlatListMapContainer>
         </>
       )}

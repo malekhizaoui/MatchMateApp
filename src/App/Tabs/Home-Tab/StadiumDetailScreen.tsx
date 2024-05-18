@@ -13,6 +13,7 @@ import NavigateBack from '../../../Components/NavigateBack';
 import ImageSlideComponent from '../../../Components/HomeComponents/ImageSlideComponent';
 import DescriptionStadiumComponent from '../../../Components/HomeComponents/DescriptionStadiumComponent';
 import FacilityCardComponent from '../../../Components/HomeComponents/FacilityCardComponent';
+import { StatusBar } from 'react-native';
 // import CarousselComponent from '../../../Components/HomeComponents/CarousselComponent';
 export const StadiumDetailScreen = ({navigation, route}: any) => {
   const {stadium} = route.params;
@@ -24,6 +25,10 @@ export const StadiumDetailScreen = ({navigation, route}: any) => {
           navigation={navigation}
           headerTitle={"Stadium Detail"}
         />
+        <StatusBar
+        barStyle={'light-content'}
+        backgroundColor={MatchMatePalette.darkBackgroundColor}
+      />
       <ContainerDetailScreen
         horizontal={false}
         showsVerticalScrollIndicator={false}>

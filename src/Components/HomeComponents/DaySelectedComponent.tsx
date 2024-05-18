@@ -16,7 +16,7 @@ import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
 import ExpandIconSVG from '../../assets/Icons/svg/ExpandIconSVG';
 import {MatchMatePalette} from '../../assets/color-palette';
 interface DaySelectedComponentProps {
-  selectedDay: any;
+  selectedDay: object;
   item: any;
   setSelectedDay: (item:any) => void;
 }

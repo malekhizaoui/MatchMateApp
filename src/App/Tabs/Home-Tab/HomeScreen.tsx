@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import {
   ContainerApp,
@@ -34,28 +34,34 @@ import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 import axios from 'axios';
 import BaseUrl from '../../../services/BaseUrl';
-import { Dropdown } from 'react-native-element-dropdown';
+import {Dropdown} from 'react-native-element-dropdown';
+import {Stadium} from '../../models/Stadium';
+import { Field } from '../../models/Field';
 
 export const HomeScreen = ({navigation}: any) => {
+
   const scrollViewRef = useRef<ScrollView>(null);
-  const [basketballField, setBasketballField] = useState([]);
-  const [footballField, setFootballField] = useState([]);
-  const [volleyballField, setVolleyballField] = useState([]);
-  const [fieldDataPut, setfieldDataPut] = useState([]);
+  const [basketballField, setBasketballField] =  useState<Stadium[]>([]);
+  const [footballField, setFootballField] = useState<Stadium[]>([]);
+  const [volleyballField, setVolleyballField] =  useState<Stadium[]>([]);
+  const [fieldDataPut, setfieldDataPut] = useState<Field[]>([]);
   const [fieldSelected, setFieldSelected] = useState('Basketball');
-  const [regionSelected,setRegionSelected]=useState('Lausanne')
+  const [regionSelected, setRegionSelected] = useState('Lausanne');
   const [value, setValue] = useState(null);
-    const [isFocus, setIsFocus] = useState(false);
-    const renderLabel = () => {
-      if (value || isFocus) {
-        return (
-          <Text style={[styles.label, isFocus && { color: MatchMatePalette.primaryColor }]}>
-           
-          </Text>
-        );
-      }
-      return null;
-    };
+  const [isFocus, setIsFocus] = useState(false);
+
+  const renderLabel = () => {
+    if (value || isFocus) {
+      return (
+        <Text
+          style={[
+            styles.label,
+            isFocus && {color: MatchMatePalette.primaryColor},
+          ]}></Text>
+      );
+    }
+    return null;
+  };
   const updateFieldData = (index: number) => {
     const reorderedFieldData = [
       fieldDataPut[index],
@@ -66,25 +72,27 @@ export const HomeScreen = ({navigation}: any) => {
     setFieldSelected(fieldDataPut[index].fieldName);
     scrollViewRef.current?.scrollTo({x: 0, y: 0, animated: true});
   };
-
+    
+  console.log('fieldDataPut',fieldDataPut);
+    
   const getFieldsBaseOnRegion = async () => {
     try {
       const res = await axios.get(`${BaseUrl}/fieldRegion/${regionSelected}`);
       setfieldDataPut(res.data);
       setBasketballField(res.data[0].stadiums);
       setFootballField(res.data[1].stadiums);
-      setVolleyballField(res.data[2].stadiums)
+      setVolleyballField(res.data[2].stadiums);
     } catch (error) {}
   };
-
+    
   useEffect(() => {
     getFieldsBaseOnRegion();
   }, [regionSelected]);
   const data = [
-    { label: 'Lausanne' , value: 'Lausanne' },
-    { label:  'Geneva', value: 'Geneva' },
-   
+    {label: 'Lausanne', value: 'Lausanne'},
+    {label: 'Geneva', value: 'Geneva'},
   ];
+  console.log('footballField', footballField);
 
   return (
     <ContainerApp>
@@ -99,30 +107,30 @@ export const HomeScreen = ({navigation}: any) => {
             <RegionTxt>{regionSelected}</RegionTxt>
           </ExploreRegionContainer>
           <View style={styles.container}>
-        {renderLabel()}
-        <Dropdown
-          style={[styles.dropdown, isFocus && { borderColor: 'red' }]}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
-          iconStyle={styles.iconStyle}
-          data={data}
-          maxHeight={300}
-          labelField="label"
-          valueField="value"
-          placeholder={regionSelected}
-          value={regionSelected}
-          onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
-          onChange={item => {
-            setRegionSelected(item.value);
-            setIsFocus(false);
-          }}
-          renderLeftIcon={() => (
-            <PinIconSVG color={MatchMatePalette.primaryColor} size={'15'} />
-          )}
-        />
-      </View>
-    
+            {renderLabel()}
+            <Dropdown
+              style={[styles.dropdown, isFocus && {borderColor: 'red'}]}
+              placeholderStyle={styles.placeholderStyle}
+              selectedTextStyle={styles.selectedTextStyle}
+              iconStyle={styles.iconStyle}
+              data={data}
+              maxHeight={300}
+              labelField="label"
+              valueField="value"
+              placeholder={regionSelected}
+              value={regionSelected}
+              onFocus={() => setIsFocus(true)}
+              onBlur={() => setIsFocus(false)}
+              onChange={item => {
+                setRegionSelected(item.value);
+                setIsFocus(false);
+                setFieldSelected('Basketball');
+              }}
+              renderLeftIcon={() => (
+                <PinIconSVG color={MatchMatePalette.primaryColor} size={'15'} />
+              )}
+            />
+          </View>
         </HeaderContainer>
         <InputContainer>
           <SearchIconSVG color="grey" />
@@ -168,7 +176,7 @@ export const HomeScreen = ({navigation}: any) => {
                     ? footballField
                     : fieldSelected === 'Basketball'
                     ? basketballField
-                    : stadiumsVolley,
+                    : volleyballField,
               });
             }}>
             <TextCheckAllList>Discover All</TextCheckAllList>
@@ -212,9 +220,7 @@ export const HomeScreen = ({navigation}: any) => {
                     }}
                   />
                 );
-              })
-              
-              }
+              })}
         </ListContainer>
       </ContainerScreen>
     </ContainerApp>
@@ -223,7 +229,7 @@ export const HomeScreen = ({navigation}: any) => {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    width:"44%",
+    width: '44%',
   },
   dropdown: {
     height: 50,
@@ -240,15 +246,14 @@ const styles = StyleSheet.create({
     zIndex: 999,
     paddingHorizontal: 8,
     fontSize: 14,
-    color:"white",
+    color: 'white',
   },
   placeholderStyle: {
     fontSize: 16,
   },
   selectedTextStyle: {
     fontSize: 16,
-    color:MatchMatePalette.primaryColor,
-    
+    color: MatchMatePalette.primaryColor,
   },
   iconStyle: {
     width: 20,

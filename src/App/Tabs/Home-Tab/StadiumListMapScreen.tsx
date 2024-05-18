@@ -5,28 +5,42 @@ import PinOrderSVG from '../../../assets/Icons/svg/TabsIcon/PinOrderSVG';
 import {MatchMatePalette} from '../../../assets/color-palette';
 
 YaMap.init('ca4f9c56-2615-48b0-ab59-28438efd4454');
+interface StadiumListMapProps {
+  stadiums: any;
+}
 
-const StadiumListMapScreen = () => {
+const StadiumListMapScreen = ({stadiums}: StadiumListMapProps) => {
+  console.log("stadium",stadiums[4]);
+  
   return (
     <YaMap
       style={{flex: 1}}
       showUserPosition={true}
       initialRegion={{
-        lat: 47.383736,
-        lon: 8.531274,
+        lat: JSON.parse(stadiums[0].latitude),
+              lon: JSON.parse(stadiums[0].longitude),
         zoom: 12,
         azimuth: 20,
         tilt: 100,
       }}>
-      <Marker
-        visible={true}
-        point={{
-          lat: 47.376822,
-          lon: 8.531728,
-        }}>
-        <PinOrderSVG color={MatchMatePalette.darkBackgroundColor} order={1} />
-      </Marker>
-      <Marker
+      {stadiums.map((stadium: any, index: number) => {
+        return (
+          <Marker
+            key={index}
+            visible={true}
+            point={{
+              lat: JSON.parse(stadium.latitude),
+              lon: JSON.parse(stadium.longitude),
+            }}>
+            <PinOrderSVG
+              color={MatchMatePalette.darkBackgroundColor}
+              order={index}
+            />
+          </Marker>
+        );
+      })}
+
+      {/* <Marker
         visible={true}
         point={{
           lat: 47.370906,
@@ -57,7 +71,7 @@ const StadiumListMapScreen = () => {
           lon: 8.548527,
         }}>
         <PinOrderSVG order={5} color={MatchMatePalette.darkBackgroundColor} />
-      </Marker>
+      </Marker> */}
     </YaMap>
   );
 };

@@ -355,10 +355,10 @@ export const TimeText = styled.Text`
 
 // StadiumCardMapComponent design
 
-export const StadiumCardContainer = styled.View`
+export const StadiumCardContainer = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
-  width: 40%;
+  width: 250px;
   height: 150px;
   border-radius: 20px;
   background-color: ${MatchMatePalette.darkBackgroundColor};
@@ -371,4 +371,5 @@ export const ImageContainerCard = styled.Image`
   height: 100%;
   background-color: white;
   margin-right: 10px;
+  border-radius:10px
 `;

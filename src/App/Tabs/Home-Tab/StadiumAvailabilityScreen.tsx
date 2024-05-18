@@ -18,7 +18,7 @@ import {
 import DaySelectedComponent from '../../../Components/HomeComponents/DaySelectedComponent';
 import { MatchMatePalette } from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
-
+import { Stadium } from '../../models/Stadium';
 import PreviousIconSVG from '../../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../../assets/Icons/svg/NextIconSVG';
 
@@ -74,16 +74,13 @@ console.log("days", days);
 export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
   const [selectedDay, setSelectedDay] = useState(days[0]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [stadium, setStadium] = useState([])
-
+  const [stadium, setStadium] = useState<Stadium[]>([])
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const { stadiumId } = route.params;
+
   useEffect(() => {
     retrieveTimeSlots()
-
   }, [currentImageIndex, fadeAnim, selectedDay]);
-
-
 
   const retrieveTimeSlots = async () => {
     try {
@@ -95,9 +92,6 @@ export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
 
     }
   }
-
-  console.log("stadium", stadium);
-
 
   return (
     <ContainerApp>

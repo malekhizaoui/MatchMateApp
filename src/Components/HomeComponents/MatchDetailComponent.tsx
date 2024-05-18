@@ -4,11 +4,13 @@ import { MatchDetailContainer, DayDetailContainer, HeaderDetailContainer, TextHe
 import DurationIconSVG from '../../assets/Icons/svg/DurationIconSVG';
 import { MatchMatePalette } from '../../assets/color-palette';
 import PlayersIconSVG from '../../assets/Icons/svg/PlayersIconSVG';
+import { Stadium } from '../../App/models/Stadium';
+import { TimeSlot } from '../../App/models/TimeSlot';
 
 interface MatchDetailComponentProps {
   navigation: any,
-  timeSlot: any
-  stadium: any
+  timeSlot: TimeSlot
+  stadium: Stadium
 }
 
 const MatchDetailComponent = ({ navigation, timeSlot, stadium }: MatchDetailComponentProps) => {
@@ -44,8 +46,7 @@ const MatchDetailComponent = ({ navigation, timeSlot, stadium }: MatchDetailComp
               size={'25'}
             />
             <TxtdetailLabel>Teams :</TxtdetailLabel>
-            {/* Assuming timeSlot.teamCount contains the number of teams */}
-            <TextDesciption>{timeSlot.teamCount} teams of 5</TextDesciption>
+            <TextDesciption>2 teams of {stadium.capacity/2}</TextDesciption>
           </DescriptionContainer>
           <DescriptionContainer>
             <PlayersIconSVG
@@ -53,8 +54,7 @@ const MatchDetailComponent = ({ navigation, timeSlot, stadium }: MatchDetailComp
               size={'25'}
             />
             <TxtdetailLabel>Players Left :</TxtdetailLabel>
-            {/* Assuming timeSlot.playersLeft contains the number of players left */}
-            <TextDesciption>{timeSlot.playersLeft}</TextDesciption>
+            <TextDesciption>{stadium.capacity-timeSlot.team.length}</TextDesciption>
           </DescriptionContainer>
         </ContentMatchDetail>
         <Seperator></Seperator>
