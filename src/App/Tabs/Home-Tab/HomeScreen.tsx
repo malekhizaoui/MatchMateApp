@@ -73,7 +73,6 @@ export const HomeScreen = ({navigation}: any) => {
     scrollViewRef.current?.scrollTo({x: 0, y: 0, animated: true});
   };
     
-  console.log('fieldDataPut',fieldDataPut);
     
   const getFieldsBaseOnRegion = async () => {
     try {

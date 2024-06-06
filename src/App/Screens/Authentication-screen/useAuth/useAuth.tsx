@@ -6,7 +6,7 @@ import {
 } from 'react-native-confirmation-code-field';
 import {AuthContext} from '../../../../services/Context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import BaseUrl from '../../../../services/BaseUrl';
 import {handleRequests} from '../../../../services/HandleRequests';
 const CELL_COUNT = 6;
 export const useAuth = (navigation: any, route: any = false) => {
@@ -27,7 +27,7 @@ export const useAuth = (navigation: any, route: any = false) => {
   const loginUser = async () => {
     if (email !== '' && password !== '') {
       await axios
-        .post('http://192.168.1.112:3009/api/v1/login', {email, password})
+        .post(`http://${BaseUrl}:3009/api/v1/login`, {email, password})
         .then(res => {
           if (res.data.token) {
             console.log('resszvdv', res.data);
@@ -45,7 +45,7 @@ export const useAuth = (navigation: any, route: any = false) => {
     console.log('ss');
 
     await axios
-      .post('http://192.168.1.112:3009/api/v1/register', {
+      .post(`http://${BaseUrl}:3009/api/v1/register`, {
         email,
         password,
         firstName,
@@ -66,7 +66,7 @@ export const useAuth = (navigation: any, route: any = false) => {
   const verifyCode = async () => {
     if (Number(value) == Number(codeVerification)) {
       await axios
-        .put(`http://192.168.1.112:3009/api/v1/user/${userId}`, {
+        .put(`http://192.168.1.41:3009/api/v1/user/${userId}`, {
           is_verified: true,
         })
         .then(res => {
