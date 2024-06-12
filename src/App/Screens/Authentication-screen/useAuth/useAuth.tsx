@@ -27,7 +27,7 @@ export const useAuth = (navigation: any, route: any = false) => {
   const loginUser = async () => {
     if (email !== '' && password !== '') {
       await axios
-        .post(`http://${BaseUrl}:3009/api/v1/login`, {email, password})
+        .post(`http://192.168.1.112:3009/api/v1/login`, {email, password})
         .then(res => {
           if (res.data.token) {
             console.log('resszvdv', res.data);
@@ -42,10 +42,10 @@ export const useAuth = (navigation: any, route: any = false) => {
     }
   };
   const registerUser = async () => {
-    console.log('ss');
+    console.log('ssd');
 
     await axios
-      .post(`http://${BaseUrl}:3009/api/v1/register`, {
+      .post(`http://192.168.1.112:3009/api/v1/register`, {
         email,
         password,
         firstName,
@@ -64,12 +64,16 @@ export const useAuth = (navigation: any, route: any = false) => {
   };
 
   const verifyCode = async () => {
+    
     if (Number(value) == Number(codeVerification)) {
+      console.log("dsdsdsdsdsdsdsd");
+
       await axios
-        .put(`http://192.168.1.41:3009/api/v1/user/${userId}`, {
+        .put(`http://192.168.1.112:3009/api/v1/user/${userId}`, {
           is_verified: true,
         })
         .then(res => {
+          
           navigation.navigate('Signin');
         });
     } else {

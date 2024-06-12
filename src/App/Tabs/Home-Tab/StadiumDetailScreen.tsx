@@ -24,6 +24,7 @@ export const StadiumDetailScreen = ({navigation, route}: any) => {
       <NavigateBack
           navigation={navigation}
           headerTitle={"Stadium Detail"}
+          color={MatchMatePalette.primaryColor}
         />
         <StatusBar
         barStyle={'light-content'}

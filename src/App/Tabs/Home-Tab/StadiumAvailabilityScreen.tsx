@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   Animated,
   StatusBar,
@@ -16,9 +16,9 @@ import {
   ImagesContent,
 } from './StyledComponent/StyledComponent';
 import DaySelectedComponent from '../../../Components/HomeComponents/DaySelectedComponent';
-import { MatchMatePalette } from '../../../assets/color-palette';
+import {MatchMatePalette} from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
-import { Stadium } from '../../models/Stadium';
+import {Stadium} from '../../models/Stadium';
 import PreviousIconSVG from '../../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../../assets/Icons/svg/NextIconSVG';
 
@@ -37,7 +37,7 @@ const getWeekDaysInfo = () => {
     date: `${today.getDate()} ${today.toLocaleDateString('en-US', {
       month: 'long',
     })}`,
-    realDay: today.toLocaleDateString('en-US', { weekday: 'long' }), // Actual day of the week
+    realDay: today.toLocaleDateString('en-US', {weekday: 'long'}), // Actual day of the week
   });
 
   const tomorrow = new Date(today);
@@ -47,7 +47,7 @@ const getWeekDaysInfo = () => {
     date: `${tomorrow.getDate()} ${tomorrow.toLocaleDateString('en-US', {
       month: 'long',
     })}`,
-    realDay: tomorrow.toLocaleDateString('en-US', { weekday: 'long' }), // Actual day of the week
+    realDay: tomorrow.toLocaleDateString('en-US', {weekday: 'long'}), // Actual day of the week
   });
 
   for (let i = 2; i < 7; i++) {
@@ -60,7 +60,7 @@ const getWeekDaysInfo = () => {
       date: `${nextDay.getDate()} ${nextDay.toLocaleDateString('en-US', {
         month: 'long',
       })}`,
-      realDay: nextDay.toLocaleDateString('en-US', { weekday: 'long' }), // Actual day of the week
+      realDay: nextDay.toLocaleDateString('en-US', {weekday: 'long'}), // Actual day of the week
     });
   }
 
@@ -69,29 +69,25 @@ const getWeekDaysInfo = () => {
 
 const days = getWeekDaysInfo();
 
-console.log("days", days);
+console.log('days', days);
 
-export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
+export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
   const [selectedDay, setSelectedDay] = useState(days[0]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [stadium, setStadium] = useState<Stadium[]>([])
+  const [stadium, setStadium] = useState<Stadium[]>([]);
   const fadeAnim = useRef(new Animated.Value(1)).current;
-  const { stadiumId } = route.params;
+  const {stadiumId} = route.params;
 
   useEffect(() => {
-    retrieveTimeSlots()
+    retrieveTimeSlots();
   }, [currentImageIndex, fadeAnim, selectedDay]);
 
   const retrieveTimeSlots = async () => {
     try {
-
-      const res = await axios.get(`${BaseUrl}/stadium/${stadiumId}`)
-      setStadium(res.data.data)
-
-    } catch (error) {
-
-    }
-  }
+      const res = await axios.get(`${BaseUrl}/stadium/${stadiumId}`);
+      setStadium(res.data.data);
+    } catch (error) {}
+  };
 
   return (
     <ContainerApp>
@@ -118,62 +114,65 @@ export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
       <ImageConainer>
         <ImagesContent>
           <Animated.Image
-            source={{ uri: stadium.imageURL ? stadium.imageURL : "https://static.vecteezy.com/ti/vecteur-libre/p1/1824188-toile-de-fond-flou-abstrait-vector-gris-clair-vectoriel.jpg" }}
-            style={[styles.image, { opacity: fadeAnim }]}
+            source={{
+              uri: stadium.imageURL
+                ? stadium.imageURL
+                : 'https://static.vecteezy.com/ti/vecteur-libre/p1/1824188-toile-de-fond-flou-abstrait-vector-gris-clair-vectoriel.jpg',
+            }}
+            style={[styles.image, {opacity: fadeAnim}]}
           />
-          <TouchableOpacity
-            onPress={() => { }}
-            style={styles.arrowButton}>
+          <TouchableOpacity onPress={() => {}} style={styles.arrowButton}>
             <PreviousIconSVG color="white" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => { }}
-            style={[styles.arrowButton, { right: 0 }]}>
+            onPress={() => {}}
+            style={[styles.arrowButton, {right: 0}]}>
             <NextIconSVG color="white" />
           </TouchableOpacity>
         </ImagesContent>
       </ImageConainer>
       <ScrollView
-        contentContainerStyle={{ alignItems: 'center', justifyContent: 'center' }}
+        contentContainerStyle={{alignItems: 'center', justifyContent: 'center'}}
         horizontal={false}
         showsVerticalScrollIndicator={false}
-        style={{ width: '100%' }}>
-        {
-  stadium?.timeSlots?.length > 0 ? (
-    // Check if any time slots match the selected day
-    stadium.timeSlots.some((timeSlot: any) => {
-      const timeSlotDay = new Date(timeSlot.startTime).toLocaleDateString('en-US', {
-        weekday: 'long',
-      });
-      return timeSlotDay === selectedDay.realDay;
-    }) ? (
-      // Render time slots
-      stadium.timeSlots
-        .filter((timeSlot: any) => {
-          const timeSlotDay = new Date(timeSlot.startTime).toLocaleDateString('en-US', {
-            weekday: 'long',
-          });
-          return timeSlotDay === selectedDay.realDay;
-        })
-        .map((timeSlot: any, i: number) => (
-          <MatchDetailComponent
-            key={i}
-            navigation={navigation}
-            timeSlot={timeSlot}
-            stadium={stadium}
-          />
-        ))
-    ) : (
-      // Render NoTimeSlotsComponent if no time slots match the selected day
-      <NoTimeSlotsComponent selectedDay={selectedDay} />
-    )
-  ) : (
-    // Render NoTimeSlotsComponent if there are no time slots
-    <NoTimeSlotsComponent selectedDay={selectedDay} />
-  )
-}
-
-
+        style={{width: '100%'}}>
+        {stadium?.timeSlots?.length > 0 ? (
+          // Check if any time slots match the selected day
+          stadium.timeSlots.some((timeSlot: any) => {
+            const timeSlotDay = new Date(timeSlot.startTime).toLocaleDateString(
+              'en-US',
+              {
+                weekday: 'long',
+              },
+            );
+            return timeSlotDay === selectedDay.realDay;
+          }) ? (
+            // Render time slots
+            stadium.timeSlots
+              .filter((timeSlot: any) => {
+                const timeSlotDay = new Date(
+                  timeSlot.startTime,
+                ).toLocaleDateString('en-US', {
+                  weekday: 'long',
+                });
+                return timeSlotDay === selectedDay.realDay;
+              })
+              .map((timeSlot: any, i: number) => (
+                <MatchDetailComponent
+                  key={i}
+                  navigation={navigation}
+                  timeSlot={timeSlot}
+                  stadium={stadium}
+                />
+              ))
+          ) : (
+            // Render NoTimeSlotsComponent if no time slots match the selected day
+            <NoTimeSlotsComponent selectedDay={selectedDay} />
+          )
+        ) : (
+          // Render NoTimeSlotsComponent if there are no time slots
+          <NoTimeSlotsComponent selectedDay={selectedDay} />
+        )}
       </ScrollView>
     </ContainerApp>
   );

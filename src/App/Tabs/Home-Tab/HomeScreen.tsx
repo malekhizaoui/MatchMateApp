@@ -36,20 +36,37 @@ import axios from 'axios';
 import BaseUrl from '../../../services/BaseUrl';
 import {Dropdown} from 'react-native-element-dropdown';
 import {Stadium} from '../../models/Stadium';
-import { Field } from '../../models/Field';
+import {Field} from '../../models/Field';
 
 export const HomeScreen = ({navigation}: any) => {
-
   const scrollViewRef = useRef<ScrollView>(null);
-  const [basketballField, setBasketballField] =  useState<Stadium[]>([]);
+  const [basketballField, setBasketballField] = useState<Stadium[]>([]);
   const [footballField, setFootballField] = useState<Stadium[]>([]);
-  const [volleyballField, setVolleyballField] =  useState<Stadium[]>([]);
+  const [volleyballField, setVolleyballField] = useState<Stadium[]>([]);
   const [fieldDataPut, setfieldDataPut] = useState<Field[]>([]);
   const [fieldSelected, setFieldSelected] = useState('Basketball');
   const [regionSelected, setRegionSelected] = useState('Lausanne');
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+  const [searchResults, setSearchResults] = useState<Stadium[]>([]);
+  const [query, setQuery] = useState('');
 
+  const searchFields = (query: string) => {
+    if (query.length < 3) {
+      setSearchResults([]);
+      return;
+    }
+    const allStadiums = [...basketballField, ...footballField];
+    const filteredStadiums = allStadiums.filter(stadium =>
+      stadium.stadiumName.toLowerCase().includes(query.toLowerCase())
+    );
+    setSearchResults(filteredStadiums);
+  };
+
+  const handleSearch = (valueText:string) => {
+    setQuery(valueText);
+    searchFields(valueText);
+  };
   const renderLabel = () => {
     if (value || isFocus) {
       return (
@@ -72,8 +89,10 @@ export const HomeScreen = ({navigation}: any) => {
     setFieldSelected(fieldDataPut[index].fieldName);
     scrollViewRef.current?.scrollTo({x: 0, y: 0, animated: true});
   };
-    
-    
+
+  console.log("searchResults",searchResults);
+  
+
   const getFieldsBaseOnRegion = async () => {
     try {
       const res = await axios.get(`${BaseUrl}/fieldRegion/${regionSelected}`);
@@ -83,7 +102,7 @@ export const HomeScreen = ({navigation}: any) => {
       setVolleyballField(res.data[2].stadiums);
     } catch (error) {}
   };
-    
+
   useEffect(() => {
     getFieldsBaseOnRegion();
   }, [regionSelected]);
@@ -91,7 +110,6 @@ export const HomeScreen = ({navigation}: any) => {
     {label: 'Lausanne', value: 'Lausanne'},
     {label: 'Geneva', value: 'Geneva'},
   ];
-  console.log('footballField', footballField);
 
   return (
     <ContainerApp>
@@ -135,7 +153,10 @@ export const HomeScreen = ({navigation}: any) => {
           <SearchIconSVG color="grey" />
           <TextInputStyle
             placeholder="things to find out"
-            placeholderTextColor={'grey'}></TextInputStyle>
+            placeholderTextColor={'grey'}
+            onChangeText={handleSearch}
+            value={query}
+            ></TextInputStyle>
         </InputContainer>
 
         <TextContainer>
