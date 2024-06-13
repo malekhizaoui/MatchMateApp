@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext, useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -18,13 +18,16 @@ import {
   ProfilePropertiesContainer,
   ProfilePropertyContent,
 } from './StyledComponent/StyledComponent';
+import { AuthContext } from '../../../services/Context/AuthContext';
 import {MatchMatePalette} from '../../../assets/color-palette';
 import GameHistoryIconSVG from '../../../assets/Icons/svg/GameHistoryIconSVG';
 import InfoPersoIconSVG from '../../../assets/Icons/svg/InfoPersoIconSVG';
 import SettingsIconSVG from '../../../assets/Icons/svg/SettingsIconSVG';
 import LogoutIconSVG from '../../../assets/Icons/svg/LogoutIconSVG';
 import ProfilePropertyComponent from '../../../Components/ProfileComponents/ProfilePropertyComponent';
+import useProfile from './useProfile';
 const ProfileScreen = ({navigation}: any) => {
+const {userData,signOut}=useProfile(navigation)
   return (
     <ContainerApp>
       <StatusBar
@@ -34,11 +37,11 @@ const ProfileScreen = ({navigation}: any) => {
       <TextHeader>Profile</TextHeader>
       <ProfileHeaderContainer>
         <ImageProfile
-          source={require('../../../assets/Images/yasmine.jpg')}></ImageProfile>
+          source={userData?.image?{uri:userData.image}:require('../../../assets/Images/userAnonymousImage.png')}></ImageProfile>
 
         <HeaderTitleContainer>
-          <TextNameProfile>Yasmine ghali</TextNameProfile>
-          <TextNameProfile>YasmineGhali@gmail.com</TextNameProfile>
+          <TextNameProfile>{userData?.firstName} {userData?.lastName}</TextNameProfile>
+          <TextNameProfile>{userData?.email}</TextNameProfile>
         </HeaderTitleContainer>
       </ProfileHeaderContainer>
       <ProfilePropertiesContainer>
@@ -70,9 +73,7 @@ const ProfileScreen = ({navigation}: any) => {
           <ProfilePropertyComponent
             propertyText="Log out"
             icon={<LogoutIconSVG color={MatchMatePalette.primaryColor} />}
-            toNavigate={() => {
-              navigation.navigate('EditProfile');
-            }}
+            toNavigate={signOut}
           />
           <LineSperator></LineSperator>
         </ProfilePropertyContent>

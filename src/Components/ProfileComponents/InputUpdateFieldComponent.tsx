@@ -1,39 +1,38 @@
-import React, {useState} from 'react';
-import {StyleSheet, Dimensions, Text, View} from 'react-native';
+import React from 'react';
 import {
   ContainerInput,
   ContentInput,
   ContainerContentInput,
   TextTitleInput,
   TextInputStyle,
-  IconStyle,
 } from './StyledComponent/StyledComponent';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import UserNameIconSVG from '../../assets/Icons/svg/UsernameIconSVG';
-import { MatchMatePalette } from '../../assets/color-palette';
-interface InputUpdateFieldComponentProps{
-  placeholder:string,
-  inputName:string,
-//   setValue: React.Dispatch<React.SetStateAction<string>>,
-//   valueInput : string ,
+
+interface InputUpdateFieldComponentProps {
+  placeholder: string;
+  inputName: string;
+  setValue: (value: any) => void; // Ensure correct type for setValue
+  value: any; // Ensure correct type for value
 }
 
-
-export const InputUpdateFieldComponent = ({placeholder,inputName }:InputUpdateFieldComponentProps) => {
-
+export const InputUpdateFieldComponent = ({
+  placeholder,
+  inputName,
+  setValue,
+  value,
+}: InputUpdateFieldComponentProps) => {
   return (
     <ContainerInput>
-            <ContainerContentInput>
-              <ContentInput>
-                <TextTitleInput>{inputName} :</TextTitleInput>
-                <TextInputStyle
-                
-                //   value={valueInput}
-                //   onChangeText={value=>setValue(value)}
-                  placeholder={placeholder}
-                  placeholderTextColor={'grey'}></TextInputStyle>
-              </ContentInput>
-            </ContainerContentInput>
-          </ContainerInput>
-  )
-}
+      <ContainerContentInput>
+        <ContentInput>
+          <TextTitleInput>{inputName} :</TextTitleInput>
+          <TextInputStyle
+            value={value}
+            onChangeText={(text) => setValue(text)} // Ensure onChangeText correctly invokes setValue
+            placeholder={placeholder}
+            placeholderTextColor={'grey'}
+          />
+        </ContentInput>
+      </ContainerContentInput>
+    </ContainerInput>
+  );
+};

@@ -25,6 +25,8 @@ export const useAuth = (navigation: any, route: any = false) => {
   const {signIn} = useContext(AuthContext);
 
   const loginUser = async () => {
+    AsyncStorage.setItem('token', "res.data.token");
+
     if (email !== '' && password !== '') {
       await axios
         .post(`http://192.168.1.112:3009/api/v1/login`, {email, password})
@@ -101,6 +103,7 @@ export const useAuth = (navigation: any, route: any = false) => {
     getCellOnLayoutHandler,
     CELL_COUNT,
     signIn,
+    
   };
 };
 

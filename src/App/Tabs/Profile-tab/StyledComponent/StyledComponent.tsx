@@ -114,7 +114,7 @@ export const LineSperatorProperty = styled.View`
 `;
 export const EditIconContainer = styled.TouchableOpacity`
   position: absolute;
-  bottom: 5; /* Position at the bottom */
+  bottom: 0 ; /* Position at the bottom */
   width: 45%;
   align-items: center;
 `;
@@ -129,3 +129,18 @@ export const EditIcon = styled.View`
   justify-content:center
 `;
 
+export const TxtBtn=styled.Text`
+font-size: 16px;
+  color: white;
+  font-weight: 600;
+`
+
+export const BtnContainer=styled.TouchableOpacity`
+ background-color: ${MatchMatePalette.secondaryColor};
+  width: 70%;
+  height: 50px;
+  display: flex;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+`

@@ -29,6 +29,14 @@ function NavigationApp() {
       console.log(error);
     }
   };
+  const removeUserSession = async () => {
+    try {
+      const res = await AsyncStorage.removeItem('token');
+      retrieveUserSession();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     retrieveUserSession();
@@ -39,6 +47,9 @@ function NavigationApp() {
       signIn: () => {
         retrieveUserSession();
         setSign(false);
+      },
+      signOut: () => {
+        removeUserSession();
       },
       setChoix: setChoix,
       choix,
