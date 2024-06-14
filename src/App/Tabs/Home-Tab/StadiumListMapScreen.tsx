@@ -39,39 +39,6 @@ const StadiumListMapScreen = ({stadiums}: StadiumListMapProps) => {
           </Marker>
         );
       })}
-
-      {/* <Marker
-        visible={true}
-        point={{
-          lat: 47.370906,
-          lon: 8.562813,
-        }}>
-        <PinOrderSVG order={2} color={MatchMatePalette.darkBackgroundColor} />
-      </Marker>
-      <Marker
-        visible={true}
-        point={{
-          lat: 47.383577,
-          lon: 8.556433,
-        }}>
-        <PinOrderSVG order={3} color={MatchMatePalette.darkBackgroundColor} />
-      </Marker>
-      <Marker
-        visible={true}
-        point={{
-          lat: 47.366911,
-          lon: 8.541825,
-        }}>
-        <PinOrderSVG order={4} color={MatchMatePalette.darkBackgroundColor} />
-      </Marker>
-      <Marker
-        visible={true}
-        point={{
-          lat: 47.390344,
-          lon: 8.548527,
-        }}>
-        <PinOrderSVG order={5} color={MatchMatePalette.darkBackgroundColor} />
-      </Marker> */}
     </YaMap>
   );
 };

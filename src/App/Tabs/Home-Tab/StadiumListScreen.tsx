@@ -109,9 +109,9 @@ export const StadiumListScreen = ({navigation, route}: any) => {
             horizontal
             showsHorizontalScrollIndicator={false}>
             
-            {fieldDataPass.map((stadium:any)=>{
+            {fieldDataPass.map((stadium:any,index:number)=>{
               return(
-                <StadiumCardMapComponent stadium={stadium} navigation={navigation}/>
+                <StadiumCardMapComponent key={index} stadium={stadium} navigation={navigation}/>
               )
             })}
             

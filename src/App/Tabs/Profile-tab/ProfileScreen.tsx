@@ -66,7 +66,7 @@ const {userData,signOut}=useProfile(navigation)
             propertyText="Game history"
             icon={<GameHistoryIconSVG color={MatchMatePalette.primaryColor} />}
             toNavigate={() => {
-              navigation.navigate('EditProfile');
+              navigation.navigate('GameHistory');
             }}
           />
           <LineSperator></LineSperator>

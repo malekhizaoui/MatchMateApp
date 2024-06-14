@@ -8,7 +8,7 @@ import {
   Text,
   ScrollView,
   Dimensions,
-  Button,
+  Button,Image
 } from 'react-native';
 import {
   ContainerApp,
@@ -19,7 +19,6 @@ import {
 import {MatchMatePalette} from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
 import NextIconSVG from '../../../assets/Icons/svg/NextIconSVG';
-import {Image} from 'react-native-svg';
 import PlayerIconSVG from '../../../assets/Icons/svg/PlayerIconSVG';
 import PrimaryButtonComponant from '../../../Components/ButtonPrimaryComponent';
 import MatchDetailBoardComponent from '../../../Components/HomeComponents/MatchDetailBoardComponent';
@@ -91,7 +90,10 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
   const renderPlayerIcons = (team: any) => {
     return team.map((el: object | any, index: number) => (
       <View key={index} style={el}>
-        <PlayerIconSVG color={timeSlot.team[index]?"white":""} size="40" />
+        {/* <PlayerIconSVG color={timeSlot.team[index]?"white":""} size="40" /> */}
+        <View style={{width:50,height:50,borderRadius:25,borderWidth:2,borderColor:"white",display:"flex",justifyContent:"center",alignItems:"center"}}>
+          <Image source={timeSlot.team[index]?.image?{uri:timeSlot.team[index].image}:require('../../../assets/Images/userAnonymousImage.png')} style={{width:48,height:48,borderRadius:25}}/>
+        </View>
         <Text style={{color:"white"}}>{timeSlot.team[index]?timeSlot.team[index].firstName:""}</Text>
       </View>
     ));

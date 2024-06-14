@@ -8,43 +8,52 @@ import {
   BtnCheck,
   TextButton,
 } from './StyledComponent/StyledComponent';
+import {YaMap, Marker} from 'react-native-yamap';
+
 import {MatchMatePalette} from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
 import ImageSlideComponent from '../../../Components/HomeComponents/ImageSlideComponent';
 import DescriptionStadiumComponent from '../../../Components/HomeComponents/DescriptionStadiumComponent';
 import FacilityCardComponent from '../../../Components/HomeComponents/FacilityCardComponent';
-import { StatusBar } from 'react-native';
+import {StatusBar} from 'react-native';
+import PinOrderSVG from '../../../assets/Icons/svg/TabsIcon/PinOrderSVG';
+import StadiumLocationMapComponent from '../../../Components/HomeComponents/StadiumLocationMapComponent';
 // import CarousselComponent from '../../../Components/HomeComponents/CarousselComponent';
 export const StadiumDetailScreen = ({navigation, route}: any) => {
   const {stadium} = route.params;
-  console.log("stadium",stadium);
-  
+  console.log('stadium', stadium);
+
   return (
     <ContainerApp>
       <NavigateBack
-          navigation={navigation}
-          headerTitle={"Stadium Detail"}
-          color={MatchMatePalette.primaryColor}
-        />
-        <StatusBar
+        navigation={navigation}
+        headerTitle={'Stadium Detail'}
+        color={MatchMatePalette.primaryColor}
+      />
+      <StatusBar
         barStyle={'light-content'}
         backgroundColor={MatchMatePalette.darkBackgroundColor}
       />
       <ContainerDetailScreen
         horizontal={false}
         showsVerticalScrollIndicator={false}>
-        
-        <ImageSlideComponent stadium={stadium} btnClicked={navigation}/>
-        <DescriptionStadiumComponent stadium={stadium} btnClicked={navigation}/>
+        <ImageSlideComponent stadium={stadium} btnClicked={navigation} />
+        <DescriptionStadiumComponent
+          stadium={stadium}
+          btnClicked={navigation}
+        />
         <TxtContainer>Facilities</TxtContainer>
-        <FacilityCardComponent/>
-        
+        <FacilityCardComponent />
+
         <TxtContainer>Location</TxtContainer>
-        <ImageLocation></ImageLocation>
+        <ImageLocation>
+          <StadiumLocationMapComponent stadium={stadium}/>
+        </ImageLocation>
       </ContainerDetailScreen>
-      <BtnCheck onPress={()=>{
-        navigation.navigate('StadiumAvailability',{stadiumId:stadium.id})
-      }}>
+      <BtnCheck
+        onPress={() => {
+          navigation.navigate('StadiumAvailability', {stadiumId: stadium.id});
+        }}>
         <TextButton>Check availability</TextButton>
       </BtnCheck>
     </ContainerApp>

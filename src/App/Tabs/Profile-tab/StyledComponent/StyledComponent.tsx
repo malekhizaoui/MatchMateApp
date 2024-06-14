@@ -44,6 +44,7 @@ export const ProfileHeaderContainer = styled.View`
   flex-direction: column;
   justify-content: center;
   background-color: ${MatchMatePalette.primaryColor};
+  padding-top:20px
 `;
 
 export const ImageProfile = styled.Image`
@@ -143,4 +144,36 @@ export const BtnContainer=styled.TouchableOpacity`
   border-radius: 20px;
   justify-content: center;
   align-items: center;
+`
+
+// GameHistory Edit
+
+export const GameHistoryHeaderContainer = styled.View`
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: ${MatchMatePalette.primaryColor};
+`;
+
+export const GameHistoryPropertiesContainer = styled.ScrollView`
+  width: 100%;
+  height: 80%;
+  background-color: ${MatchMatePalette.darkBackgroundColor};
+  border-top-right-radius: 40px;
+  border-top-left-radius: 40px;
+  display: flex;
+  padding-top: 2 0px;
+  padding-bottom: 70px;
+`;
+
+export const GamePropertyContent=styled.View`
+ width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items:center;
+  margin-top: 20px;
 `

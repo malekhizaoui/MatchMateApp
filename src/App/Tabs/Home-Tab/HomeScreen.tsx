@@ -56,12 +56,18 @@ export const HomeScreen = ({navigation}: any) => {
       setSearchResults([]);
       return;
     }
+    
     const allStadiums = [...basketballField, ...footballField];
-    const filteredStadiums = allStadiums.filter(stadium =>
-      stadium.stadiumName.toLowerCase().includes(query.toLowerCase())
-    );
+    const filteredStadiums = allStadiums.filter(stadium => {
+      const nameMatch = stadium.stadiumName.toLowerCase().includes(query.toLowerCase());
+      const statusMatch = stadium.status && stadium.status.toLowerCase().includes(query.toLowerCase());
+      return nameMatch || statusMatch;
+    });
+    
     setSearchResults(filteredStadiums);
   };
+  
+  
 
   const handleSearch = (valueText:string) => {
     setQuery(valueText);

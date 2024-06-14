@@ -17,11 +17,11 @@ import DurationIconSVG from '../../assets/Icons/svg/DurationIconSVG';
 import {MatchMatePalette} from '../../assets/color-palette';
 import PlayersIconSVG from '../../assets/Icons/svg/PlayersIconSVG';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
-interface MatchDetailComponentProps {
+interface MatchDetailBoardComponentProps {
   
 }
 
-const MatchDetailComponent = ({}: MatchDetailComponentProps) => {
+const MatchDetailBoardComponent = ({}: MatchDetailBoardComponentProps) => {
   return (
     <MatchDetailBoard>
     <StadiumTextname>Maldives</StadiumTextname>
@@ -35,4 +35,4 @@ const MatchDetailComponent = ({}: MatchDetailComponentProps) => {
   );
 };
 
-export default MatchDetailComponent;
+export default MatchDetailBoardComponent;

@@ -25,7 +25,8 @@ export const useAuth = (navigation: any, route: any = false) => {
   const {signIn} = useContext(AuthContext);
 
   const loginUser = async () => {
-    AsyncStorage.setItem('token', "res.data.token");
+    // AsyncStorage.setItem('token', "res.data.token");
+    // signIn();
 
     if (email !== '' && password !== '') {
       await axios

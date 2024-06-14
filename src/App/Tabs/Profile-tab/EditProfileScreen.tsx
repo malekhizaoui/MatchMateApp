@@ -33,12 +33,13 @@ const EditProfileScreen = ({ navigation }: any) => {
     setFirstName,
     setLastName,
     setAge,
-    updateUser, // Ensure updateUser is imported
+    updateUser, 
     password,
     firstName,
     lastName,
     age,
-  } = useProfile(navigation); // Pass navigation as prop to useProfile
+    choosePhotoFromLibrary
+  } = useProfile(navigation);
 
   return (
     <ContainerApp>
@@ -51,7 +52,7 @@ const EditProfileScreen = ({ navigation }: any) => {
         barStyle={'light-content'}
         backgroundColor={MatchMatePalette.primaryColor}
       />
-      <EditProfileHeaderContainer>
+      <EditProfileHeaderContainer >
         <View style={{ position: 'relative' }}>
           <ImageProfile
             source={
@@ -61,7 +62,7 @@ const EditProfileScreen = ({ navigation }: any) => {
             }
           />
           <EditIconContainer>
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={choosePhotoFromLibrary}>
               <EditIcon>
                 <EditPicIconSVG color={MatchMatePalette.darkBackgroundColor} />
               </EditIcon>
