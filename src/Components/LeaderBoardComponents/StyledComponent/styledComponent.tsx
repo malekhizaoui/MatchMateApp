@@ -12,12 +12,18 @@ import {
   ContainerAppStyle,
 } from '../../../assets/Styles/index';
 
-export const ContainerRankBoard=styled.View`
+interface ContainerRankBoardProps {
+    backgroundColor?: string; // Define backgroundColor prop
+  }
+export const ContainerRankBoard=styled.TouchableOpacity<ContainerRankBoardProps>`
 display:flex;
 flex-direction:row;
 align-items:center;
 justify-content:space-between;
-margin-bottom:20px
+margin-bottom:20px;
+background-color: ${({ backgroundColor }) => backgroundColor || '#262626'};
+padding:5px;
+border-radius:15px
 `
 export const ImageRankContainer=styled.View`
 display:flex;
@@ -34,12 +40,14 @@ export const TextNameLeader = styled.Text`
   font-size: 18px;
   font-weight: 600;
   color: white;
-  margin:10px
+  margin:5px
 `;
 export const TextPointLeader = styled.Text`
   font-size: 16px;
   font-weight: 400;
   color: white;
+  margin:5px
+
 `;
 
 

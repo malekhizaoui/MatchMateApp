@@ -32,6 +32,8 @@ import ThirdPlaceIconSVG from '../../../assets/Icons/svg/ThirdPlaceIconSVG';
 import PointsIconSVG from '../../../assets/Icons/svg/PointsIconSVG';
 import UserLeaderCardComponent from '../../../Components/LeaderBoardComponents/UserLeaderCardComponent';
 const LeaderBoardScreen = ({navigation}: any) => {
+  const [profileHoveres, setProfileHovered] = useState("");
+
   const names = [
     "Alice Smith",
     "Bob Johnson",
@@ -102,7 +104,7 @@ const LeaderBoardScreen = ({navigation}: any) => {
         <LeaderPropertyContent >
           {names.map((el,i)=>{
             return(
-              <UserLeaderCardComponent key={i} rank={i} name={el}/>
+              <UserLeaderCardComponent key={i} rank={i} name={el} event={()=>{setProfileHovered(el)}} profileHoveres={profileHoveres}/>
 
             )
           })}
