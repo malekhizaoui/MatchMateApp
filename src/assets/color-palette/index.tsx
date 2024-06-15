@@ -1,5 +1,5 @@
 export const MatchMatePalette={
-    primaryColor: '#25BAC7',
+    primaryColor: '#00979D',
     secondaryColor: '#0a6b77',
     darkBackgroundColor:'#171717',
     lightBackgroundColoe:'#F5F5F5   ',

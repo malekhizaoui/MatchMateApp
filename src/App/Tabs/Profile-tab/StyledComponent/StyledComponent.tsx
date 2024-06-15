@@ -25,8 +25,8 @@ export const TextHeader = styled.Text`
 
 export const TextNameProfile = styled.Text`
   font-size: 18px;
-  font-weight: 600;
-  color: ${MatchMatePalette.darkBackgroundColor};
+  font-weight: 700;
+  color: white;
 `;
 export const LineSperator = styled.View`
   width: 100%;

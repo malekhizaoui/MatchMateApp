@@ -37,7 +37,10 @@ const {userData,signOut}=useProfile(navigation)
       <TextHeader>Profile</TextHeader>
       <ProfileHeaderContainer>
         <ImageProfile
-          source={userData?.image?{uri:userData.image}:require('../../../assets/Images/userAnonymousImage.png')}></ImageProfile>
+          source={
+            // userData?.image?{uri:userData.image}:require('../../../assets/Images/userAnonymousImage.png')
+            {uri:"https://media.licdn.com/dms/image/D4E03AQF9mGOMHjgeFw/profile-displayphoto-shrink_800_800/0/1691514563140?e=2147483647&v=beta&t=Dtl8CXMfr032HwoVz3eo6slKJ-KUKFzGAocaqZMnvIw"}
+            }/>
 
         <HeaderTitleContainer>
           <TextNameProfile>{userData?.firstName} {userData?.lastName}</TextNameProfile>
