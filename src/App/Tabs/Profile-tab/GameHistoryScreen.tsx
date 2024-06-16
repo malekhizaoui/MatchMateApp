@@ -17,7 +17,6 @@ import useProfile from './useProfile';
 import GameHistoryCardComponent from '../../../Components/ProfileComponents/GameHistoryCardComponent';
 const GameHistoryScreen = ({navigation}: any) => {
   const {userData, gameHistory} = useProfile(navigation);
-  console.log("gameHistory",gameHistory);
   
   return (
     <ContainerApp>

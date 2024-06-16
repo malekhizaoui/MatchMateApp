@@ -28,7 +28,7 @@ const DaySelectedComponent = ({
 }: DaySelectedComponentProps) => {
   
   return (
-    <DayContent onPress={() => {setSelectedDay(item);console.log("item",item)}
+    <DayContent onPress={() => {setSelectedDay(item)}
     }>
       <DayText>{item.day}</DayText>
       <MonthText>{item.date}</MonthText>

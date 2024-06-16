@@ -14,26 +14,27 @@ import {
   ContainerRankBoard,
 } from './StyledComponent/styledComponent';
 import {MatchMatePalette} from '../../assets/color-palette';
+import { User } from '../../App/models/User';
 
 interface UserLeaderCardComponentProps {
   rank: number;
-  name: string;
+  user: User;
   backgroundColor?: string;
   event: any;
-  profileHoveres: any;
+  profileHovered: any;
 }
 
 const UserLeaderCardComponent = ({
   rank,
-  name,
+  user,
   backgroundColor,
   event,
-  profileHoveres
+  profileHovered
 }: UserLeaderCardComponentProps) => {
   return (
     <ContainerRankBoard
       backgroundColor={
-        profileHoveres===name
+        profileHovered===user.id
           ? MatchMatePalette.secondaryColor
           : MatchMatePalette.darkBackgroundColor
       }
@@ -44,12 +45,12 @@ const UserLeaderCardComponent = ({
         <TextNameLeader>{rank + 4}</TextNameLeader>
         <ImageUser
           source={{
-            uri: 'https://media.licdn.com/dms/image/D4E03AQF9mGOMHjgeFw/profile-displayphoto-shrink_800_800/0/1691514563140?e=2147483647&v=beta&t=Dtl8CXMfr032HwoVz3eo6slKJ-KUKFzGAocaqZMnvIw',
+            uri: user.image,
           }}
         />
-        <TextNameLeader>{name}</TextNameLeader>
+        <TextNameLeader>{user.firstName} {user.lastName}</TextNameLeader>
       </ImageRankContainer>
-      <TextPointLeader>36 pts</TextPointLeader>
+      <TextPointLeader>{user.gameHistories.length} pts</TextPointLeader>
     </ContainerRankBoard>
   );
 };

@@ -13,7 +13,6 @@ import {
 
 const PinOrderSVG = (props: any) => {
   useEffect(() => {
-    // console.log("props.color",props.color);
   });
   return (
     <Svg

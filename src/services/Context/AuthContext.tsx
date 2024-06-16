@@ -5,6 +5,8 @@ export interface AuthContextProps {
   setChoix: Dispatch<SetStateAction<string>>;
   signIn: () => void; // Include signIn function in the interface
   signOut: () => void;
+
+
 }
 
 export const AuthContext = createContext<AuthContextProps>({
@@ -12,5 +14,6 @@ export const AuthContext = createContext<AuthContextProps>({
   setChoix: () => {},
   signIn: () => {},
   signOut: () => {},
+
    // Provide a default empty function
 });

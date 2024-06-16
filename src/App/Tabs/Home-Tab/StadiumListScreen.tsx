@@ -23,7 +23,6 @@ import StadiumCardMapComponent from '../../../Components/HomeComponents/StadiumC
 export const StadiumListScreen = ({navigation, route}: any) => {
   const {fieldDataPass} = route.params;
   const [showMap, setShowMap] = useState(true);
-  console.log("fieldDataPass",fieldDataPass);
   
   return (
     <>

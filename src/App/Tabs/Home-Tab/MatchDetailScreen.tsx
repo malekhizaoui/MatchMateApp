@@ -77,7 +77,6 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
         const userId=await AsyncStorage.getItem("userId")
         try {
             const res=await axios.put(`${BaseUrl}/user/${userId}`,{timeSlotId:timeSlot.id})
-            console.log("resss",res);
             navigation.goBack()
         } catch (error) {
           console.log("err",error);
@@ -85,7 +84,6 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
         }
       }
 
-      console.log("timeSlot.team",timeSlot.team[0]);
       
   const renderPlayerIcons = (team: any) => {
     return team.map((el: object | any, index: number) => (

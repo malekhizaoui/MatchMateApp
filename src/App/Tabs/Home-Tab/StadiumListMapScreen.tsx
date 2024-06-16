@@ -10,7 +10,6 @@ interface StadiumListMapProps {
 }
 
 const StadiumListMapScreen = ({stadiums}: StadiumListMapProps) => {
-  console.log("stadium",stadiums[4]);
   
   return (
     <YaMap

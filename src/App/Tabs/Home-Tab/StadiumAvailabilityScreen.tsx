@@ -18,14 +18,13 @@ import {
 import DaySelectedComponent from '../../../Components/HomeComponents/DaySelectedComponent';
 import {MatchMatePalette} from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
-import {Stadium} from '../../models/Stadium';
+import { Stadium } from '../../models/Stadium';
 import PreviousIconSVG from '../../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../../assets/Icons/svg/NextIconSVG';
 
 import MatchDetailComponent from '../../../Components/HomeComponents/MatchDetailComponent';
 import axios from 'axios';
 import BaseUrl from '../../../services/BaseUrl';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Import Material Icons
 
 import NoTimeSlotsComponent from '../../../Components/HomeComponents/NoTimeSlotsComponent';
 
@@ -69,7 +68,6 @@ const getWeekDaysInfo = () => {
 
 const days = getWeekDaysInfo();
 
-console.log('days', days);
 
 export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
   const [selectedDay, setSelectedDay] = useState(days[0]);
@@ -86,7 +84,10 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
     try {
       const res = await axios.get(`${BaseUrl}/stadium/${stadiumId}`);
       setStadium(res.data.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log("err",error);
+      
+    }
   };
 
   return (

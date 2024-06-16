@@ -183,7 +183,6 @@ export const ContainerDetailScreen = styled.ScrollView`
   display: flex;
   flex: 1;
   width: 90%;
-  margin-top: 60px;
 `;
 
 export const InputContainer = styled.View`
@@ -284,7 +283,7 @@ export const ListStadiumContainer = styled.View`
   flex-direction: column;
   margin-top: 20px;
   align-items: center;
-  width:90%;
+  width:100%;
   padding-bottom : 50px
 `;
 

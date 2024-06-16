@@ -1,17 +1,14 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   View,
   StatusBar,
   Image,
-  Button,
-  TouchableOpacity,
 } from 'react-native';
 import {
   ContainerApp,
   TextHeader,
   TextNameLeader,
-  LineSperator,
   LeaderHeaderContainer,
   ImageLeader,
   HeaderTitleContainer,
@@ -24,27 +21,49 @@ import {
   ConatinerLeaders,
   TextPointLeader,
 } from './StyleComponent/StyledComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { MatchMatePalette } from '../../../assets/color-palette';
 import KingIconSVG from '../../../assets/Icons/svg/KingIconSVG';
 import FirstPlaceIconSVG from '../../../assets/Icons/svg/FirstPlaceIconSVG';
 import SecondPlaceIconSVG from '../../../assets/Icons/svg/SecondPlaceIconSVG';
 import ThirdPlaceIconSVG from '../../../assets/Icons/svg/ThirdPlaceIconSVG';
 import PointsIconSVG from '../../../assets/Icons/svg/PointsIconSVG';
 import UserLeaderCardComponent from '../../../Components/LeaderBoardComponents/UserLeaderCardComponent';
-const LeaderBoardScreen = ({navigation}: any) => {
-  const [profileHoveres, setProfileHovered] = useState("");
+import axios from 'axios';
+import BaseUrl from '../../../services/BaseUrl';
+import { User } from '../../models/User';
 
-  const names = [
-    "Alice Smith",
-    "Bob Johnson",
-    "Charlie Williams",
-    "David Brown",
-    "Eve Jones",
-    "Frank Garcia",
-    "Grace Miller",
-    "Heidi Davis",
-    "Ivan Wilson"
-  ];  return (
+const LeaderBoardScreen = ({ navigation }: any) => {
+  const [profileHovered, setProfileHovered] = useState<number | null>(null);
+  const [usersRank, setUsersRank] = useState<User[] | null>(null);
+
+  const getAllRankedUsers = async () => {
+    try {
+      const res = await axios.get(`${BaseUrl}/users`);
+      const sortedUser = displayUsersByGameHistories(res.data.data);
+      setUsersRank(sortedUser);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  const displayUsersByGameHistories = (users: User[]) => {
+    const sortedUsers = users.sort((a, b) => b.gameHistories.length - a.gameHistories.length);
+    return sortedUsers;
+  };
+
+  useEffect(() => {
+    getAllRankedUsers();
+  }, []);
+
+  if (!usersRank) {
+    return (
+      <ContainerApp>
+        <Text>Loading...</Text>
+      </ContainerApp>
+    );
+  }
+
+  return (
     <ContainerApp>
       <StatusBar
         barStyle={'light-content'}
@@ -52,63 +71,84 @@ const LeaderBoardScreen = ({navigation}: any) => {
       />
       <TextHeader>LeaderBoard</TextHeader>
       <LeaderHeaderContainer>
-        <ConatinerLeaders>
-          <UserConatinerLeaders>
-            <ImageLeader
-              source={{uri:"https://media.licdn.com/dms/image/D4E03AQF9mGOMHjgeFw/profile-displayphoto-shrink_800_800/0/1691514563140?e=2147483647&v=beta&t=Dtl8CXMfr032HwoVz3eo6slKJ-KUKFzGAocaqZMnvIw"}}
+        {usersRank[0] && (
+          <ConatinerLeaders>
+            <UserConatinerLeaders>
+              <ImageLeader
+                source={{
+                  uri: usersRank[0].image,
+                }}
+              />
+              <KingIconSVG />
+              <FirstPlaceIconSVG color="#262626" />
+            </UserConatinerLeaders>
+            <UserConatinerLeaders></UserConatinerLeaders>
+            <HeaderTitleContainer>
+              <TextNameLeader>{usersRank[0].firstName} {usersRank[0].lastName}</TextNameLeader>
+              <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <PointsIconSVG color={MatchMatePalette.darkBackgroundColor} />
+                <TextPointLeader> {usersRank[0].gameHistories.length} pts</TextPointLeader>
+              </View>
+            </HeaderTitleContainer>
+          </ConatinerLeaders>
+        )}
+
+        {usersRank[1] && (
+          <UserConatinerLeadersA>
+            <ImageLeaderA
+              source={{
+                uri: usersRank[1].image,
+              }}
             />
-            <KingIconSVG />
-            <FirstPlaceIconSVG color="#262626" />
-          </UserConatinerLeaders>
-          <UserConatinerLeaders></UserConatinerLeaders>
-          <HeaderTitleContainer>
-            <TextNameLeader>Yasmine Ghali</TextNameLeader>
-            <View style={{display: 'flex', flexDirection: 'row'}}>
-              <PointsIconSVG color={MatchMatePalette.darkBackgroundColor} />
-              <TextPointLeader> 60 pts</TextPointLeader>
-            </View>
-          </HeaderTitleContainer>
-        </ConatinerLeaders>
+            <SecondPlaceIconSVG color="#262626" />
+            <HeaderTitleContainer>
+              <TextNameLeader>{usersRank[1].firstName} {usersRank[1].lastName}</TextNameLeader>
+              <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <PointsIconSVG color={MatchMatePalette.darkBackgroundColor} />
+                <TextPointLeader> {usersRank[1].gameHistories.length} pts</TextPointLeader>
+              </View>
+            </HeaderTitleContainer>
+          </UserConatinerLeadersA>
+        )}
 
-        <UserConatinerLeadersA>
-          <ImageLeaderA
-            source={{uri:"https://media.licdn.com/dms/image/D4E03AQF9mGOMHjgeFw/profile-displayphoto-shrink_800_800/0/1691514563140?e=2147483647&v=beta&t=Dtl8CXMfr032HwoVz3eo6slKJ-KUKFzGAocaqZMnvIw"}}></ImageLeaderA>
-          <SecondPlaceIconSVG color="#262626" />
-          <HeaderTitleContainer>
-            <TextNameLeader>Yasmine Ghali</TextNameLeader>
-            <View style={{display: 'flex', flexDirection: 'row'}}>
-              <PointsIconSVG color={MatchMatePalette.darkBackgroundColor} />
-              <TextPointLeader> 50 pts</TextPointLeader>
-            </View>
-          </HeaderTitleContainer>
-        </UserConatinerLeadersA>
-
-        <UserConatinerLeadersB>
-          <ImageLeaderA
-            source={{uri:"https://media.licdn.com/dms/image/D4E03AQF9mGOMHjgeFw/profile-displayphoto-shrink_800_800/0/1691514563140?e=2147483647&v=beta&t=Dtl8CXMfr032HwoVz3eo6slKJ-KUKFzGAocaqZMnvIw"}}></ImageLeaderA>
-          <ThirdPlaceIconSVG color="#262626" />
-          <HeaderTitleContainer>
-            <TextNameLeader>Yasmine Ghali</TextNameLeader>
-            <View style={{display: 'flex', flexDirection: 'row'}}>
-              <PointsIconSVG color={MatchMatePalette.darkBackgroundColor} />
-              <TextPointLeader> 46 pts</TextPointLeader>
-            </View>
-          </HeaderTitleContainer>
-        </UserConatinerLeadersB>
+        {usersRank[2] && (
+          <UserConatinerLeadersB>
+            <ImageLeaderA
+              source={{
+                uri: usersRank[2].image,
+              }}
+            />
+            <ThirdPlaceIconSVG color="#262626" />
+            <HeaderTitleContainer>
+              <TextNameLeader>{usersRank[2].firstName} {usersRank[2].lastName}</TextNameLeader>
+              <View style={{ display: 'flex', flexDirection: 'row' }}>
+                <PointsIconSVG color={MatchMatePalette.darkBackgroundColor} />
+                <TextPointLeader> {usersRank[2].gameHistories.length} pts</TextPointLeader>
+              </View>
+            </HeaderTitleContainer>
+          </UserConatinerLeadersB>
+        )}
       </LeaderHeaderContainer>
 
-      <LeaderPropertiesContainer contentContainerStyle={{
+      <LeaderPropertiesContainer
+        contentContainerStyle={{
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-        <LeaderPropertyContent >
-          {names.map((el,i)=>{
-            return(
-              <UserLeaderCardComponent key={i} rank={i} name={el} event={()=>{setProfileHovered(el)}} profileHoveres={profileHoveres}/>
-
-            )
+        <LeaderPropertyContent>
+          {usersRank.slice(3).map((el, i) => {
+            return (
+              <UserLeaderCardComponent
+                key={i} // Adjusted key to ensure unique keys
+                rank={i} // Adjust rank to reflect starting from the fourth user
+                user={el}
+                event={() => {
+                  setProfileHovered(el.id);
+                }}
+                profileHovered={profileHovered}
+              />
+            );
           })}
-       
         </LeaderPropertyContent>
       </LeaderPropertiesContainer>
     </ContainerApp>

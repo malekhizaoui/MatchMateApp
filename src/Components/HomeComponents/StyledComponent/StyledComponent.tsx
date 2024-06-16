@@ -373,3 +373,78 @@ export const ImageContainerCard = styled.Image`
   margin-right: 10px;
   border-radius:10px
 `;
+
+// ImageListFieldComponent
+
+export const Container = styled.TouchableOpacity`
+  margin-bottom: 20px;
+`;
+
+export const StadiumImageField = styled.Image`
+  width: 100%;
+  height: 190px;
+  border-radius: 17px;
+`;
+const Button = styled.TouchableOpacity`
+  position: absolute;
+  top: 50%;
+  align-items: center;
+  justify-content: center;
+  width: 8%;
+  height: 30px;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.54);
+`;
+
+export const PreviousButton = styled(Button)`
+  left: 15px;
+`;
+
+export const NextButton = styled(Button)`
+  right: 15px;
+`;
+
+export const CourtNumberContainer = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  align-items: center;
+  justify-content: center;
+  width: 8%;
+  height: 18px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.54);
+`;
+
+
+
+export const RentalContainer = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  align-items: center;
+  justify-content: center;
+  width: 18%;
+  height: 32px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.54);
+`;
+
+export const RentalText = styled.Text`
+  color: white;
+  font-size: 12px;
+`;
+
+export const RentalPrice = styled.Text`
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+`;
+
+export const StadiumTitle = styled.Text`
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: left;
+  color:white
+`;

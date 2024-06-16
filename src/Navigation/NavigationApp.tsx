@@ -53,6 +53,7 @@ function NavigationApp() {
       },
       setChoix: setChoix,
       choix,
+
     };
   }, [choix]);
 
@@ -87,7 +88,6 @@ function NavigationApp() {
           options={({route}) => ({
             tabBarStyle: (route => {
               const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-              console.log(routeName);
               if (routeName === 'MatchDetail' || routeName === 'StadiumAvailability' ) {
                 return {
                   display: 'none',

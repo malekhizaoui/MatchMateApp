@@ -25,15 +25,11 @@ export const useAuth = (navigation: any, route: any = false) => {
   const {signIn} = useContext(AuthContext);
 
   const loginUser = async () => {
-    AsyncStorage.setItem('token', "res.data.token");
-    signIn();
-
     if (email !== '' && password !== '') {
       await axios
         .post(`http://192.168.1.112:3009/api/v1/login`, {email, password})
         .then(res => {
           if (res.data.token) {
-            console.log('resszvdv', res.data);
             AsyncStorage.setItem('token', res.data.token);
             AsyncStorage.setItem('userId',JSON.stringify(res.data.findUser.id))
             signIn();
@@ -45,7 +41,6 @@ export const useAuth = (navigation: any, route: any = false) => {
     }
   };
   const registerUser = async () => {
-    console.log('ssd');
 
     await axios
       .post(`http://192.168.1.112:3009/api/v1/register`, {
@@ -69,7 +64,6 @@ export const useAuth = (navigation: any, route: any = false) => {
   const verifyCode = async () => {
     
     if (Number(value) == Number(codeVerification)) {
-      console.log("dsdsdsdsdsdsdsd");
 
       await axios
         .put(`http://192.168.1.112:3009/api/v1/user/${userId}`, {

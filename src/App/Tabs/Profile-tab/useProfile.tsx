@@ -57,7 +57,6 @@ const useProfile = (navigation: any) => {
     const userId = await AsyncStorage.getItem('userId');
     try {
         const res =await axios.get(`${BaseUrl}/gameHistoryUserId/${userId}`)
-        console.log('resssssss',res.data.data);
         
         setGameHistory(res.data.data)
     } catch (error) {

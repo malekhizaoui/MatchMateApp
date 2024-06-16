@@ -21,7 +21,6 @@ import StadiumLocationMapComponent from '../../../Components/HomeComponents/Stad
 // import CarousselComponent from '../../../Components/HomeComponents/CarousselComponent';
 export const StadiumDetailScreen = ({navigation, route}: any) => {
   const {stadium} = route.params;
-  console.log('stadium', stadium);
 
   return (
     <ContainerApp>
