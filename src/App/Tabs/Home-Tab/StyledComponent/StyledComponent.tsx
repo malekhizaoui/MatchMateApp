@@ -116,6 +116,8 @@ export const fieldData = [
 
 export const ContainerApp = styled.SafeAreaView`
   ${ContainerAppStyle};
+  display:flex;
+  flex-direction:column;
 `;
 
 export const ContainerScreen = styled.ScrollView`
@@ -226,11 +228,12 @@ export const TxtContainer = styled.Text`
 
 export const ImageLocation = styled.View`
   margin-top: 20px;
-  width: 100%;
+  width: 90%;
   height: 166px;
   border-radius: 30px;
   background-color: #f1f1f1;
   margin-bottom: 60px;
+  position:relative
 `;
 
 export const BtnCheck = styled.TouchableOpacity`
@@ -258,7 +261,7 @@ export const ContainerListStadiumScreen = styled.ScrollView`
   flex: 1;
   width: 100%;
   margin-top: 60px;
-  
+  padding:15px
 `;
 export const HeaderListStadiumContainer = styled.View`
   flex-direction: row;

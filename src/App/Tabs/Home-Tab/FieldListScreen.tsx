@@ -26,6 +26,7 @@ export const FieldListScreen = ({ navigation }: any) => {
     setIsFocus(false);
     setFieldSelected('Basketball'); // Example of resetting field selection
   };
+console.log("fieldDataPut",fieldDataPut);
 
   return (
     <ContainerApp>
@@ -68,7 +69,9 @@ export const FieldListScreen = ({ navigation }: any) => {
                 key={i}
                 field={field}
                 btnClicked={() => {
-                  navigation.navigate('StadiumDetail', { field });
+                  navigation.navigate('StadiumList', { fieldDataPass:field.stadiums });
+                  console.log("MapList",field);
+                  
                 }}
               />
             );

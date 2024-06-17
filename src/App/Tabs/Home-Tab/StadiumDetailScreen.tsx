@@ -44,11 +44,12 @@ export const StadiumDetailScreen = ({navigation, route}: any) => {
         <TxtContainer>Facilities</TxtContainer>
         <FacilityCardComponent />
 
-        <TxtContainer>Location</TxtContainer>
-        <ImageLocation>
-          <StadiumLocationMapComponent stadium={stadium}/>
-        </ImageLocation>
+       
       </ContainerDetailScreen>
+      <TxtContainer>Location</TxtContainer>
+        <ImageLocation>
+          <StadiumLocationMapComponent stadium={stadium} />
+        </ImageLocation>
       <BtnCheck
         onPress={() => {
           navigation.navigate('StadiumAvailability', {stadiumId: stadium.id});
