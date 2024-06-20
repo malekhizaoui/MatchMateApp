@@ -82,7 +82,8 @@ export const ImagesStadiumContainer = styled.View`
   width: 100%;
   height: 300px;
   border-radius: 15px;
-  margin-top: 60px;
+  margin-top:10px;
+  margin-bottom:20px
 `;
 export const ImageStadium = styled.Image`
   width: 100%;

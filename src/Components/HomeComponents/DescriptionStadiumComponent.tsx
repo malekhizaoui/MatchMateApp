@@ -28,7 +28,9 @@ return(
   <View>
     <HeaderStadium>
           <TitleTextStadium>{stadium.stadiumName}</TitleTextStadium>
-          <TxtShowMap>Show map</TxtShowMap>
+          <TouchableOpacity onPress={btnClicked}>
+          <TxtShowMap >Show map</TxtShowMap>
+          </TouchableOpacity>
         </HeaderStadium>
         <StadiumDescriptionTxt>
           Aspen is as close as one can get to a storybook alpine town in

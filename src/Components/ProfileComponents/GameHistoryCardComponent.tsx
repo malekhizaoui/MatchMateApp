@@ -28,13 +28,15 @@ import {GameHistory} from '../../App/models/gameHistory';
 interface GameHistoryCardComponentProps {
   navigation: any;
   gameHistory: GameHistory;
-  backgroundColor?: string; // Optional prop for background color
+  backgroundColor?: string;
+  gameHistoryId:number // Optional prop for background color
 }
 
 const GameHistoryCardComponent = ({
   navigation,
   gameHistory,
   backgroundColor,
+  gameHistoryId
 }: GameHistoryCardComponentProps) => {
   // Format the start and end time of the match
   const startTime = new Date(gameHistory.startTime).toLocaleTimeString('en-US', {
@@ -102,8 +104,9 @@ const GameHistoryCardComponent = ({
           <TxtButton color={gameHistory.team.length>gameHistory.stadium.capacity?MatchMatePalette.secondaryColor:"#c62525"}>Status : </TxtButton>
             <TxtButton color={gameHistory.team.length>gameHistory.stadium.capacity?MatchMatePalette.secondaryColor:"#c62525"}>{gameHistory.team.length>gameHistory.stadium.capacity?"game sucessfully played":"team didn't complete"}</TxtButton>
           </TouchableOpacity>
+          <TouchableOpacity onPress={()=>{navigation.navigate('GameHistoryDetail',{gameHistoryId})}}>
           <TxtButton color={MatchMatePalette.primaryColor}>Detail</TxtButton>
-
+          </TouchableOpacity>
         </BtnTxtContainer>
       </DayDetailContainer>
     </MatchDetailContainer>

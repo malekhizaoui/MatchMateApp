@@ -15,6 +15,11 @@ export const ContainerApp = styled.SafeAreaView`
   background-color: ${MatchMatePalette.primaryColor};
   align-items: center;
 `;
+export const ContainerAppDetailGame = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${MatchMatePalette.darkBackgroundColor};
+  align-items: center;
+`;
 
 export const TextHeader = styled.Text`
   color: ${MatchMatePalette.darkBackgroundColor};
@@ -27,6 +32,7 @@ export const TextNameProfile = styled.Text`
   font-size: 18px;
   font-weight: 700;
   color: white;
+
 `;
 export const LineSperator = styled.View`
   width: 100%;
@@ -38,13 +44,12 @@ export const LineSperator = styled.View`
 
 export const ProfileHeaderContainer = styled.View`
   width: 100%;
-  height: 35%;
+  height: 30%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
   background-color: ${MatchMatePalette.primaryColor};
-  padding-top:20px
 `;
 
 export const ImageProfile = styled.Image`
@@ -64,7 +69,7 @@ export const HeaderTitleContainer = styled.View`
 
 export const ProfilePropertiesContainer = styled.View`
   width: 100%;
-  height: 65%;
+  height: 70%;
   background-color: ${MatchMatePalette.darkBackgroundColor};
   border-top-right-radius: 40px;
   border-top-left-radius: 40px;
@@ -86,17 +91,16 @@ export const ProfilePropertyContent = styled.View`
 // editProfile
 export const EditProfileHeaderContainer = styled.View`
   width: 100%;
-  height: 35%;
+  height: 28%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
   background-color: ${MatchMatePalette.primaryColor};
-  padding-top:30px
 `;
 export const EditProfilePropertiesContainer = styled.View`
   width: 100%;
-  height: 65%;
+  height: 72%;
   background-color: ${MatchMatePalette.darkBackgroundColor};
   border-top-right-radius: 40px;
   border-top-left-radius: 40px;
@@ -177,3 +181,11 @@ export const GamePropertyContent=styled.View`
   align-items:center;
   margin-top: 20px;
 `
+
+// GamehistoryDetailScreen
+export const ContainerDetailScreen = styled.ScrollView`
+  display: flex;
+  flex: 1;
+  width: 90%;
+  flex-direction:column
+`;

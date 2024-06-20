@@ -150,3 +150,29 @@ export const TxtButton = styled.Text<TxtButtonProps>`
   font-size: 15px;
   font-weight: 600;
 `;
+
+// 
+export const GameHistoryDetailContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  height: 650px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  flex: 1;
+`;
+
+export const FieldStyleContainer = styled.View`
+  width: 100%;
+  margin-top: 20px;
+  flex: 6;
+  align-item: center;
+  position: relative;
+`;
+
+export const FieldImage = styled.Image`
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+`;

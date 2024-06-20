@@ -64,71 +64,6 @@ const useProfile = (navigation: any) => {
     }
   }
 
-  const choosePhotoFromLibrary = async () => {
-    // try {
-    //   const image = await ImagePicker.openPicker({
-    //     width: 300,
-    //     height: 400,
-    //     cropping: true,
-    //   });
-    //   const uri = image.path;
-    //   const name = image.modificationDate;
-    //   const type = image.mime;
-    //   const source = {
-    //     uri,
-    //     name,
-    //     type,
-    //   };
-    //   await handleUpload(source);
-    // } catch (err) {
-    //   console.log(err);
-    // }
-  };
-  
-//   const changeImageFromCamera = async () => {
-//     try {
-//       const image = await ImagePicker.openCamera({
-//         width: 300,
-//         height: 400,
-//         cropping: true,
-//       });
-//       const uri = image.path;
-//       const name = image.modificationDate;
-//       const type = image.mime;
-//       const source = {
-//         uri,
-//         name,
-//         type,
-//       };
-//       await handleUpload(source);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-  const handleUpload = async (photo:any) => {
-    const userId = await AsyncStorage.getItem('userId');
-
-    const data = new FormData();
-    data.append('file', photo);
-    data.append('upload_preset', 'dourbina');
-    data.append('cloud_name', 'dqoutfci8');
-    await fetch('https://api.cloudinary.com/v1_1/dqoutfci8/upload', {
-      method: 'post',
-      body: data,
-    })
-      .then(res => res.json())
-      .then(async data => {
-        await axios
-          .put(`${BaseUrl}/user/${userId}`, {image: data.url})
-          .then(() => {
-            DevSettings.reload()
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        
-    });
-  };
 
 
 
@@ -149,7 +84,6 @@ const useProfile = (navigation: any) => {
     setLastName,
     setAge,
     updateUser, // Make sure updateUser is included in the returned object
-    choosePhotoFromLibrary,
     gameHistory
   };
 };

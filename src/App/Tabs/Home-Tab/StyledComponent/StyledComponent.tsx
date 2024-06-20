@@ -13,7 +13,6 @@ import {
   ContainerAppStyle,
 } from '../../../../assets/Styles/index';
 
-
 export const stadiumsFootball = [
   {
     titleDescription: 'Balexert',
@@ -35,21 +34,23 @@ export const stadiumsFootball = [
   },
 ];
 
-
 export const stadiumsVolley = [
   {
     titleDescription: 'Zermatt',
-    backgroundImage:'https://db-service.toubiz.de/var/plain_site/storage/images/orte/zermatt/beachvolley/beachvolley/1404114-1-ger-DE/beachvolley_front_large.jpg',
+    backgroundImage:
+      'https://db-service.toubiz.de/var/plain_site/storage/images/orte/zermatt/beachvolley/beachvolley/1404114-1-ger-DE/beachvolley_front_large.jpg',
     field: 'volleyBall',
   },
   {
     titleDescription: 'Asphalt',
-    backgroundImage:'https://www.genevepascher.com/wp-content/uploads/2022/06/initiations-volley-geneve-pas-cher.jpg',
+    backgroundImage:
+      'https://www.genevepascher.com/wp-content/uploads/2022/06/initiations-volley-geneve-pas-cher.jpg',
     field: 'volleyBall',
   },
   {
     titleDescription: 'Trembley',
-    backgroundImage:'https://aweniddofq.cloudimg.io/v7/luxemburg.imxplatform.de/data/httpsappvisitluxembourgcomimages23296-resize-1680x1050x100.jpg?func=crop&width=1000&height=1000',
+    backgroundImage:
+      'https://aweniddofq.cloudimg.io/v7/luxemburg.imxplatform.de/data/httpsappvisitluxembourgcomimages23296-resize-1680x1050x100.jpg?func=crop&width=1000&height=1000',
     field: 'volleyBall',
   },
 ];
@@ -113,11 +114,14 @@ export const fieldData = [
     stadiums: stadiumsVolley,
   },
 ];
+interface ContainerMap {
+  container?: any; // Define backgroundColor prop
+}
 
 export const ContainerApp = styled.SafeAreaView`
   ${ContainerAppStyle};
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const ContainerScreen = styled.ScrollView`
@@ -226,14 +230,14 @@ export const TxtContainer = styled.Text`
   margin-top: 20px;
 `;
 
-export const ImageLocation = styled.View`
+export const ImageLocation = styled.View<ContainerMap>`
   margin-top: 20px;
-  width: 90%;
-  height: 166px;
+  width:${({ container }) => container || '100%'};
+  height:${({ container }) => container || "166px"};
   border-radius: 30px;
   background-color: #f1f1f1;
   margin-bottom: 60px;
-  position:relative
+  position: relative;
 `;
 
 export const BtnCheck = styled.TouchableOpacity`
@@ -254,14 +258,26 @@ export const TextButton = styled.Text`
   font-size: 15px;
   font-weight: 600;
 `;
-
+export const CloseContainerIcon = styled.TouchableOpacity`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: ${MatchMatePalette.darkBackgroundColor};
+  z-index: 99999;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 //style ListStadium
 export const ContainerListStadiumScreen = styled.ScrollView`
   display: flex;
   flex: 1;
   width: 100%;
   margin-top: 60px;
-  padding:15px
+  padding: 15px;
 `;
 export const HeaderListStadiumContainer = styled.View`
   flex-direction: row;
@@ -286,8 +302,8 @@ export const ListStadiumContainer = styled.View`
   flex-direction: column;
   margin-top: 20px;
   align-items: center;
-  width:100%;
-  padding-bottom : 50px
+  width: 100%;
+  padding-bottom: 50px;
 `;
 
 //
@@ -295,11 +311,9 @@ export const DaysContainer = styled.ScrollView`
   width: ${WIDTH}px;
   display: flex;
   flex-direction: row;
-  margin-top: 50px;
-  padding: 5px;
   border-radius: 5px;
-  max-height: 140px;
-  position:fixed
+  max-height: 60px;
+  position: fixed;
 `;
 
 export const ImageConainer = styled.View`
@@ -324,14 +338,14 @@ export const MatchDetailContainer = styled.View`
   align-items: center;
   height: 95%;
   margin-top: 70px;
-  margin-bottom:20px;
-  flex:1
+  margin-bottom: 20px;
+  flex: 1;
 `;
 
 export const FieldStyleContainer = styled.View`
   width: 100%;
   margin-top: 20px;
-  flex:6;
+  flex: 6;
   align-item: center;
   position: relative;
 `;
@@ -342,11 +356,11 @@ export const FieldImage = styled.Image`
   object-fit: fill;
 `;
 
-// 
+//
 
 export const FlatListMapContainer = styled.ScrollView`
   width: 95%;
   position: absolute;
   bottom: 15px;
   align-self: center;
-  `;
+`;

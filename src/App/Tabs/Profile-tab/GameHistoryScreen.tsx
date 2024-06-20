@@ -56,6 +56,7 @@ const GameHistoryScreen = ({navigation}: any) => {
                  key={index}
                  navigation={navigation}
                  gameHistory={gameHistory}
+                 gameHistoryId={gameHistory.id}
                 //  stadium={stadium}
             />
                 )

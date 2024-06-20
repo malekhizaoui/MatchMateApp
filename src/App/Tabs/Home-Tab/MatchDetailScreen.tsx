@@ -27,7 +27,7 @@ import BaseUrl from '../../../services/BaseUrl';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export const MatchDetailScreen = ({navigation, route}: any) => {
   const {stadiumFieldName,timeSlot} = route.params;
-  const homeTeamPositionsFootball = [
+  const TeamPositionsFootball = [
     {top: '5%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
     {top: '15%', left: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
     {top: '15%', right: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
@@ -42,7 +42,7 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
     {bottom: '35%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
   ];
 
-  const homeTeamPositionsBasketball = [
+  const TeamPositionsBasketball = [
     {top: '5%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
     {top: '5%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
     {top: '17%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
@@ -55,7 +55,7 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
     {bottom: '27%', right: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
   ];
  
-  const awayTeamPositionsVolleyBall = [
+  const TeamPositionsVolleyBall = [
     {bottom: '15%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
     {bottom: '15%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
     {bottom: '30%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
@@ -67,10 +67,10 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
 
   const currentSport =
     stadiumFieldName === 'Basketball'
-      ? homeTeamPositionsBasketball
+      ? TeamPositionsBasketball
       : stadiumFieldName === 'FootBall'
-      ? homeTeamPositionsFootball
-      : awayTeamPositionsVolleyBall;
+      ? TeamPositionsFootball
+      : TeamPositionsVolleyBall;
 
 
       const joinTeam=async()=>{   

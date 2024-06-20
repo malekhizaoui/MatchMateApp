@@ -38,7 +38,6 @@ const EditProfileScreen = ({ navigation }: any) => {
     firstName,
     lastName,
     age,
-    choosePhotoFromLibrary
   } = useProfile(navigation);
 
   return (
@@ -63,7 +62,7 @@ const EditProfileScreen = ({ navigation }: any) => {
             }
           />
           <EditIconContainer>
-            <TouchableOpacity onPress={choosePhotoFromLibrary}>
+            <TouchableOpacity >
               <EditIcon>
                 <EditPicIconSVG color={MatchMatePalette.darkBackgroundColor} />
               </EditIcon>

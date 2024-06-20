@@ -5,10 +5,11 @@ import {MatchMatePalette} from '../assets/color-palette';
 interface NavigateBackComponentProps{
   color?:string ,
   navigation:any,
-  headerTitle?:string
+  headerTitle?:string,
+  backgroundColor?:string
 }
 
-export const NavigateBack = ({navigation, headerTitle,color}: NavigateBackComponentProps) => {
+export const NavigateBack = ({navigation, headerTitle,color,backgroundColor}: NavigateBackComponentProps) => {
   return (
     <View
       style={{
@@ -16,11 +17,13 @@ export const NavigateBack = ({navigation, headerTitle,color}: NavigateBackCompon
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        position: 'absolute',
-        height: 40,
+        position: 'fixed',
+        height: 60,
         width: '90%',
-        top: 10,
         zIndex: 9999,
+        paddingTop:10,
+        paddingBottom:10,
+        backgroundColor:backgroundColor
       }}>
     
         <BackIconSVG color={color?color:MatchMatePalette.primaryColor} btnClicked={()=>{navigation.goBack()}}/>

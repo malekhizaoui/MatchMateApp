@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {
   ContainerApp,
@@ -7,6 +7,7 @@ import {
   ImageLocation,
   BtnCheck,
   TextButton,
+  CloseContainerIcon,
 } from './StyledComponent/StyledComponent';
 import {YaMap, Marker} from 'react-native-yamap';
 
@@ -18,38 +19,62 @@ import FacilityCardComponent from '../../../Components/HomeComponents/FacilityCa
 import {StatusBar} from 'react-native';
 import PinOrderSVG from '../../../assets/Icons/svg/TabsIcon/PinOrderSVG';
 import StadiumLocationMapComponent from '../../../Components/HomeComponents/StadiumLocationMapComponent';
+import CloseIconSVG from '../../../assets/Icons/svg/CloseIconSVG';
 // import CarousselComponent from '../../../Components/HomeComponents/CarousselComponent';
-export const StadiumDetailScreen = ({navigation, route}: any) => {
+interface StadiumDetailScreenProps {
+  navigation: any;
+  route: any;
+  container: any;
+}
+export const StadiumDetailScreen = ({
+  navigation,
+  route,
+  container,
+}: StadiumDetailScreenProps) => {
   const {stadium} = route.params;
-
+  const [showMap, setShowMap] = useState(false);
   return (
     <ContainerApp>
       <NavigateBack
         navigation={navigation}
         headerTitle={'Stadium Detail'}
         color={MatchMatePalette.primaryColor}
+        backgroundColor={MatchMatePalette.darkBackgroundColor}
       />
       <StatusBar
         barStyle={'light-content'}
         backgroundColor={MatchMatePalette.darkBackgroundColor}
       />
-      <ContainerDetailScreen
-        horizontal={false}
-        showsVerticalScrollIndicator={false}>
-        <ImageSlideComponent stadium={stadium} btnClicked={navigation} />
-        <DescriptionStadiumComponent
-          stadium={stadium}
-          btnClicked={navigation}
-        />
-        <TxtContainer>Facilities</TxtContainer>
-        <FacilityCardComponent />
+      {!showMap && (
+        <ContainerDetailScreen
+          horizontal={false}
+          showsVerticalScrollIndicator={false}>
+          <ImageSlideComponent stadium={stadium} />
+          <DescriptionStadiumComponent
+            stadium={stadium}
+            btnClicked={() => {
+              setShowMap(true);
+            }}
+          />
+          <TxtContainer>Facilities</TxtContainer>
+          <FacilityCardComponent />
+        </ContainerDetailScreen>
+      )}
+      {showMap && (
+        <>
+          <ImageLocation container={showMap && '100%'}>
+            <StadiumLocationMapComponent stadium={stadium} />
 
-       
-      </ContainerDetailScreen>
-      <TxtContainer>Location</TxtContainer>
-        <ImageLocation>
-          <StadiumLocationMapComponent stadium={stadium} />
-        </ImageLocation>
+            <CloseContainerIcon
+              onPress={() => {
+                setShowMap(false);
+              }}>
+              <CloseIconSVG />
+            </CloseContainerIcon>
+          </ImageLocation>
+        </>
+      )}
+
       <BtnCheck
         onPress={() => {
           navigation.navigate('StadiumAvailability', {stadiumId: stadium.id});

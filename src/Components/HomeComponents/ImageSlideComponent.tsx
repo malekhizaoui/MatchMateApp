@@ -9,12 +9,10 @@ import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
 import { Stadium } from '../../App/models/Stadium';
 interface ImageSlideComponentProps {
   stadium:Stadium;
-  btnClicked: () => void;
 }
 
 const ImageSlideComponent = ({
   stadium,
-  btnClicked,
 }: ImageSlideComponentProps) => {
   return (
     <ImagesStadiumContainer>
