@@ -75,12 +75,12 @@ export const StadiumDetailScreen = ({
         </>
       )}
 
-      <BtnCheck
+      {stadium.status==="private"&&(<BtnCheck
         onPress={() => {
           navigation.navigate('StadiumAvailability', {stadiumId: stadium.id});
         }}>
         <TextButton>Check availability</TextButton>
-      </BtnCheck>
+      </BtnCheck>)}
     </ContainerApp>
   );
 };

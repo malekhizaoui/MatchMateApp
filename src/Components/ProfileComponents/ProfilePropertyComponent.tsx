@@ -28,12 +28,12 @@ const ProfilePropertyComponent = ({
   
   return (
     <PropertyContainer onPress={toNavigate}>
-        <PropertyContainer>
+        <View style={{display:"flex",flexDirection:'row'}}>
             {icon}
         <TextProperty>
             {propertyText}
         </TextProperty>
-        </PropertyContainer>
+        </View>
         <NextIconSVG color={MatchMatePalette.primaryColor} />
         </PropertyContainer>
   );

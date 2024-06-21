@@ -1,7 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LeaderBoardScreen from '../../App/Tabs/LeaderBoard-tab/LeaderBoardScreen';
-import BookingScreen from '../../App/Tabs/Booking-tab/BookingScreen';
+import { BookingScreen } from '../../App/Tabs/Booking-tab/BookingScreen';
 const HomeStack = createNativeStackNavigator();
 
 export const BookingSectionStack = () => {
