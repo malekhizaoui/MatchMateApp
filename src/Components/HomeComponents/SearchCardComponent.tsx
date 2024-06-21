@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, Dimensions, Text, View,TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Dimensions,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import {
   ImagesStadiumContainer,
   ImageStadium,
@@ -7,33 +13,39 @@ import {
   InputIconContainer,
   TextInputStyle,
   LineSperator,
-  FilterIconContainer
+  FilterIconContainer,
 } from './StyledComponent/StyledComponent';
-import PreviousIconSVG from '../../assets/Icons/svg/PreviousIconSVG';
-import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
+
 import SearchIconSVG from '../../assets/Icons/svg/SearchIconSVG';
 import FilterIconSVG from '../../assets/Icons/svg/FilterIconSVG';
-import { MatchMatePalette } from '../../assets/color-palette';
+import {MatchMatePalette} from '../../assets/color-palette';
 interface SearchCardComponentProps {
- showMap:boolean
+  showMap: boolean;
+  onSearch: (query: string) => void;
 }
 
-const SearchCardComponent = ({
-showMap
-}: SearchCardComponentProps) => {
+const SearchCardComponent: React.FC<SearchCardComponentProps> = ({showMap, onSearch}) => {
   return (
-    <InputHeaderContainer style={{borderColor: MatchMatePalette.darkBackgroundColor,borderWidth: 1 }}>
-          <InputIconContainer>
-            <SearchIconSVG color={'#262626'} />
-            <TextInputStyle placeholder="Search ..."></TextInputStyle>
-          </InputIconContainer>
-          <FilterIconContainer>
-            <LineSperator></LineSperator>
-          </FilterIconContainer>
-          <LineSperator></LineSperator>
-          <FilterIconSVG color={MatchMatePalette.darkBackgroundColor} />
-        </InputHeaderContainer>
+    <InputHeaderContainer
+      style={{
+        borderColor: MatchMatePalette.darkBackgroundColor,
+        borderWidth: 1,
+      }}>
+      <InputIconContainer>
+        <SearchIconSVG color={'#262626'} />
+        <TextInputStyle
+          placeholder="Search ..."
+          onChangeText={onSearch}
+        />
+      </InputIconContainer>
+      <FilterIconContainer>
+        <LineSperator></LineSperator>
+      </FilterIconContainer>
+      <LineSperator></LineSperator>
+      <FilterIconSVG color={MatchMatePalette.darkBackgroundColor} />
+    </InputHeaderContainer>
   );
 };
 
 export default SearchCardComponent;
+

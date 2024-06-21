@@ -1,4 +1,6 @@
-import React, {Fragment, useState} from 'react';
+// StadiumListScreen.tsx
+
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -7,7 +9,6 @@ import {
   StatusBar,
 } from 'react-native';
 import {
-  ContainerApp,
   ContainerListStadiumScreen,
   HeaderListStadiumContainer,
   TextTypeOfRender,
@@ -20,10 +21,34 @@ import {MatchMatePalette} from '../../../assets/color-palette';
 import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
 import StadiumListMapScreen from './StadiumListMapScreen';
 import StadiumCardMapComponent from '../../../Components/HomeComponents/StadiumCardMapComponent';
-export const StadiumListScreen = ({navigation, route}: any) => {
+
+interface Stadium {
+  id: number;
+  stadiumName: string;
+  // Add other properties as needed
+}
+
+interface RouteParams {
+  fieldDataPass: Stadium[];
+}
+
+interface StadiumListScreenProps {
+  navigation: any;
+  route: { params: RouteParams };
+}
+
+export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation, route}) => {
   const {fieldDataPass} = route.params;
   const [showMap, setShowMap] = useState(true);
-  
+  const [filteredStadiums, setFilteredStadiums] = useState(fieldDataPass);
+
+  const handleSearch = (query: string) => {
+    const filtered = fieldDataPass.filter((stadium) =>
+      stadium.stadiumName.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredStadiums(filtered);
+  };
+
   return (
     <>
       <HeaderListStadiumContainer>
@@ -50,7 +75,7 @@ export const StadiumListScreen = ({navigation, route}: any) => {
             }}
           />
         </TouchableOpacity>
-        <SearchCardComponent showMap={showMap} />
+        <SearchCardComponent showMap={showMap} onSearch={handleSearch} />
         <TouchableOpacity
           onPress={() => {
             setShowMap(!showMap);
@@ -61,7 +86,7 @@ export const StadiumListScreen = ({navigation, route}: any) => {
                 ? MatchMatePalette.primaryColor
                 : MatchMatePalette.darkBackgroundColor,
             }}>
-            {showMap ? 'Map' : 'list'}
+            {showMap ? 'Map' : 'List'}
           </TextTypeOfRender>
         </TouchableOpacity>
       </HeaderListStadiumContainer>
@@ -86,9 +111,9 @@ export const StadiumListScreen = ({navigation, route}: any) => {
                 fontWeight: '600',
                 marginBottom: 10,
               }}>
-              {fieldDataPass.length} listings court
+              {filteredStadiums.length} listings court
             </Text>
-            {fieldDataPass.map((stadium:any,i:number) => {
+            {filteredStadiums.map((stadium, i) => {
               return (
                 <ImageListStadiumComponent
                   key={i}
@@ -103,17 +128,19 @@ export const StadiumListScreen = ({navigation, route}: any) => {
         </ContainerListStadiumScreen>
       ) : (
         <>
-          <StadiumListMapScreen stadiums={fieldDataPass}/>
+          <StadiumListMapScreen stadiums={filteredStadiums} />
           <FlatListMapContainer
             horizontal
             showsHorizontalScrollIndicator={false}>
-            
-            {fieldDataPass.map((stadium:any,index:number)=>{
-              return(
-                <StadiumCardMapComponent key={index} stadium={stadium} navigation={navigation}/>
-              )
+            {filteredStadiums.map((stadium, index) => {
+              return (
+                <StadiumCardMapComponent
+                  key={index}
+                  stadium={stadium}
+                  navigation={navigation}
+                />
+              );
             })}
-            
           </FlatListMapContainer>
         </>
       )}

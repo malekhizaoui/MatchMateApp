@@ -21,7 +21,6 @@ export const BookingContainer = styled.View`
   border-width: 1px;
   border-color: white;
   margin-bottom: 30px;
-  padding:5px
 `;
 
 export const BookingImage = styled.Image`
