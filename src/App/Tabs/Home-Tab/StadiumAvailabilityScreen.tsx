@@ -27,6 +27,7 @@ import axios from 'axios';
 import BaseUrl from '../../../services/BaseUrl';
 
 import NoTimeSlotsComponent from '../../../Components/HomeComponents/NoTimeSlotsComponent';
+import { TimeSlot } from '../../models/TimeSlot';
 
 const getWeekDaysInfo = () => {
   const today = new Date();

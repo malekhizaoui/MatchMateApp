@@ -27,7 +27,7 @@ export const useAuth = (navigation: any, route: any = false) => {
   const loginUser = async () => {
     if (email !== '' && password !== '') {
       await axios
-        .post(`http://192.168.1.112:3009/api/v1/login`, {email, password})
+        .post(`http://16.171.175.193:3009/api/v1/login`, {email, password})
         .then(res => {
           if (res.data.token) {
             AsyncStorage.setItem('token', res.data.token);
@@ -43,7 +43,7 @@ export const useAuth = (navigation: any, route: any = false) => {
   const registerUser = async () => {
 
     await axios
-      .post(`http://192.168.1.112:3009/api/v1/register`, {
+      .post(`http://16.171.175.193:3009/api/v1/register`, {
         email,
         password,
         firstName,
@@ -66,7 +66,7 @@ export const useAuth = (navigation: any, route: any = false) => {
     if (Number(value) == Number(codeVerification)) {
 
       await axios
-        .put(`http://192.168.1.112:3009/api/v1/user/${userId}`, {
+        .put(`http://16.171.175.193:3009/api/v1/user/${userId}`, {
           is_verified: true,
         })
         .then(res => {

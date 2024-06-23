@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { ContainerApp, ContainerScreen, HeaderContainer, ExploreRegionContainer, RegionExploreTxt, RegionTxt, InputContainer, TextInputStyle, ListContainer, TextContainer, TextTitleList, TextCheckAllList, fieldData, stadiumsVolley } from './StyledComponent/StyledComponent';
 import { Dropdown } from 'react-native-element-dropdown';
-import useHome, { styles } from './useHome';
+import {useHome,styles } from './useHome';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
 import { MatchMatePalette } from '../../../assets/color-palette';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
@@ -26,7 +26,7 @@ export const HomeScreen = ({ navigation }: any) => {
     fieldDataPut,
     updateFieldData,
     region,
-    setRegion
+    setRegion,
   } = useHome(navigation);
 
   return (
