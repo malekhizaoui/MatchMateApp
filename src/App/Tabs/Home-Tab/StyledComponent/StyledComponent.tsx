@@ -337,7 +337,7 @@ export const MatchDetailContainer = styled.View`
   width: 90%;
   align-items: center;
   height: 95%;
-  margin-top: 70px;
+  margin-top: 20px;
   margin-bottom: 20px;
   flex: 1;
 `;

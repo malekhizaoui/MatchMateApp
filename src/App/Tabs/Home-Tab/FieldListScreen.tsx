@@ -14,7 +14,6 @@ export const FieldListScreen = ({ navigation }: any) => {
     data,
     setIsFocus,
     setFieldSelected,
-
     fieldDataPut,
     region,
     setRegion

@@ -1,5 +1,5 @@
-import React, {useState, useRef, useEffect} from 'react';
-import {
+import {useCallback, useState, useContext,useRef} from 'react';
+import {useFocusEffect} from '@react-navigation/native';import {
   Animated,
   StatusBar,
   StyleSheet,
@@ -77,9 +77,6 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const {stadiumId} = route.params;
 
-  useEffect(() => {
-    retrieveTimeSlots();
-  }, [currentImageIndex, fadeAnim, selectedDay]);
 
   const retrieveTimeSlots = async () => {
     try {
@@ -90,6 +87,12 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
       
     }
   };
+  useFocusEffect(
+    useCallback(() => {
+      retrieveTimeSlots();
+
+    }, [currentImageIndex, fadeAnim, selectedDay]),
+  );
 
   return (
     <ContainerApp>
@@ -139,7 +142,6 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
         showsVerticalScrollIndicator={false}
         style={{width: '100%'}}>
         {stadium?.timeSlots?.length > 0 ? (
-          // Check if any time slots match the selected day
           stadium.timeSlots.some((timeSlot: any) => {
             const timeSlotDay = new Date(timeSlot.startTime).toLocaleDateString(
               'en-US',

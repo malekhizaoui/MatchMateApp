@@ -1,7 +1,8 @@
 // BookingScreen.js
 
-import React, {useEffect, useState} from 'react';
+import React, { useCallback, useState } from 'react';
 import {ScrollView, StatusBar, Text, TouchableOpacity} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native'
 import {
   ContainerApp,
   BookingContainer,
@@ -34,9 +35,11 @@ export const BookingScreen = ({navigation}: any) => {
   };
 console.log("BookingList",BookingList);
 
-  useEffect(() => {
+useFocusEffect(
+  useCallback(() => {
     getUserBooking();
-  }, []);
+  }, [])
+);
 
   return (
     <ContainerApp>

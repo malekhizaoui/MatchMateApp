@@ -72,17 +72,25 @@ export const useHome = (navigation:any, route: any=false) => {
 
 
   const getFieldsBaseOnRegion = async () => {
+    console.log("change region",region);
+    
     try {
       const res = await axios.get(`${BaseUrl}/fieldRegion/${region}`);
+      console.log('res',res.data[0].stadiums);
+      
       setfieldDataPut(res.data);
       setBasketballField(res.data[0].stadiums);
       setFootballField(res.data[1].stadiums);
       setVolleyballField(res.data[2].stadiums);
-    } catch (error) {}
+    } catch (error) {
+      console.log("err",error);
+      
+    }
   };
 
   useEffect(() => {
     getFieldsBaseOnRegion();
+    
   }, [region]);
   const data = [
     {label: 'Lausanne', value: 'Lausanne'},
@@ -94,7 +102,7 @@ export const useHome = (navigation:any, route: any=false) => {
     footballField,
     basketballField,
     volleyballField,
-    
+
     renderLabel,
     isFocus,
     data,
