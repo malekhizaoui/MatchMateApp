@@ -73,10 +73,11 @@ const days = getWeekDaysInfo();
 export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
   const [selectedDay, setSelectedDay] = useState(days[0]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [stadium, setStadium] = useState<Stadium[]>([]);
+  const [stadium, setStadium] = useState<Stadium | null>(null);
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const {stadiumId} = route.params;
 
+  console.log("days",selectedDay);
 
   const retrieveTimeSlots = async () => {
     try {
@@ -87,6 +88,7 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
       
     }
   };
+  
   useFocusEffect(
     useCallback(() => {
       retrieveTimeSlots();
@@ -120,7 +122,7 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
         <ImagesContent>
           <Animated.Image
             source={{
-              uri: stadium.imageURL
+              uri: stadium?.imageURL
                 ? stadium.imageURL
                 : 'https://static.vecteezy.com/ti/vecteur-libre/p1/1824188-toile-de-fond-flou-abstrait-vector-gris-clair-vectoriel.jpg',
             }}
@@ -142,24 +144,27 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
         showsVerticalScrollIndicator={false}
         style={{width: '100%'}}>
         {stadium?.timeSlots?.length > 0 ? (
-          stadium.timeSlots.some((timeSlot: any) => {
-            const timeSlotDay = new Date(timeSlot.startTime).toLocaleDateString(
-              'en-US',
-              {
-                weekday: 'long',
-              },
-            );
-            return timeSlotDay === selectedDay.realDay;
+          stadium?.timeSlots.some((timeSlot: any) => {
+            // const timeSlotDay = new Date(timeSlot.startTime).toLocaleDateString(
+            //   'en-GB',
+            //   {
+            //     weekday: 'long',
+            //   },
+            // );
+            
+            return timeSlot.day === selectedDay.realDay;
           }) ? (
             // Render time slots
             stadium.timeSlots
               .filter((timeSlot: any) => {
-                const timeSlotDay = new Date(
-                  timeSlot.startTime,
-                ).toLocaleDateString('en-US', {
-                  weekday: 'long',
-                });
-                return timeSlotDay === selectedDay.realDay;
+                // const timeSlotDay = new Date(
+                //   timeSlot.startTime,
+                // ).toLocaleDateString('en-GB', {
+                //   weekday: 'long',
+                // });
+                // console.log("timeSlotDay",timeSlotDay);
+
+                return timeSlot.day === selectedDay.realDay;
               })
               .map((timeSlot: any, i: number) => (
                 <MatchDetailComponent

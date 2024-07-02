@@ -33,6 +33,8 @@ export const StadiumDetailScreen = ({
 }: StadiumDetailScreenProps) => {
   const {stadium} = route.params;
   const [showMap, setShowMap] = useState(false);
+  console.log("stadium",stadium);
+  
   return (
     <ContainerApp>
       <NavigateBack

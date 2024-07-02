@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -17,19 +17,27 @@ import DurationIconSVG from '../../assets/Icons/svg/DurationIconSVG';
 import {MatchMatePalette} from '../../assets/color-palette';
 import PlayersIconSVG from '../../assets/Icons/svg/PlayersIconSVG';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
+import { Stadium } from '../../App/models/Stadium';
+import { TimeSlot } from '../../App/models/TimeSlot';
+import { extractTimeFromDate } from '../../services/HelperFunctions';
 interface MatchDetailBoardComponentProps {
-  
+  stadium:Stadium,
+  timeSlot:TimeSlot
 }
 
-const MatchDetailBoardComponent = ({}: MatchDetailBoardComponentProps) => {
+const MatchDetailBoardComponent = ({stadium,timeSlot}: MatchDetailBoardComponentProps) => {
+  const startTime = extractTimeFromDate(timeSlot.startTime);
+  const endTime=extractTimeFromDate(timeSlot.endTime)
+  const playersLeft=stadium.capacity-timeSlot.team.length
+
   return (
     <MatchDetailBoard>
-    <StadiumTextname>Maldives</StadiumTextname>
-    <PlayerLeftText>4 players left</PlayerLeftText>
+    <StadiumTextname>{stadium.stadiumName} court</StadiumTextname>
+    <PlayerLeftText>{playersLeft} players left</PlayerLeftText>
     <MatchTimeDetailContainer>
-      <TimeText>12:30</TimeText>
+      <TimeText>{startTime}</TimeText>
       <NextIconSVG color="#262626" />
-      <TimeText>14:00</TimeText>
+      <TimeText>{endTime}</TimeText>
     </MatchTimeDetailContainer>
   </MatchDetailBoard>
   );

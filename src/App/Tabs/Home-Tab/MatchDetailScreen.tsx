@@ -26,7 +26,9 @@ import axios from 'axios';
 import BaseUrl from '../../../services/BaseUrl';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 export const MatchDetailScreen = ({navigation, route}: any) => {
-  const {stadiumFieldName,timeSlot} = route.params;
+  const {stadium,timeSlot} = route.params;
+  console.log("timeSlot",timeSlot);
+  
   const TeamPositionsFootball = [
     {top: '5%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
     {top: '15%', left: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
@@ -66,9 +68,9 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
  
 
   const currentSport =
-    stadiumFieldName === 'Basketball'
+    stadium.field.fieldName === 'Basketball'
       ? TeamPositionsBasketball
-      : stadiumFieldName === 'FootBall'
+      : stadium.field.fieldName === 'FootBall'
       ? TeamPositionsFootball
       : TeamPositionsVolleyBall;
 
@@ -101,14 +103,14 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
     <ContainerApp>
       <NavigateBack navigation={navigation} headerTitle={'Match Detail'} />
       <MatchDetailContainer>
-        <MatchDetailBoardComponent/>
+        <MatchDetailBoardComponent stadium={stadium} timeSlot={timeSlot}/>
         <FieldStyleContainer>
           {renderPlayerIcons(currentSport)}
           <FieldImage
             source={
-              stadiumFieldName === 'basketball'
+              stadium.field.fieldName === 'basketball'
                 ? require('../../../assets/Images/BasketballFieldImage.png')
-                : stadiumFieldName === 'footBall'
+                : stadium.field.fieldName === 'footBall'
                 ? require('../../../assets/Images/FootballFieldImage.png')
                 : require('../../../assets/Images/VolleyballFieldImage.png')
             }
