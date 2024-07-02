@@ -24,7 +24,10 @@ import {
   import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
   import FacebookIconSVG from '../../../assets/Icons/svg/FacebookIconSVG';
   import GoogleIconSVG from '../../../assets/Icons/svg/GoogleIconSVG';
+import useAuth from './useAuth/useAuth';
   const ConnexionMethodScreen = ({navigation}: any) => {
+    const {googleSignInEvent} =
+    useAuth(navigation);
     return (
       <ContainerApp>
         <StatusBar
@@ -40,7 +43,7 @@ import {
             <TextDescription>Inscrivez-vous ou connectez-vous en utilisant l'une de ces méthodes de connexion</TextDescription>
 
              <ButtonAuthComponent btnText='Connexion avec Facebook' backgroundColor="#1d5dc4" btnTextColor='white' btnClicked={()=>{}} iconComponent={<FacebookIconSVG color=''/>} />
-             <ButtonAuthComponent btnText='Connexion avec Google' backgroundColor="white" btnTextColor='black' btnClicked={()=>{}} iconComponent={<GoogleIconSVG color=''/>}/>
+             <ButtonAuthComponent btnText='Connexion avec Google' backgroundColor="white" btnTextColor='black' btnClicked={googleSignInEvent} iconComponent={<GoogleIconSVG color=''/>}/>
              <ButtonAuthComponent btnText='Connexion avec MatchMate' backgroundColor={MatchMatePalette.primaryColor} btnTextColor='white' btnClicked={()=>navigation.navigate('Signin')} iconComponent={""}/>
 
           </ContainerBtnMethod>

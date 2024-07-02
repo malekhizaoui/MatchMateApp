@@ -14,6 +14,7 @@ import ProfileSectionStack from './Stacks/ProfileSectionStack';
 import HomeSectionStack from './Stacks/HomeSectionStack';
 import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
 import {ScreenOptions} from './ScreenOptions';
+import ImmersiveMode from 'react-native-immersive-mode';
 
 function NavigationApp() {
   const [isLoggedin, setIsLoggedin] = useState(false);
@@ -41,7 +42,16 @@ function NavigationApp() {
   useEffect(() => {
     retrieveUserSession();
   }, []);
+    useEffect(() => {
+      // ComponentDidMount equivalent
+      ImmersiveMode.setBarMode('Normal');
+      ImmersiveMode.setBarColor('#262626');
 
+      // componentWillUnmount equivalent
+      return () => {
+        ImmersiveMode.fullLayout(false);
+      };
+    }, []);
   const authContext: AuthContextProps = useMemo(() => {
     return {
       signIn: () => {
