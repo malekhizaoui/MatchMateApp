@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StatusBar,
-  Image,
 } from 'react-native';
 import {
   ContainerApp,
@@ -28,9 +27,8 @@ import SecondPlaceIconSVG from '../../../assets/Icons/svg/SecondPlaceIconSVG';
 import ThirdPlaceIconSVG from '../../../assets/Icons/svg/ThirdPlaceIconSVG';
 import PointsIconSVG from '../../../assets/Icons/svg/PointsIconSVG';
 import UserLeaderCardComponent from '../../../Components/LeaderBoardComponents/UserLeaderCardComponent';
-import axios from 'axios';
-import BaseUrl from '../../../services/BaseUrl';
 import { User } from '../../models/User';
+import { handleRequests } from '../../../services/HandleRequests';
 
 const LeaderBoardScreen = ({ navigation }: any) => {
   const [profileHovered, setProfileHovered] = useState<number | null>(null);
@@ -38,8 +36,8 @@ const LeaderBoardScreen = ({ navigation }: any) => {
 
   const getAllRankedUsers = async () => {
     try {
-      const res = await axios.get(`${BaseUrl}/users`);
-      const sortedUser = displayUsersByGameHistories(res.data.data);
+      const res = await handleRequests('get','users');
+      const sortedUser = displayUsersByGameHistories(res.data);
       setUsersRank(sortedUser);
     } catch (error) {
       console.log("error", error);

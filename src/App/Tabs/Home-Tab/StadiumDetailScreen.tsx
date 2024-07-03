@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
 import {
   ContainerApp,
   ContainerDetailScreen,
@@ -9,7 +8,6 @@ import {
   TextButton,
   CloseContainerIcon,
 } from './StyledComponent/StyledComponent';
-import {YaMap, Marker} from 'react-native-yamap';
 
 import {MatchMatePalette} from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
@@ -17,7 +15,6 @@ import ImageSlideComponent from '../../../Components/HomeComponents/ImageSlideCo
 import DescriptionStadiumComponent from '../../../Components/HomeComponents/DescriptionStadiumComponent';
 import FacilityCardComponent from '../../../Components/HomeComponents/FacilityCardComponent';
 import {StatusBar} from 'react-native';
-import PinOrderSVG from '../../../assets/Icons/svg/TabsIcon/PinOrderSVG';
 import StadiumLocationMapComponent from '../../../Components/HomeComponents/StadiumLocationMapComponent';
 import CloseIconSVG from '../../../assets/Icons/svg/CloseIconSVG';
 // import CarousselComponent from '../../../Components/HomeComponents/CarousselComponent';
@@ -29,11 +26,9 @@ interface StadiumDetailScreenProps {
 export const StadiumDetailScreen = ({
   navigation,
   route,
-  container,
 }: StadiumDetailScreenProps) => {
   const {stadium} = route.params;
   const [showMap, setShowMap] = useState(false);
-  console.log("stadium",stadium);
   
   return (
     <ContainerApp>

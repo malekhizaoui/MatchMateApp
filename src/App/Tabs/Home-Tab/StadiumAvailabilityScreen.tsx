@@ -1,14 +1,6 @@
-import {useCallback, useState, useContext,useRef} from 'react';
-import {useFocusEffect} from '@react-navigation/native';import {
-  Animated,
-  StatusBar,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
+import {useCallback, useState, useRef} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import {Animated, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import {
   ContainerApp,
   DaysContainer,
@@ -16,60 +8,17 @@ import {
   ImagesContent,
 } from './StyledComponent/StyledComponent';
 import DaySelectedComponent from '../../../Components/HomeComponents/DaySelectedComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
-import { Stadium } from '../../models/Stadium';
+import {Stadium} from '../../models/Stadium';
 import PreviousIconSVG from '../../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../../assets/Icons/svg/NextIconSVG';
 
 import MatchDetailComponent from '../../../Components/HomeComponents/MatchDetailComponent';
-import axios from 'axios';
-import BaseUrl from '../../../services/BaseUrl';
-
+import {getWeekDaysInfo} from '../../../services/HelperFunctions';
 import NoTimeSlotsComponent from '../../../Components/HomeComponents/NoTimeSlotsComponent';
-import { TimeSlot } from '../../models/TimeSlot';
-
-const getWeekDaysInfo = () => {
-  const today = new Date();
-  const daysInfo = [];
-  daysInfo.push({
-    day: 'today',
-    date: `${today.getDate()} ${today.toLocaleDateString('en-US', {
-      month: 'long',
-    })}`,
-    realDay: today.toLocaleDateString('en-US', {weekday: 'long'}), // Actual day of the week
-  });
-
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1);
-  daysInfo.push({
-    day: 'tomorrow',
-    date: `${tomorrow.getDate()} ${tomorrow.toLocaleDateString('en-US', {
-      month: 'long',
-    })}`,
-    realDay: tomorrow.toLocaleDateString('en-US', {weekday: 'long'}), // Actual day of the week
-  });
-
-  for (let i = 2; i < 7; i++) {
-    const nextDay = new Date(today);
-    nextDay.setDate(today.getDate() + i);
-    daysInfo.push({
-      day: nextDay.toLocaleDateString('en-US', {
-        weekday: 'long',
-      }),
-      date: `${nextDay.getDate()} ${nextDay.toLocaleDateString('en-US', {
-        month: 'long',
-      })}`,
-      realDay: nextDay.toLocaleDateString('en-US', {weekday: 'long'}), // Actual day of the week
-    });
-  }
-
-  return daysInfo;
-};
+import {handleRequests} from '../../../services/HandleRequests';
 
 const days = getWeekDaysInfo();
-
-
 export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
   const [selectedDay, setSelectedDay] = useState(days[0]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -77,22 +26,18 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const {stadiumId} = route.params;
 
-  console.log("days",selectedDay);
-
   const retrieveTimeSlots = async () => {
     try {
-      const res = await axios.get(`${BaseUrl}/stadium/${stadiumId}`);
-      setStadium(res.data.data);
+      const res = await handleRequests('get', `stadium/${stadiumId}`);
+      setStadium(res.data);
     } catch (error) {
-      console.log("err",error);
-      
+      console.log('err', error);
     }
   };
-  
+
   useFocusEffect(
     useCallback(() => {
       retrieveTimeSlots();
-
     }, [currentImageIndex, fadeAnim, selectedDay]),
   );
 
@@ -143,27 +88,13 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
         horizontal={false}
         showsVerticalScrollIndicator={false}
         style={{width: '100%'}}>
-        {stadium?.timeSlots?.length > 0 ? (
+        {stadium &&  stadium.timeSlots.length > 0 ? (
           stadium?.timeSlots.some((timeSlot: any) => {
-            // const timeSlotDay = new Date(timeSlot.startTime).toLocaleDateString(
-            //   'en-GB',
-            //   {
-            //     weekday: 'long',
-            //   },
-            // );
-            
             return timeSlot.day === selectedDay.realDay;
           }) ? (
             // Render time slots
             stadium.timeSlots
               .filter((timeSlot: any) => {
-                // const timeSlotDay = new Date(
-                //   timeSlot.startTime,
-                // ).toLocaleDateString('en-GB', {
-                //   weekday: 'long',
-                // });
-                // console.log("timeSlotDay",timeSlotDay);
-
                 return timeSlot.day === selectedDay.realDay;
               })
               .map((timeSlot: any, i: number) => (

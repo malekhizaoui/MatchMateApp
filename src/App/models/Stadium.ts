@@ -21,7 +21,7 @@ export interface Stadium {
   hasShower?: boolean; // optional
   created_at: Date;
   updated_at: Date;
-  timeSlots: TimeSlot[];
+  timeSlots: TimeSlot[] ;
   gameHistories: GameHistory[];
   field: Field;
   stadiumImages: ImageStadium[];

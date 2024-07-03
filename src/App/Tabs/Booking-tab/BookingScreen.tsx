@@ -1,8 +1,7 @@
 // BookingScreen.js
 
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import {ScrollView, StatusBar, Text, TouchableOpacity} from 'react-native';
-import { useFocusEffect } from '@react-navigation/native'
 import {
   ContainerApp,
   BookingContainer,
@@ -16,31 +15,13 @@ import {
   CancelButtonText,
 } from './StyledComponent/StyledComponent';
 import {MatchMatePalette} from '../../../assets/color-palette';
-import axios from 'axios';
-import BaseUrl from '../../../services/BaseUrl';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {TimeSlot} from '../../models/TimeSlot';
-export const BookingScreen = ({navigation}: any) => {
-  const [BookingList, setBookingList] = useState<TimeSlot[] | null>(null);
-
-  const getUserBooking = async () => {
-    const userId = await AsyncStorage.getItem('userId');
-    try {
-      const res = await axios.get(`${BaseUrl}/users/${userId}`);
-      console.log('res.data.data', res.data.data.timeSlots);
-      setBookingList(res.data.data.timeSlots)
-    } catch (error) {
-      console.log('err', error);
-    }
-  };
-console.log("BookingList",BookingList);
-
-useFocusEffect(
-  useCallback(() => {
-    getUserBooking();
-  }, [])
-);
-
+import useBooking from './useBooking';
+import {
+  formatDate,
+  extractTimeFromDate,
+} from '../../../services/HelperFunctions';
+export const BookingScreen = ({navigation, route}: any) => {
+  const {BookingList, removeBookingFromUser} = useBooking(route);
   return (
     <ContainerApp>
       <StatusBar
@@ -70,14 +51,27 @@ useFocusEffect(
                 <BookingImage source={{uri: el.stadium.imageURL}} />
                 <BookingDetails>
                   <BookingRow>
-                    <BookingTitle>{el.stadium.stadiumName} Stadium</BookingTitle>
-                    <TouchableOpacity onPress={() => {}}>
+                    <BookingTitle>
+                      {el.stadium.stadiumName} Stadium
+                    </BookingTitle>
+                    <TouchableOpacity
+                      onPress={() => {                        
+                        navigation.navigate('BookingDetail', {
+                          timeSlotId: el.id,
+                        });
+                      }}>
                       <BookingDetailText>Detail</BookingDetailText>
                     </TouchableOpacity>
                   </BookingRow>
-                  <BookingDate>Day : 20 Wednesday, 2024</BookingDate>
-                  <BookingDate>Time : 15:00 - 15:00</BookingDate>
-                  <CancelButton>
+                  <BookingDate>Day : {formatDate(el.startTime)}</BookingDate>
+                  <BookingDate>
+                    Time : {extractTimeFromDate(el.startTime)}h -{' '}
+                    {extractTimeFromDate(el.endTime)}h
+                  </BookingDate>
+                  <CancelButton
+                    onPress={() => {
+                      removeBookingFromUser(el.id);
+                    }}>
                     <CancelButtonText>Cancel Booking</CancelButtonText>
                   </CancelButton>
                 </BookingDetails>

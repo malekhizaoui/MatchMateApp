@@ -13,7 +13,7 @@ export const handleRequests = async (
 ) => {
   let response = null;
 
-  if (method === 'get') {
+  if (method === 'get') {    
     response = await axios
       .get(`${BaseUrl}/${end_point}`)
       .then(res => res.data)
@@ -22,7 +22,7 @@ export const handleRequests = async (
     response = await axios
       .post(`${BaseUrl}/${end_point}`, requestBody)
       .then(res => res)
-      .catch(erreur => console.log(erreur));
+      .catch(erreur => console.log("Post Error",erreur));
   } else if (method === 'put') {
     response = await axios
       .put(`${BaseUrl}/${end_point}`, requestBody)
@@ -30,7 +30,6 @@ export const handleRequests = async (
       .catch(erreur => console.log(erreur));
   } else if (method === 'delete') {
     response = await axios.delete(`${BaseUrl}/${end_point}`);
-  }
-
+  }  
   return response;
 };

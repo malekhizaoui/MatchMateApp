@@ -82,8 +82,8 @@ export const ImagesStadiumContainer = styled.View`
   width: 100%;
   height: 300px;
   border-radius: 15px;
-  margin-top:10px;
-  margin-bottom:20px
+  margin-top:20px;
+  margin-bottom:10px
 `;
 export const ImageStadium = styled.Image`
   width: 100%;
@@ -321,7 +321,7 @@ export const MatchDetailBoard = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: #262626;
   border-radius: 20px;
   heigth: 100px;
   padding: 10px;
@@ -330,7 +330,7 @@ export const MatchDetailBoard = styled.View`
 export const StadiumTextname = styled.Text`
   font-size: 17px;
   font-weight: bold;
-  color: #262626;
+  color: white;
   font-family: poppins;
 `;
 export const PlayerLeftText = styled.Text`
@@ -350,7 +350,7 @@ export const MatchTimeDetailContainer = styled.View`
 export const TimeText = styled.Text`
   font-size: 22px;
   font-weight: bold;
-  color: #262626;
+  color: white;
   font-family: poppins;
 `;
 

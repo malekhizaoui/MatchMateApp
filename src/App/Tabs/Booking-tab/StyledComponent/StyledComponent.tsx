@@ -60,15 +60,15 @@ export const BookingDetailText = styled.Text`
 
 export const BookingDate = styled.Text`
   font-size: 15px;
-  color: grey;
+  color: white;
   margin-top: 10px;
   font-weight: 600;
 `;
 
 export const CancelButton = styled.TouchableOpacity`
   background-color: ${MatchMatePalette.primaryColor};
-  width: 90%;
-  height: 50px;
+  width: 70%;
+  height: 45px;
   display: flex;
   border-radius: 20px;
   justify-content: center;
@@ -81,4 +81,43 @@ export const CancelButtonText = styled.Text`
   color: white;
   font-weight: 600;
   text-align: center;
+`;
+
+
+// 
+export const ContainerAppDetailGame = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${MatchMatePalette.darkBackgroundColor};
+  align-items: center;
+`;
+export const ContainerDetailScreen = styled.ScrollView`
+  display: flex;
+  flex: 1;
+  width: 90%;
+  flex-direction:column;
+`;
+
+export const TextNameProfile = styled.Text`
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+
+`;
+export const BtnCheck = styled.TouchableOpacity`
+width: 70%;
+height: 40px;
+background-color: ${MatchMatePalette.primaryColor};
+justify-content: center;
+align-items: center;
+border-radius: 7px;
+margin-bottom: 5px;
+flex-direction: row;
+position: absolute;
+bottom: 5px;
+align-self: center;
+`;
+export const TextButton = styled.Text`
+color: white;
+font-size: 15px;
+font-weight: 600;
 `;

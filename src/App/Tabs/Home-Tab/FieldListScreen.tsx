@@ -1,13 +1,21 @@
 import React from 'react';
-import { View, Text, StatusBar } from 'react-native';
-import { ContainerApp, ContainerDetailScreen, HeaderContainer, ExploreRegionContainer, RegionExploreTxt, RegionTxt, ListStadiumContainer } from './StyledComponent/StyledComponent';
-import { Dropdown } from 'react-native-element-dropdown';
-import useHome, { styles } from './useHome';
+import {View, StatusBar} from 'react-native';
+import {
+  ContainerApp,
+  ContainerDetailScreen,
+  HeaderContainer,
+  ExploreRegionContainer,
+  RegionExploreTxt,
+  RegionTxt,
+  ListStadiumContainer,
+} from './StyledComponent/StyledComponent';
+import {Dropdown} from 'react-native-element-dropdown';
+import useHome, {styles} from './useHome';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
-import { MatchMatePalette } from '../../../assets/color-palette';
+import {MatchMatePalette} from '../../../assets/color-palette';
 import ImageListFieldComponent from '../../../Components/HomeComponents/ImageListFieldComponent';
 
-export const FieldListScreen = ({ navigation }: any) => {
+export const FieldListScreen = ({navigation}: any) => {
   const {
     renderLabel,
     isFocus,
@@ -16,16 +24,15 @@ export const FieldListScreen = ({ navigation }: any) => {
     setFieldSelected,
     fieldDataPut,
     region,
-    setRegion
+    setRegion,
   } = useHome(navigation);
 
   // Handle region change only when user selects an option
-  const handleRegionChange = (item: { value: string }) => {
-    setRegion(item.value)
+  const handleRegionChange = (item: {value: string}) => {
+    setRegion(item.value);
     setIsFocus(false);
     setFieldSelected('Basketball'); // Example of resetting field selection
   };
-console.log("fieldDataPut",fieldDataPut);
 
   return (
     <ContainerApp>
@@ -42,7 +49,7 @@ console.log("fieldDataPut",fieldDataPut);
           <View style={styles.container}>
             {renderLabel()}
             <Dropdown
-              style={[styles.dropdown, isFocus && { borderColor: 'red' }]}
+              style={[styles.dropdown, isFocus && {borderColor: 'red'}]}
               placeholderStyle={styles.placeholderStyle}
               selectedTextStyle={styles.selectedTextStyle}
               iconStyle={styles.iconStyle}
@@ -54,7 +61,7 @@ console.log("fieldDataPut",fieldDataPut);
               value={region}
               onFocus={() => setIsFocus(true)}
               onBlur={() => setIsFocus(false)}
-              onChange={handleRegionChange} 
+              onChange={handleRegionChange}
               renderLeftIcon={() => (
                 <PinIconSVG color={MatchMatePalette.primaryColor} size={'15'} />
               )}
@@ -68,9 +75,10 @@ console.log("fieldDataPut",fieldDataPut);
                 key={i}
                 field={field}
                 btnClicked={() => {
-                  navigation.navigate('StadiumList', { fieldDataPass:field.stadiums });
-                  console.log("MapList",field);
-                  
+                  navigation.navigate('StadiumList', {
+                    fieldDataPass: field.stadiums,
+                  });
+                  console.log('MapList', field);
                 }}
               />
             );

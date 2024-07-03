@@ -1,11 +1,9 @@
 import {useEffect, useState, useContext, useRef} from 'react';
-import axios from 'axios';
-import BaseUrl from '../../../services/BaseUrl';
 import {MatchMatePalette} from '../../../assets/color-palette';
 import {Stadium} from '../../models/Stadium';
 import {Field} from '../../models/Field';
 import {ScrollView, StyleSheet, Text} from 'react-native';
-import { AuthContext } from '../../../services/Context/AuthContext';
+import { handleRequests } from '../../../services/HandleRequests';
 
 export const useHome = (navigation:any, route: any=false) => {
   // HomeScreen
@@ -71,17 +69,13 @@ export const useHome = (navigation:any, route: any=false) => {
   };
 
 
-  const getFieldsBaseOnRegion = async () => {
-    console.log("change region",region);
-    
+  const getFieldsBaseOnRegion = async () => {    
     try {
-      const res = await axios.get(`${BaseUrl}/fieldRegion/${region}`);
-      console.log('res',res.data[0].stadiums);
-      
-      setfieldDataPut(res.data);
-      setBasketballField(res.data[0].stadiums);
-      setFootballField(res.data[1].stadiums);
-      setVolleyballField(res.data[2].stadiums);
+     const res=await handleRequests('get',`fieldRegion/${region}`)      
+      setfieldDataPut(res);
+      setBasketballField(res[0].stadiums);
+      setFootballField(res[1].stadiums);
+      setVolleyballField(res[2].stadiums);
     } catch (error) {
       console.log("err",error);
       

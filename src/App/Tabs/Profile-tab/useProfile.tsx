@@ -1,14 +1,11 @@
 import {useCallback, useState, useContext} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 
-import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {User} from '../../models/User';
 import {AuthContext} from '../../../services/Context/AuthContext';
-import BaseUrl from '../../../services/BaseUrl';
-import ImagePicker from 'react-native-image-crop-picker';
-import {DevSettings} from 'react-native';
 import {GameHistory} from '../../models/GameHistory';
+import { handleRequests } from '../../../services/HandleRequests';
 
 const useProfile = (navigation: any) => {
   const [userData, setUserData] = useState<User | null>(null);
@@ -22,10 +19,8 @@ const useProfile = (navigation: any) => {
   const getUserData = async () => {
     const userId = await AsyncStorage.getItem('userId');
     try {
-      const res = await axios.get(
-        `http://16.171.175.193:3009/api/v1/users/${userId}`,
-      );
-      setUserData(res.data.data);
+      const res  =await handleRequests('get',`users/${userId}`)
+      setUserData(res.data);
     } catch (error) {
       console.error('Error fetching user data:', error);
     }
@@ -50,7 +45,7 @@ const useProfile = (navigation: any) => {
     }
 
     try {
-      await axios.put(`${BaseUrl}/user/${userId}`, updateData);
+      handleRequests('put',`user/${userId}`, updateData)
       navigation.navigate('Profile');
     } catch (error) {
       console.error('Error updating user:', error);
@@ -60,10 +55,12 @@ const useProfile = (navigation: any) => {
   const getGameHistory = async () => {
     const userId = await AsyncStorage.getItem('userId');
     try {
-      const res = await axios.get(`${BaseUrl}/gameHistoryUserId/${userId}`);
-
-      setGameHistory(res.data.data);
-    } catch (error) {}
+      const res =await handleRequests('get',`gameHistoryUserId/${userId}`)
+      setGameHistory(res.data);
+    } catch (error) {
+      console.log("err",error);
+      
+    }
   };
 
   useFocusEffect(

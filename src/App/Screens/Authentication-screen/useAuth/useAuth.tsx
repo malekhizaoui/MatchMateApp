@@ -1,5 +1,4 @@
-import {useEffect, useState, useContext} from 'react';
-import axios from 'axios';
+import {useState, useContext} from 'react';
 import {
   useBlurOnFulfill,
   useClearByFocusCell,
@@ -10,9 +9,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import BaseUrl from '../../../../services/BaseUrl';
 import {handleRequests} from '../../../../services/HandleRequests';
-
 const CELL_COUNT = 6;
 export const useAuth = (navigation: any, route: any = false) => {
   const [email, setEmail] = useState('');
@@ -31,12 +28,14 @@ export const useAuth = (navigation: any, route: any = false) => {
 
   const loginUser = async () => {
     if (email !== '' && password !== '') {
-      await axios
-        .post(`http://16.171.175.193:3009/api/v1/login`, {email, password})
+      handleRequests('post', 'login', {email, password})
         .then(res => {
           if (res.data.token) {
             AsyncStorage.setItem('token', res.data.token);
-            AsyncStorage.setItem('userId',JSON.stringify(res.data.findUser.id))
+            AsyncStorage.setItem(
+              'userId',
+              JSON.stringify(res.data.findUser.id),
+            );
             signIn();
           }
         })
@@ -46,15 +45,13 @@ export const useAuth = (navigation: any, route: any = false) => {
     }
   };
   const registerUser = async () => {
-
-    await axios
-      .post(`http://16.171.175.193:3009/api/v1/register`, {
-        email,
-        password,
-        firstName,
-        lastName,
-        age,
-      })
+    handleRequests('post', 'register', {
+      email,
+      password,
+      firstName,
+      lastName,
+      age,
+    })
       .then(res => {
         navigation.navigate('CodeVerification', {
           userId: res.data.user.id,
@@ -77,20 +74,18 @@ export const useAuth = (navigation: any, route: any = false) => {
           GoogleSignin.signIn()
             .then(async userInfo => {
               const tokenId = userInfo.idToken;
-              userInfo
-                && 
-                console.log("tokenId",tokenId);
-                
-                // handleRequests('post', 'user/google', {tokenId})
-                //     .then(async response => {
-                //       await AsyncStorage.setItem('idUser', response.userId);
-                //       await AsyncStorage.setItem('token', response.token);
-                //     })
-                //     .then(eventSucces)
+              userInfo && console.log('tokenId', tokenId);
+
+              // handleRequests('post', 'user/google', {tokenId})
+              //     .then(async response => {
+              //       await AsyncStorage.setItem('idUser', response.userId);
+              //       await AsyncStorage.setItem('token', response.token);
+              //     })
+              //     .then(eventSucces)
             })
-            .catch(err => console.log("erroro google",err));
+            .catch(err => console.log('erroro google', err));
       })
-  
+
       .catch(error => {
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
           console.error('user cancelled the login flow');
@@ -106,17 +101,12 @@ export const useAuth = (navigation: any, route: any = false) => {
   };
 
   const verifyCode = async () => {
-    
     if (Number(value) == Number(codeVerification)) {
-
-      await axios
-        .put(`http://16.171.175.193:3009/api/v1/user/${userId}`, {
-          is_verified: true,
-        })
-        .then(res => {
-          
-          navigation.navigate('Signin');
-        });
+      handleRequests('put', `user/${userId}`, {
+        is_verified: true,
+      }).then(res => {
+        navigation.navigate('Signin');
+      });
     } else {
       console.log('verification code is wrong');
     }
@@ -143,7 +133,6 @@ export const useAuth = (navigation: any, route: any = false) => {
     CELL_COUNT,
     signIn,
     googleSignInEvent,
-
   };
 };
 

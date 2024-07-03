@@ -1,71 +1,28 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React from 'react';
 import {
-  Animated,
-  StatusBar,
   StyleSheet,
-  TouchableOpacity,
   View,
   Text,
-  ScrollView,
-  Dimensions,
-  Button,Image
+  Image
 } from 'react-native';
 import {
   ContainerApp,
   MatchDetailContainer,
   FieldStyleContainer,
   FieldImage,
+  TeamPositionsFootball,
+  TeamPositionsBasketball,
+  TeamPositionsVolleyBall
 } from './StyledComponent/StyledComponent';
 import {MatchMatePalette} from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
-import NextIconSVG from '../../../assets/Icons/svg/NextIconSVG';
-import PlayerIconSVG from '../../../assets/Icons/svg/PlayerIconSVG';
 import PrimaryButtonComponant from '../../../Components/ButtonPrimaryComponent';
 import MatchDetailBoardComponent from '../../../Components/HomeComponents/MatchDetailBoardComponent';
-import axios from 'axios';
-import BaseUrl from '../../../services/BaseUrl';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { handleRequests } from '../../../services/HandleRequests';
 export const MatchDetailScreen = ({navigation, route}: any) => {
-  const {stadium,timeSlot} = route.params;
-  console.log("timeSlot",timeSlot);
-  
-  const TeamPositionsFootball = [
-    {top: '5%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '15%', left: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '15%', right: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '25%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '25%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '35%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '5%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '15%', left: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '15%', right: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '25%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '25%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '35%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  ];
+  const {stadium,timeSlot} = route.params;  
 
-  const TeamPositionsBasketball = [
-    {top: '5%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '5%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '17%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '17%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '27%', right: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '5%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '5%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '17%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '17%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '27%', right: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  ];
- 
-  const TeamPositionsVolleyBall = [
-    {bottom: '15%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '15%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {bottom: '30%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '15%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '15%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-    {top: '30%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  ];
- 
 
   const currentSport =
     stadium.field.fieldName === 'Basketball'
@@ -77,8 +34,8 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
 
       const joinTeam=async()=>{   
         const userId=await AsyncStorage.getItem("userId")
-        try {
-            const res=await axios.put(`${BaseUrl}/user/${userId}`,{timeSlotId:timeSlot.id})
+        try { 
+            handleRequests('put',`user/${userId}`,{timeSlotId:timeSlot.id})
             navigation.goBack()
         } catch (error) {
           console.log("err",error);
@@ -90,7 +47,6 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
   const renderPlayerIcons = (team: any) => {
     return team.map((el: object | any, index: number) => (
       <View key={index} style={el}>
-        {/* <PlayerIconSVG color={timeSlot.team[index]?"white":""} size="40" /> */}
         <View style={{width:50,height:50,borderRadius:25,borderWidth:2,borderColor:"white",display:"flex",justifyContent:"center",alignItems:"center"}}>
           <Image source={timeSlot.team[index]?.image?{uri:timeSlot.team[index].image}:require('../../../assets/Images/userAnonymousImage.png')} style={{width:48,height:48,borderRadius:25}}/>
         </View>

@@ -13,107 +13,43 @@ import {
   ContainerAppStyle,
 } from '../../../../assets/Styles/index';
 
-export const stadiumsFootball = [
-  {
-    titleDescription: 'Balexert',
-    backgroundImage:
-      'https://www.realsport.ch/sites/default/files/styles/images_section_small/public/2023-09/Terrain3.png?h=8f74817f&itok=RPSY0REx',
-    field: 'footBall',
-  },
-  {
-    titleDescription: 'varembé',
-    backgroundImage:
-      'https://www.realsport.ch/sites/default/files/styles/image_header_small/public/2022-03/DiROts9Q.jpeg?h=4521fff0&itok=s3DJdXHb',
-    field: 'footBall',
-  },
-  {
-    titleDescription: 'Trembley',
-    backgroundImage:
-      'https://www.realsport.ch/sites/default/files/styles/image_header_small/public/2021-03/Carouge%20a%C3%A9rienne.jpg?h=2e111cc1&itok=u4s66gJj',
-    field: 'footBall',
-  },
+export const TeamPositionsFootball = [
+  {top: '5%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '15%', left: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '15%', right: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '25%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '25%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '35%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '5%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '15%', left: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '15%', right: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '25%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '25%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '35%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
 ];
 
-export const stadiumsVolley = [
-  {
-    titleDescription: 'Zermatt',
-    backgroundImage:
-      'https://db-service.toubiz.de/var/plain_site/storage/images/orte/zermatt/beachvolley/beachvolley/1404114-1-ger-DE/beachvolley_front_large.jpg',
-    field: 'volleyBall',
-  },
-  {
-    titleDescription: 'Asphalt',
-    backgroundImage:
-      'https://www.genevepascher.com/wp-content/uploads/2022/06/initiations-volley-geneve-pas-cher.jpg',
-    field: 'volleyBall',
-  },
-  {
-    titleDescription: 'Trembley',
-    backgroundImage:
-      'https://aweniddofq.cloudimg.io/v7/luxemburg.imxplatform.de/data/httpsappvisitluxembourgcomimages23296-resize-1680x1050x100.jpg?func=crop&width=1000&height=1000',
-    field: 'volleyBall',
-  },
+export const TeamPositionsBasketball = [
+  {top: '5%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '5%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '17%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '17%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '27%', right: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '5%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '5%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '17%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '17%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '27%', right: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
 ];
 
-export const stadiumData = [
-  {
-    titleDescription: 'Saint Jean',
-    backgroundImage:
-      'https://cdn.shopify.com/s/files/1/0550/4237/5908/products/633wm_1.png?v=1660617305',
-    field: 'basketball',
-  },
-  {
-    titleDescription: 'Nant-Cayla',
-    backgroundImage:
-      'https://www.shutterstock.com/image-photo/illuminated-basketball-playground-red-pavement-600nw-1221779821.jpg',
-    field: 'basketball',
-  },
-  {
-    titleDescription: 'Chemain de Tivoli',
-    backgroundImage:
-      'https://www.sportshub.com.sg/sites/default/files/2022-09/Play%20Ground.jpg',
-    field: 'basketball',
-  },
-  {
-    titleDescription: 'Asphalte',
-    backgroundImage:
-      'https://www.geneve.ch/sites/default/files/2022-06/asphalte-ville-geneve-cover-01%281%29.jpg',
-    field: 'basketball',
-  },
-  {
-    titleDescription: 'Franchises',
-    backgroundImage:
-      'https://st2.depositphotos.com/2601429/9447/i/450/depositphotos_94474168-stock-photo-basketball-board-on-the-sky.jpg',
-    field: 'basketball',
-  },
-  {
-    titleDescription: 'Lancy-Florimont',
-    backgroundImage:
-      'https://engermancontracting.com/wp/wp-content/uploads/2022/02/US_So_CA_P1195217.jpg?gid=6',
-    field: 'basketball',
-  },
+export const TeamPositionsVolleyBall = [
+  {bottom: '15%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '15%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {bottom: '30%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '15%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '15%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {top: '30%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
 ];
 
-export const fieldData = [
-  {
-    fieldName: 'Basketball',
-    backgroundImage:
-      'https://ak.picdn.net/shutterstock/videos/1104632401/thumb/1.jpg',
-    stadiums: stadiumData,
-  },
-  {
-    fieldName: 'Football',
-    backgroundImage:
-      'https://d2jx2rerrg6sh3.cloudfront.net/images/news/ImageForNews_742320_1679349106715629.jpg',
-    stadiums: stadiumsFootball,
-  },
-  {
-    fieldName: 'Beach Volley',
-    backgroundImage:
-      'https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/beach-volleyball-leah-guo.jpg',
-    stadiums: stadiumsVolley,
-  },
-];
 interface ContainerMap {
   container?: any; // Define backgroundColor prop
 }

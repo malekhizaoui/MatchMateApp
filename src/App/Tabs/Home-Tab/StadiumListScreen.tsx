@@ -2,10 +2,8 @@
 
 import React, {useState} from 'react';
 import {
-  View,
   Text,
   TouchableOpacity,
-  SafeAreaView,
   StatusBar,
 } from 'react-native';
 import {
@@ -21,12 +19,8 @@ import {MatchMatePalette} from '../../../assets/color-palette';
 import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
 import StadiumListMapScreen from './StadiumListMapScreen';
 import StadiumCardMapComponent from '../../../Components/HomeComponents/StadiumCardMapComponent';
+import { Stadium } from '../../models/Stadium';
 
-interface Stadium {
-  id: number;
-  stadiumName: string;
-  // Add other properties as needed
-}
 
 interface RouteParams {
   fieldDataPass: Stadium[];

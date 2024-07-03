@@ -4,10 +4,9 @@ import { ContainerAppDetailGame, ContainerDetailScreen,TextNameProfile } from '.
 import { MatchMatePalette } from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
 import { GameHistory } from '../../models/GameHistory';
-import axios from 'axios';
-import BaseUrl from '../../../services/BaseUrl';
 import ImageSlideComponent from '../../../Components/HomeComponents/ImageSlideComponent';
 import GameHistoryMatchComponent from '../../../Components/ProfileComponents/GameHistoryMatchComponent';
+import { handleRequests } from '../../../services/HandleRequests';
 
 const GameHistoryDetailScreen = ({ navigation, route }: any) => {
   const [gameHistoryDetail, setGameHistoryDetail] = useState<GameHistory | null>(null);
@@ -15,8 +14,8 @@ const GameHistoryDetailScreen = ({ navigation, route }: any) => {
 
   const getGameHistoryDetail = async () => {
     try {
-      const res = await axios.get(`${BaseUrl}/GameHistoryById/${gameHistoryId}`);
-      setGameHistoryDetail(res.data.data);
+      const res =await handleRequests('get',`GameHistoryById/${gameHistoryId}`)
+      setGameHistoryDetail(res.data);
     } catch (error) {
       console.log('err', error);
     }
@@ -32,7 +31,6 @@ const GameHistoryDetailScreen = ({ navigation, route }: any) => {
         navigation={navigation}
         headerTitle={'Game history detail'}
         color={MatchMatePalette.primaryColor}
-        // backgroundColor={MatchMatePalette.darkBackgroundColor}
       />
       <StatusBar barStyle={'light-content'} backgroundColor={MatchMatePalette.darkBackgroundColor} />
       <ContainerDetailScreen>
