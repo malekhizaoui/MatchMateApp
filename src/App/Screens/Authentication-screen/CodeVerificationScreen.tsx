@@ -46,7 +46,7 @@ const CodeVerificationScreen = ({navigation,route}: any) => {
         </View>
         <HeaderConnexionScreen>
           <LogoAppStyle>
-            <TickIconSVG color="white" />
+            <TickIconSVG color={MatchMatePalette.whiteColor} />
           </LogoAppStyle>
           <HeaderTitleText>Code de confirmation</HeaderTitleText>
         </HeaderConnexionScreen>
@@ -78,7 +78,7 @@ const CodeVerificationScreen = ({navigation,route}: any) => {
         <ButtonAuthComponent
           btnText="Valider"
           backgroundColor={MatchMatePalette.primaryColor}
-          btnTextColor="white"
+          btnTextColor={MatchMatePalette.whiteColor}
           btnClicked={verifyCode}
           iconComponent={""}
         />
@@ -97,14 +97,14 @@ const styles = StyleSheet.create({
     lineHeight: 38,
     fontSize: 24,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: MatchMatePalette.whiteColor,
     textAlign: 'center',
-    backgroundColor: 'black',
+    backgroundColor: MatchMatePalette.blackColor,
     borderRadius: 5,
-    color: 'white',
+    color: MatchMatePalette.whiteColor,
     alignSelf: 'center',
   },
   focusCell: {
-    borderColor: 'white',
+    borderColor: MatchMatePalette.whiteColor,
   },
 });

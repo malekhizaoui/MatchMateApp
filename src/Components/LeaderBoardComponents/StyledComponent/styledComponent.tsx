@@ -21,7 +21,7 @@ flex-direction:row;
 align-items:center;
 justify-content:space-between;
 margin-bottom:20px;
-background-color: ${({ backgroundColor }) => backgroundColor || '#262626'};
+background-color: ${({ backgroundColor }) => backgroundColor || MatchMatePalette.lightBackgroundColor};
 padding:5px;
 border-radius:15px
 `
@@ -37,15 +37,15 @@ height:40px;
 border-radius:20px;
 `
 export const TextNameLeader = styled.Text`
-  font-size: 18px;
+  ${fontSizeTextScreen};
   font-weight: 600;
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
   margin:5px
 `;
 export const TextPointLeader = styled.Text`
-  font-size: 16px;
+  ${fontSizeTextScreen};
   font-weight: 400;
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
   margin:5px
 
 `;

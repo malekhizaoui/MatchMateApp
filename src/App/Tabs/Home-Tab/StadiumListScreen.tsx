@@ -100,7 +100,7 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
           <ListStadiumContainer>
             <Text
               style={{
-                color: 'white',
+                color: MatchMatePalette.whiteColor,
                 fontSize: 15,
                 fontWeight: '600',
                 marginBottom: 10,

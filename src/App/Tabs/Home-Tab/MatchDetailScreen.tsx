@@ -47,10 +47,10 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
   const renderPlayerIcons = (team: any) => {
     return team.map((el: object | any, index: number) => (
       <View key={index} style={el}>
-        <View style={{width:50,height:50,borderRadius:25,borderWidth:2,borderColor:"white",display:"flex",justifyContent:"center",alignItems:"center"}}>
+        <View style={{width:50,height:50,borderRadius:25,borderWidth:2,borderColor:MatchMatePalette.whiteColor,display:"flex",justifyContent:"center",alignItems:"center"}}>
           <Image source={timeSlot.team[index]?.image?{uri:timeSlot.team[index].image}:require('../../../assets/Images/userAnonymousImage.png')} style={{width:48,height:48,borderRadius:25}}/>
         </View>
-        <Text style={{color:"white"}}>{timeSlot.team[index]?timeSlot.team[index].firstName:""}</Text>
+        <Text style={{color:MatchMatePalette.whiteColor}}>{timeSlot.team[index]?timeSlot.team[index].firstName:""}</Text>
       </View>
     ));
   };
@@ -73,7 +73,7 @@ export const MatchDetailScreen = ({navigation, route}: any) => {
           />
         </FieldStyleContainer>
         <PrimaryButtonComponant
-          colorTxtBtn={'white'}
+          colorTxtBtn={MatchMatePalette.whiteColor}
           colorbtn={MatchMatePalette.primaryColor}
           event={joinTeam}
           radius={20}

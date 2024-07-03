@@ -84,7 +84,7 @@ const {userData,signOut}=useProfile(navigation)
         {/* <TouchableOpacity style={{backgroundColor:MatchMatePalette.primaryColor,width:'70%',height:50,display:"flex",borderRadius:20,justifyContent:"center",alignItems:"center"}}>
                 <Text  style={{
                   fontSize: 16,
-                  color: 'white',
+                  color: '${MatchMatePalette.whiteColor}',
                   fontWeight: '600',
                 }}>Logout</Text>
                 </TouchableOpacity> */}

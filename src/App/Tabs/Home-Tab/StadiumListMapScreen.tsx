@@ -51,7 +51,7 @@ const StadiumListMapScreen: React.FC<StadiumListMapProps> = ({stadiums}) => {
         ))
       ) : (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{color: 'white'}}>No stadiums available</Text>
+          <Text style={{color: MatchMatePalette.whiteColor}}>No stadiums available</Text>
         </View>
       )}
     </YaMap>

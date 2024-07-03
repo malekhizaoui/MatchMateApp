@@ -11,6 +11,7 @@ import {
   Circle,
   G,
 } from 'react-native-svg';
+import { MatchMatePalette } from '../../color-palette';
 interface FirstPlaceIconSVG {
   color: string;
 }
@@ -21,7 +22,7 @@ const FirstPlaceIconSVG = ({color}: FirstPlaceIconSVG) => {
       <G filter="url(#filter0_d_72_1654)">
         <Path
           d="M16.0414 25V14.936H13.7374V13.08H18.2174V25H16.0414Z"
-          fill="white"
+          fill={MatchMatePalette.whiteColor}
         />
       </G>
       <Defs></Defs>

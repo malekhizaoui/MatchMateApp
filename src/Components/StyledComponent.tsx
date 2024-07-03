@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import {Dimensions} from 'react-native';
+import { fontSizeTextScreen } from '../assets/Styles';
 
 
 const HEIGHT = Dimensions.get('screen').height;
@@ -17,6 +18,6 @@ export const BtnContainer = styled.TouchableOpacity`
 
 export const TextBtnContainer = styled.Text`
   color: #fff;
-  font-size: 19px;
+  ${fontSizeTextScreen};
   text-align: center;
 `;

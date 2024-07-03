@@ -9,6 +9,7 @@ import {
   Svg,
   Path,
 } from 'react-native-svg';
+import { MatchMatePalette } from '../../color-palette';
 interface CloseIconSVG {
 //   color: string;
 }
@@ -18,7 +19,7 @@ const CloseIconSVG = ({}: CloseIconSVG) => {
       height="24px"
       viewBox="0 -960 960 960"
       width="24px"
-      fill="white"> 
+      fill={MatchMatePalette.whiteColor}> 
       <Path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
     </Svg>
   );

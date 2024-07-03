@@ -25,7 +25,7 @@ export const PropertyContainer = styled.TouchableOpacity`
 `;
 
 export const TextProperty = styled.Text`
-  font-size: 16px;
+  ${fontSizeTextScreen};
   color: ${MatchMatePalette.primaryColor};
   margin-left: 20px;
   font-weight: 600;
@@ -52,14 +52,14 @@ padding:2px
 
 export const TextTitleInput =styled.Text`
 color:${MatchMatePalette.primaryColor};
-font-size:17px;
+font-size: 17px;
 fontWeight:500
 `
 
 export const TextInputStyle =styled.TextInput`
 color:grey;
 margin-bottom:10px;
-font-size:15px
+font-size: 15px
 
 `
 
@@ -88,7 +88,7 @@ export const DayDetailContainer = styled.View`
 
 export const HeaderDetailContainer = styled.View<HeaderDetailContainerProps>`
   width: 100%;
-  background-color: ${({ backgroundColor }) => backgroundColor || '#262626'};
+  background-color: ${({ backgroundColor }) => backgroundColor || MatchMatePalette.lightBackgroundColor};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
@@ -99,8 +99,8 @@ export const HeaderDetailContainer = styled.View<HeaderDetailContainerProps>`
 `;
 
 export const TextHeaderTime = styled.Text`
-  color: white;
-  font-size: 17px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
   font-weight: bold;
   margin: 10px;
 `;
@@ -115,14 +115,14 @@ export const DescriptionContainer = styled.View`
   align-items: center;
 `;
 export const TxtdetailLabel = styled.Text`
-  color: ${MatchMatePalette.lightBackgroundColoe};
+  color: ${MatchMatePalette.lightColor};
   font-weight: bold;
-  font-size: 15px;
+  ${fontSizeTextScreen};
   margin-left: 10px;
 `;
 export const TextDesciption = styled.Text`
   color: white;
-  font-size: 15px;
+  ${fontSizeTextScreen};
   margin-left: 10px;
   margin-bottom: 4px;
   margin-top: 4px;
@@ -146,8 +146,8 @@ export const BtnTxtContainer = styled.View`
 `;
 
 export const TxtButton = styled.Text<TxtButtonProps>`
-  color: ${({ color }) => color || '#262626'};
-  font-size: 15px;
+  color: ${({ color }) => color || MatchMatePalette.lightBackgroundColor};
+  ${fontSizeTextScreen};
   font-weight: 600;
 `;
 

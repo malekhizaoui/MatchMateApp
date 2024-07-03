@@ -18,26 +18,26 @@ import {
 
 export const TextHeader = styled.Text`
   color: ${MatchMatePalette.darkBackgroundColor};
-  font-size: 17px;
+  ${fontSizeTextScreen};
   font-weight: 800;
   margin-bottom: 20px;
   margin-top: 10px;
 `;
 
 export const TextNameLeader = styled.Text`
-  font-size: 18px;
+  ${fontSizeTextScreen};
   font-weight: 600;
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
 `;
 export const TextPointLeader = styled.Text`
-  font-size: 16px;
+  ${fontSizeTextScreen};
   font-weight: 400;
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
 `;
 export const LineSperator = styled.View`
   width: 100%;
   height: 1px;
-  background-color: white;
+  background-color: ${MatchMatePalette.whiteColor};
   margin-top: 20px;
   margin-bottom: 35px;
 `;
@@ -91,7 +91,7 @@ export const ImageLeader = styled.Image`
   width: 120px;
   height: 120px;
   border-radius: 60px;
-  border-color: #262626;
+  border-color:${MatchMatePalette.lightBackgroundColor};
   border-width: 4px;
   margin: 10px;
 `;
@@ -99,7 +99,7 @@ export const ImageLeaderA = styled.Image`
   width: 110px;
   height: 110px;
   border-radius: 60px;
-  border-color: #262626;
+  border-color:${MatchMatePalette.lightBackgroundColor};
   border-width: 4px;
   margin: 10px;
 `;

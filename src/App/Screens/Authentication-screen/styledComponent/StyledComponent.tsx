@@ -19,23 +19,24 @@ export const ContainerScreen = styled.ScrollView`
   width: 85%;
 `;
 export const HeaderRegisterScreen = styled.View`
-  margin-top: 50px;
+  margin-top: 20px;
 `;
 
 export const HeaderTitleText = styled.Text`
-  ${fontSizeTitleScreen};
-  color: white;
+  ${fontSizeSubTitleScreen}
+  color: grey;
   font-weight: 500;
   text-align: center;
+  width:70%
 `;
 export const HeaderText = styled.Text`
   ${fontSizeSubTitleScreen};
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
   font-weight: 500;
 `;
 
 export const ContainerForm = styled.View`
-  margin-top: 40px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,7 +50,13 @@ export const SeperateLine = styled.View`
 `;
 
 export const HeaderConnexionScreen = styled.View`
-  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+export const HeaderConnexionMethodScreen = styled.View`
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,16 +66,18 @@ export const LogoAppStyle = styled.View`
   height: 150px;
   width: 150px;
   border-radius: 75px;
-  background-color: ${MatchMatePalette.primaryColor};
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-
+export const LogoApp = styled.Image`
+  height: 270px;
+  width: 270px;
+`;
 export const TextpasswordForgotten = styled.Text`
-  color: white;
-  margin-top: 20px;
+  color: ${MatchMatePalette.whiteColor};
+  margin-top: 10px;
   ${fontSizeTextScreen};
   font-weight: bold;
 `;
@@ -76,19 +85,19 @@ export const ContainerDivideText = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 export const LineStyle = styled.View`
   flex: 1;
   height: 1px;
-  background-color: white;
+  background-color: ${MatchMatePalette.whiteColor};
 `;
 export const TextDivide = styled.Text`
   margin-horizontal: 10px;
-  font-size: 16px;
-  color: white;
+  ${fontSizeTextScreen};
+  color: ${MatchMatePalette.whiteColor};
 `;
 
 export const ContainerScreenMethod = styled.View`
@@ -110,8 +119,8 @@ export const TextDescription = styled.Text`
 `;
 
 export const TextValidationCode = styled.Text`
-  color: white;
-  font-size: 15px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
   margin-top: 20px;
   margin-bottom: 20px;
 `;

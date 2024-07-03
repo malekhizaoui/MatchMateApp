@@ -23,21 +23,21 @@ export const ContainerAppDetailGame = styled.SafeAreaView`
 
 export const TextHeader = styled.Text`
   color: ${MatchMatePalette.darkBackgroundColor};
-  font-size: 17px;
+  ${fontSizeTextScreen};
   font-weight: 800;
   margin-top: 30px;
 `;
 
 export const TextNameProfile = styled.Text`
-  font-size: 18px;
+  ${fontSizeTextScreen};
   font-weight: 700;
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
 
 `;
 export const LineSperator = styled.View`
   width: 100%;
   height: 1px;
-  background-color: white;
+  background-color: ${MatchMatePalette.whiteColor};
   margin-top: 20px;
   margin-bottom: 35px;
 `;
@@ -56,7 +56,7 @@ export const ImageProfile = styled.Image`
   width: 120px;
   height: 120px;
   border-radius: 60px;
-  border-color: white;
+  border-color: ${MatchMatePalette.whiteColor};
   border-width: 2px;
   margin: 10px;
 `;
@@ -113,7 +113,7 @@ export const EditProfilePropertiesContainer = styled.View`
 export const LineSperatorProperty = styled.View`
   width: 100%;
   height: 1px;
-  background-color: white;
+  background-color: ${MatchMatePalette.whiteColor};
   margin-top: 15px;
   margin-bottom: 15px;
 `;
@@ -128,15 +128,15 @@ export const EditIcon = styled.View`
   width: 30px;
   height: 30px;
   border-radius:15px;
-  background-color:white;
+  background-color:${MatchMatePalette.whiteColor};
   display:flex;
   align-items:center;
   justify-content:center
 `;
 
 export const TxtBtn=styled.Text`
-font-size: 16px;
-  color: white;
+${fontSizeTextScreen};
+  color: ${MatchMatePalette.whiteColor};
   font-weight: 600;
 `
 

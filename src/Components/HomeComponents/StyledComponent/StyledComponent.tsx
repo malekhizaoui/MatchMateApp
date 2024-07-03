@@ -40,8 +40,8 @@ export const TitleCard = styled.View`
 `;
 
 export const TxtTitle = styled.Text`
-  font-size: 13px;
-  color: white;
+  ${fontSizeLegendIcon};
+  color: ${MatchMatePalette.whiteColor};
 `;
 
 export const StadiumContainer = styled.TouchableOpacity`
@@ -49,7 +49,7 @@ export const StadiumContainer = styled.TouchableOpacity`
   border-radius: 20px;
   margin-left: 10px;
   width: 185px;
-  border: 2px white;
+  border: 2px ${MatchMatePalette.whiteColor};
   flex-direction: column;
   margin-top: 10px;
 `;
@@ -65,13 +65,13 @@ export const StadiumDescription = styled.View`
   padding: 5px;
 `;
 export const TitleDescription = styled.Text`
-  font-size: 12px;
+  ${fontSizeLegendIcon};
   font-weight: 500;
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
   padding-left: 5px;
 `;
 export const TextDescription = styled.Text`
-  font-size: 10px;
+  ${fontSizeLegendIcon};
   font-weight: 500;
   color: ${MatchMatePalette.primaryColor};
   padding-left: 5px;
@@ -102,19 +102,19 @@ export const HeaderStadium = styled.View`
 `;
 
 export const TitleTextStadium = styled.Text`
-  color: white;
-  font-size: 25px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeSubTitleScreen};
   font-weight: 600;
 `;
 
 export const TxtShowMap = styled.Text`
   color: ${MatchMatePalette.primaryColor};
-  font-size: 15px;
+  ${fontSizeTextScreen};
   font-weight: 700;
 `;
 export const StadiumDescriptionTxt = styled.Text`
-  color: white;
-  font-size: 16px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
   font-weight: 400;
   text-align: left;
 `;
@@ -136,7 +136,7 @@ export const FacilityContentContainer = styled.View`
   align-items: center;
   justify-content: center;
   width: 20%;
-  background-color: white;
+  background-color: ${MatchMatePalette.whiteColor};
   margin: 5px;
   height: 80px;
   border-radius: 15px;
@@ -144,9 +144,9 @@ export const FacilityContentContainer = styled.View`
 `;
 
 export const TextFacility = styled.Text`
-  color: #262626;
+  color:${MatchMatePalette.lightBackgroundColor};
   font-weight: 500;
-  font-size: 13px;
+  ${fontSizeLegendIcon};
 `;
 
 // SearchCardComponent Design
@@ -155,7 +155,7 @@ export const InputHeaderContainer = styled.View`
   flex-direction: row;
   align-items: center;
   width: 65%;
-  background-color: white;
+  background-color: ${MatchMatePalette.whiteColor};
   height: 40px;
   border-radius: 30px;
   justify-content: space-between;
@@ -174,7 +174,7 @@ export const FilterIconContainer = styled.View`
 export const LineSperator = styled.View`
   height: 90%;
   width: 2px;
-  background-color: #262626;
+  background-color:${MatchMatePalette.lightBackgroundColor};
 `;
 export const TextInputStyle = styled.TextInput`
   color: grey;
@@ -194,17 +194,17 @@ export const StadiumImageContainer = styled.Image`
 `;
 
 export const TitleStadiumName = styled.Text`
-  color: white;
-  font-size: 18px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
   font-weight: 600;
   margin-top: 10px;
   margin-bottom: 10px;
 `;
 
 export const NumberOfCourt = styled.Text`
-  font-size: 10px;
+  ${fontSizeLegendIcon};
   font-weight: 500;
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
 `;
 
 // design DaySelectedComponent
@@ -219,13 +219,13 @@ export const DayContent = styled.TouchableOpacity`
   background-color: transparent;
 `;
 export const DayText = styled.Text`
-  color: white;
-  font-size: 17px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
   font-weight: 500;
 `;
 export const MonthText = styled.Text`
   color: ${MatchMatePalette.primaryColor};
-  font-size: 14px;
+  ${fontSizeTextScreen};
   font-weight: 500;
 `;
 
@@ -249,7 +249,7 @@ export const DayDetailContainer = styled.View`
 
 export const HeaderDetailContainer = styled.View`
   width: 100%;
-  background-color: #262626;
+  background-color:${MatchMatePalette.lightBackgroundColor};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
@@ -260,8 +260,8 @@ export const HeaderDetailContainer = styled.View`
 `;
 
 export const TextHeaderTime = styled.Text`
-  color: white;
-  font-size: 17px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
   font-weight: bold;
   margin: 10px;
 `;
@@ -276,14 +276,14 @@ export const DescriptionContainer = styled.View`
   align-items: center;
 `;
 export const TxtdetailLabel = styled.Text`
-  color: ${MatchMatePalette.lightBackgroundColoe};
+  color: ${MatchMatePalette.lightColor};
   font-weight: bold;
-  font-size: 15px;
+  ${fontSizeTextScreen};
   margin-left: 10px;
 `;
 export const TextDesciption = styled.Text`
-  color: white;
-  font-size: 15px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
   margin-left: 10px;
   margin-bottom: 4px;
   margin-top: 4px;
@@ -308,7 +308,7 @@ export const BtnTxtContainer = styled.View`
 
 export const TxtButton = styled.Text`
   color: ${MatchMatePalette.primaryColor};
-  font-size: 15px;
+  ${fontSizeTextScreen};
   text-decoration-line: underline;
   font-weight: 600;
 `;
@@ -321,22 +321,22 @@ export const MatchDetailBoard = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: #262626;
+  background-color:${MatchMatePalette.lightBackgroundColor};
   border-radius: 20px;
   heigth: 100px;
   padding: 10px;
 `;
 
 export const StadiumTextname = styled.Text`
-  font-size: 17px;
+  ${fontSizeSubTitleScreen};
   font-weight: bold;
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
   font-family: poppins;
 `;
 export const PlayerLeftText = styled.Text`
   font-weight: bold;
   color: ${MatchMatePalette.primaryColor};
-  font-size: 12px;
+  ${fontSizeTextScreen};
 `;
 
 export const MatchTimeDetailContainer = styled.View`
@@ -348,9 +348,9 @@ export const MatchTimeDetailContainer = styled.View`
 `;
 
 export const TimeText = styled.Text`
-  font-size: 22px;
+  ${fontSizeTextScreen};
   font-weight: bold;
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
   font-family: poppins;
 `;
 
@@ -370,7 +370,7 @@ export const StadiumCardContainer = styled.TouchableOpacity`
 export const ImageContainerCard = styled.Image`
   width: 40%;
   height: 100%;
-  background-color: white;
+  background-color: ${MatchMatePalette.whiteColor};
   margin-right: 10px;
   border-radius:10px
 `;
@@ -432,20 +432,20 @@ export const RentalContainer = styled.TouchableOpacity`
 `;
 
 export const RentalText = styled.Text`
-  color: white;
-  font-size: 12px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeLegendIcon};
 `;
 
 export const RentalPrice = styled.Text`
-  color: white;
-  font-size: 12px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeLegendIcon};
   font-weight: 600;
 `;
 
 export const StadiumTitle = styled.Text`
-  font-size: 18px;
+  ${fontSizeTextScreen};
   font-weight: bold;
   margin-top: 10px;
   text-align: left;
-  color:white
+  color:${MatchMatePalette.whiteColor}
 `;

@@ -83,12 +83,12 @@ export const UpdateRegionContainer = styled.View`
   flex-direction: row;
 `;
 export const RegionExploreTxt = styled.Text`
-  color: white;
-  font-size: 15px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
 `;
 export const RegionTxt = styled.Text`
   color: ${MatchMatePalette.primaryColor};
-  font-size: 32px;
+  ${fontSizeTitleScreen};
 `;
 
 export const TextContainer = styled.View`
@@ -100,13 +100,13 @@ export const TextContainer = styled.View`
   flex-direction: row;
 `;
 export const TextTitleList = styled.Text`
-  color: white;
-  font-size: 17px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
   font-weight: 600;
 `;
 export const TextCheckAllList = styled.Text`
   color: ${MatchMatePalette.primaryColor};
-  font-size: 15px;
+  ${fontSizeTextScreen};
   text-decoration-line: underline;
   font-weight: 600;
 `;
@@ -133,7 +133,7 @@ export const InputContainer = styled.View`
   align-items: center;
   width: 85%;
   height: 50px;
-  background-color: white;
+  background-color: ${MatchMatePalette.whiteColor};
   border-radius: 25px;
   align-self: center;
   margin-top: 10px;
@@ -143,8 +143,8 @@ export const TextInputStyle = styled.TextInput`
 `;
 
 export const TitleTextStadium = styled.Text`
-  color: white;
-  font-size: 25px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeSubTitleScreen};
   font-weight: 600;
 `;
 
@@ -160,8 +160,8 @@ export const ExpandMore = styled.View`
 `;
 
 export const TxtContainer = styled.Text`
-  color: white;
-  font-size: 20px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
   font-weight: 600;
   margin-top: 20px;
 `;
@@ -190,8 +190,8 @@ export const BtnCheck = styled.TouchableOpacity`
   align-self: center;
 `;
 export const TextButton = styled.Text`
-  color: white;
-  font-size: 15px;
+  color: ${MatchMatePalette.whiteColor};
+  ${fontSizeTextScreen};
   font-weight: 600;
 `;
 export const CloseContainerIcon = styled.TouchableOpacity`
@@ -229,7 +229,7 @@ export const HeaderListStadiumContainer = styled.View`
 export const TextTypeOfRender = styled.Text`
   color: ${MatchMatePalette.primaryColor};
   font-weight: 500;
-  font-size: 18px;
+  ${fontSizeTextScreen};
   width: 37px;
 `;
 

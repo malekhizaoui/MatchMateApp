@@ -71,7 +71,9 @@ export const useHome = (navigation:any, route: any=false) => {
 
   const getFieldsBaseOnRegion = async () => {    
     try {
-     const res=await handleRequests('get',`fieldRegion/${region}`)      
+     const res=await handleRequests('get',`fieldRegion/${region}`)  
+     console.log("res",res);
+         
       setfieldDataPut(res);
       setBasketballField(res[0].stadiums);
       setFootballField(res[1].stadiums);
@@ -133,7 +135,7 @@ export const styles = StyleSheet.create({
     zIndex: 999,
     paddingHorizontal: 8,
     fontSize: 14,
-    color: 'white',
+    color: MatchMatePalette.whiteColor,
   },
   placeholderStyle: {
     fontSize: 16,

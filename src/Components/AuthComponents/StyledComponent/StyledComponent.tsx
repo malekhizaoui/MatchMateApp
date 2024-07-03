@@ -15,7 +15,7 @@ import {
   width: 100%;
   height: 70px;
   border-radius: 10px;
-  border: 1.5px solid white;
+  border: 1.5px solid ${MatchMatePalette.whiteColor};
   margin-bottom:20px;
 
   `
@@ -27,26 +27,28 @@ import {
   export const ContentInput=styled.View`
   display:flex;
   flex-direction:column;
-  justify-content:space-between;
   height:90%;
-  padding:2px
+  padding:2px;
+   
+
   `
 
   export const TextTitleInput =styled.Text`
   color:${MatchMatePalette.primaryColor};
   ${fontSizeTextScreen};
-  fontWeight:500
+  fontWeight:500;
+  padding:0
   `
 
   export const TextInputStyle =styled.TextInput`
   color:grey;
-  margin-bottom:10px
+  margin-bottom:16px
   `
 
   export const IconStyle =styled.View`
   width:50px;
   align-items:center;
-  padding-top:2px
+  padding-top:2px;
   `
 
 
@@ -62,7 +64,7 @@ import {
   flex-direction:row
   `
   export const TextButton =styled.Text`
-  color:white;
+  color:${MatchMatePalette.whiteColor};
   margin-left:10px
   `
 

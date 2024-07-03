@@ -11,6 +11,7 @@ import {
   LineStyle,
   HeaderTitleText,
   TextDivide,
+  LogoApp
 } from './styledComponent/StyledComponent';
 import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
 import {MatchMatePalette} from '../../../assets/color-palette';
@@ -31,12 +32,12 @@ const SignInScreen = ({navigation}: any) => {
         backgroundColor={MatchMatePalette.darkBackgroundColor}
       />
       <ContainerScreen showsVerticalScrollIndicator={false}>
-        <View style={{marginTop: 20}}>
+        <View style={{marginTop: 10}}>
           <NavigateBack navigation={navigation} />
         </View>
         <HeaderConnexionScreen>
-          <LogoAppStyle></LogoAppStyle>
-          <HeaderTitleText>Se Connecter à MatchMate</HeaderTitleText>
+        <LogoApp source={require('../../../assets/Logos/MatchMateDarkWhite.png')}/>
+        <HeaderTitleText>Se Connecter à MatchMate</HeaderTitleText>
         </HeaderConnexionScreen>
         <ContainerForm>
           <InputAuthComponent
@@ -60,7 +61,7 @@ const SignInScreen = ({navigation}: any) => {
           <ButtonAuthComponent
             btnText="Connexion"
             backgroundColor={MatchMatePalette.primaryColor}
-            btnTextColor="white"
+            btnTextColor={MatchMatePalette.whiteColor}
             btnClicked={loginUser}
             iconComponent={""}
           />
@@ -73,7 +74,7 @@ const SignInScreen = ({navigation}: any) => {
           <ButtonAuthComponent
             btnText="Créer un compte"
             backgroundColor={MatchMatePalette.primaryColor}
-            btnTextColor="white"
+            btnTextColor={MatchMatePalette.whiteColor}
             btnClicked={() => {
               // signIn()
               navigation.navigate('Signup');

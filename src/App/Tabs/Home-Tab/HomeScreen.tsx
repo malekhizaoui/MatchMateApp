@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
-import { ContainerApp, ContainerScreen, HeaderContainer, ExploreRegionContainer, RegionExploreTxt, RegionTxt, InputContainer, TextInputStyle, ListContainer, TextContainer, TextTitleList, TextCheckAllList, fieldData, stadiumsVolley } from './StyledComponent/StyledComponent';
+import { ContainerApp, ContainerScreen, HeaderContainer, ExploreRegionContainer, RegionExploreTxt, RegionTxt, InputContainer, TextInputStyle, ListContainer, TextContainer, TextTitleList, TextCheckAllList } from './StyledComponent/StyledComponent';
 import { Dropdown } from 'react-native-element-dropdown';
 import {useHome,styles } from './useHome';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
@@ -8,7 +8,7 @@ import { MatchMatePalette } from '../../../assets/color-palette';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
-
+import { fontSiszeTest } from '../../../assets/Styles';
 export const HomeScreen = ({ navigation }: any) => {
   const {
     fieldSelected,
@@ -28,6 +28,7 @@ export const HomeScreen = ({ navigation }: any) => {
     region,
     setRegion,
   } = useHome(navigation);
+console.log("fontSiszeTest",fontSiszeTest);
 
   return (
     <ContainerApp>
@@ -90,7 +91,7 @@ export const HomeScreen = ({ navigation }: any) => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ref={scrollViewRef}>
-          {fieldDataPut.map((field, i) => {
+          {fieldDataPut?.map((field, i) => {
             return (
               <FieldsCardComponent
                 key={i}

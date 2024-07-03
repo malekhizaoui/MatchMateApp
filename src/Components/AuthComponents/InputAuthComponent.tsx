@@ -26,9 +26,6 @@ export const InputAuthComponent = ({placeholder,inputName,setValue,valueInput,ic
     <ContainerInput>
             <ContainerContentInput>
               <IconStyle>
-              {/* <Text style={{color:"white"}}>He</Text> */}
-              {/* <Icon name="rocket" size={30} color="#900" /> */}
-              {/* <UserNameIconSVG color={MatchMatePalette.primaryColor} /> */}
               {iconComponent}
               </IconStyle>
               <ContentInput>

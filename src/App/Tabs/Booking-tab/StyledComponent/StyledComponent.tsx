@@ -2,6 +2,7 @@
 
 import styled from 'styled-components/native';
 import { MatchMatePalette } from '../../../../assets/color-palette';
+import { fontSizeTextScreen } from '../../../../assets/Styles';
 
 export const ContainerApp = styled.View`
   flex: 1;
@@ -15,18 +16,18 @@ export const BookingContainer = styled.View`
   align-items: center;
   height: 400px;
   width: 90%;
-  background-color: #262626;
+  background-color:${MatchMatePalette.lightBackgroundColor};
   border-radius: 30px;
   margin-top: 20px;
   border-width: 1px;
-  border-color: white;
+  border-color: ${MatchMatePalette.whiteColor};
   margin-bottom: 30px;
 `;
 
 export const BookingImage = styled.Image`
   width: 100%;
   height: 50%;
-  background-color: white;
+  background-color: ${MatchMatePalette.whiteColor};
   border-radius: 25px;
 `;
 
@@ -44,14 +45,14 @@ export const BookingRow = styled.View`
 `;
 
 export const BookingTitle = styled.Text`
-  font-size: 17px;
-  color: white;
+  ${fontSizeTextScreen};
+  color: ${MatchMatePalette.whiteColor};
   margin-top: 20px;
   font-weight: 700;
 `;
 
 export const BookingDetailText = styled.Text`
-  font-size: 15px;
+  ${fontSizeTextScreen};
   color: ${MatchMatePalette.primaryColor};
   margin-top: 20px;
   font-weight: 700;
@@ -59,8 +60,8 @@ export const BookingDetailText = styled.Text`
 `;
 
 export const BookingDate = styled.Text`
-  font-size: 15px;
-  color: white;
+  ${fontSizeTextScreen};
+  color: ${MatchMatePalette.whiteColor};
   margin-top: 10px;
   font-weight: 600;
 `;
@@ -77,8 +78,8 @@ export const CancelButton = styled.TouchableOpacity`
 `;
 
 export const CancelButtonText = styled.Text`
-  font-size: 16px;
-  color: white;
+  ${fontSizeTextScreen};
+  color: ${MatchMatePalette.whiteColor};
   font-weight: 600;
   text-align: center;
 `;
@@ -98,9 +99,9 @@ export const ContainerDetailScreen = styled.ScrollView`
 `;
 
 export const TextNameProfile = styled.Text`
-  font-size: 18px;
+  ${fontSizeTextScreen};
   font-weight: 700;
-  color: white;
+  color: ${MatchMatePalette.whiteColor};
 
 `;
 export const BtnCheck = styled.TouchableOpacity`
@@ -117,7 +118,7 @@ bottom: 5px;
 align-self: center;
 `;
 export const TextButton = styled.Text`
-color: white;
-font-size: 15px;
+color: ${MatchMatePalette.whiteColor};
+${fontSizeTextScreen};
 font-weight: 600;
 `;

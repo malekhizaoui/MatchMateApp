@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ViewStyle } from 'react-native';
 import { GameHistoryDetailContainer, FieldStyleContainer, FieldImage } from './StyledComponent/StyledComponent';
+import { MatchMatePalette } from '../../assets/color-palette';
 
 const GameHistoryMatchComponent = ({ team, fieldName }: any) => {
   const TeamPositionsFootball: ViewStyle[] = [
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     borderWidth: 2,
-    borderColor: 'white',
+    borderColor: MatchMatePalette.whiteColor,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   playerIconText: {
-    color: 'white',
+    color: MatchMatePalette.whiteColor,
   },
 });
 

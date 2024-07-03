@@ -32,7 +32,7 @@ const SearchCardComponent: React.FC<SearchCardComponentProps> = ({showMap, onSea
         borderWidth: 1,
       }}>
       <InputIconContainer>
-        <SearchIconSVG color={'#262626'} />
+        <SearchIconSVG color={MatchMatePalette.lightBackgroundColor} />
         <TextInputStyle
           placeholder="Search ..."
           onChangeText={onSearch}

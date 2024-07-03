@@ -15,6 +15,7 @@ import HomeSectionStack from './Stacks/HomeSectionStack';
 import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
 import {ScreenOptions} from './ScreenOptions';
 import ImmersiveMode from 'react-native-immersive-mode';
+import { MatchMatePalette } from '../assets/color-palette';
 
 function NavigationApp() {
   const [isLoggedin, setIsLoggedin] = useState(false);
@@ -45,7 +46,7 @@ function NavigationApp() {
     useEffect(() => {
       // ComponentDidMount equivalent
       ImmersiveMode.setBarMode('Normal');
-      ImmersiveMode.setBarColor('#262626');
+      ImmersiveMode.setBarColor(MatchMatePalette.lightBackgroundColor);
 
       // componentWillUnmount equivalent
       return () => {
@@ -83,12 +84,12 @@ function NavigationApp() {
           ...ScreenOptions({navigation, route}),
           tabBarStyle: {
             // display: hide ? 'none' : 'flex',
-            backgroundColor: '#262626',
+            backgroundColor: MatchMatePalette.lightBackgroundColor,
             padding: 10,
             height: '8%',
             width: '100%',
             alignSelf: 'center',
-            borderColor: 'white',
+            borderColor: MatchMatePalette.whiteColor,
             border: 1,
           },
         })}>
@@ -101,17 +102,17 @@ function NavigationApp() {
               if (routeName === 'MatchDetail' || routeName === 'StadiumAvailability' ) {
                 return {
                   display: 'none',
-                  backgroundColor: '#262626',
+                  backgroundColor: MatchMatePalette.lightBackgroundColor,
                  
                 };
               }
               return {
-                backgroundColor: '#262626',
+                backgroundColor: MatchMatePalette.lightBackgroundColor,
                 padding: 10,
                 height: '8%',
                 width: '100%',
                 alignSelf: 'center',
-                borderColor: 'white',
+                borderColor: MatchMatePalette.whiteColor,
               }
               ;  
             })(route),

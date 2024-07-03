@@ -10,6 +10,7 @@ import {
   ImageContainerCard,
 } from './StyledComponent/StyledComponent';
 import { Stadium } from '../../App/models/Stadium';
+import { MatchMatePalette } from '../../assets/color-palette';
 interface StadiumCardMapComponentProps {
   stadium:Stadium,
   navigation:any
@@ -32,7 +33,7 @@ const StadiumCardMapComponent = ({stadium,navigation}: StadiumCardMapComponentPr
         }}>
         <Text
           style={{
-            color: 'white',
+            color: MatchMatePalette.whiteColor,
             fontSize: 16,
             fontWeight: '600',
             flexWrap: 'wrap',
@@ -41,7 +42,7 @@ const StadiumCardMapComponent = ({stadium,navigation}: StadiumCardMapComponentPr
         </Text>
         <Text
           style={{
-            color: 'white',
+            color: MatchMatePalette.whiteColor,
             fontSize: 16,
             fontWeight: '600',
             flexWrap: 'wrap',

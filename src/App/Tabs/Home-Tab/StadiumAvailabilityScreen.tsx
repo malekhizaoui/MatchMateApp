@@ -17,6 +17,7 @@ import MatchDetailComponent from '../../../Components/HomeComponents/MatchDetail
 import {getWeekDaysInfo} from '../../../services/HelperFunctions';
 import NoTimeSlotsComponent from '../../../Components/HomeComponents/NoTimeSlotsComponent';
 import {handleRequests} from '../../../services/HandleRequests';
+import { MatchMatePalette } from '../../../assets/color-palette';
 
 const days = getWeekDaysInfo();
 export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
@@ -74,12 +75,12 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
             style={[styles.image, {opacity: fadeAnim}]}
           />
           <TouchableOpacity onPress={() => {}} style={styles.arrowButton}>
-            <PreviousIconSVG color="white" />
+            <PreviousIconSVG color={MatchMatePalette.whiteColor} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {}}
             style={[styles.arrowButton, {right: 0}]}>
-            <NextIconSVG color="white" />
+            <NextIconSVG color={MatchMatePalette.whiteColor} />
           </TouchableOpacity>
         </ImagesContent>
       </ImageConainer>

@@ -11,6 +11,7 @@ import {
 import PreviousIconSVG from '../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
 import { Stadium } from '../../App/models/Stadium';
+import { MatchMatePalette } from '../../assets/color-palette';
 interface ImageListStadiumComponentProps {
   stadium:Stadium;
   btnClicked: () => void;
@@ -41,7 +42,7 @@ const ImageListStadiumComponent = ({
           height: 30,
           borderRadius: 15,
         }}>
-        <PreviousIconSVG color="white" />
+        <PreviousIconSVG color={MatchMatePalette.whiteColor} />
       </TouchableOpacity>
       <TouchableOpacity
         style={{
@@ -56,7 +57,7 @@ const ImageListStadiumComponent = ({
           height: 30,
           borderRadius: 15,
         }}>
-        <NextIconSVG color="white" />
+        <NextIconSVG color={MatchMatePalette.whiteColor} />
       </TouchableOpacity>
       <TouchableOpacity
         style={{
@@ -88,14 +89,14 @@ const ImageListStadiumComponent = ({
         }}>
         <Text
           style={{
-            color: 'white',
+            color: MatchMatePalette.whiteColor,
             fontSize: 12,
           }}>
           Rental
         </Text>
         <Text
           style={{
-            color: 'white',
+            color: MatchMatePalette.whiteColor,
             fontSize: 12,
             fontWeight: '600',
           }}>

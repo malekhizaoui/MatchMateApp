@@ -35,9 +35,9 @@ const MatchDetailBoardComponent = ({stadium,timeSlot}: MatchDetailBoardComponent
     <StadiumTextname>{stadium.stadiumName} court</StadiumTextname>
     <PlayerLeftText>{playersLeft} players left</PlayerLeftText>
     <MatchTimeDetailContainer>
-      <TimeText>{startTime}</TimeText>
-      <NextIconSVG color="white" />
-      <TimeText>{endTime}</TimeText>
+      <TimeText>{startTime}h</TimeText>
+      <NextIconSVG color={MatchMatePalette.whiteColor} />
+      <TimeText>{endTime}h</TimeText>
     </MatchTimeDetailContainer>
   </MatchDetailBoard>
   );

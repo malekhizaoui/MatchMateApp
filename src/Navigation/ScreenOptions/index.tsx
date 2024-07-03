@@ -19,23 +19,23 @@ export const ScreenOptions = ({navigation, route}: any) => ({
       let name;
       if (route.name === 'HomeTab') {
         iconName = !focused
-          ? <HomeIconSVG color='white'/>
+          ? <HomeIconSVG color={MatchMatePalette.whiteColor}/>
           :<HomeIconSVG color={MatchMatePalette.primaryColor}/>
         name = 'home';
         namm = 'home';
       } else if (route.name === 'ProfileTab') {
         iconName = !focused
-        ? <ProfileIconSVG color='white'/>
+        ? <ProfileIconSVG color={MatchMatePalette.whiteColor}/>
         :<ProfileIconSVG color={MatchMatePalette.primaryColor}/>
         name = 'Profile';
       } else if (route.name === 'LeaderboardTab') {
         iconName = !focused
-        ? <LeaderboardIconSCG color='white'/>
+        ? <LeaderboardIconSCG color={MatchMatePalette.whiteColor}/>
         :<LeaderboardIconSCG color={MatchMatePalette.primaryColor}/>
         name = 'Leaderboard';
       } else if (route.name === 'BookingTab') {
         iconName = !focused
-        ? <BookingIconSVG color='white'/>
+        ? <BookingIconSVG color={MatchMatePalette.whiteColor}/>
         :<BookingIconSVG color={MatchMatePalette.primaryColor}/>
         name = 'booking';
       } 
@@ -63,5 +63,5 @@ export const ScreenOptions = ({navigation, route}: any) => ({
       );
     },
     tabBarActiveTintColor: MatchMatePalette.primaryColor,
-    tabBarInactiveTintColor: 'white',
+    tabBarInactiveTintColor: MatchMatePalette.whiteColor,
   });

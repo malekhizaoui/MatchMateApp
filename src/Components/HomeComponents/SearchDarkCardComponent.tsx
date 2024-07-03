@@ -22,9 +22,9 @@ const SearchCardComponent = ({
 
 }: SearchCardComponentProps) => {
   return (
-    <InputHeaderContainer style={{backgroundColor:"white"}}>
+    <InputHeaderContainer style={{backgroundColor:MatchMatePalette.whiteColor}}>
           <InputIconContainer>
-            <SearchIconSVG color={'#262626'} />
+            <SearchIconSVG color={MatchMatePalette.lightBackgroundColor} />
             <TextInputStyle placeholder="Search ..."></TextInputStyle>
           </InputIconContainer>
           <FilterIconContainer>

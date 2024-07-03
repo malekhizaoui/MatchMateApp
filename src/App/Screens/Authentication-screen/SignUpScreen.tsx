@@ -94,7 +94,7 @@ const SignUpScreen = ({navigation}: any) => {
           <ButtonAuthComponent
             btnText="Créer un compte"
             backgroundColor={MatchMatePalette.primaryColor}
-            btnTextColor="white"
+            btnTextColor={MatchMatePalette.whiteColor}
             btnClicked={registerUser}
             iconComponent={""}
           />
