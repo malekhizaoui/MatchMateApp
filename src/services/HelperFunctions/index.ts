@@ -1,3 +1,5 @@
+import { Feedback } from "../../App/models/Feedback";
+
 export const extractTimeFromDate=(dateString:Date)=> {
     const date = new Date(dateString);
   
@@ -57,3 +59,14 @@ export const extractTimeFromDate=(dateString:Date)=> {
   
     return daysInfo;
   };
+
+  export const getStarsReviw = (Feedbacks: Feedback[]): string => {
+    let totalStars: number = 0;
+    Feedbacks.forEach((Feedback) => {
+      totalStars += Feedback.stars;
+    });
+  
+    const averageStars = totalStars / Feedbacks.length;
+    return averageStars.toFixed(1);
+  };
+  

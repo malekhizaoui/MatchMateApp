@@ -15,7 +15,7 @@ import ExpandIconSVG from '../../assets/Icons/svg/ExpandIconSVG';
 import { MatchMatePalette } from '../../assets/color-palette';
 import { Stadium } from '../../App/models/Stadium';
 interface DescriptionStadiumComponentProps {
-  stadium:Stadium;
+  stadium:Stadium |null;
   btnClicked: () => void;
 }
 
@@ -27,7 +27,7 @@ const DescriptionStadiumComponent = ({
 return(
   <View>
     <HeaderStadium>
-          <TitleTextStadium>{stadium.stadiumName}</TitleTextStadium>
+          <TitleTextStadium>{stadium?.stadiumName}</TitleTextStadium>
           <TouchableOpacity onPress={btnClicked}>
           <TxtShowMap >Show map</TxtShowMap>
           </TouchableOpacity>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ContainerApp,
   ContainerDetailScreen,
@@ -7,17 +7,23 @@ import {
   BtnCheck,
   TextButton,
   CloseContainerIcon,
+  LineStyle,
 } from './StyledComponent/StyledComponent';
-
+import CardReviewComponent from '../../../Components/HomeComponents/CardReviewComponent';
 import {MatchMatePalette} from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
 import ImageSlideComponent from '../../../Components/HomeComponents/ImageSlideComponent';
 import DescriptionStadiumComponent from '../../../Components/HomeComponents/DescriptionStadiumComponent';
 import FacilityCardComponent from '../../../Components/HomeComponents/FacilityCardComponent';
-import {StatusBar} from 'react-native';
+import {StatusBar, TouchableOpacity, View} from 'react-native';
 import StadiumLocationMapComponent from '../../../Components/HomeComponents/StadiumLocationMapComponent';
 import CloseIconSVG from '../../../assets/Icons/svg/CloseIconSVG';
-// import CarousselComponent from '../../../Components/HomeComponents/CarousselComponent';
+import {Stadium} from '../../models/Stadium';
+import {handleRequests} from '../../../services/HandleRequests';
+import StarIconSVG from '../../../assets/Icons/svg/StarIconSVG';
+import StarIconNotFilledIconSVG from '../../../assets/Icons/svg/StarIconNotFilledIconSVG';
+import {Feedback} from '../../models/Feedback';
+import { getStarsReviw } from '../../../services/HelperFunctions';
 interface StadiumDetailScreenProps {
   navigation: any;
   route: any;
@@ -27,9 +33,27 @@ export const StadiumDetailScreen = ({
   navigation,
   route,
 }: StadiumDetailScreenProps) => {
-  const {stadium} = route.params;
+  const {stadiumId} = route.params;
   const [showMap, setShowMap] = useState(false);
-  
+  const [stadium, setStadium] = useState<Stadium | null>(null);
+  const [feedbacks, setFeedbacks] = useState<Feedback[] | null>(null);
+
+  const getStadiumById = async () => {
+    try {
+      const res = await handleRequests('get', `stadium/${stadiumId}`);
+      setStadium(res.data);
+      setFeedbacks(res.data.feedbacks);
+      console.log('res', res.data.feedbacks);
+    } catch (error) {
+      console.log('err', error);
+    }
+  };
+
+  console.log('stadium', stadium);
+
+  useEffect(() => {
+    getStadiumById();
+  }, []);
   return (
     <ContainerApp>
       <NavigateBack
@@ -46,15 +70,64 @@ export const StadiumDetailScreen = ({
         <ContainerDetailScreen
           horizontal={false}
           showsVerticalScrollIndicator={false}>
-          <ImageSlideComponent stadium={stadium} />
+          <ImageSlideComponent stadium={stadium} reviewStars={feedbacks&&getStarsReviw(feedbacks)} />
           <DescriptionStadiumComponent
             stadium={stadium}
             btnClicked={() => {
               setShowMap(true);
             }}
           />
-          <TxtContainer>Facilities</TxtContainer>
+          <TouchableOpacity
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginTop: 20,
+              marginBottom: 10,
+            }}>
+            <TxtContainer>Facilities</TxtContainer>
+          </TouchableOpacity>
+          <LineStyle></LineStyle>
+
           <FacilityCardComponent />
+
+          <TouchableOpacity
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginTop: 20,
+              marginBottom: 10,
+            }}>
+            <TxtContainer>Reviews {feedbacks&&getStarsReviw(feedbacks)}</TxtContainer>
+            <StarIconSVG color="yellow" />
+          </TouchableOpacity>
+          <LineStyle></LineStyle>
+          <View style={{marginBottom: 60}}>
+            {feedbacks && feedbacks.length > 0 ? (
+              feedbacks.map((feedback, index) => {
+                return (
+                  <CardReviewComponent
+                    user={feedback.user}
+                    stars={feedback.stars}
+                    comment={feedback.comment}
+                    key={index}
+                    date={feedback.created_at}
+                  />
+                );
+              })
+            ) : (
+              <View
+                style={{
+                  display: 'flex',
+                  margin: 20,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <TxtContainer>There is no Review to show</TxtContainer>
+              </View>
+            )}
+          </View>
         </ContainerDetailScreen>
       )}
       {showMap && (
@@ -72,12 +145,16 @@ export const StadiumDetailScreen = ({
         </>
       )}
 
-      {stadium.status==="private"&&(<BtnCheck
-        onPress={() => {
-          navigation.navigate('StadiumAvailability', {stadiumId: stadium.id});
-        }}>
-        <TextButton>Check availability</TextButton>
-      </BtnCheck>)}
+      {stadium?.status === 'private' && (
+        <BtnCheck
+          onPress={() => {
+            navigation.navigate('StadiumAvailability', {
+              stadiumId: stadium?.id,
+            });
+          }}>
+          <TextButton>Check availability</TextButton>
+        </BtnCheck>
+      )}
     </ContainerApp>
   );
 };

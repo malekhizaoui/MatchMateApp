@@ -449,3 +449,44 @@ export const StadiumTitle = styled.Text`
   text-align: left;
   color:${MatchMatePalette.whiteColor}
 `;
+
+// CardReviewComponent style
+export const UserContainerReview = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+`;
+export const UserImageReview = styled.Image`
+  width: 35px;
+  height: 35px;
+  border-radius: 17px;
+  background-color: red;
+`;
+export const UserNameReview = styled.Text`
+  ${fontSizeLegendIcon};
+  margin-left: 10px;
+  color: ${MatchMatePalette.whiteColor};
+  font-weight:600
+`;
+export const DateReviewtxt = styled.Text`
+  ${fontSizeLegendIcon};
+  margin-left: 10px;
+  color: grey;
+  text-align:left
+`;
+export const StarsContainer = styled.View`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-top:10px;
+
+`;
+export const Reviewtxt = styled.Text`
+  ${fontSizeLegendIcon};
+  margin-left: 10px;
+  color: ${MatchMatePalette.whiteColor};
+  text-align:left;
+  font-weight:600;
+  margin-left:3px
+  `;

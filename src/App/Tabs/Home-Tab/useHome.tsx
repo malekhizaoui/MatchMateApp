@@ -18,7 +18,7 @@ export const useHome = (navigation:any, route: any=false) => {
   const [isFocus, setIsFocus] = useState(false);
   const [searchResults, setSearchResults] = useState<Stadium[]>([]);
   const [query, setQuery] = useState('');
-  const [region, setRegion] = useState("Lausanne");
+  const [region, setRegion] = useState("Geneva");
 
 
   const searchFields = (query: string) => {

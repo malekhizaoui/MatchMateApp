@@ -14,40 +14,264 @@ import {
 } from '../../../../assets/Styles/index';
 
 export const TeamPositionsFootball = [
-  {top: '5%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '15%', left: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '15%', right: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '25%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '25%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '35%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '5%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '15%', left: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '15%', right: '10%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '25%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '25%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '35%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {
+    top: '5%',
+    left: '45%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '15%',
+    left: '10%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '15%',
+    right: '10%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '25%',
+    right: '25%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '25%',
+    left: '25%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '35%',
+    left: '45%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '5%',
+    left: '45%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '15%',
+    left: '10%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '15%',
+    right: '10%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '25%',
+    right: '25%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '25%',
+    left: '25%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '35%',
+    left: '45%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
 ];
 
 export const TeamPositionsBasketball = [
-  {top: '5%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '5%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '17%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '17%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '27%', right: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '5%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '5%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '17%', left: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '17%', right: '25%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '27%', right: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {
+    top: '5%',
+    left: '20%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '5%',
+    right: '20%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '17%',
+    left: '25%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '17%',
+    right: '25%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '27%',
+    right: '45%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '5%',
+    left: '20%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '5%',
+    right: '20%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '17%',
+    left: '25%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '17%',
+    right: '25%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '27%',
+    right: '45%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
 ];
 
 export const TeamPositionsVolleyBall = [
-  {bottom: '15%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '15%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {bottom: '30%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '15%', left: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '15%', right: '20%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
-  {top: '30%', left: '45%', position: 'absolute', zIndex: 999,alignItems:"center",justifyContent: 'center',maxWidth:40},
+  {
+    bottom: '15%',
+    left: '20%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '15%',
+    right: '20%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    bottom: '30%',
+    left: '45%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '15%',
+    left: '20%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '15%',
+    right: '20%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
+  {
+    top: '30%',
+    left: '45%',
+    position: 'absolute',
+    zIndex: 999,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: 40,
+  },
 ];
 
 interface ContainerMap {
@@ -163,13 +387,13 @@ export const TxtContainer = styled.Text`
   color: ${MatchMatePalette.whiteColor};
   ${fontSizeTextScreen};
   font-weight: 600;
-  margin-top: 20px;
+  margin-right: 10px;
 `;
 
 export const ImageLocation = styled.View<ContainerMap>`
   margin-top: 20px;
-  width:${({ container }) => container || '100%'};
-  height:${({ container }) => container || "166px"};
+  width: ${({container}) => container || '100%'};
+  height: ${({container}) => container || '166px'};
   border-radius: 30px;
   background-color: #f1f1f1;
   margin-bottom: 60px;
@@ -207,6 +431,15 @@ export const CloseContainerIcon = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
 `;
+
+export const LineStyle = styled.View`
+  width: 100%;
+  height: 2px;
+  background-color: grey;
+`;
+
+
+
 //style ListStadium
 export const ContainerListStadiumScreen = styled.ScrollView`
   display: flex;

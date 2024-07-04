@@ -130,7 +130,7 @@ console.log("fontSiszeTest",fontSiszeTest);
                     titleDescription={stadium.stadiumName}
                     backgroundImage={stadium.imageURL}
                     btnClicked={() => {
-                      navigation.navigate('StadiumDetail', { stadium });
+                      navigation.navigate('StadiumDetail', { stadiumId:stadium.id });
                     }}
                   />
                 );
@@ -143,7 +143,7 @@ console.log("fontSiszeTest",fontSiszeTest);
                     titleDescription={stadium.stadiumName}
                     backgroundImage={stadium.imageURL}
                     btnClicked={() => {
-                      navigation.navigate('StadiumDetail', { stadium });
+                      navigation.navigate('StadiumDetail', { stadiumId :stadium.id});
                     }}
                   />
                 );
@@ -155,7 +155,7 @@ console.log("fontSiszeTest",fontSiszeTest);
                     titleDescription={stadium.stadiumName}
                     backgroundImage={stadium.imageURL}
                     btnClicked={() => {
-                      navigation.navigate('StadiumDetail', { stadium });
+                      navigation.navigate('StadiumDetail', { stadiumId:stadium.id });
                     }}
                   />
                 );
