@@ -29,7 +29,7 @@ font-size: ${scale(20)}px;
 `;
 
 export const fontSizeTextScreen = `
-font-size: ${scale(16)}px;
+font-size: ${scale(15)}px;
 `;
 
 export const fontSizeLegendIcon = `

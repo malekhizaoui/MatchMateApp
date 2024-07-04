@@ -377,6 +377,14 @@ export const TxtShowMap = styled.Text`
   font-size: 15px;
   font-weight: 700;
 `;
+export const AddReviewText = styled.Text`
+  color: ${MatchMatePalette.primaryColor};
+  ${fontSizeLegendIcon};
+  font-weight: 700;
+   text-decoration-line: underline;
+   margin-top: 20px;
+    margin-bottom: 10px;
+`;
 
 export const ExpandMore = styled.View`
   margin-top: 10px;
@@ -437,8 +445,6 @@ export const LineStyle = styled.View`
   height: 2px;
   background-color: grey;
 `;
-
-
 
 //style ListStadium
 export const ContainerListStadiumScreen = styled.ScrollView`

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ContainerApp,
   ContainerDetailScreen,
@@ -8,35 +8,40 @@ import {
   TextButton,
   CloseContainerIcon,
   LineStyle,
+  AddReviewText,
 } from './StyledComponent/StyledComponent';
 import CardReviewComponent from '../../../Components/HomeComponents/CardReviewComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { MatchMatePalette } from '../../../assets/color-palette';
 import NavigateBack from '../../../Components/NavigateBack';
 import ImageSlideComponent from '../../../Components/HomeComponents/ImageSlideComponent';
 import DescriptionStadiumComponent from '../../../Components/HomeComponents/DescriptionStadiumComponent';
 import FacilityCardComponent from '../../../Components/HomeComponents/FacilityCardComponent';
-import {StatusBar, TouchableOpacity, View} from 'react-native';
+import { StatusBar, TouchableOpacity, View, Modal, TouchableHighlight, Text } from 'react-native';
 import StadiumLocationMapComponent from '../../../Components/HomeComponents/StadiumLocationMapComponent';
 import CloseIconSVG from '../../../assets/Icons/svg/CloseIconSVG';
-import {Stadium} from '../../models/Stadium';
-import {handleRequests} from '../../../services/HandleRequests';
+import { Stadium } from '../../models/Stadium';
+import { handleRequests } from '../../../services/HandleRequests';
 import StarIconSVG from '../../../assets/Icons/svg/StarIconSVG';
 import StarIconNotFilledIconSVG from '../../../assets/Icons/svg/StarIconNotFilledIconSVG';
-import {Feedback} from '../../models/Feedback';
+import { Feedback } from '../../models/Feedback';
 import { getStarsReviw } from '../../../services/HelperFunctions';
+import ModalReviewComponent from '../../../Components/HomeComponents/ModalReviewComponent';
+
 interface StadiumDetailScreenProps {
   navigation: any;
   route: any;
   container: any;
 }
+
 export const StadiumDetailScreen = ({
   navigation,
   route,
 }: StadiumDetailScreenProps) => {
-  const {stadiumId} = route.params;
+  const { stadiumId } = route.params;
   const [showMap, setShowMap] = useState(false);
   const [stadium, setStadium] = useState<Stadium | null>(null);
   const [feedbacks, setFeedbacks] = useState<Feedback[] | null>(null);
+  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
 
   const getStadiumById = async () => {
     try {
@@ -53,7 +58,8 @@ export const StadiumDetailScreen = ({
 
   useEffect(() => {
     getStadiumById();
-  }, []);
+  }, [modalVisible]);
+
   return (
     <ContainerApp>
       <NavigateBack
@@ -70,7 +76,10 @@ export const StadiumDetailScreen = ({
         <ContainerDetailScreen
           horizontal={false}
           showsVerticalScrollIndicator={false}>
-          <ImageSlideComponent stadium={stadium} reviewStars={feedbacks&&getStarsReviw(feedbacks)} />
+          <ImageSlideComponent
+            stadium={stadium}
+            reviewStars={feedbacks && getStarsReviw(feedbacks)}
+          />
           <DescriptionStadiumComponent
             stadium={stadium}
             btnClicked={() => {
@@ -90,20 +99,32 @@ export const StadiumDetailScreen = ({
           <LineStyle></LineStyle>
 
           <FacilityCardComponent />
-
-          <TouchableOpacity
+          <View
             style={{
               display: 'flex',
               flexDirection: 'row',
               alignItems: 'center',
-              marginTop: 20,
-              marginBottom: 10,
+              justifyContent: 'space-between',
             }}>
-            <TxtContainer>Reviews {feedbacks&&getStarsReviw(feedbacks)}</TxtContainer>
-            <StarIconSVG color="yellow" />
-          </TouchableOpacity>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 20,
+                marginBottom: 10,
+              }}>
+              <TxtContainer>
+                Reviews {feedbacks && getStarsReviw(feedbacks)}
+              </TxtContainer>
+              <StarIconSVG color="yellow" />
+            </View>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <AddReviewText>Add Review</AddReviewText>
+            </TouchableOpacity>
+          </View>
           <LineStyle></LineStyle>
-          <View style={{marginBottom: 60}}>
+          <View style={{ marginBottom: 60 }}>
             {feedbacks && feedbacks.length > 0 ? (
               feedbacks.map((feedback, index) => {
                 return (
@@ -154,6 +175,10 @@ export const StadiumDetailScreen = ({
           }}>
           <TextButton>Check availability</TextButton>
         </BtnCheck>
+      )}
+
+      {modalVisible && (
+        <ModalReviewComponent modalVisible={modalVisible} setModalVisible={setModalVisible} stadiumId={stadium?.id}/>
       )}
     </ContainerApp>
   );

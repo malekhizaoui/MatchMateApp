@@ -49,7 +49,7 @@ const CardReviewComponent = ({
         <UserImageReview
           source={{ uri: user.image }}
         />
-        <UserNameReview>{user.firstName}</UserNameReview>
+        <UserNameReview>{user.firstName} {user.lastName}</UserNameReview>
         <DateReviewtxt>created at {formatDate(date)}</DateReviewtxt>
       </UserContainerReview>
       <StarsContainer>

@@ -490,3 +490,51 @@ export const Reviewtxt = styled.Text`
   font-weight:600;
   margin-left:3px
   `;
+
+  // ModalReviexComponent
+  export const Overlay = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+`;
+
+export const CenteredView = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ModalView = styled.View`
+  margin: 20px;
+  background-color: ${MatchMatePalette.lightBackgroundColor};
+  border-radius: 20px;
+  padding: 35px;
+  align-items: center;
+  height: 350px;
+  width: 300px;
+  position: relative;
+`;
+
+export const CloseButton = styled.TouchableOpacity`
+  position: absolute;
+  top: -40px;
+  right: 10px;
+  width:30px;
+  height:30px;
+  border-radius:20px;
+  border:1px;
+  border-color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center
+`;
+export const TextReviewQs=styled.Text`
+${fontSizeTextScreen};
+color:${MatchMatePalette.whiteColor};
+text-align:center
+`
