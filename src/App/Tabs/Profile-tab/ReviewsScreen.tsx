@@ -16,9 +16,10 @@ import FireIconSVG from '../../../assets/Icons/svg/FireIconSVG';
 import StarIconNotFilledIconSVG from '../../../assets/Icons/svg/StarIconNotFilledIconSVG';
 import CardToReviewComponent from '../../../Components/HomeComponents/CardToReviewComponent';
 import ModalReviewComponent from '../../../Components/HomeComponents/ModalReviewComponent';
+import CardStadiumReviewedComponent from '../../../Components/HomeComponents/CardStadiumReviewedComponent';
 
 const ReviewsScreen = ({navigation}: any) => {
-  const {setModalVisible, modalVisible, stadiumsExcludingFeedback} =
+  const {setModalVisible,userData, stadiumsExcludingFeedback} =
     useProfile(navigation);
   const [activeTab, setActiveTab] = useState('readyForReview');
   console.log('stadiumsExcludingFeedback', stadiumsExcludingFeedback);
@@ -76,16 +77,17 @@ const ReviewsScreen = ({navigation}: any) => {
       {activeTab === 'readyForReview' ? (
         stadiumsExcludingFeedback.map((stadiumUserReview, index) => {
           return (
-            <CardToReviewComponent stadiumUserReview={stadiumUserReview} />
+            <CardToReviewComponent stadiumUserReview={stadiumUserReview} key={index} />
           );
           
         })
       ) : (
-        <FlatList
-          data={reviewedCards}
-          renderItem={renderCard}
-          keyExtractor={item => item.id}
-        />
+        userData?.feedbacks.map((feedback,index)=>{
+          return (
+            <CardStadiumReviewedComponent user={userData} feedback={feedback} key={index}/>
+
+          )
+        })
       )}
       
     </ContainerAppReviews>

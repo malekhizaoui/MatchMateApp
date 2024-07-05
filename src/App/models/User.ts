@@ -1,5 +1,6 @@
 import { TimeSlot } from "./TimeSlot";
 import { GameHistory } from "./GameHistory";
+import { Feedback } from "./Feedback";
 export interface User {
   id: number;
   firstName: string;
@@ -16,4 +17,5 @@ export interface User {
   code_verification?: number; // optional
   timeSlots: TimeSlot[];
   gameHistories: GameHistory[];
+  feedbacks:Feedback[]
 }

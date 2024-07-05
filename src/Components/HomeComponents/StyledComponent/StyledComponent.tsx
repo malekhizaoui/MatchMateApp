@@ -456,6 +456,7 @@ export const UserContainerReview = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: 20px;
+  width:90%
 `;
 export const UserImageReview = styled.Image`
   width: 35px;
@@ -480,6 +481,7 @@ export const StarsContainer = styled.View`
   align-items: center;
   flex-direction: row;
   margin-top:10px;
+  width:90%
 
 `;
 export const Reviewtxt = styled.Text`
@@ -555,6 +557,7 @@ export const CardReviewDetailContainer = styled.View`
   width: 100%;
   justify-content:space-between;
   align-items:center;
+  margin-top:10px
 `;
 
 export const HeaderDescriptionReview = styled.TouchableOpacity`

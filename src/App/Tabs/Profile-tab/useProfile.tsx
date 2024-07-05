@@ -66,6 +66,7 @@ const useProfile = (navigation: any) => {
     }
   };
 
+  
   useFocusEffect(
     useCallback(() => {
       getUserData();
