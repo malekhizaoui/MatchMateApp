@@ -34,7 +34,6 @@ const ModalReviewComponent = ({
 }: ModalReviewComponentProps) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
-  console.log('rating', rating);
 
   const addFeedback = async () => {
     const userId = await AsyncStorage.getItem('userId');

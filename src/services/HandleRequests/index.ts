@@ -14,7 +14,6 @@ export const handleRequests = async (
   let response = null;
 
   if (method === 'get') {    
-    console.log("`${BaseUrl}/${end_point}`",`${BaseUrl}/${end_point}`);
     
     response = await axios
       .get(`${BaseUrl}/${end_point}`)

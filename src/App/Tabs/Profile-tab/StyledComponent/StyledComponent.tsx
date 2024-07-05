@@ -15,6 +15,11 @@ export const ContainerApp = styled.SafeAreaView`
   background-color: ${MatchMatePalette.primaryColor};
   align-items: center;
 `;
+export const ContainerAppReviews = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${MatchMatePalette.darkBackgroundColor};
+  align-items: center;
+`;
 export const ContainerAppDetailGame = styled.SafeAreaView`
   flex: 1;
   background-color: ${MatchMatePalette.darkBackgroundColor};
@@ -32,7 +37,6 @@ export const TextNameProfile = styled.Text`
   ${fontSizeTextScreen};
   font-weight: 700;
   color: ${MatchMatePalette.whiteColor};
-
 `;
 export const LineSperator = styled.View`
   width: 100%;
@@ -119,7 +123,7 @@ export const LineSperatorProperty = styled.View`
 `;
 export const EditIconContainer = styled.TouchableOpacity`
   position: absolute;
-  bottom: 0 ; /* Position at the bottom */
+  bottom: 0; /* Position at the bottom */
   width: 45%;
   align-items: center;
 `;
@@ -127,28 +131,28 @@ export const EditIconContainer = styled.TouchableOpacity`
 export const EditIcon = styled.View`
   width: 30px;
   height: 30px;
-  border-radius:15px;
-  background-color:${MatchMatePalette.whiteColor};
-  display:flex;
-  align-items:center;
-  justify-content:center
+  border-radius: 15px;
+  background-color: ${MatchMatePalette.whiteColor};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-export const TxtBtn=styled.Text`
-${fontSizeTextScreen};
+export const TxtBtn = styled.Text`
+  ${fontSizeTextScreen};
   color: ${MatchMatePalette.whiteColor};
   font-weight: 600;
-`
+`;
 
-export const BtnContainer=styled.TouchableOpacity`
- background-color: ${MatchMatePalette.secondaryColor};
+export const BtnContainer = styled.TouchableOpacity`
+  background-color: ${MatchMatePalette.secondaryColor};
   width: 70%;
   height: 50px;
   display: flex;
   border-radius: 20px;
   justify-content: center;
   align-items: center;
-`
+`;
 
 // GameHistory Edit
 
@@ -173,19 +177,21 @@ export const GameHistoryPropertiesContainer = styled.ScrollView`
   padding-bottom: 70px;
 `;
 
-export const GamePropertyContent=styled.View`
- width: 80%;
+export const GamePropertyContent = styled.View`
+  width: 80%;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   margin-top: 20px;
-`
+`;
 
 // GamehistoryDetailScreen
 export const ContainerDetailScreen = styled.ScrollView`
   display: flex;
   flex: 1;
   width: 90%;
-  flex-direction:column
+  flex-direction: column;
 `;
+
+

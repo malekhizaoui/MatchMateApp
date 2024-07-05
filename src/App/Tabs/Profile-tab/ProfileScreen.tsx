@@ -26,6 +26,7 @@ import SettingsIconSVG from '../../../assets/Icons/svg/SettingsIconSVG';
 import LogoutIconSVG from '../../../assets/Icons/svg/LogoutIconSVG';
 import ProfilePropertyComponent from '../../../Components/ProfileComponents/ProfilePropertyComponent';
 import useProfile from './useProfile';
+import ReviewsIconSVG from '../../../assets/Icons/svg/ReviewsIconSVG';
 const ProfileScreen = ({navigation}: any) => {
 const {userData,signOut}=useProfile(navigation)
   return (
@@ -62,6 +63,14 @@ const {userData,signOut}=useProfile(navigation)
             icon={<SettingsIconSVG color={MatchMatePalette.primaryColor} />}
             toNavigate={() => {
               navigation.navigate('EditProfile');
+            }}
+          />
+          <LineSperator></LineSperator>
+          <ProfilePropertyComponent
+            propertyText="Your reviews"
+            icon={<ReviewsIconSVG color={MatchMatePalette.primaryColor} />}
+            toNavigate={() => {
+              navigation.navigate('Reviews');
             }}
           />
           <LineSperator></LineSperator>

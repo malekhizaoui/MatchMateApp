@@ -29,8 +29,6 @@ import {
   flex-direction:column;
   height:90%;
   padding:2px;
-   
-
   `
 
   export const TextTitleInput =styled.Text`
@@ -42,7 +40,6 @@ import {
 
   export const TextInputStyle =styled.TextInput`
   color:grey;
-  margin-bottom:16px
   `
 
   export const IconStyle =styled.View`

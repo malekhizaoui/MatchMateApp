@@ -538,3 +538,59 @@ ${fontSizeTextScreen};
 color:${MatchMatePalette.whiteColor};
 text-align:center
 `
+
+// CardToReviewComponent design
+
+export const CardReviewsContainer = styled.View`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top:20px
+`;
+
+export const CardReviewDetailContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content:space-between;
+  align-items:center;
+`;
+
+export const HeaderDescriptionReview = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  
+`;
+
+export const ImageStadiumReview = styled.Image`
+  width: 50px;
+  height: 50px;
+  margin-right:10px
+`;
+
+export const ButtonToReview=styled.TouchableOpacity`
+  width:100px;
+  height:32px;
+  border-radius:30px;
+  display:flex;
+  justify-content:center;
+  background-color:${MatchMatePalette.primaryColor};
+  align-items:center;
+`
+
+export const ReviewWaitContainer=styled.TouchableOpacity`
+  width:90%;
+  height:40px;
+  margin-top:20px;
+  background-color:${MatchMatePalette.lightBackgroundColor};
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between
+`
+export const TextNameProfile = styled.Text`
+  ${fontSizeTextScreen};
+  font-weight: 700;
+  color: ${MatchMatePalette.whiteColor};
+`;

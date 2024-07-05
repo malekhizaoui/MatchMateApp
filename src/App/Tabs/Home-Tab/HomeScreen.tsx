@@ -28,7 +28,6 @@ export const HomeScreen = ({ navigation }: any) => {
     region,
     setRegion,
   } = useHome(navigation);
-console.log("fontSiszeTest",fontSiszeTest);
 
   return (
     <ContainerApp>

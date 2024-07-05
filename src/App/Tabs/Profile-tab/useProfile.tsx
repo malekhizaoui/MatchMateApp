@@ -6,6 +6,7 @@ import {User} from '../../models/User';
 import {AuthContext} from '../../../services/Context/AuthContext';
 import {GameHistory} from '../../models/GameHistory';
 import { handleRequests } from '../../../services/HandleRequests';
+import { Stadium } from '../../models/Stadium';
 
 const useProfile = (navigation: any) => {
   const [userData, setUserData] = useState<User | null>(null);
@@ -15,6 +16,8 @@ const useProfile = (navigation: any) => {
   const [firstName, setFirstName] = useState<string | null>(null);
   const [lastName, setLastName] = useState<string | null>(null);
   const [age, setAge] = useState<string | null>(null);
+  const [stadiumsExcludingFeedback,setStadiumsExcludingFeedbacs]=useState<Stadium[]>([])
+  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
 
   const getUserData = async () => {
     const userId = await AsyncStorage.getItem('userId');
@@ -67,8 +70,22 @@ const useProfile = (navigation: any) => {
     useCallback(() => {
       getUserData();
       getGameHistory();
+      getStadiumsExludingFeedbacks();
     }, []),
   );
+
+  const getStadiumsExludingFeedbacks=async ()=>{
+    const userId=await AsyncStorage.getItem("userId")
+
+    try {      
+        const res =await handleRequests('get',`userStadium/${userId}`)
+        setStadiumsExcludingFeedbacs(res.data)
+        
+    } catch (error) {
+      console.log("error",error);
+       
+    }
+  }  
 
   return {
     userData,
@@ -83,6 +100,8 @@ const useProfile = (navigation: any) => {
     setAge,
     updateUser, // Make sure updateUser is included in the returned object
     gameHistory,
+    stadiumsExcludingFeedback,
+    modalVisible, setModalVisible
   };
 };
 
