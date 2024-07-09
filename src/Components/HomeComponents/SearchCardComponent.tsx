@@ -12,7 +12,7 @@ import {
   InputHeaderContainer,
   InputIconContainer,
   TextInputStyle,
-  LineSperator,
+  LineSperatorSearchBar,
   FilterIconContainer,
 } from './StyledComponent/StyledComponent';
 
@@ -38,11 +38,11 @@ const SearchCardComponent: React.FC<SearchCardComponentProps> = ({showMap, onSea
           onChangeText={onSearch}
         />
       </InputIconContainer>
-      <FilterIconContainer>
-        <LineSperator></LineSperator>
+      {/* <FilterIconContainer>
+        <LineSperatorSearchBar></LineSperatorSearchBar>
       </FilterIconContainer>
-      <LineSperator></LineSperator>
-      <FilterIconSVG color={MatchMatePalette.darkBackgroundColor} />
+      <LineSperatorSearchBar></LineSperatorSearchBar>
+      <FilterIconSVG color={MatchMatePalette.darkBackgroundColor} /> */}
     </InputHeaderContainer>
   );
 };

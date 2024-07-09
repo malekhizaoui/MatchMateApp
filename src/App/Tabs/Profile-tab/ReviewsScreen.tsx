@@ -6,7 +6,8 @@ import {
   View,
   StyleSheet,
   FlatList,
-  Modal
+  Modal,
+  ScrollView,
 } from 'react-native';
 import {ContainerAppReviews} from './StyledComponent/StyledComponent';
 import {MatchMatePalette} from '../../../assets/color-palette';
@@ -19,7 +20,7 @@ import ModalReviewComponent from '../../../Components/HomeComponents/ModalReview
 import CardStadiumReviewedComponent from '../../../Components/HomeComponents/CardStadiumReviewedComponent';
 
 const ReviewsScreen = ({navigation}: any) => {
-  const {setModalVisible,userData, stadiumsExcludingFeedback} =
+  const {setModalVisible, userData, stadiumsExcludingFeedback} =
     useProfile(navigation);
   const [activeTab, setActiveTab] = useState('readyForReview');
   console.log('stadiumsExcludingFeedback', stadiumsExcludingFeedback);
@@ -54,7 +55,7 @@ const ReviewsScreen = ({navigation}: any) => {
               styles.tabText,
               activeTab === 'readyForReview' && styles.activeTabText,
             ]}>
-            Ready for Review
+            Ready for Review {`(${stadiumsExcludingFeedback.length})`}
           </Text>
           {activeTab === 'readyForReview' && (
             <View style={styles.activeTabIndicator} />
@@ -66,30 +67,34 @@ const ReviewsScreen = ({navigation}: any) => {
               styles.tabText,
               activeTab === 'reviewed' && styles.activeTabText,
             ]}>
-            Reviewed
+            Reviewed {`(${userData?.feedbacks.length})`}
           </Text>
           {activeTab === 'reviewed' && (
             <View style={styles.activeTabIndicator} />
           )}
         </TouchableOpacity>
       </View>
-
-      {activeTab === 'readyForReview' ? (
-        stadiumsExcludingFeedback.map((stadiumUserReview, index) => {
-          return (
-            <CardToReviewComponent stadiumUserReview={stadiumUserReview} key={index} />
-          );
-          
-        })
-      ) : (
-        userData?.feedbacks.map((feedback,index)=>{
-          return (
-            <CardStadiumReviewedComponent user={userData} feedback={feedback} key={index}/>
-
-          )
-        })
-      )}
-      
+      <ScrollView style={{width:"90%"}} >
+        {activeTab === 'readyForReview'
+          ? stadiumsExcludingFeedback.map((stadiumUserReview, index) => {
+              return (
+                <CardToReviewComponent
+                  stadiumUserReview={stadiumUserReview}
+                  key={index}
+                />
+              );
+            })
+          : userData?.feedbacks.map((feedback, index) => {
+              return (
+                <CardStadiumReviewedComponent
+                  user={userData}
+                  feedback={feedback}
+                  key={index}
+                />
+              );
+            })}
+            <View style={{marginBottom:30}}></View>
+      </ScrollView>
     </ContainerAppReviews>
   );
 };

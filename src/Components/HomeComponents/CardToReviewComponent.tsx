@@ -57,8 +57,8 @@ stadiumUserReview
         </ButtonToReview>
       </CardReviewDetailContainer>
     </CardReviewsContainer>
-    <ReviewWaitContainer>
-      <HeaderDescriptionReview onPress={(()=>{setModalVisible(true)})}>
+    <ReviewWaitContainer onPress={(()=>{setModalVisible(true)})}>
+      <HeaderDescriptionReview >
         <FireIconSVG color={MatchMatePalette.primaryColor} />
         <Text
           style={{fontSize: 12, color: MatchMatePalette.primaryColor}}>

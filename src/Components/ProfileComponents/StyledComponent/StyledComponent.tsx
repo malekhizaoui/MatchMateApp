@@ -53,7 +53,7 @@ padding:2px
 export const TextTitleInput =styled.Text`
 color:${MatchMatePalette.primaryColor};
 font-size: 17px;
-fontWeight:500
+font-weight:500
 `
 
 export const TextInputStyle =styled.TextInput`

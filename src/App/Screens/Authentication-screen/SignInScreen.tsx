@@ -1,4 +1,4 @@
-import {StatusBar,View} from 'react-native';
+import {StatusBar, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {
   ContainerApp,
@@ -11,7 +11,7 @@ import {
   LineStyle,
   HeaderTitleText,
   TextDivide,
-  LogoApp
+  LogoApp,
 } from './styledComponent/StyledComponent';
 import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
 import {MatchMatePalette} from '../../../assets/color-palette';
@@ -32,12 +32,14 @@ const SignInScreen = ({navigation}: any) => {
         backgroundColor={MatchMatePalette.darkBackgroundColor}
       />
       <ContainerScreen showsVerticalScrollIndicator={false}>
-        <View style={{marginTop: 10}}>
+        <View>
           <NavigateBack navigation={navigation} />
         </View>
         <HeaderConnexionScreen>
-        <LogoApp source={require('../../../assets/Logos/MatchMateDarkWhite.png')}/>
-        <HeaderTitleText>Se Connecter à MatchMate</HeaderTitleText>
+          <LogoApp
+            source={require('../../../assets/Logos/MatchMateDarkWhite.png')}
+          />
+          <HeaderTitleText>Se Connecter à MatchMate</HeaderTitleText>
         </HeaderConnexionScreen>
         <ContainerForm>
           <InputAuthComponent
@@ -63,9 +65,12 @@ const SignInScreen = ({navigation}: any) => {
             backgroundColor={MatchMatePalette.primaryColor}
             btnTextColor={MatchMatePalette.whiteColor}
             btnClicked={loginUser}
-            iconComponent={""}
+            iconComponent={''}
           />
+          <TouchableOpacity onPress={()=>{navigation.navigate('PasswordForgotten')}}>
           <TextpasswordForgotten>Mot de passe oublié ?</TextpasswordForgotten>
+
+          </TouchableOpacity>
           <ContainerDivideText>
             <LineStyle></LineStyle>
             <TextDivide>ou</TextDivide>
@@ -79,7 +84,7 @@ const SignInScreen = ({navigation}: any) => {
               // signIn()
               navigation.navigate('Signup');
             }}
-            iconComponent={""}
+            iconComponent={''}
           />
         </ContainerForm>
       </ContainerScreen>

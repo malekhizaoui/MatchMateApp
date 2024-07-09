@@ -25,6 +25,8 @@ export const handleRequests = async (
       .then(res => res)
       .catch(erreur => console.log("Post Error",erreur));
   } else if (method === 'put') {
+    console.log("dsdsdsdsds");
+    
     response = await axios
       .put(`${BaseUrl}/${end_point}`, requestBody)
       .then(res => res)

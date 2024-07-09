@@ -172,8 +172,14 @@ export const FilterIconContainer = styled.View`
   margin-right: 50px;
 `;
 export const LineSperator = styled.View`
-  height: 90%;
+  width: 100%;
+  height: 2px;
+  background-color:${MatchMatePalette.lightBackgroundColor};
+  margin-top:10px
+`;
+export const LineSperatorSearchBar = styled.View`
   width: 2px;
+  height: 90%;
   background-color:${MatchMatePalette.lightBackgroundColor};
 `;
 export const TextInputStyle = styled.TextInput`
@@ -544,7 +550,7 @@ text-align:center
 // CardToReviewComponent design
 
 export const CardReviewsContainer = styled.View`
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -560,7 +566,7 @@ export const CardReviewDetailContainer = styled.View`
   margin-top:10px
 `;
 
-export const HeaderDescriptionReview = styled.TouchableOpacity`
+export const HeaderDescriptionReview = styled.View`
   display: flex;
   flex-direction: row;
   align-items:center;
@@ -584,7 +590,7 @@ export const ButtonToReview=styled.TouchableOpacity`
 `
 
 export const ReviewWaitContainer=styled.TouchableOpacity`
-  width:90%;
+  width:100%;
   height:40px;
   margin-top:20px;
   background-color:${MatchMatePalette.lightBackgroundColor};

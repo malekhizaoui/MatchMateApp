@@ -4,6 +4,7 @@ import ConnexionMethodScreen from '../../App/Screens/Authentication-screen/Conne
 import SignUpScreen from '../../App/Screens/Authentication-screen/SignUpScreen';
 import SignInScreen from '../../App/Screens/Authentication-screen/SignInScreen';
 import CodeVerificationScreen from '../../App/Screens/Authentication-screen/CodeVerificationScreen';
+import PasswordForgottenScreen from '../../App/Screens/Authentication-screen/PasswordForgottenScreen';
 const AuthStack = createNativeStackNavigator();
 
 export const UnauthenticatedStack = () => {
@@ -27,6 +28,11 @@ export const UnauthenticatedStack = () => {
       <AuthStack.Screen
         name="CodeVerification"
         component={CodeVerificationScreen}
+        options={{ headerShown: false }}
+      />
+      <AuthStack.Screen
+        name="PasswordForgotten"
+        component={PasswordForgottenScreen}
         options={{ headerShown: false }}
       />
     </AuthStack.Navigator>

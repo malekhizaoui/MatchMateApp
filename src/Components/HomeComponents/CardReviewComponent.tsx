@@ -10,7 +10,7 @@ import {
     UserNameReview,
     DateReviewtxt,
     StarsContainer,
-    Reviewtxt
+    Reviewtxt,
 } from './StyledComponent/StyledComponent';
 import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
 import StarIconNotFilledIconSVG from '../../assets/Icons/svg/StarIconNotFilledIconSVG';

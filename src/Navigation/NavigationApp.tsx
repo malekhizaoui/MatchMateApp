@@ -15,11 +15,12 @@ import HomeSectionStack from './Stacks/HomeSectionStack';
 import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
 import {ScreenOptions} from './ScreenOptions';
 import ImmersiveMode from 'react-native-immersive-mode';
-import { MatchMatePalette } from '../assets/color-palette';
+import {MatchMatePalette} from '../assets/color-palette';
 
 function NavigationApp() {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [choix, setChoix] = useState<string>('');
+  const [barColor, setBarColor] = useState<string>('');
   const [sign, setSign] = useState(true);
   const [routeName, setRouteName] = useState<string | undefined>();
 
@@ -43,16 +44,16 @@ function NavigationApp() {
   useEffect(() => {
     retrieveUserSession();
   }, []);
-    useEffect(() => {
-      // ComponentDidMount equivalent
-      ImmersiveMode.setBarMode('Normal');
-      ImmersiveMode.setBarColor(MatchMatePalette.lightBackgroundColor);
+  useEffect(() => {
+    // ComponentDidMount equivalent
+    ImmersiveMode.setBarMode('Normal');
+    ImmersiveMode.setBarColor(barColor);
 
-      // componentWillUnmount equivalent
-      return () => {
-        ImmersiveMode.fullLayout(false);
-      };
-    }, []);
+    // componentWillUnmount equivalent
+    return () => {
+      ImmersiveMode.fullLayout(false);
+    };
+  }, []);
   const authContext: AuthContextProps = useMemo(() => {
     return {
       signIn: () => {
@@ -64,11 +65,11 @@ function NavigationApp() {
       },
       setChoix: setChoix,
       choix,
-
+      setBarColorCntxt: (color: string) => {
+        setBarColor(color);
+      },
     };
   }, [choix]);
-
-  
 
   const SplashApp = createNativeStackNavigator();
   const TabBarDourbia = createBottomTabNavigator();
@@ -99,11 +100,13 @@ function NavigationApp() {
           options={({route}) => ({
             tabBarStyle: (route => {
               const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-              if (routeName === 'MatchDetail' || routeName === 'StadiumAvailability' ) {
+              if (
+                routeName === 'MatchDetail' ||
+                routeName === 'StadiumAvailability'
+              ) {
                 return {
                   display: 'none',
                   backgroundColor: MatchMatePalette.lightBackgroundColor,
-                 
                 };
               }
               return {
@@ -113,12 +116,11 @@ function NavigationApp() {
                 width: '100%',
                 alignSelf: 'center',
                 borderColor: MatchMatePalette.whiteColor,
-              }
-              ;  
+              };
             })(route),
           })}
         />
-        
+
         <TabBarDourbia.Screen
           name="BookingTab"
           component={BookingSectionStack}

@@ -79,7 +79,7 @@ const useProfile = (navigation: any) => {
     const userId=await AsyncStorage.getItem("userId")
 
     try {      
-        const res =await handleRequests('get',`userStadium/${userId}`)
+        const res =await handleRequests('get',`user/${userId}`)
         setStadiumsExcludingFeedbacs(res.data)
         
     } catch (error) {

@@ -11,7 +11,7 @@ import { MatchMatePalette } from '../../assets/color-palette';
 import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
 interface ImageSlideComponentProps {
   stadium:Stadium|null;
-  reviewStars:number 
+  reviewStars:string |null
 }
 
 const ImageSlideComponent = ({
@@ -29,7 +29,7 @@ const ImageSlideComponent = ({
           </TouchableOpacity>
           <TouchableOpacity style={{position:'absolute',bottom:"5%",left:15,backgroundColor:MatchMatePalette.lightBackgroundColor,alignItems:"center",display:"flex",justifyContent:"center",height:40,borderRadius:15,width:60,flexDirection:"row"}}>
           <StarIconSVG color='yellow'/>
-          <Text style={{color:MatchMatePalette.whiteColor}}>{reviewStars>0?reviewStars:0}</Text>
+          <Text style={{color:MatchMatePalette.whiteColor}}>{reviewStars}</Text>
           </TouchableOpacity>
         </ImagesStadiumContainer>
   );

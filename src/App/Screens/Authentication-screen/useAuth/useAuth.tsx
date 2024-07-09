@@ -14,17 +14,19 @@ const CELL_COUNT = 6;
 export const useAuth = (navigation: any, route: any = false) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [age, setAge] = useState('');
   const [value, setValue] = useState('');
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
+  const [step,setStep]=useState<number>(0)
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
   });
-  const {userId, codeVerification} = route && route.params;
-  const {signIn} = useContext(AuthContext);
+  const {userId, codeVerification, cameFrom} = route && route.params;
+  const {signIn, setBarColorCntxt} = useContext(AuthContext);
 
   const loginUser = async () => {
     if (email !== '' && password !== '') {
@@ -73,6 +75,8 @@ export const useAuth = (navigation: any, route: any = false) => {
         hasPlayService &&
           GoogleSignin.signIn()
             .then(async userInfo => {
+              console.log('jgfdfgd');
+
               const tokenId = userInfo.idToken;
               userInfo && console.log('tokenId', tokenId);
 
@@ -95,9 +99,25 @@ export const useAuth = (navigation: any, route: any = false) => {
           console.error('play services not available or outdated');
         } else {
           console.error(error);
+          console.log('ldsqjhglsqjhgdlsqhj');
+
           // some other error happened
         }
       });
+  };
+
+  const resentCode = async () => {
+    try {
+      const res = await handleRequests('put', 'resendCode', {email});
+
+      navigation.navigate('CodeVerification', {
+        userId: res.data.id,
+        codeVerification: res.data.code_verification,
+        cameFrom: 'forgetPass',
+      });
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
   const verifyCode = async () => {
@@ -105,12 +125,34 @@ export const useAuth = (navigation: any, route: any = false) => {
       handleRequests('put', `user/${userId}`, {
         is_verified: true,
       }).then(res => {
-        navigation.navigate('Signin');
+        console.log('cameFrom', cameFrom);
+
+        !cameFrom
+          ? navigation.navigate('Signin')
+          : navigation.navigate('PasswordForgotten', {step: 2});
       });
     } else {
       console.log('verification code is wrong');
     }
   };
+
+  const resetPassword = async () => {
+    try {
+      if (password === newPassword) {
+
+        await handleRequests('put', 'resetpassword', {
+          email,
+          newPassword: password,
+        });
+        setStep(3)
+      } else {
+        console.log("paswwordds doesn't match");
+      }
+    } catch (error) {
+      console.log('erroe', error);
+    }
+  };
+
   return {
     email,
     setEmail,
@@ -133,6 +175,12 @@ export const useAuth = (navigation: any, route: any = false) => {
     CELL_COUNT,
     signIn,
     googleSignInEvent,
+    setBarColorCntxt,
+    resetPassword,
+    resentCode,
+    newPassword,
+    setNewPassword,
+    step
   };
 };
 

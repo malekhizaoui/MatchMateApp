@@ -5,7 +5,7 @@ export interface AuthContextProps {
   setChoix: Dispatch<SetStateAction<string>>;
   signIn: () => void; // Include signIn function in the interface
   signOut: () => void;
-
+  setBarColorCntxt:(color:string)=>void
 
 }
 
@@ -14,6 +14,7 @@ export const AuthContext = createContext<AuthContextProps>({
   setChoix: () => {},
   signIn: () => {},
   signOut: () => {},
+  setBarColorCntxt:(color:string)=>{}
 
    // Provide a default empty function
 });
