@@ -20,6 +20,7 @@ import CloseIconSVG from '../../assets/Icons/svg/CloseIconSVG';
 import {MatchMatePalette} from '../../assets/color-palette';
 import {handleRequests} from '../../services/HandleRequests';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useToast } from 'react-native-toast-notifications';
 
 interface ModalReviewComponentProps {
   modalVisible: boolean;
@@ -32,6 +33,7 @@ const ModalReviewComponent = ({
   setModalVisible,
   stadiumId,
 }: ModalReviewComponentProps) => {
+  const toast =useToast()
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
 
@@ -42,6 +44,7 @@ const ModalReviewComponent = ({
         stars: rating,
         comment: reviewText,
       });
+      toast.show('Your Feedback has bee successfully added', { type: 'success', placement: 'center', duration: 4000,style: { backgroundColor: MatchMatePalette.primaryColor }  });
       setModalVisible(false);
     } catch (error) {
       console.log('err', error);

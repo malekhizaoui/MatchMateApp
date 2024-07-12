@@ -17,7 +17,7 @@ import {
 `;
 
 export const TextHeader = styled.Text`
-  color: ${MatchMatePalette.darkBackgroundColor};
+  color: ${MatchMatePalette.lightBackgroundColor};
   ${fontSizeTextScreen};
   font-weight: 800;
   margin-bottom: 20px;

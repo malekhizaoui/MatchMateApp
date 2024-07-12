@@ -48,7 +48,6 @@ export const StadiumDetailScreen = ({
       const res = await handleRequests('get', `stadium/${stadiumId}`);
       setStadium(res.data);
       setFeedbacks(res.data.feedbacks);
-      console.log('res', res.data.feedbacks);
     } catch (error) {
       console.log('err', error);
     }

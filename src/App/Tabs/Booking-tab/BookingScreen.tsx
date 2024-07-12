@@ -1,6 +1,6 @@
 // BookingScreen.js
 
-import React from 'react';
+import React, {useState} from 'react';
 import {ScrollView, StatusBar, Text, TouchableOpacity} from 'react-native';
 import {
   ContainerApp,
@@ -20,8 +20,11 @@ import {
   formatDate,
   extractTimeFromDate,
 } from '../../../services/HelperFunctions';
+import ModalQrCodeGenerateComponent from '../../../Components/HomeComponents/ModalQrCodeGenerateComponent';
 export const BookingScreen = ({navigation, route}: any) => {
   const {BookingList, removeBookingFromUser} = useBooking(route);
+  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
+
   return (
     <ContainerApp>
       <StatusBar
@@ -55,7 +58,7 @@ export const BookingScreen = ({navigation, route}: any) => {
                       {el.stadium.stadiumName} Stadium
                     </BookingTitle>
                     <TouchableOpacity
-                      onPress={() => {                        
+                      onPress={() => {
                         navigation.navigate('BookingDetail', {
                           timeSlotId: el.id,
                         });
@@ -68,6 +71,9 @@ export const BookingScreen = ({navigation, route}: any) => {
                     Time : {extractTimeFromDate(el.startTime)}h -{' '}
                     {extractTimeFromDate(el.endTime)}h
                   </BookingDate>
+                  <TouchableOpacity onPress={()=>{setModalVisible(true)}}>
+                  <BookingDetailText>Show qrCode</BookingDetailText>
+                  </TouchableOpacity>
                   <CancelButton
                     onPress={() => {
                       removeBookingFromUser(el.id);
@@ -75,6 +81,14 @@ export const BookingScreen = ({navigation, route}: any) => {
                     <CancelButtonText>Cancel Booking</CancelButtonText>
                   </CancelButton>
                 </BookingDetails>
+                {modalVisible && (
+                  <ModalQrCodeGenerateComponent
+                    qrCode={el?.qrCodeUrl}
+                    modalVisible={modalVisible}
+                    setModalVisible={setModalVisible}
+                    stadiumId={el.stadium?.id}
+                  />
+                )}
               </BookingContainer>
             );
           })}

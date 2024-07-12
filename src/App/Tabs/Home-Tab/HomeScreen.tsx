@@ -1,14 +1,27 @@
 import React from 'react';
 import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
-import { ContainerApp, ContainerScreen, HeaderContainer, ExploreRegionContainer, RegionExploreTxt, RegionTxt, InputContainer, TextInputStyle, ListContainer, TextContainer, TextTitleList, TextCheckAllList } from './StyledComponent/StyledComponent';
+import {
+  ContainerApp,
+  ContainerScreen,
+  HeaderContainer,
+  ExploreRegionContainer,
+  RegionExploreTxt,
+  RegionTxt,
+  InputContainer,
+  TextInputStyle,
+  ListContainer,
+  TextContainer,
+  TextTitleList,
+  TextCheckAllList,
+} from './StyledComponent/StyledComponent';
 import { Dropdown } from 'react-native-element-dropdown';
-import {useHome,styles } from './useHome';
+import { useHome, styles } from './useHome';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
 import { MatchMatePalette } from '../../../assets/color-palette';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
-import { fontSiszeTest } from '../../../assets/Styles';
+
 export const HomeScreen = ({ navigation }: any) => {
   const {
     fieldSelected,
@@ -28,6 +41,7 @@ export const HomeScreen = ({ navigation }: any) => {
     region,
     setRegion,
   } = useHome(navigation);
+console.log("fieldDataPut",fieldDataPut);
 
   return (
     <ContainerApp>
@@ -56,7 +70,7 @@ export const HomeScreen = ({ navigation }: any) => {
               value={region}
               onFocus={() => setIsFocus(true)}
               onBlur={() => setIsFocus(false)}
-              onChange={item => {
+              onChange={(item) => {
                 setRegion(item.value);
                 setIsFocus(false);
                 setFieldSelected('Basketball');
@@ -90,19 +104,34 @@ export const HomeScreen = ({ navigation }: any) => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ref={scrollViewRef}>
-          {fieldDataPut?.map((field, i) => {
-            return (
+          {fieldDataPut?.length < 1 ? (
+            [1, 2, 3].map((item, i) => (
               <FieldsCardComponent
                 key={i}
-                isSelected={i === 0}
+                isSelected={i === 0} // Adjust isSelected logic as needed
+                titleText={``} // Example title text
+                backgroundImage={''} // Example default image URL
+                btnClicked={() => {
+                  // Handle click logic for default items
+                  console.log(`Default item ${item} clicked`);
+                }}
+                isLoading={true} // Adjust loading state as needed
+              />
+            ))
+          ) : (
+            fieldDataPut&& fieldDataPut.map((field, i) => (
+              <FieldsCardComponent
+                key={i}
+                isSelected={i === 0} // Adjust isSelected logic as needed
                 titleText={field.fieldName}
                 backgroundImage={field.imageURL}
                 btnClicked={() => {
                   updateFieldData(i);
                 }}
+                isLoading={!fieldDataPut.length}
               />
-            );
-          })}
+            ))
+          )}
         </ListContainer>
         <TextContainer>
           <TextTitleList>Recommended</TextTitleList>
@@ -120,47 +149,45 @@ export const HomeScreen = ({ navigation }: any) => {
             <TextCheckAllList>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>
-        <ListContainer horizontal={true} showsHorizontalScrollIndicator={false}>
-          {fieldSelected === 'Football'
-            ? footballField.map((stadium, i) => {
-                return (
-                  <StadiumCardComponent
-                    key={i}
-                    titleDescription={stadium.stadiumName}
-                    backgroundImage={stadium.imageURL}
-                    btnClicked={() => {
-                      navigation.navigate('StadiumDetail', { stadiumId:stadium.id });
-                    }}
-                  />
-                );
-              })
-            : fieldSelected === 'Basketball'
-            ? basketballField.map((stadium, i) => {
-                return (
-                  <StadiumCardComponent
-                    key={i}
-                    titleDescription={stadium.stadiumName}
-                    backgroundImage={stadium.imageURL}
-                    btnClicked={() => {
-                      navigation.navigate('StadiumDetail', { stadiumId :stadium.id});
-                    }}
-                  />
-                );
-              })
-            : volleyballField.map((stadium, i) => {
-                return (
-                  <StadiumCardComponent
-                    key={i}
-                    titleDescription={stadium.stadiumName}
-                    backgroundImage={stadium.imageURL}
-                    btnClicked={() => {
-                      navigation.navigate('StadiumDetail', { stadiumId:stadium.id });
-                    }}
-                  />
-                );
-              })}
+        <ListContainer horizontal showsHorizontalScrollIndicator={false}>
+          {(footballField || basketballField || volleyballField)?.length > 0 ? (
+            (fieldSelected === 'Football'
+              ? footballField
+              : fieldSelected === 'Basketball'
+              ? basketballField
+              : volleyballField
+            ).map((stadium, i) => (
+              <StadiumCardComponent
+                key={i}
+                titleDescription={stadium.stadiumName}
+                backgroundImage={stadium.imageURL}
+                btnClicked={() => {
+                  navigation.navigate('StadiumDetail', { stadiumId: stadium.id });
+                }}
+                isLoading={
+                  fieldSelected === 'Football'
+                    ? !footballField.length
+                    : fieldSelected === 'Basketball'
+                    ? !basketballField.length
+                    : !volleyballField.length
+                }
+              />
+            ))
+          ) : (
+            [1, 2, 3, 4].map((_, i) => (
+              <StadiumCardComponent
+                key={i}
+                titleDescription={''}
+                backgroundImage={''}
+                btnClicked={() => {}}
+                isLoading={true}
+              />
+            ))
+          )}
         </ListContainer>
       </ContainerScreen>
     </ContainerApp>
   );
 };
+
+export default HomeScreen;

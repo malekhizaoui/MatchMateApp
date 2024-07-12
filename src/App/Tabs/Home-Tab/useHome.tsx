@@ -63,7 +63,7 @@ export const useHome = (navigation:any, route: any=false) => {
       ...fieldDataPut.slice(0, index),
       ...fieldDataPut.slice(index + 1),
     ];
-    setfieldDataPut(reorderedFieldData);
+    reorderedFieldData&& setfieldDataPut(reorderedFieldData);
     setFieldSelected(fieldDataPut[index].fieldName);
     scrollViewRef.current?.scrollTo({x: 0, y: 0, animated: true});
   };
@@ -74,7 +74,7 @@ export const useHome = (navigation:any, route: any=false) => {
      const res=await handleRequests('get',`fieldRegion/${region}`)  
      console.log("res",res);
          
-      setfieldDataPut(res);
+     res&& setfieldDataPut(res);
       setBasketballField(res[0].stadiums);
       setFootballField(res[1].stadiums);
       setVolleyballField(res[2].stadiums);

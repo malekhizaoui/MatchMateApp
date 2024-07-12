@@ -73,6 +73,7 @@ export const LogoAppStyle = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color:${MatchMatePalette.primaryColor}
 `;
 export const LogoApp = styled.Image`
   height:175px;

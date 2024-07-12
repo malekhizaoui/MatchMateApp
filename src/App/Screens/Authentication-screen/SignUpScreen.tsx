@@ -32,6 +32,7 @@ const SignUpScreen = ({navigation}: any) => {
     age,
     setAge,
     registerUser,
+    loading
   } = useAuth(navigation);
   
   return (
@@ -97,6 +98,7 @@ const SignUpScreen = ({navigation}: any) => {
             btnTextColor={MatchMatePalette.whiteColor}
             btnClicked={registerUser}
             iconComponent={""}
+            loading={loading}
           />
         </ContainerForm>
       </ContainerScreen>

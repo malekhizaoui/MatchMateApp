@@ -27,6 +27,7 @@ import LogoutIconSVG from '../../../assets/Icons/svg/LogoutIconSVG';
 import ProfilePropertyComponent from '../../../Components/ProfileComponents/ProfilePropertyComponent';
 import useProfile from './useProfile';
 import ReviewsIconSVG from '../../../assets/Icons/svg/ReviewsIconSVG';
+import SkeletonHeaderProfileUser from '../../../Components/SkeletonLoadingComponents/SkeletonHeaderProfileUser';
 const ProfileScreen = ({navigation}: any) => {
 const {userData,signOut}=useProfile(navigation)
   return (
@@ -36,18 +37,15 @@ const {userData,signOut}=useProfile(navigation)
         backgroundColor={MatchMatePalette.primaryColor}
       />
       <TextHeader>Profile</TextHeader>
-      <ProfileHeaderContainer>
+      {userData?.image?(<ProfileHeaderContainer>
         <ImageProfile
-          source={
-            userData?.image?{uri:userData.image}:require('../../../assets/Images/userAnonymousImage.png')
-            // {uri:"https://media.licdn.com/dms/image/D4E03AQF9mGOMHjgeFw/profile-displayphoto-shrink_800_800/0/1691514563140?e=2147483647&v=beta&t=Dtl8CXMfr032HwoVz3eo6slKJ-KUKFzGAocaqZMnvIw"}
-            }/>
+          source={{uri:userData.image}}/>
 
         <HeaderTitleContainer>
           <TextNameProfile>{userData?.firstName} {userData?.lastName}</TextNameProfile>
           <TextNameProfile>{userData?.email}</TextNameProfile>
         </HeaderTitleContainer>
-      </ProfileHeaderContainer>
+      </ProfileHeaderContainer>):<SkeletonHeaderProfileUser/>}
       <ProfilePropertiesContainer>
         <ProfilePropertyContent>
           <ProfilePropertyComponent

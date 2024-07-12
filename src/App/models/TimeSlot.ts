@@ -10,4 +10,5 @@ export interface TimeSlot {
   updated_at: Date;
   team: User[];
   stadium: Stadium;
+  qrCodeUrl:string  
 }

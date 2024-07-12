@@ -1,17 +1,21 @@
-import {useState, useContext} from 'react';
+import { useState, useContext } from 'react';
 import {
   useBlurOnFulfill,
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
-import {AuthContext} from '../../../../services/Context/AuthContext';
+import { AuthContext } from '../../../../services/Context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-  GoogleSignin,
-  statusCodes,
-} from '@react-native-google-signin/google-signin';
-import {handleRequests} from '../../../../services/HandleRequests';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import { handleRequests } from '../../../../services/HandleRequests';
+import { ToastAndroid } from 'react-native';
+import { useToast } from 'react-native-toast-notifications';
+import { MatchMatePalette } from '../../../../assets/color-palette';
+
 const CELL_COUNT = 6;
+
 export const useAuth = (navigation: any, route: any = false) => {
+  
+  // State variables using useState hook
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -19,140 +23,123 @@ export const useAuth = (navigation: any, route: any = false) => {
   const [lastName, setLastName] = useState('');
   const [age, setAge] = useState('');
   const [value, setValue] = useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
-  const [step,setStep]=useState<number>(0)
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-    value,
-    setValue,
-  });
-  const {userId, codeVerification, cameFrom} = route && route.params;
-  const {signIn, setBarColorCntxt} = useContext(AuthContext);
+  const [step, setStep] = useState<number>(0);
+  const [loading, setLoading] = useState(false); // 1. Add loading state
 
+
+  // Confirmation code field hooks
+  const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({ value, setValue });
+
+  // Destructuring from route params and AuthContext
+  const { userId, codeVerification, cameFrom } = route && route.params;
+  const { signIn, setBarColorCntxt } = useContext(AuthContext);
+
+  // Toast notification hook
+  const toast = useToast();
+
+  // Login user function
   const loginUser = async () => {
     if (email !== '' && password !== '') {
-      handleRequests('post', 'login', {email, password})
-        .then(res => {
-          if (res.data.token) {
-            AsyncStorage.setItem('token', res.data.token);
-            AsyncStorage.setItem(
-              'userId',
-              JSON.stringify(res.data.findUser.id),
-            );
-            signIn();
-          }
-        })
-        .catch((err: any) => {
-          console.log('err', err);
-        });
+      try {
+        setLoading(true); // Start loading when login process begins
+        const res = await handleRequests('post', 'login', { email, password });
+        if (res.data.token) {
+          AsyncStorage.setItem('token', res.data.token);
+          AsyncStorage.setItem('userId', JSON.stringify(res.data.findUser.id));
+          signIn();
+        }
+      } catch (err) {
+        toast.show('Email or Password is invalid', { type: 'danger', placement: 'bottom', duration: 4000 });
+        console.log('err', err);
+      } finally {
+        setLoading(false); // Stop loading when login process completes
+      }
+    } else {
+      toast.show('You should type your email and password please', { type: 'danger', placement: 'bottom', duration: 4000 });
     }
   };
+
+  // Register user function
   const registerUser = async () => {
-    handleRequests('post', 'register', {
-      email,
-      password,
-      firstName,
-      lastName,
-      age,
-    })
-      .then(res => {
-        navigation.navigate('CodeVerification', {
-          userId: res.data.user.id,
-          codeVerification: res.data.user.code_verification,
-        });
-      })
-      .catch((err: any) => {
-        console.log('err', err);
-      });
+    try {
+      setLoading(true); // Start loading when registration process begins
+      const res = await handleRequests('post', 'register', { email, password, firstName, lastName, age });
+      navigation.navigate('CodeVerification', { userId: res.data.user.id, codeVerification: res.data.user.code_verification });
+      toast.show('A confirmation code has been sent to your email.', { type: 'custom', placement: 'top', duration: 4000 });
+    } catch (err) {
+      console.log('err', err);
+    } finally {
+      setLoading(false); // Stop loading when registration process completes
+    }
   };
+
+  // Google sign-in function
   const googleSignInEvent = async () => {
     GoogleSignin.configure({
-      webClientId:
-        '597756036187-tlrpf1jnr3l5fg7575uj4qjelg8062es.apps.googleusercontent.com',
+      webClientId: '597756036187-tlrpf1jnr3l5fg7575uj4qjelg8062es.apps.googleusercontent.com',
       offlineAccess: true,
     });
-    GoogleSignin.hasPlayServices()
-      .then(async hasPlayService => {
-        hasPlayService &&
-          GoogleSignin.signIn()
-            .then(async userInfo => {
-              console.log('jgfdfgd');
-
-              const tokenId = userInfo.idToken;
-              userInfo && console.log('tokenId', tokenId);
-
-              // handleRequests('post', 'user/google', {tokenId})
-              //     .then(async response => {
-              //       await AsyncStorage.setItem('idUser', response.userId);
-              //       await AsyncStorage.setItem('token', response.token);
-              //     })
-              //     .then(eventSucces)
-            })
-            .catch(err => console.log('erroro google', err));
-      })
-
-      .catch(error => {
-        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-          console.error('user cancelled the login flow');
-        } else if (error.code === statusCodes.IN_PROGRESS) {
-          console.error('operation (e.g. sign in) is in progress already');
-        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-          console.error('play services not available or outdated');
-        } else {
-          console.error(error);
-          console.log('ldsqjhglsqjhgdlsqhj');
-
-          // some other error happened
-        }
-      });
+    try {
+      const hasPlayService = await GoogleSignin.hasPlayServices();
+      if (hasPlayService) {
+        const userInfo = await GoogleSignin.signIn();
+        const tokenId = userInfo.idToken;
+        console.log('tokenId', tokenId);
+        // Handle backend request with tokenId
+      }
+    } catch (error) {
+      console.log('erroro google', error);
+    }
   };
 
+  // Resend confirmation code function
   const resentCode = async () => {
     try {
-      const res = await handleRequests('put', 'resendCode', {email});
-
-      navigation.navigate('CodeVerification', {
-        userId: res.data.id,
-        codeVerification: res.data.code_verification,
-        cameFrom: 'forgetPass',
-      });
+      const res = await handleRequests('put', 'resendCode', { email });
+      navigation.navigate('CodeVerification', { userId: res.data.id, codeVerification: res.data.code_verification, cameFrom: 'forgetPass' });
+      toast.show('A confirmation code has been sent to your email.', { type: 'success', placement: 'top', duration: 4000, style: { backgroundColor: MatchMatePalette.primaryColor } });
     } catch (error) {
       console.log('error', error);
     }
   };
 
+  // Verify confirmation code function
   const verifyCode = async () => {
-    if (Number(value) == Number(codeVerification)) {
-      handleRequests('put', `user/${userId}`, {
-        is_verified: true,
-      }).then(res => {
-        console.log('cameFrom', cameFrom);
-
-        !cameFrom
-          ? navigation.navigate('Signin')
-          : navigation.navigate('PasswordForgotten', {step: 2});
-      });
+    if (Number(value) === Number(codeVerification)) {
+      try {
+        await handleRequests('put', `user/${userId}`, { is_verified: true });
+        if (!cameFrom) {
+          navigation.navigate('Signin');
+          toast.show('Your account is successfully created.', { type: 'success', placement: 'top', duration: 4000, style: { backgroundColor: MatchMatePalette.primaryColor } });
+        } else {
+          navigation.navigate('PasswordForgotten', { step: 2 });
+        }
+      } catch (error) {
+        console.log('Error verifying code:', error);
+      }
     } else {
-      console.log('verification code is wrong');
+      console.log('Verification code is wrong');
+      ToastAndroid.show('Verification code is wrong', ToastAndroid.LONG);
     }
   };
 
+  // Reset password function
   const resetPassword = async () => {
     try {
       if (password === newPassword) {
-
-        await handleRequests('put', 'resetpassword', {
-          email,
-          newPassword: password,
-        });
-        setStep(3)
+        await handleRequests('put', 'resetpassword', { email, newPassword: password });
+        setStep(3);
+        ToastAndroid.show('Your password has been successfully changed', ToastAndroid.LONG);
       } else {
-        console.log("paswwordds doesn't match");
+        ToastAndroid.show("Your passwords don't match", ToastAndroid.LONG);
       }
     } catch (error) {
-      console.log('erroe', error);
+      console.log('Error resetting password:', error);
     }
   };
 
+  // Returning necessary variables and functions
   return {
     email,
     setEmail,
@@ -180,7 +167,8 @@ export const useAuth = (navigation: any, route: any = false) => {
     resentCode,
     newPassword,
     setNewPassword,
-    step
+    step,
+    loading
   };
 };
 

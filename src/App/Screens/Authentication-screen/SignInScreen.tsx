@@ -21,11 +21,13 @@ import PasswordIconSVG from '../../../assets/Icons/svg/PasswordIconSVG';
 import MailIconSVG from '../../../assets/Icons/svg/MailIconSVG';
 import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
 import NavigateBack from '../../../Components/NavigateBack';
+
 const SignInScreen = ({navigation}: any) => {
-  const {email, setEmail, password, setPassword, loginUser} =
+  const {email, setEmail, password, setPassword, loginUser,loading } =
     useAuth(navigation);
 
   return (
+    
     <ContainerApp>
       <StatusBar
         barStyle={'light-content'}
@@ -66,6 +68,7 @@ const SignInScreen = ({navigation}: any) => {
             btnTextColor={MatchMatePalette.whiteColor}
             btnClicked={loginUser}
             iconComponent={''}
+            loading ={loading}
           />
           <TouchableOpacity onPress={()=>{navigation.navigate('PasswordForgotten')}}>
           <TextpasswordForgotten>Mot de passe oublié ?</TextpasswordForgotten>

@@ -25,6 +25,7 @@ export const ImageField = styled.Image`
   border-radius: 20px;
   width: 182px;
   align-self: center;
+
 `;
 
 export const TitleCard = styled.View`

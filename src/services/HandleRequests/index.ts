@@ -19,7 +19,8 @@ export const handleRequests = async (
       .get(`${BaseUrl}/${end_point}`)
       .then(res => res.data)
       .catch(erreur => console.log(erreur));
-  } else if (method === 'post') {    
+  } else if (method === 'post') { 
+   
     response = await axios
       .post(`${BaseUrl}/${end_point}`, requestBody)
       .then(res => res)

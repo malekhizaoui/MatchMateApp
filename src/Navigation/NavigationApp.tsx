@@ -1,23 +1,26 @@
-import React, {useMemo, useState, useEffect} from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {AuthContext, AuthContextProps} from '../services/Context/AuthContext';
+import { AuthContext, AuthContextProps } from '../services/Context/AuthContext';
 import UnauthenticatedStack from './Stacks/UnauthenticatedStack';
 import {
   NavigationContainer,
   createNavigationContainerRef,
   getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BookingSectionStack from './Stacks/BookingSectionStack';
 import ProfileSectionStack from './Stacks/ProfileSectionStack';
 import HomeSectionStack from './Stacks/HomeSectionStack';
 import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
-import {ScreenOptions} from './ScreenOptions';
+import { ScreenOptions } from './ScreenOptions';
 import ImmersiveMode from 'react-native-immersive-mode';
-import {MatchMatePalette} from '../assets/color-palette';
+import { MatchMatePalette } from '../assets/color-palette';
+
+import LoadingScreen from '../App/Screens/Splach-screen/LoadingScreen';
 
 function NavigationApp() {
+  const [isLoading, setIsLoading] = useState(true); // State to manage loading state
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [choix, setChoix] = useState<string>('');
   const [barColor, setBarColor] = useState<string>('');
@@ -30,11 +33,14 @@ function NavigationApp() {
       setSign(!res);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false); // Update loading state when finished retrieving
     }
   };
+
   const removeUserSession = async () => {
     try {
-      const res = await AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('token');
       retrieveUserSession();
     } catch (error) {
       console.log(error);
@@ -44,16 +50,18 @@ function NavigationApp() {
   useEffect(() => {
     retrieveUserSession();
   }, []);
+
   useEffect(() => {
     // ComponentDidMount equivalent
     ImmersiveMode.setBarMode('Normal');
-    ImmersiveMode.setBarColor(barColor);
+    ImmersiveMode.setBarColor(MatchMatePalette.lightBackgroundColor);
 
     // componentWillUnmount equivalent
     return () => {
       ImmersiveMode.fullLayout(false);
     };
   }, []);
+
   const authContext: AuthContextProps = useMemo(() => {
     return {
       signIn: () => {
@@ -75,14 +83,14 @@ function NavigationApp() {
   const TabBarDourbia = createBottomTabNavigator();
   const ref = createNavigationContainerRef();
 
-  const TabNav = ({routeName}: {routeName: string | undefined}) => {
+  const TabNav = ({ routeName }: { routeName: string | undefined }) => {
     const hide = routeName === 'MatchDetail';
 
     return (
       <TabBarDourbia.Navigator
         initialRouteName={'Home'}
-        screenOptions={({navigation, route}: any) => ({
-          ...ScreenOptions({navigation, route}),
+        screenOptions={({ navigation, route }: any) => ({
+          ...ScreenOptions({ navigation, route }),
           tabBarStyle: {
             // display: hide ? 'none' : 'flex',
             backgroundColor: MatchMatePalette.lightBackgroundColor,
@@ -93,49 +101,19 @@ function NavigationApp() {
             borderColor: MatchMatePalette.whiteColor,
             border: 1,
           },
-        })}>
-        <TabBarDourbia.Screen
-          name="HomeTab"
-          component={HomeSectionStack}
-          options={({route}) => ({
-            tabBarStyle: (route => {
-              const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-              if (
-                routeName === 'MatchDetail' ||
-                routeName === 'StadiumAvailability'
-              ) {
-                return {
-                  display: 'none',
-                  backgroundColor: MatchMatePalette.lightBackgroundColor,
-                };
-              }
-              return {
-                backgroundColor: MatchMatePalette.lightBackgroundColor,
-                padding: 10,
-                height: '8%',
-                width: '100%',
-                alignSelf: 'center',
-                borderColor: MatchMatePalette.whiteColor,
-              };
-            })(route),
-          })}
-        />
-
-        <TabBarDourbia.Screen
-          name="BookingTab"
-          component={BookingSectionStack}
-        />
-        <TabBarDourbia.Screen
-          name="LeaderboardTab"
-          component={LeaderboardSectionStack}
-        />
-        <TabBarDourbia.Screen
-          name="ProfileTab"
-          component={ProfileSectionStack}
-        />
+        })}
+      >
+        <TabBarDourbia.Screen name="HomeTab" component={HomeSectionStack} />
+        <TabBarDourbia.Screen name="BookingTab" component={BookingSectionStack} />
+        <TabBarDourbia.Screen name="LeaderboardTab" component={LeaderboardSectionStack} />
+        <TabBarDourbia.Screen name="ProfileTab" component={ProfileSectionStack} />
       </TabBarDourbia.Navigator>
     );
   };
+
+  if (isLoading) {
+    return <LoadingScreen />; // Show loading screen while retrieving user session
+  }
 
   return (
     <AuthContext.Provider value={authContext}>
@@ -145,7 +123,7 @@ function NavigationApp() {
             <SplashApp.Screen
               name="unauthenticated"
               component={UnauthenticatedStack}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
           </SplashApp.Navigator>
         ) : (

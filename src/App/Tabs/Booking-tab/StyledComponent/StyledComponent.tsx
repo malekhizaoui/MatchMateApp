@@ -26,7 +26,7 @@ export const BookingContainer = styled.View`
 
 export const BookingImage = styled.Image`
   width: 100%;
-  height: 50%;
+  height: 40%;
   background-color: ${MatchMatePalette.whiteColor};
   border-radius: 25px;
 `;

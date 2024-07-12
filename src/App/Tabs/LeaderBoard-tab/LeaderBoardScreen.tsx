@@ -29,10 +29,12 @@ import PointsIconSVG from '../../../assets/Icons/svg/PointsIconSVG';
 import UserLeaderCardComponent from '../../../Components/LeaderBoardComponents/UserLeaderCardComponent';
 import { User } from '../../models/User';
 import { handleRequests } from '../../../services/HandleRequests';
+import SkeletonHeaderLeaderBoard from '../../../Components/SkeletonLoadingComponents/SkeletonHeaderLeaderBoard';
+import SkeletonLeaderBoardCard from '../../../Components/SkeletonLoadingComponents/SkeletonLeaderBoardCard';
 
 const LeaderBoardScreen = ({ navigation }: any) => {
   const [profileHovered, setProfileHovered] = useState<number | null>(null);
-  const [usersRank, setUsersRank] = useState<User[] | null>(null);
+  const [usersRank, setUsersRank] = useState<User[] >([]);
 
   const getAllRankedUsers = async () => {
     try {
@@ -53,13 +55,8 @@ const LeaderBoardScreen = ({ navigation }: any) => {
     getAllRankedUsers();
   }, []);
 
-  if (!usersRank) {
-    return (
-      <ContainerApp>
-        <Text>Loading...</Text>
-      </ContainerApp>
-    );
-  }
+   
+ 
 
   return (
     <ContainerApp>
@@ -69,7 +66,7 @@ const LeaderBoardScreen = ({ navigation }: any) => {
       />
       <TextHeader>LeaderBoard</TextHeader>
       <LeaderHeaderContainer>
-        {usersRank[0] && (
+        {usersRank.length>0 ?usersRank[0] && (
           <ConatinerLeaders>
             <UserConatinerLeaders>
               <ImageLeader
@@ -89,9 +86,13 @@ const LeaderBoardScreen = ({ navigation }: any) => {
               </View>
             </HeaderTitleContainer>
           </ConatinerLeaders>
-        )}
+        ):(<ConatinerLeaders>
+          <UserConatinerLeaders>
+          <SkeletonHeaderLeaderBoard/>
+          </UserConatinerLeaders>
+        </ConatinerLeaders>)}
 
-        {usersRank[1] && (
+        {usersRank.length>0 ?usersRank[1] && (
           <UserConatinerLeadersA>
             <ImageLeaderA
               source={{
@@ -107,9 +108,13 @@ const LeaderBoardScreen = ({ navigation }: any) => {
               </View>
             </HeaderTitleContainer>
           </UserConatinerLeadersA>
-        )}
+        ):(<UserConatinerLeadersA>
+          {/* <UserConatinerLeaders> */}
+          <SkeletonHeaderLeaderBoard/>
+          {/* </UserConatinerLeaders> */}
+        </UserConatinerLeadersA>)}
 
-        {usersRank[2] && (
+        {usersRank.length>0?usersRank[2] && (
           <UserConatinerLeadersB>
             <ImageLeaderA
               source={{
@@ -125,7 +130,11 @@ const LeaderBoardScreen = ({ navigation }: any) => {
               </View>
             </HeaderTitleContainer>
           </UserConatinerLeadersB>
-        )}
+        ):(<UserConatinerLeadersB>
+          {/* <UserConatinerLeaders> */}
+          <SkeletonHeaderLeaderBoard/>
+          {/* </UserConatinerLeaders> */}
+        </UserConatinerLeadersB>)}
       </LeaderHeaderContainer>
 
       <LeaderPropertiesContainer
@@ -134,7 +143,7 @@ const LeaderBoardScreen = ({ navigation }: any) => {
           justifyContent: 'space-between',
         }}>
         <LeaderPropertyContent>
-          {usersRank.slice(3).map((el, i) => {
+          {usersRank.length>0?usersRank.slice(3).map((el, i) => {
             return (
               <UserLeaderCardComponent
                 key={i} // Adjusted key to ensure unique keys
@@ -146,11 +155,12 @@ const LeaderBoardScreen = ({ navigation }: any) => {
                 profileHovered={profileHovered}
               />
             );
-          })}
+          }):([1,2,3,4,5,6,7,8,9].map((item,index)=><View key={index} style={{marginTop:20}}><SkeletonLeaderBoardCard/></View>))}
         </LeaderPropertyContent>
       </LeaderPropertiesContainer>
     </ContainerApp>
   );
+
 };
 
 export default LeaderBoardScreen;

@@ -11,13 +11,14 @@ import {
 } from 'react-native-svg';
 interface NextIconSVG {
   color: string;
+  size?:string
 }
-const NextIconSVG = ({color}: NextIconSVG) => {
+const NextIconSVG = ({color,size}: NextIconSVG) => {
   return (
     <Svg
-      height="15"
+      height={size?size:"15"}
       viewBox="0 -960 960 960"
-      width="15">
+      width={size?size:"15"}>
       <Path
       fill={color}
       d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" />
