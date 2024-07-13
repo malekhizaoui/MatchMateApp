@@ -44,9 +44,8 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
       const response = await handleRequests('put', `user/${userId}`, {
         timeSlotId: timeSlot.id,
       });
-      console.log("response",response.data);
       
-      setQrCode(response.data.qrCode); // Set the QR code in state
+      setQrCode(response.data.data.timeSlots[0].qrCodeUrl); // Set the QR code in state
       setModalVisible(true)
     } catch (error) {
       console.log('err', error);

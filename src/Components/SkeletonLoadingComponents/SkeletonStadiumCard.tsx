@@ -5,7 +5,7 @@ import { MatchMatePalette } from '../../assets/color-palette';
 
 const SkeletonStadiumCard = () => {
   return (
-    <SkeletonPlaceholder borderRadius={4} highlightColor={MatchMatePalette.whiteColor} backgroundColor={MatchMatePalette.lightBackgroundColor}>
+    <SkeletonPlaceholder borderRadius={4} highlightColor={MatchMatePalette.darkBackgroundColor} backgroundColor={MatchMatePalette.lightBackgroundColor}>
     <SkeletonPlaceholder.Item flexDirection="column" alignItems="center" marginLeft={20}>
       <SkeletonPlaceholder.Item width={130} height={"60%"} borderRadius={5} />
       <SkeletonPlaceholder.Item  marginTop={20}>

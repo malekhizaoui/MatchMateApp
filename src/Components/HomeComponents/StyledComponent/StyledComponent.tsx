@@ -604,3 +604,11 @@ export const TextNameProfile = styled.Text`
   font-weight: 700;
   color: ${MatchMatePalette.whiteColor};
 `;
+
+
+export const BookingDetailText = styled.Text`
+  ${fontSizeTextScreen};
+  color: ${MatchMatePalette.primaryColor};
+  font-weight: 700;
+  text-decoration-line: underline;
+`;

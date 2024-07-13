@@ -7,6 +7,7 @@ import PlayersIconSVG from '../../assets/Icons/svg/PlayersIconSVG';
 import { Stadium } from '../../App/models/Stadium';
 import { TimeSlot } from '../../App/models/TimeSlot';
 import { extractTimeFromDate } from '../../services/HelperFunctions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 interface MatchDetailComponentProps {
   navigation: any,
   timeSlot: TimeSlot
@@ -23,8 +24,13 @@ const MatchDetailComponent = ({ navigation, timeSlot, stadium }: MatchDetailComp
   const endDateTime = new Date(timeSlot.endTime).getTime();
   const durationInMinutes = Math.floor((endDateTime - startDateTime) / (1000 * 60));
   const playersLeft=stadium.capacity-timeSlot.team.length
-  console.log("timeSllot",timeSlot.day);
-  
+  const handleDetailMatch=async()=>{
+    const token= await AsyncStorage.getItem('token')
+    if(token){
+    return  navigation.navigate("MatchDetail", { stadium,timeSlot })
+    }
+    navigation.navigate('ProfileTab',{Screen:"ConnexionMethodScreen"})
+  }
   return (
     <MatchDetailContainer>
       <DayDetailContainer>
@@ -62,9 +68,9 @@ const MatchDetailComponent = ({ navigation, timeSlot, stadium }: MatchDetailComp
         <Seperator></Seperator>
         <BtnTxtContainer>
           <TouchableOpacity >
-            <TxtButton>Join Team</TxtButton>
+            <TxtButton></TxtButton>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { navigation.navigate("MatchDetail", { stadium,timeSlot }) }}>
+          <TouchableOpacity onPress={handleDetailMatch}>
             <TxtButton>See Details</TxtButton>
           </TouchableOpacity>
         </BtnTxtContainer>

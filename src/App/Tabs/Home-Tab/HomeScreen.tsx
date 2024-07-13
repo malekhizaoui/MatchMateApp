@@ -21,6 +21,7 @@ import { MatchMatePalette } from '../../../assets/color-palette';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
+import { Screen } from 'react-native-screens';
 
 export const HomeScreen = ({ navigation }: any) => {
   const {
@@ -96,6 +97,7 @@ console.log("fieldDataPut",fieldDataPut);
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('FieldList', { field: fieldDataPut });
+              // navigation.navigate('AuthTab',{Screen:"ConnexionMethodScreen"})
             }}>
             <TextCheckAllList>Discover All</TextCheckAllList>
           </TouchableOpacity>

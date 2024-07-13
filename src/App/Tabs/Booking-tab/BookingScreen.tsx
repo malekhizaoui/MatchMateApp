@@ -1,7 +1,7 @@
 // BookingScreen.js
 
 import React, {useState} from 'react';
-import {ScrollView, StatusBar, Text, TouchableOpacity} from 'react-native';
+import {ScrollView, StatusBar, Text, TouchableOpacity, View} from 'react-native';
 import {
   ContainerApp,
   BookingContainer,
@@ -21,10 +21,16 @@ import {
   extractTimeFromDate,
 } from '../../../services/HelperFunctions';
 import ModalQrCodeGenerateComponent from '../../../Components/HomeComponents/ModalQrCodeGenerateComponent';
+import CardBookingComponents from '../../../Components/HomeComponents/CardBookingComponents';
+import SkeletonBookingCard from '../../../Components/SkeletonLoadingComponents/SkeletonBookingCard';
 export const BookingScreen = ({navigation, route}: any) => {
   const {BookingList, removeBookingFromUser} = useBooking(route);
   const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
-
+  const navigate = (timeSlotId: string) => {
+    navigation.navigate('BookingDetail', {
+      timeSlotId: timeSlotId,
+    });
+  };
   return (
     <ContainerApp>
       <StatusBar
@@ -47,51 +53,30 @@ export const BookingScreen = ({navigation, route}: any) => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-        {BookingList &&
+        {BookingList ?
           BookingList.map((el, i) => {
             return (
-              <BookingContainer key={i}>
-                <BookingImage source={{uri: el.stadium.imageURL}} />
-                <BookingDetails>
-                  <BookingRow>
-                    <BookingTitle>
-                      {el.stadium.stadiumName} Stadium
-                    </BookingTitle>
-                    <TouchableOpacity
-                      onPress={() => {
-                        navigation.navigate('BookingDetail', {
-                          timeSlotId: el.id,
-                        });
-                      }}>
-                      <BookingDetailText>Detail</BookingDetailText>
-                    </TouchableOpacity>
-                  </BookingRow>
-                  <BookingDate>Day : {formatDate(el.startTime)}</BookingDate>
-                  <BookingDate>
-                    Time : {extractTimeFromDate(el.startTime)}h -{' '}
-                    {extractTimeFromDate(el.endTime)}h
-                  </BookingDate>
-                  <TouchableOpacity onPress={()=>{setModalVisible(true)}}>
-                  <BookingDetailText>Show qrCode</BookingDetailText>
-                  </TouchableOpacity>
-                  <CancelButton
-                    onPress={() => {
-                      removeBookingFromUser(el.id);
-                    }}>
-                    <CancelButtonText>Cancel Booking</CancelButtonText>
-                  </CancelButton>
-                </BookingDetails>
+              <View style={{width:"100%",display:"flex",alignItems:"center"}}>
+                <CardBookingComponents
+                  key={i}
+                  img={el.stadium.imageURL}
+                  name={el.stadium.stadiumName}
+                  day={formatDate(el.startTime)}time={`${extractTimeFromDate( el.startTime,)}-${extractTimeFromDate(el.endTime)}`}
+                  navigation={() => {navigation.navigate('BookingDetail', {timeSlotId: el.id,});}}
+                  showQrCode={() => { setModalVisible(true);}}
+                  removeBooking={() => {removeBookingFromUser(el.id);}}
+                />
                 {modalVisible && (
                   <ModalQrCodeGenerateComponent
-                    qrCode={el?.qrCodeUrl}
+                    qrCode={el.qrCodeUrl}
                     modalVisible={modalVisible}
                     setModalVisible={setModalVisible}
                     stadiumId={el.stadium?.id}
                   />
                 )}
-              </BookingContainer>
+              </View>
             );
-          })}
+          }):[1,2,3,4].map((_,index)=><View key={index} style={{width:"90%",marginBottom:10,height:260}}><SkeletonBookingCard/></View>)}
       </ScrollView>
     </ContainerApp>
   );

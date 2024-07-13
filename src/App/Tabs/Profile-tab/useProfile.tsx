@@ -77,13 +77,14 @@ const useProfile = (navigation: any) => {
 
   const getStadiumsExludingFeedbacks=async ()=>{
     const userId=await AsyncStorage.getItem("userId")
-
+    console.log("s");
+    
     try {      
-        const res =await handleRequests('get',`user/${userId}`)
+        const res =await handleRequests('get',`userStadium/${userId}`)
         setStadiumsExcludingFeedbacs(res.data)
         
     } catch (error) {
-      console.log("error",error);
+      console.log("errjor",error);
        
     }
   }  

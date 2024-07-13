@@ -5,7 +5,6 @@ import UnauthenticatedStack from './Stacks/UnauthenticatedStack';
 import {
   NavigationContainer,
   createNavigationContainerRef,
-  getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -24,13 +23,13 @@ function NavigationApp() {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [choix, setChoix] = useState<string>('');
   const [barColor, setBarColor] = useState<string>('');
-  const [sign, setSign] = useState(true);
+  const [signed, setSigned] = useState(true);
   const [routeName, setRouteName] = useState<string | undefined>();
 
   const retrieveUserSession = async () => {
     try {
       const res = await AsyncStorage.getItem('token');
-      setSign(!res);
+      setSigned(!res);
     } catch (error) {
       console.log(error);
     } finally {
@@ -66,7 +65,7 @@ function NavigationApp() {
     return {
       signIn: () => {
         retrieveUserSession();
-        setSign(false);
+        setSigned(false);
       },
       signOut: () => {
         removeUserSession();
@@ -83,7 +82,7 @@ function NavigationApp() {
   const TabBarDourbia = createBottomTabNavigator();
   const ref = createNavigationContainerRef();
 
-  const TabNav = ({ routeName }: { routeName: string | undefined }) => {
+  const TabNav = ({ routeName, authenticated = false }: any) => {
     const hide = routeName === 'MatchDetail';
 
     return (
@@ -92,7 +91,6 @@ function NavigationApp() {
         screenOptions={({ navigation, route }: any) => ({
           ...ScreenOptions({ navigation, route }),
           tabBarStyle: {
-            // display: hide ? 'none' : 'flex',
             backgroundColor: MatchMatePalette.lightBackgroundColor,
             padding: 10,
             height: '8%',
@@ -101,12 +99,17 @@ function NavigationApp() {
             borderColor: MatchMatePalette.whiteColor,
             border: 1,
           },
-        })}
-      >
+        })}>
         <TabBarDourbia.Screen name="HomeTab" component={HomeSectionStack} />
-        <TabBarDourbia.Screen name="BookingTab" component={BookingSectionStack} />
         <TabBarDourbia.Screen name="LeaderboardTab" component={LeaderboardSectionStack} />
-        <TabBarDourbia.Screen name="ProfileTab" component={ProfileSectionStack} />
+        {authenticated ? (
+          <>
+            <TabBarDourbia.Screen name="BookingTab" component={BookingSectionStack} />
+            <TabBarDourbia.Screen name="ProfileTab" component={ProfileSectionStack} />
+          </>
+        ) : (
+          <TabBarDourbia.Screen name="ProfileTab" component={UnauthenticatedStack}  />
+        )}
       </TabBarDourbia.Navigator>
     );
   };
@@ -118,17 +121,7 @@ function NavigationApp() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        {sign ? (
-          <SplashApp.Navigator>
-            <SplashApp.Screen
-              name="unauthenticated"
-              component={UnauthenticatedStack}
-              options={{ headerShown: false }}
-            />
-          </SplashApp.Navigator>
-        ) : (
-          <TabNav routeName={routeName} />
-        )}
+        <TabNav routeName={routeName} authenticated={!signed} />
       </NavigationContainer>
     </AuthContext.Provider>
   );
