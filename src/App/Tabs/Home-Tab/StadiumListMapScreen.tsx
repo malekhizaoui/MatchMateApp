@@ -31,6 +31,7 @@ const StadiumListMapScreen: React.FC<StadiumListMapProps> = ({stadiums}) => {
 
   return (
     <YaMap
+    nightMode=  {true}
       style={{flex: 1}}
       showUserPosition={true}
       initialRegion={initialRegion}>
@@ -44,7 +45,7 @@ const StadiumListMapScreen: React.FC<StadiumListMapProps> = ({stadiums}) => {
               lon: parseFloat(stadium.longitude),
             }}>
             <PinOrderSVG
-              color={MatchMatePalette.darkBackgroundColor}
+              color={"orange"}
               order={index+1}
             />
           </Marker>

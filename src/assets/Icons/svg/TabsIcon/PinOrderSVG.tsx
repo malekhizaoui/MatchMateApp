@@ -66,7 +66,7 @@ const PinOrderSVG = (props: any) => {
         rx={10.27}
         ry={10.249}
         transform="translate(23)"
-        fill={props.color}
+        fill={"black"}
       />
       <Text
         data-name={1}

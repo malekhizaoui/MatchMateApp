@@ -72,7 +72,6 @@ export const useHome = (navigation:any, route: any=false) => {
   const getFieldsBaseOnRegion = async () => {    
     try {
      const res=await handleRequests('get',`fieldRegion/${region}`)  
-     console.log("res",res);
          
      res&& setfieldDataPut(res);
       setBasketballField(res[0].stadiums);

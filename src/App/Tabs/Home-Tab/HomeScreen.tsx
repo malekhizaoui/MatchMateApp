@@ -42,7 +42,7 @@ export const HomeScreen = ({ navigation }: any) => {
     region,
     setRegion,
   } = useHome(navigation);
-console.log("fieldDataPut",fieldDataPut);
+console.log("volleyballField",volleyballField[0]);
 
   return (
     <ContainerApp>
@@ -165,15 +165,13 @@ console.log("fieldDataPut",fieldDataPut);
                 backgroundImage={stadium.imageURL}
                 btnClicked={() => {
                   navigation.navigate('StadiumDetail', { stadiumId: stadium.id });
-                }}
-                isLoading={
-                  fieldSelected === 'Football'
-                    ? !footballField.length
-                    : fieldSelected === 'Basketball'
+                } }
+                isLoading={fieldSelected === 'Football'
+                  ? !footballField.length
+                  : fieldSelected === 'Basketball'
                     ? !basketballField.length
-                    : !volleyballField.length
-                }
-              />
+                    : !volleyballField.length} 
+                feedback={stadium.feedbacks}/>
             ))
           ) : (
             [1, 2, 3, 4].map((_, i) => (
@@ -181,9 +179,8 @@ console.log("fieldDataPut",fieldDataPut);
                 key={i}
                 titleDescription={''}
                 backgroundImage={''}
-                btnClicked={() => {}}
-                isLoading={true}
-              />
+                btnClicked={() => { } }
+                isLoading={true} feedback={[]}              />
             ))
           )}
         </ListContainer>

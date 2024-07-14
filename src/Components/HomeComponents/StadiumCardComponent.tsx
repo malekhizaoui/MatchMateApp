@@ -1,20 +1,24 @@
 import React from 'react';
-import {StyleSheet, ActivityIndicator} from 'react-native';
+import {StyleSheet, ActivityIndicator, Text} from 'react-native';
 import {
   StadiumContainer,
   StadiumImage,
   StadiumDescription,
   TitleDescription,
   TextDescription,
+  StarsReviewContainer
 } from './StyledComponent/StyledComponent';
 import {MatchMatePalette} from '../../assets/color-palette';
 import SkeletonStadiumCard from '../SkeletonLoadingComponents/SkeletonStadiumCard';
-
+import { getStarsReviw } from '../../services/HelperFunctions';
+import { Feedback } from '../../App/models/Feedback';
+import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
 interface StadiumCardComponentProps {
   titleDescription: string;
   backgroundImage?: string;
   btnClicked: () => void;
   isLoading?: boolean; // Add isLoading prop
+  feedback:Feedback[]
 }
 
 const StadiumCardComponent = ({
@@ -22,10 +26,10 @@ const StadiumCardComponent = ({
   backgroundImage,
   btnClicked,
   isLoading = false,
+  feedback
 }: StadiumCardComponentProps) => {
   const defaultImage =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpusOZAX4leJSqoJ6grIZPYdoDTgNfgKZXAA&s'; // Provide a valid default image URL
-  console.log('isLoadingStadiumCard', isLoading);
 
   return (
     <>
@@ -39,6 +43,10 @@ const StadiumCardComponent = ({
               <TitleDescription>Explore {titleDescription}</TitleDescription>
               <TextDescription>Near court</TextDescription>
             </StadiumDescription>
+            <StarsReviewContainer>
+            <StarIconSVG color='yellow' size='17'/>
+            <Text style={{color: MatchMatePalette.whiteColor}}>{getStarsReviw(feedback)}</Text>
+            </StarsReviewContainer>
           </StadiumContainer>
              
         </>

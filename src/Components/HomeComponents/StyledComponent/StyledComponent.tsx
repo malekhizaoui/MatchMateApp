@@ -46,24 +46,25 @@ export const TxtTitle = styled.Text`
 `;
 
 export const StadiumContainer = styled.TouchableOpacity`
-  height: 60%;
+  height: 65%;
   border-radius: 20px;
   margin-left: 10px;
   width: 185px;
   border: 2px ${MatchMatePalette.whiteColor};
   flex-direction: column;
   margin-top: 10px;
+  position:relative;
 `;
 
 export const StadiumImage = styled.Image`
   width: 100%;
-  height: 70%;
+  height: 65%;
   border-radius: 17px;
 `;
 export const StadiumDescription = styled.View`
   display: Flex;
   flex-direction: column;
-  padding: 5px;
+  padding:5px;
 `;
 export const TitleDescription = styled.Text`
   ${fontSizeLegendIcon};
@@ -78,6 +79,19 @@ export const TextDescription = styled.Text`
   padding-left: 5px;
 `;
 
+export const StarsReviewContainer=styled.View`
+  position:absolute;
+  top:80px;
+  left:8px;
+  width:50px;
+  height:30px;
+  border-radius:10px;
+  background-color:${MatchMatePalette.lightBackgroundColor};
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction: row;
+`
 // ImageSlideComponent Design
 export const ImagesStadiumContainer = styled.View`
   width: 100%;
@@ -366,20 +380,21 @@ export const TimeText = styled.Text`
 export const StadiumCardContainer = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
-  width: 250px;
-  height: 150px;
+  width: 210px;
+  height: 120px;
   border-radius: 20px;
-  background-color: ${MatchMatePalette.darkBackgroundColor};
-  margin-right: 10px;
-  padding: 10px;
+  background-color:#f4eded;
+  justify-content:center;
+  position:relative;
+    margin-right: 10px;
+
 `;
 
 export const ImageContainerCard = styled.Image`
-  width: 40%;
+  width: 100%;
   height: 100%;
   background-color: ${MatchMatePalette.whiteColor};
-  margin-right: 10px;
-  border-radius:10px
+  border-radius:12px;
 `;
 
 // ImageListFieldComponent
@@ -609,6 +624,7 @@ export const TextNameProfile = styled.Text`
 export const BookingDetailText = styled.Text`
   ${fontSizeTextScreen};
   color: ${MatchMatePalette.primaryColor};
+  margin-top: 20px;
   font-weight: 700;
   text-decoration-line: underline;
 `;

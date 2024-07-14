@@ -24,7 +24,6 @@ const FieldsCardComponent = ({
   isSelected = false,
   isLoading = false,
 }: FieldsCardComponentProps) => {
-  console.log('isLoadingFieldCard', isLoading);
 
   return (
     <>

@@ -2,6 +2,7 @@ import { TimeSlot } from "./TimeSlot";
 import { Field } from "./Field";
 import { GameHistory } from "./GameHistory";
 import { ImageStadium } from "./ImageStadium";
+import { Feedback } from "./Feedback";
 
 export interface Stadium {
   id: number;
@@ -25,4 +26,5 @@ export interface Stadium {
   gameHistories: GameHistory[];
   field: Field;
   stadiumImages: ImageStadium[];
+  feedbacks: Feedback[];
 }

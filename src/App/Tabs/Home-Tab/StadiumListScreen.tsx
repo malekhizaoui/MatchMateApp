@@ -47,10 +47,10 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
     <>
       <HeaderListStadiumContainer>
         <StatusBar
-          barStyle={!showMap ? 'dark-content' : 'light-content'}
+          barStyle={'light-content'}
           backgroundColor={
             !showMap
-              ? MatchMatePalette.whiteColor
+              ? MatchMatePalette.darkBackgroundColor
               : MatchMatePalette.darkBackgroundColor
           }
         />
@@ -62,7 +62,7 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
             color={
               showMap
                 ? MatchMatePalette.primaryColor
-                : MatchMatePalette.darkBackgroundColor
+                : MatchMatePalette.whiteColor
             }
             btnClicked={() => {
               navigation.goBack();
@@ -78,7 +78,7 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
             style={{
               color: showMap
                 ? MatchMatePalette.primaryColor
-                : MatchMatePalette.darkBackgroundColor,
+                : MatchMatePalette.whiteColor,
             }}>
             {showMap ? 'Map' : 'List'}
           </TextTypeOfRender>
@@ -132,7 +132,7 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
                   key={index}
                   stadium={stadium}
                   navigation={navigation}
-                />
+                  index={index + 1} feedback={stadium.feedbacks}                />
               );
             })}
           </FlatListMapContainer>
