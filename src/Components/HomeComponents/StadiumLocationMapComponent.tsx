@@ -27,6 +27,7 @@ interface StadiumLocationMapComponentProps {
 const StadiumLocationMapComponent = ({stadium}: StadiumLocationMapComponentProps) => {
   return (
     <YaMap
+            nightMode={true}
             style={{flex: 1 }}
             showUserPosition={true}
             initialRegion={{
@@ -44,7 +45,7 @@ const StadiumLocationMapComponent = ({stadium}: StadiumLocationMapComponentProps
                 lon: parseFloat(stadium.longitude),
               }}>
               <PinOrderSVG
-                color={MatchMatePalette.darkBackgroundColor}
+                color={MatchMatePalette.primaryColor}
                 order={stadium.id}
               />
             </Marker>

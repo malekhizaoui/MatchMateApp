@@ -1,7 +1,13 @@
 // BookingScreen.js
 
 import React, {useState} from 'react';
-import {ScrollView, StatusBar, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ScrollView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {
   ContainerApp,
   BookingContainer,
@@ -53,30 +59,52 @@ export const BookingScreen = ({navigation, route}: any) => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-        {BookingList ?
-          BookingList.map((el, i) => {
-            return (
-              <View style={{width:"100%",display:"flex",alignItems:"center"}}>
-                <CardBookingComponents
+        {BookingList
+          ? BookingList.map((el, i) => {
+              return (
+                <View
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
                   key={i}
-                  img={el.stadium.imageURL}
-                  name={el.stadium.stadiumName}
-                  day={formatDate(el.startTime)}time={`${extractTimeFromDate( el.startTime,)}-${extractTimeFromDate(el.endTime)}`}
-                  navigation={() => {navigation.navigate('BookingDetail', {timeSlotId: el.id,});}}
-                  showQrCode={() => { setModalVisible(true);}}
-                  removeBooking={() => {removeBookingFromUser(el.id);}}
-                />
-                {modalVisible && (
-                  <ModalQrCodeGenerateComponent
-                    qrCode={el.qrCodeUrl}
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
-                    stadiumId={el.stadium?.id}
+>
+                  <CardBookingComponents
+                    img={el.stadium.imageURL}
+                    name={el.stadium.stadiumName}
+                    day={formatDate(el.startTime)}
+                    time={`${extractTimeFromDate(
+                      el.startTime,
+                    )}-${extractTimeFromDate(el.endTime)}`}
+                    navigation={() => {
+                      navigation.navigate('BookingDetail', {timeSlotId: el.id});
+                    }}
+                    showQrCode={() => {
+                      setModalVisible(true);
+                    }}
+                    removeBooking={() => {
+                      removeBookingFromUser(el.id);
+                    }}
                   />
-                )}
+                  {modalVisible && (
+                    <ModalQrCodeGenerateComponent
+                      qrCode={el.qrCodeUrl}
+                      modalVisible={modalVisible}
+                      setModalVisible={setModalVisible}
+                      stadiumId={el.stadium?.id}
+                    />
+                  )}
+                </View>
+              );
+            })
+          : [1, 2, 3, 4].map((_, index) => (
+              <View
+                key={index}
+                style={{width: '90%', marginBottom: 10, height: 260}}>
+                <SkeletonBookingCard />
               </View>
-            );
-          }):[1,2,3,4].map((_,index)=><View key={index} style={{width:"90%",marginBottom:10,height:260}}><SkeletonBookingCard/></View>)}
+            ))}
       </ScrollView>
     </ContainerApp>
   );

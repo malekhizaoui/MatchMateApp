@@ -45,7 +45,7 @@ const StadiumListMapScreen: React.FC<StadiumListMapProps> = ({stadiums}) => {
               lon: parseFloat(stadium.longitude),
             }}>
             <PinOrderSVG
-              color={"orange"}
+              color={MatchMatePalette.primaryColor}
               order={index+1}
             />
           </Marker>

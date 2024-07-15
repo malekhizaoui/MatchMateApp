@@ -42,7 +42,6 @@ export const HomeScreen = ({ navigation }: any) => {
     region,
     setRegion,
   } = useHome(navigation);
-console.log("volleyballField",volleyballField[0]);
 
   return (
     <ContainerApp>

@@ -364,6 +364,7 @@ export const InputContainer = styled.View`
 `;
 export const TextInputStyle = styled.TextInput`
   color: grey;
+  width:100%
 `;
 
 export const TitleTextStadium = styled.Text`

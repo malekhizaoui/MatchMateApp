@@ -22,26 +22,33 @@ export const useHome = (navigation:any, route: any=false) => {
 
 
   const searchFields = (query: string) => {
-    if (query.length < 3) {
+    if (query.length < 1) {
       setSearchResults([]);
       return;
     }
+console.log("searchResults",searchResults);
 
-    const allStadiums = [...basketballField, ...footballField];
+    const allStadiums = [...basketballField, ...footballField,...volleyballField];
     const filteredStadiums = allStadiums.filter(stadium => {
+   
+      
       const nameMatch = stadium.stadiumName
         .toLowerCase()
         .includes(query.toLowerCase());
+
       const statusMatch =
         stadium.status &&
         stadium.status.toLowerCase().includes(query.toLowerCase());
+        
       return nameMatch || statusMatch;
     });
-
+    
     setSearchResults(filteredStadiums);
   };
 
   const handleSearch = (valueText: string) => {
+    console.log("sss");
+    
     setQuery(valueText);
     searchFields(valueText);
   };

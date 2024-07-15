@@ -5,6 +5,8 @@ import {
   Text,
   Image,
   Alert,
+  Modal,
+  ActivityIndicator,
 } from 'react-native';
 import {
   ContainerApp,
@@ -29,7 +31,7 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
 
   const [qrCode, setQrCode] = useState<string>(""); // State to store the QR code
   const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
-
+  const [loading,setLoading]=useState(false)
   const currentSport =
     stadium.field.fieldName === 'Basketball'
       ? TeamPositionsBasketball
@@ -39,17 +41,21 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
    console.log("qrCode",qrCode);
 
   const joinTeam = async () => {
+    setLoading(true)
     const userId = await AsyncStorage.getItem('userId');
     try {
       const response = await handleRequests('put', `user/${userId}`, {
         timeSlotId: timeSlot.id,
       });
       
-      setQrCode(response.data.data.timeSlots[0].qrCodeUrl); // Set the QR code in state
+      setQrCode(response.data.data.timeSlots[0].qrCodeUrl);
       setModalVisible(true)
     } catch (error) {
       console.log('err', error);
       Alert.alert('Error', 'Failed to join the team.');
+    }finally{
+          setLoading(true)
+
     }
   };
 
@@ -84,6 +90,7 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
     ));
   };
 
+
   return (
     <ContainerApp>
       <NavigateBack navigation={navigation} headerTitle={'Match Detail'} />
@@ -101,12 +108,6 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
             }
           />
         </FieldStyleContainer>
-        {/* {qrCode && (
-          <View style={styles.qrCodeContainer}>
-            <Text style={styles.qrCodeLabel}>Your QR Code:</Text>
-            <Image source={{ uri: qrCode }} style={styles.qrCodeImage} />
-          </View>
-        )} */}
         <PrimaryButtonComponant
           colorTxtBtn={MatchMatePalette.whiteColor}
           colorbtn={MatchMatePalette.primaryColor}
@@ -118,6 +119,11 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
         {modalVisible && (
         <ModalQrCodeGenerateComponent qrCode={qrCode} modalVisible={modalVisible} setModalVisible={setModalVisible} stadiumId={stadium?.id}/>
       )}
+      {
+        loading&&(
+         <></>
+        )
+      }
       </MatchDetailContainer>
     </ContainerApp>
   );
