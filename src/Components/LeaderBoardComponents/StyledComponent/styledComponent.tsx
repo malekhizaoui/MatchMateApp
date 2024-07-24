@@ -39,13 +39,13 @@ border-radius:20px;
 export const TextNameLeader = styled.Text`
   ${fontSizeTextScreen};
   font-weight: 600;
-  color: ${MatchMatePalette.whiteColor};
+  color: ${MatchMatePalette.secondaryTextColor};
   margin:5px
 `;
 export const TextPointLeader = styled.Text`
   ${fontSizeTextScreen};
   font-weight: 400;
-  color: ${MatchMatePalette.whiteColor};
+  color: ${MatchMatePalette.secondaryTextColor};
   margin:5px
 
 `;

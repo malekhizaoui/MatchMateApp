@@ -30,6 +30,7 @@ const MatchDetailComponent = ({ navigation, timeSlot, stadium }: MatchDetailComp
     return  navigation.navigate("MatchDetail", { stadium,timeSlot })
     }
     navigation.navigate('ProfileTab',{Screen:"ConnexionMethodScreen"})
+
   }
   return (
     <MatchDetailContainer>

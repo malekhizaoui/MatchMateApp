@@ -24,7 +24,7 @@ export const HeaderRegisterScreen = styled.View`
 
 export const HeaderTitleText = styled.Text`
   ${fontSizeSubTitleScreen}
-  color: white;
+  color: ${MatchMatePalette.secondaryTextColor};
   font-weight: 500;
   text-align: center;
   width:70%;
@@ -32,7 +32,7 @@ export const HeaderTitleText = styled.Text`
 `;
 export const HeaderText = styled.Text`
   ${fontSizeSubTitleScreen};
-  color: ${MatchMatePalette.whiteColor};
+  color: ${MatchMatePalette.secondaryTextColor};
   font-weight: 500;
 `;
 
@@ -80,7 +80,7 @@ export const LogoApp = styled.Image`
   width: 175px;
 `;
 export const TextpasswordForgotten = styled.Text`
-  color: ${MatchMatePalette.whiteColor};
+  color: ${MatchMatePalette.secondaryTextColor};
   margin-top: 10px;
   ${fontSizeTextScreen};
   font-weight: bold;
@@ -96,12 +96,12 @@ export const ContainerDivideText = styled.View`
 export const LineStyle = styled.View`
   flex: 1;
   height: 1px;
-  background-color: ${MatchMatePalette.whiteColor};
+  background-color: ${MatchMatePalette.secondaryTextColor};
 `;
 export const TextDivide = styled.Text`
   margin-horizontal: 10px;
   ${fontSizeTextScreen};
-  color: ${MatchMatePalette.whiteColor};
+  color: ${MatchMatePalette.secondaryTextColor};
 `;
 
 export const ContainerScreenMethod = styled.View`
@@ -128,7 +128,7 @@ export const TextDescriptionForgetPass = styled.Text`
 `;
 
 export const TextValidationCode = styled.Text`
-  color: ${MatchMatePalette.whiteColor};
+  color: ${MatchMatePalette.secondaryTextColor};
   ${fontSizeTextScreen};
   margin-top: 20px;
   margin-bottom: 20px;

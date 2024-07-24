@@ -46,7 +46,7 @@ export const BookingScreen = ({navigation, route}: any) => {
       <Text
         style={{
           fontSize: 17,
-          color: MatchMatePalette.whiteColor,
+          color: MatchMatePalette.secondaryTextColor,
           marginTop: 30,
           fontWeight: '700',
           paddingBottom: 20,

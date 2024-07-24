@@ -14,6 +14,8 @@ interface CloseIconSVG {
 //   color: string;
 }
 const CloseIconSVG = ({}: CloseIconSVG) => {
+  
+
   return (
     <Svg
       height="24px"

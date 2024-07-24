@@ -15,7 +15,7 @@ export const ContainerInput = styled.View`
   width: 100%;
   height: 70px;
   border-radius: 10px;
-  border: 1px solid ${MatchMatePalette.whiteColor};
+  border: 1px solid ${MatchMatePalette.secondaryTextColor};
   margin-bottom: 20px;
 `;
 export const ContainerContentInput = styled.View`
@@ -59,8 +59,9 @@ export const ButtonStyle = styled.TouchableOpacity`
   flex-direction: row;
 `;
 export const TextButton = styled.Text`
-  color: ${MatchMatePalette.whiteColor};
+  color: ${MatchMatePalette.secondaryTextColor};
   margin-left: 10px;
+  font-weight:600;
 `;
 
 //

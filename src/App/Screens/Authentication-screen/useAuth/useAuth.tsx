@@ -11,6 +11,7 @@ import { ToastAndroid } from 'react-native';
 import { useToast } from 'react-native-toast-notifications';
 import { MatchMatePalette } from '../../../../assets/color-palette';
 
+
 const CELL_COUNT = 6;
 
 export const useAuth = (navigation: any, route: any = false) => {

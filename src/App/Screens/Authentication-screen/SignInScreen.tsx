@@ -22,15 +22,15 @@ import MailIconSVG from '../../../assets/Icons/svg/MailIconSVG';
 import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
 import NavigateBack from '../../../Components/NavigateBack';
 
+
 const SignInScreen = ({navigation}: any) => {
   const {email, setEmail, password, setPassword, loginUser,loading } =
     useAuth(navigation);
-
   return (
     
     <ContainerApp>
       <StatusBar
-        barStyle={'light-content'}
+        barStyle={'dark-content'}
         backgroundColor={MatchMatePalette.darkBackgroundColor}
       />
       <ContainerScreen showsVerticalScrollIndicator={false}>
@@ -39,7 +39,8 @@ const SignInScreen = ({navigation}: any) => {
         </View>
         <HeaderConnexionScreen>
           <LogoApp
-            source={require('../../../assets/Logos/MatchMateDarkWhite.png')}
+            // source={require('../../../assets/Logos/MatchMateDarkWhite.png')}
+            source={require('../../../assets/Logos/MatchMate.png')}
           />
           <HeaderTitleText>Se Connecter à MatchMate</HeaderTitleText>
         </HeaderConnexionScreen>

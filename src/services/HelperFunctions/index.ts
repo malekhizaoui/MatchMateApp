@@ -60,13 +60,13 @@ export const extractTimeFromDate=(dateString:Date)=> {
     return daysInfo;
   };
 
-  export const getStarsReviw = (Feedbacks: Feedback[]): string => {
+  export const getStarsReviw = (feedbacks: Feedback[]): string => {
     let totalStars: number = 0;
-    Feedbacks.forEach((Feedback) => {
-      totalStars += Feedback.stars;
+    feedbacks.forEach((feedback) => {
+      totalStars += feedback.stars;
     });
   
-    const averageStars = totalStars / Feedbacks.length;
+    const averageStars = totalStars / feedbacks.length;
     return averageStars.toFixed(1);
   };
   

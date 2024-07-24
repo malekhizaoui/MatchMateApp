@@ -20,6 +20,7 @@ import {User} from '../../App/models/User';
 import {formatDate} from '../../services/HelperFunctions';
 import {MatchMatePalette} from '../../assets/color-palette';
 
+
 interface CardBookingComponentsProps {
   img : string |undefined;
   name: string;
@@ -168,8 +169,9 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: '500',
-    color: 'white',
+    color: MatchMatePalette.secondaryTextColor,
     marginRight: 'auto',
+
   },
   cardStars: {
     marginLeft: 2,

@@ -91,7 +91,7 @@ const ModalReviewComponent = ({
             </View>
             <View style={styles.inputContainer}>
               <TextInput
-                placeholderTextColor="white"
+                placeholderTextColor={MatchMatePalette.secondaryTextColor}
                 placeholder="Write your review here..."
                 value={reviewText}
                 onChangeText={setReviewText}

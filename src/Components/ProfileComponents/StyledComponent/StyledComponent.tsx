@@ -26,7 +26,7 @@ export const PropertyContainer = styled.TouchableOpacity`
 
 export const TextProperty = styled.Text`
   ${fontSizeTextScreen};
-  color: ${MatchMatePalette.primaryColor};
+  color: ${MatchMatePalette.secondaryTextColor};
   margin-left: 20px;
   font-weight: 600;
 `;
@@ -48,6 +48,7 @@ flex-direction:column;
 justify-content:space-between;
 height:90%;
 padding:2px
+
 `
 
 export const TextTitleInput =styled.Text`
@@ -121,7 +122,7 @@ export const TxtdetailLabel = styled.Text`
   margin-left: 10px;
 `;
 export const TextDesciption = styled.Text`
-  color: white;
+  color: ${MatchMatePalette.secondaryTextColor};
   ${fontSizeTextScreen};
   margin-left: 10px;
   margin-bottom: 4px;

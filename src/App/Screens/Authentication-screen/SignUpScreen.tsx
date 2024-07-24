@@ -19,6 +19,7 @@ import AgeIconSVG from '../../../assets/Icons/svg/AgeIconSV';
 import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
 import NavigateBack from '../../../Components/NavigateBack';
 
+
 const SignUpScreen = ({navigation}: any) => {
   const {
     email,

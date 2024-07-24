@@ -16,6 +16,8 @@ import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
 import StarIconNotFilledIconSVG from '../../assets/Icons/svg/StarIconNotFilledIconSVG';
 import { User } from '../../App/models/User';
 import { formatDate } from '../../services/HelperFunctions';
+import { MatchMatePalette } from '../../assets/color-palette';
+
 
 interface CardReviewComponentProps {
   user: User;
@@ -35,9 +37,9 @@ const CardReviewComponent = ({
     const starIcons = [];
     for (let i = 0; i < 5; i++) {
       if (i < stars) {
-        starIcons.push(<StarIconSVG key={i} color="yellow" />);
+        starIcons.push(<StarIconSVG key={i} color={MatchMatePalette.primaryColor} />);
       } else {
-        starIcons.push(<StarIconNotFilledIconSVG key={i} color="yellow" />);
+        starIcons.push(<StarIconNotFilledIconSVG key={i} color={MatchMatePalette.primaryColor} />);
       }
     }
     return starIcons;

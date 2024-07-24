@@ -36,7 +36,7 @@ const MatchDetailBoardComponent = ({stadium,timeSlot}: MatchDetailBoardComponent
     <PlayerLeftText>{playersLeft} players left</PlayerLeftText>
     <MatchTimeDetailContainer>
       <TimeText>{startTime}h</TimeText>
-      <NextIconSVG color={MatchMatePalette.whiteColor} />
+      <NextIconSVG color={MatchMatePalette.secondaryTextColor} />
       <TimeText>{endTime}h</TimeText>
     </MatchTimeDetailContainer>
   </MatchDetailBoard>

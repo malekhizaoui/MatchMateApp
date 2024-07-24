@@ -34,7 +34,7 @@ const ProfilePropertyComponent = ({
             {propertyText}
         </TextProperty>
         </View>
-        <NextIconSVG color={MatchMatePalette.primaryColor} />
+        <NextIconSVG color={MatchMatePalette.secondaryTextColor} />
         </PropertyContainer>
   );
 };

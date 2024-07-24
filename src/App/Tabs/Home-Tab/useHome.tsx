@@ -79,6 +79,7 @@ console.log("searchResults",searchResults);
   const getFieldsBaseOnRegion = async () => {    
     try {
      const res=await handleRequests('get',`fieldRegion/${region}`)  
+         console.log("resssssssssssssssssssssss",res[0].stadiums);
          
      res&& setfieldDataPut(res);
       setBasketballField(res[0].stadiums);

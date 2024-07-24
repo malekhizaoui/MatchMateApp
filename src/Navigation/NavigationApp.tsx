@@ -13,13 +13,12 @@ import ProfileSectionStack from './Stacks/ProfileSectionStack';
 import HomeSectionStack from './Stacks/HomeSectionStack';
 import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
 import { ScreenOptions } from './ScreenOptions';
-import ImmersiveMode from 'react-native-immersive-mode';
+// import { ThemeProvider,MatchMatePalette } from '../assets/color-palette';
+import LoadingScreen from '../App/Screens/Splach-screen/LoadingScreen';
 import { MatchMatePalette } from '../assets/color-palette';
 
-import LoadingScreen from '../App/Screens/Splach-screen/LoadingScreen';
-
 function NavigationApp() {
-  const [isLoading, setIsLoading] = useState(true); // State to manage loading state
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [choix, setChoix] = useState<string>('');
   const [barColor, setBarColor] = useState<string>('');
@@ -33,7 +32,7 @@ function NavigationApp() {
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoading(false); // Update loading state when finished retrieving
+      setIsLoading(false);
     }
   };
 
@@ -48,17 +47,6 @@ function NavigationApp() {
 
   useEffect(() => {
     retrieveUserSession();
-  }, []);
-
-  useEffect(() => {
-    // ComponentDidMount equivalent
-    ImmersiveMode.setBarMode('Normal');
-    ImmersiveMode.setBarColor(MatchMatePalette.lightBackgroundColor);
-
-    // componentWillUnmount equivalent
-    return () => {
-      ImmersiveMode.fullLayout(false);
-    };
   }, []);
 
   const authContext: AuthContextProps = useMemo(() => {
@@ -83,11 +71,12 @@ function NavigationApp() {
   const ref = createNavigationContainerRef();
 
   const TabNav = ({ routeName, authenticated = false }: any) => {
+    // 
     const hide = routeName === 'MatchDetail';
 
     return (
       <TabBarDourbia.Navigator
-        initialRouteName={'Home'}
+        initialRouteName={authenticated ? 'Home' : 'ProfileTab'}
         screenOptions={({ navigation, route }: any) => ({
           ...ScreenOptions({ navigation, route }),
           tabBarStyle: {
@@ -115,14 +104,16 @@ function NavigationApp() {
   };
 
   if (isLoading) {
-    return <LoadingScreen />; // Show loading screen while retrieving user session
+    return <LoadingScreen />;
   }
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        <TabNav routeName={routeName} authenticated={!signed} />
-      </NavigationContainer>
+      {/* <ThemeProvider> */}
+        <NavigationContainer>
+          <TabNav routeName={routeName} authenticated={!signed} />
+        </NavigationContainer>
+      {/* </ThemeProvider> */}
     </AuthContext.Provider>
   );
 }

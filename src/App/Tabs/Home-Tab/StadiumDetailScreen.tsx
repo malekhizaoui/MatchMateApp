@@ -50,6 +50,7 @@ export const StadiumDetailScreen = ({
   const [stadium, setStadium] = useState<Stadium | null>(null);
   const [feedbacks, setFeedbacks] = useState<Feedback[] | null>(null);
   const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
+  
 
   const getStadiumById = async () => {
     try {
@@ -69,7 +70,8 @@ export const StadiumDetailScreen = ({
   const handleAddReview = async () => {
     const token = await AsyncStorage.getItem('token');
     if (token) {
-      setModalVisible(true);
+    setModalVisible(true);
+    return;
     }
     navigation.navigate('ProfileTab', {Screen: 'ConnexionMethodScreen'});
   };
@@ -130,7 +132,7 @@ export const StadiumDetailScreen = ({
               <TxtContainer>
                 Reviews {feedbacks && getStarsReviw(feedbacks)}
               </TxtContainer>
-              <StarIconSVG color="yellow" />
+              <StarIconSVG color={MatchMatePalette.primaryColor} />
             </View>
             <TouchableOpacity onPress={handleAddReview}>
               <AddReviewText>Add Review</AddReviewText>

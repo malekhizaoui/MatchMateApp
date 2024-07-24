@@ -75,9 +75,8 @@ const LeaderBoardScreen = ({ navigation }: any) => {
                 }}
               />
               <KingIconSVG />
-              <FirstPlaceIconSVG color={MatchMatePalette.lightBackgroundColor} />
+              <FirstPlaceIconSVG color={MatchMatePalette.blackColor} />
             </UserConatinerLeaders>
-            <UserConatinerLeaders></UserConatinerLeaders>
             <HeaderTitleContainer>
               <TextNameLeader>{usersRank[0].firstName} {usersRank[0].lastName}</TextNameLeader>
               <View style={{ display: 'flex', flexDirection: 'row' }}>
@@ -99,7 +98,7 @@ const LeaderBoardScreen = ({ navigation }: any) => {
                 uri: usersRank[1].image,
               }}
             />
-            <SecondPlaceIconSVG color={MatchMatePalette.lightBackgroundColor} />
+            <SecondPlaceIconSVG color={MatchMatePalette.blackColor} />
             <HeaderTitleContainer>
               <TextNameLeader>{usersRank[1].firstName} {usersRank[1].lastName}</TextNameLeader>
               <View style={{ display: 'flex', flexDirection: 'row' }}>
@@ -121,7 +120,7 @@ const LeaderBoardScreen = ({ navigation }: any) => {
                 uri: usersRank[2].image,
               }}
             />
-            <ThirdPlaceIconSVG color={MatchMatePalette.lightBackgroundColor} />
+            <ThirdPlaceIconSVG color={MatchMatePalette.blackColor} />
             <HeaderTitleContainer>
               <TextNameLeader>{usersRank[2].firstName} {usersRank[2].lastName}</TextNameLeader>
               <View style={{ display: 'flex', flexDirection: 'row' }}>

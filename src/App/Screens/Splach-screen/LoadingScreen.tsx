@@ -13,7 +13,8 @@ const LoadingScreen: React.FC = () => {
       />
       <View>
         <Image
-          source={require('../../../assets/Logos/MatchMateDarkTurq.png')}
+          source={require('../../../assets/Logos/MatchMate.png')}
+          // source={require('../../../assets/Logos/MatchMateDarkTurq.png')}
           style={styles.imageContainer}></Image>
         <ActivityIndicator size="large" color={MatchMatePalette.primaryColor} />
       </View>

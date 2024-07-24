@@ -41,7 +41,7 @@ export const TextNameProfile = styled.Text`
 export const LineSperator = styled.View`
   width: 100%;
   height: 1px;
-  background-color: ${MatchMatePalette.whiteColor};
+  background-color: ${MatchMatePalette.secondaryTextColor};
   margin-top: 20px;
   margin-bottom: 35px;
 `;
@@ -117,7 +117,7 @@ export const EditProfilePropertiesContainer = styled.View`
 export const LineSperatorProperty = styled.View`
   width: 100%;
   height: 1px;
-  background-color: ${MatchMatePalette.whiteColor};
+  background-color: ${MatchMatePalette.secondaryTextColor};
   margin-top: 15px;
   margin-bottom: 15px;
 `;

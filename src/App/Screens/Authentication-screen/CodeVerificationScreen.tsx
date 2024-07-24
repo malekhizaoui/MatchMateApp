@@ -23,6 +23,7 @@ import {
 } from 'react-native-confirmation-code-field';
 import useAuth from './useAuth/useAuth';
 
+
 const CodeVerificationScreen = ({navigation,route}: any) => {
   const {
     verifyCode,
@@ -97,14 +98,14 @@ const styles = StyleSheet.create({
     lineHeight: 38,
     fontSize: 24,
     borderWidth: 1,
-    borderColor: MatchMatePalette.whiteColor,
+    borderColor: MatchMatePalette.secondaryTextColor,
     textAlign: 'center',
     backgroundColor: MatchMatePalette.blackColor,
     borderRadius: 5,
-    color: MatchMatePalette.whiteColor,
+    color: MatchMatePalette.secondaryTextColor,
     alignSelf: 'center',
   },
   focusCell: {
-    borderColor: MatchMatePalette.whiteColor,
+    borderColor: MatchMatePalette.secondaryTextColor,
   },
 });

@@ -6,6 +6,7 @@ import {
   TextTitleInput,
   TextInputStyle,
 } from './StyledComponent/StyledComponent';
+import { MatchMatePalette } from '../../assets/color-palette';
 
 interface InputUpdateFieldComponentProps {
   placeholder: string;

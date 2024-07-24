@@ -50,7 +50,7 @@ const {userData,signOut}=useProfile(navigation)
         <ProfilePropertyContent>
           <ProfilePropertyComponent
             propertyText="Personal information"
-            icon={<InfoPersoIconSVG color={MatchMatePalette.primaryColor} />}
+            icon={<InfoPersoIconSVG color={MatchMatePalette.secondaryTextColor} />}
             toNavigate={() => {
               navigation.navigate('EditProfile');
             }}
@@ -58,7 +58,7 @@ const {userData,signOut}=useProfile(navigation)
           <LineSperator></LineSperator>
           <ProfilePropertyComponent
             propertyText="Settings"
-            icon={<SettingsIconSVG color={MatchMatePalette.primaryColor} />}
+            icon={<SettingsIconSVG color={MatchMatePalette.secondaryTextColor} />}
             toNavigate={() => {
               navigation.navigate('EditProfile');
             }}
@@ -66,7 +66,7 @@ const {userData,signOut}=useProfile(navigation)
           <LineSperator></LineSperator>
           <ProfilePropertyComponent
             propertyText="Your reviews"
-            icon={<ReviewsIconSVG color={MatchMatePalette.primaryColor} />}
+            icon={<ReviewsIconSVG color={MatchMatePalette.secondaryTextColor} />}
             toNavigate={() => {
               navigation.navigate('Reviews');
             }}
@@ -74,7 +74,7 @@ const {userData,signOut}=useProfile(navigation)
           <LineSperator></LineSperator>
           <ProfilePropertyComponent
             propertyText="Game history"
-            icon={<GameHistoryIconSVG color={MatchMatePalette.primaryColor} />}
+            icon={<GameHistoryIconSVG color={MatchMatePalette.secondaryTextColor} />}
             toNavigate={() => {
               navigation.navigate('GameHistory');
             }}
@@ -82,7 +82,7 @@ const {userData,signOut}=useProfile(navigation)
           <LineSperator></LineSperator>
           <ProfilePropertyComponent
             propertyText="Log out"
-            icon={<LogoutIconSVG color={MatchMatePalette.primaryColor} />}
+            icon={<LogoutIconSVG color={MatchMatePalette.secondaryTextColor} />}
             toNavigate={signOut}
           />
           <LineSperator></LineSperator>

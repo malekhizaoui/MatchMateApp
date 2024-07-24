@@ -17,6 +17,9 @@ import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthCo
 import MailIconSVG from '../../../assets/Icons/svg/MailIconSVG';
 import PasswordIconSVG from '../../../assets/Icons/svg/PasswordIconSVG';
 import TickIconSVG from '../../../assets/Icons/svg/TickIconSVG';
+
+
+
 const PasswordForgottenScreen = ({navigation, route}: any) => {
   const {
     setBarColorCntxt,
@@ -49,7 +52,7 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
           {step !== 3 ? (
             <LockerIconSVG color={MatchMatePalette.primaryColor} />
           ) : (
-            <TickIconSVG color={MatchMatePalette.whiteColor} />
+            <TickIconSVG color={MatchMatePalette.secondaryTextColor} />
           )}
         </ImagePasswordContainer>
         {step !== 3 ? (
@@ -74,7 +77,7 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
               <ButtonAuthComponent
                 btnText="Continuer"
                 backgroundColor={MatchMatePalette.darkBackgroundColor}
-                btnTextColor={MatchMatePalette.whiteColor}
+                btnTextColor={MatchMatePalette.secondaryTextColor}
                 btnClicked={resentCode}
                 iconComponent={''}
               />
@@ -108,7 +111,7 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
               <ButtonAuthComponent
                 btnText="Continuer"
                 backgroundColor={MatchMatePalette.darkBackgroundColor}
-                btnTextColor={MatchMatePalette.whiteColor}
+                btnTextColor={MatchMatePalette.secondaryTextColor}
                 btnClicked={resetPassword}
                 iconComponent={''}
               />
@@ -127,7 +130,7 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
             <ButtonAuthComponent
               btnText="Connexion"
               backgroundColor={MatchMatePalette.darkBackgroundColor}
-              btnTextColor={MatchMatePalette.whiteColor}
+              btnTextColor={MatchMatePalette.secondaryTextColor}
               btnClicked={()=>{navigation.navigate('Signin')}}
               iconComponent={''}
             />

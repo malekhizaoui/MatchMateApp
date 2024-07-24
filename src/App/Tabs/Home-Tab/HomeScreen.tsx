@@ -21,9 +21,15 @@ import { MatchMatePalette } from '../../../assets/color-palette';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
+import { useColorScheme } from "react-native"
+
 import { Screen } from 'react-native-screens';
 
 export const HomeScreen = ({ navigation }: any) => {
+  const colorScheme = useColorScheme();
+console.log("colorScheme",colorScheme);
+
+
   const {
     fieldSelected,
     footballField,
@@ -46,7 +52,7 @@ export const HomeScreen = ({ navigation }: any) => {
   return (
     <ContainerApp>
       <StatusBar
-        barStyle={'light-content'}
+        barStyle={'dark-content'}
         backgroundColor={MatchMatePalette.darkBackgroundColor}
       />
       <ContainerScreen>

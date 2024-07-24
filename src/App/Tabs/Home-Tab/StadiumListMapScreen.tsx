@@ -31,7 +31,7 @@ const StadiumListMapScreen: React.FC<StadiumListMapProps> = ({stadiums}) => {
 
   return (
     <YaMap
-    nightMode=  {true}
+    // nightMode=  {true}
       style={{flex: 1}}
       showUserPosition={true}
       initialRegion={initialRegion}>

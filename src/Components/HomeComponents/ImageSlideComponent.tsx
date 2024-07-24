@@ -23,7 +23,6 @@ const ImageSlideComponent = ({
   stadium,
   reviewStars,
 }: ImageSlideComponentProps) => {
-  console.log('sssss', !!stadium?.imageURL);
 
   return (
     <ImagesStadiumContainer>
@@ -40,7 +39,7 @@ const ImageSlideComponent = ({
           position: 'absolute',
           bottom: '5%',
           right: 15,
-          backgroundColor: MatchMatePalette.lightBackgroundColor,
+          backgroundColor: MatchMatePalette.blackColor,
           alignItems: 'center',
           display: 'flex',
           justifyContent: 'center',
@@ -55,7 +54,7 @@ const ImageSlideComponent = ({
           position: 'absolute',
           bottom: '5%',
           left: 15,
-          backgroundColor: MatchMatePalette.lightBackgroundColor,
+          backgroundColor: MatchMatePalette.blackColor,
           alignItems: 'center',
           display: 'flex',
           justifyContent: 'center',
@@ -64,7 +63,7 @@ const ImageSlideComponent = ({
           width: 60,
           flexDirection: 'row',
         }}>
-        <StarIconSVG color="yellow" />
+        <StarIconSVG color={MatchMatePalette.primaryColor} />
         <Text style={{color: MatchMatePalette.whiteColor}}>{reviewStars}</Text>
       </TouchableOpacity>
     </ImagesStadiumContainer>

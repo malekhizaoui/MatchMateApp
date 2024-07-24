@@ -27,7 +27,7 @@ interface StadiumLocationMapComponentProps {
 const StadiumLocationMapComponent = ({stadium}: StadiumLocationMapComponentProps) => {
   return (
     <YaMap
-            nightMode={true}
+            // nightMode={true}
             style={{flex: 1 }}
             showUserPosition={true}
             initialRegion={{

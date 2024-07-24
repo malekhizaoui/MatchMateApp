@@ -14,6 +14,7 @@ import useHome, {styles} from './useHome';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
 import {MatchMatePalette} from '../../../assets/color-palette';
 import ImageListFieldComponent from '../../../Components/HomeComponents/ImageListFieldComponent';
+import NavigateBack from '../../../Components/NavigateBack';
 
 export const FieldListScreen = ({navigation}: any) => {
   const {
@@ -26,6 +27,7 @@ export const FieldListScreen = ({navigation}: any) => {
     region,
     setRegion,
   } = useHome(navigation);
+  
 
   // Handle region change only when user selects an option
   const handleRegionChange = (item: {value: string}) => {
@@ -36,6 +38,7 @@ export const FieldListScreen = ({navigation}: any) => {
 
   return (
     <ContainerApp>
+      <NavigateBack navigation={navigation} headerTitle={'Field List'} />
       <StatusBar
         barStyle={'light-content'}
         backgroundColor={MatchMatePalette.darkBackgroundColor}

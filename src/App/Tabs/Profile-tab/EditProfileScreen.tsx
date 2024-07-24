@@ -64,7 +64,7 @@ const EditProfileScreen = ({ navigation }: any) => {
           <EditIconContainer>
             <TouchableOpacity >
               <EditIcon>
-                <EditPicIconSVG color={MatchMatePalette.darkBackgroundColor} />
+                <EditPicIconSVG color={MatchMatePalette.secondaryTextColor} />
               </EditIcon>
             </TouchableOpacity>
           </EditIconContainer>

@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     borderColor: MatchMatePalette.lightBackgroundColor,
   },
   tabText: {
-    color: 'white',
+    color: MatchMatePalette.secondaryTextColor,
     fontSize: 16,
   },
   activeTabText: {

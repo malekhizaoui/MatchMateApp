@@ -26,6 +26,7 @@ import { handleRequests } from '../../../services/HandleRequests';
 import ModalReviewComponent from '../../../Components/HomeComponents/ModalReviewComponent';
 import ModalQrCodeGenerateComponent from '../../../Components/HomeComponents/ModalQrCodeGenerateComponent';
 
+
 export const MatchDetailScreen = ({ navigation, route }: any) => {
   const { stadium, timeSlot } = route.params;
 
@@ -38,7 +39,6 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
       : stadium.field.fieldName === 'FootBall'
       ? TeamPositionsFootball
       : TeamPositionsVolleyBall;
-   console.log("qrCode",qrCode);
 
   const joinTeam = async () => {
     setLoading(true)
@@ -119,11 +119,6 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
         {modalVisible && (
         <ModalQrCodeGenerateComponent qrCode={qrCode} modalVisible={modalVisible} setModalVisible={setModalVisible} stadiumId={stadium?.id}/>
       )}
-      {
-        loading&&(
-         <></>
-        )
-      }
       </MatchDetailContainer>
     </ContainerApp>
   );

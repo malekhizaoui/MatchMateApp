@@ -292,7 +292,6 @@ export const HeaderContainer = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 10px;
   padding-bottom: 10px;
   margin-top: 30px;
   width: 85%;
@@ -307,7 +306,7 @@ export const UpdateRegionContainer = styled.View`
   flex-direction: row;
 `;
 export const RegionExploreTxt = styled.Text`
-  color: ${MatchMatePalette.whiteColor};
+  color: ${MatchMatePalette.secondaryTextColor};
   ${fontSizeTextScreen};
 `;
 export const RegionTxt = styled.Text`
@@ -324,7 +323,7 @@ export const TextContainer = styled.View`
   flex-direction: row;
 `;
 export const TextTitleList = styled.Text`
-  color: ${MatchMatePalette.whiteColor};
+  color: ${MatchMatePalette.secondaryTextColor};
   ${fontSizeTextScreen};
   font-weight: 600;
 `;
@@ -361,6 +360,8 @@ export const InputContainer = styled.View`
   border-radius: 25px;
   align-self: center;
   margin-top: 10px;
+  border-color:${MatchMatePalette.secondaryTextColor};
+  border:1px
 `;
 export const TextInputStyle = styled.TextInput`
   color: grey;
@@ -393,9 +394,9 @@ export const ExpandMore = styled.View`
 `;
 
 export const TxtContainer = styled.Text`
-  color: ${MatchMatePalette.whiteColor};
+  color: ${MatchMatePalette.secondaryTextColor};
   ${fontSizeTextScreen};
-  font-weight: 600;
+  font-weight: 700;
   margin-right: 10px;
 `;
 
@@ -431,7 +432,7 @@ export const CloseContainerIcon = styled.TouchableOpacity`
   width: 40px;
   height: 40px;
   border-radius: 20px;
-  background-color: ${MatchMatePalette.darkBackgroundColor};
+  background-color: ${MatchMatePalette.blackColor};
   z-index: 99999;
   position: absolute;
   right: 10px;
