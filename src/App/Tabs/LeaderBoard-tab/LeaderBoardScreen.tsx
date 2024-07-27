@@ -20,7 +20,7 @@ import {
   ConatinerLeaders,
   TextPointLeader,
 } from './StyleComponent/StyledComponent';
-import { MatchMatePalette } from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import KingIconSVG from '../../../assets/Icons/svg/KingIconSVG';
 import FirstPlaceIconSVG from '../../../assets/Icons/svg/FirstPlaceIconSVG';
 import SecondPlaceIconSVG from '../../../assets/Icons/svg/SecondPlaceIconSVG';
@@ -35,6 +35,7 @@ import SkeletonLeaderBoardCard from '../../../Components/SkeletonLoadingComponen
 const LeaderBoardScreen = ({ navigation }: any) => {
   const [profileHovered, setProfileHovered] = useState<number | null>(null);
   const [usersRank, setUsersRank] = useState<User[] >([]);
+  const palette = usePalette();
 
   const getAllRankedUsers = async () => {
     try {
@@ -59,29 +60,29 @@ const LeaderBoardScreen = ({ navigation }: any) => {
  
 
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.primaryColor}
+        backgroundColor={palette.primaryColor}
       />
-      <TextHeader>LeaderBoard</TextHeader>
-      <LeaderHeaderContainer>
+      <TextHeader palette={palette}>LeaderBoard</TextHeader>
+      <LeaderHeaderContainer palette={palette}>
         {usersRank.length>0 ?usersRank[0] && (
           <ConatinerLeaders>
             <UserConatinerLeaders>
-              <ImageLeader
+              <ImageLeader palette={palette}
                 source={{
                   uri: usersRank[0].image,
                 }}
               />
               <KingIconSVG />
-              <FirstPlaceIconSVG color={MatchMatePalette.blackColor} />
+              <FirstPlaceIconSVG color={palette.blackColor} />
             </UserConatinerLeaders>
             <HeaderTitleContainer>
-              <TextNameLeader>{usersRank[0].firstName} {usersRank[0].lastName}</TextNameLeader>
+              <TextNameLeader palette={palette}>{usersRank[0].firstName} {usersRank[0].lastName}</TextNameLeader>
               <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <PointsIconSVG color={MatchMatePalette.darkBackgroundColor} />
-                <TextPointLeader> {usersRank[0].gameHistories.length} pts</TextPointLeader>
+                <PointsIconSVG color={palette.darkBackgroundColor} />
+                <TextPointLeader palette={palette}>  {usersRank[0].gameHistories.length} pts</TextPointLeader>
               </View>
             </HeaderTitleContainer>
           </ConatinerLeaders>
@@ -93,17 +94,17 @@ const LeaderBoardScreen = ({ navigation }: any) => {
 
         {usersRank.length>0 ?usersRank[1] && (
           <UserConatinerLeadersA>
-            <ImageLeaderA
+            <ImageLeaderA palette={palette}
               source={{
                 uri: usersRank[1].image,
               }}
             />
-            <SecondPlaceIconSVG color={MatchMatePalette.blackColor} />
+            <SecondPlaceIconSVG color={palette.blackColor} />
             <HeaderTitleContainer>
-              <TextNameLeader>{usersRank[1].firstName} {usersRank[1].lastName}</TextNameLeader>
+              <TextNameLeader palette={palette}>{usersRank[1].firstName} {usersRank[1].lastName}</TextNameLeader>
               <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <PointsIconSVG color={MatchMatePalette.darkBackgroundColor} />
-                <TextPointLeader> {usersRank[1].gameHistories.length} pts</TextPointLeader>
+                <PointsIconSVG color={palette.darkBackgroundColor} />
+                <TextPointLeader palette={palette}> {usersRank[1].gameHistories.length} pts</TextPointLeader>
               </View>
             </HeaderTitleContainer>
           </UserConatinerLeadersA>
@@ -115,17 +116,17 @@ const LeaderBoardScreen = ({ navigation }: any) => {
 
         {usersRank.length>0?usersRank[2] && (
           <UserConatinerLeadersB>
-            <ImageLeaderA
+            <ImageLeaderA palette={palette}
               source={{
                 uri: usersRank[2].image,
               }}
             />
-            <ThirdPlaceIconSVG color={MatchMatePalette.blackColor} />
+            <ThirdPlaceIconSVG color={palette.blackColor} />
             <HeaderTitleContainer>
-              <TextNameLeader>{usersRank[2].firstName} {usersRank[2].lastName}</TextNameLeader>
+              <TextNameLeader palette={palette}>{usersRank[2].firstName} {usersRank[2].lastName}</TextNameLeader>
               <View style={{ display: 'flex', flexDirection: 'row' }}>
-                <PointsIconSVG color={MatchMatePalette.darkBackgroundColor} />
-                <TextPointLeader> {usersRank[2].gameHistories.length} pts</TextPointLeader>
+                <PointsIconSVG color={palette.darkBackgroundColor} />
+                <TextPointLeader palette={palette}> {usersRank[2].gameHistories.length} pts</TextPointLeader>
               </View>
             </HeaderTitleContainer>
           </UserConatinerLeadersB>
@@ -136,7 +137,7 @@ const LeaderBoardScreen = ({ navigation }: any) => {
         </UserConatinerLeadersB>)}
       </LeaderHeaderContainer>
 
-      <LeaderPropertiesContainer
+      <LeaderPropertiesContainer palette={palette}
         contentContainerStyle={{
           alignItems: 'center',
           justifyContent: 'space-between',

@@ -20,13 +20,15 @@ import {
   TxtBtn,
   BtnContainer,
 } from './StyledComponent/StyledComponent';
-import { MatchMatePalette } from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import { InputUpdateFieldComponent } from '../../../Components/ProfileComponents/InputUpdateFieldComponent';
 import NavigateBack from '../../../Components/NavigateBack';
 import EditPicIconSVG from '../../../assets/Icons/svg/EditPicIconSVG';
 import useProfile from './useProfile'; // Ensure correct path to useProfile
 
 const EditProfileScreen = ({ navigation }: any) => {
+  const palette = usePalette();
+
   const {
     userData,
     setPassword,
@@ -41,19 +43,19 @@ const EditProfileScreen = ({ navigation }: any) => {
   } = useProfile(navigation);
 
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <NavigateBack
         navigation={navigation}
         headerTitle={'Edit profile'}
-        color={MatchMatePalette.darkBackgroundColor}
+        color={palette.darkBackgroundColor}
       />
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.primaryColor}
+        backgroundColor={palette.primaryColor}
       />
-      <EditProfileHeaderContainer >
+      <EditProfileHeaderContainer palette={palette}>
         <View style={{ position: 'relative' }}>
-          <ImageProfile
+          <ImageProfile palette={palette}
             source={
               // {uri:"https://media.licdn.com/dms/image/D4E03AQF9mGOMHjgeFw/profile-displayphoto-shrink_800_800/0/1691514563140?e=2147483647&v=beta&t=Dtl8CXMfr032HwoVz3eo6slKJ-KUKFzGAocaqZMnvIw"}
               userData?.image
@@ -63,20 +65,20 @@ const EditProfileScreen = ({ navigation }: any) => {
           />
           <EditIconContainer>
             <TouchableOpacity >
-              <EditIcon>
-                <EditPicIconSVG color={MatchMatePalette.secondaryTextColor} />
+              <EditIcon palette={palette}>
+                <EditPicIconSVG color={palette.secondaryTextColor} />
               </EditIcon>
             </TouchableOpacity>
           </EditIconContainer>
         </View>
         <HeaderTitleContainer>
-          <TextNameProfile>
+          <TextNameProfile palette={palette}>
             {userData?.firstName} {userData?.lastName}
           </TextNameProfile>
-          <TextNameProfile>{userData?.email}</TextNameProfile>
+          <TextNameProfile palette={palette}>{userData?.email}</TextNameProfile>
         </HeaderTitleContainer>
       </EditProfileHeaderContainer>
-      <EditProfilePropertiesContainer>
+      <EditProfilePropertiesContainer palette={palette}>
         <ProfilePropertyContent>
           <InputUpdateFieldComponent
             inputName="First name"
@@ -84,31 +86,31 @@ const EditProfileScreen = ({ navigation }: any) => {
             setValue={setFirstName}
             value={firstName}
           />
-          <LineSperatorProperty />
+          <LineSperatorProperty palette={palette}/>
           <InputUpdateFieldComponent
             inputName="Last name"
             placeholder={`Edit ${userData?.lastName}`}
             setValue={setLastName}
             value={lastName}
           />
-          <LineSperatorProperty />
+          <LineSperatorProperty palette={palette} />
           <InputUpdateFieldComponent
             inputName="Age"
             placeholder={`Edit ${userData?.age} years old`}
             setValue={setAge}
             value={age}
           />
-          <LineSperatorProperty />
+          <LineSperatorProperty palette={palette}/>
           <InputUpdateFieldComponent
             inputName="Password"
             placeholder={`Edit ***********`}
             setValue={setPassword}
             value={password}
           />
-          <LineSperatorProperty />
+          <LineSperatorProperty palette={palette}/>
         </ProfilePropertyContent>
-        <BtnContainer onPress={() => updateUser()}>
-          <TxtBtn>Save changes</TxtBtn>
+        <BtnContainer palette={palette} onPress={() => updateUser()}>
+          <TxtBtn palette={palette}>Save changes</TxtBtn>
         </BtnContainer>
       </EditProfilePropertiesContainer>
     </ContainerApp>

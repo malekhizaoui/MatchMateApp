@@ -19,7 +19,7 @@ import {
   ProfilePropertyContent,
 } from './StyledComponent/StyledComponent';
 import { AuthContext } from '../../../services/Context/AuthContext';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import GameHistoryIconSVG from '../../../assets/Icons/svg/GameHistoryIconSVG';
 import InfoPersoIconSVG from '../../../assets/Icons/svg/InfoPersoIconSVG';
 import SettingsIconSVG from '../../../assets/Icons/svg/SettingsIconSVG';
@@ -30,68 +30,70 @@ import ReviewsIconSVG from '../../../assets/Icons/svg/ReviewsIconSVG';
 import SkeletonHeaderProfileUser from '../../../Components/SkeletonLoadingComponents/SkeletonHeaderProfileUser';
 const ProfileScreen = ({navigation}: any) => {
 const {userData,signOut}=useProfile(navigation)
+const palette = usePalette();
+
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.primaryColor}
+        backgroundColor={palette.primaryColor}
       />
-      <TextHeader>Profile</TextHeader>
-      {userData?.image?(<ProfileHeaderContainer>
-        <ImageProfile
+      <TextHeader palette={palette}>Profile</TextHeader>
+      {userData?.image?(<ProfileHeaderContainer palette={palette}>
+        <ImageProfile palette={palette}
           source={{uri:userData.image}}/>
 
         <HeaderTitleContainer>
-          <TextNameProfile>{userData?.firstName} {userData?.lastName}</TextNameProfile>
-          <TextNameProfile>{userData?.email}</TextNameProfile>
+          <TextNameProfile palette={palette}>{userData?.firstName} {userData?.lastName}</TextNameProfile>
+          <TextNameProfile palette={palette}>{userData?.email}</TextNameProfile>
         </HeaderTitleContainer>
       </ProfileHeaderContainer>):<SkeletonHeaderProfileUser/>}
-      <ProfilePropertiesContainer>
+      <ProfilePropertiesContainer palette={palette}>
         <ProfilePropertyContent>
           <ProfilePropertyComponent
             propertyText="Personal information"
-            icon={<InfoPersoIconSVG color={MatchMatePalette.secondaryTextColor} />}
+            icon={<InfoPersoIconSVG color={palette.secondaryTextColor} />}
             toNavigate={() => {
               navigation.navigate('EditProfile');
             }}
           />
-          <LineSperator></LineSperator>
+          <LineSperator palette={palette}></LineSperator>
           <ProfilePropertyComponent
             propertyText="Settings"
-            icon={<SettingsIconSVG color={MatchMatePalette.secondaryTextColor} />}
+            icon={<SettingsIconSVG color={palette.secondaryTextColor} />}
             toNavigate={() => {
               navigation.navigate('EditProfile');
             }}
           />
-          <LineSperator></LineSperator>
+          <LineSperator palette={palette}></LineSperator>
           <ProfilePropertyComponent
             propertyText="Your reviews"
-            icon={<ReviewsIconSVG color={MatchMatePalette.secondaryTextColor} />}
+            icon={<ReviewsIconSVG color={palette.secondaryTextColor} />}
             toNavigate={() => {
               navigation.navigate('Reviews');
             }}
           />
-          <LineSperator></LineSperator>
+          <LineSperator palette={palette}></LineSperator>
           <ProfilePropertyComponent
             propertyText="Game history"
-            icon={<GameHistoryIconSVG color={MatchMatePalette.secondaryTextColor} />}
+            icon={<GameHistoryIconSVG color={palette.secondaryTextColor} />}
             toNavigate={() => {
               navigation.navigate('GameHistory');
             }}
           />
-          <LineSperator></LineSperator>
+          <LineSperator palette={palette}></LineSperator>
           <ProfilePropertyComponent
             propertyText="Log out"
-            icon={<LogoutIconSVG color={MatchMatePalette.secondaryTextColor} />}
+            icon={<LogoutIconSVG color={palette.secondaryTextColor} />}
             toNavigate={signOut}
           />
-          <LineSperator></LineSperator>
+          <LineSperator palette={palette}></LineSperator>
         </ProfilePropertyContent>
 
-        {/* <TouchableOpacity style={{backgroundColor:MatchMatePalette.primaryColor,width:'70%',height:50,display:"flex",borderRadius:20,justifyContent:"center",alignItems:"center"}}>
+        {/* <TouchableOpacity style={{backgroundColor:palette.primaryColor,width:'70%',height:50,display:"flex",borderRadius:20,justifyContent:"center",alignItems:"center"}}>
                 <Text  style={{
                   fontSize: 16,
-                  color: '${MatchMatePalette.whiteColor}',
+                  color: '${palette.whiteColor}',
                   fontWeight: '600',
                 }}>Logout</Text>
                 </TouchableOpacity> */}

@@ -10,7 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {ContainerAppReviews} from './StyledComponent/StyledComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import NavigateBack from '../../../Components/NavigateBack';
 import useProfile from './useProfile';
 import FireIconSVG from '../../../assets/Icons/svg/FireIconSVG';
@@ -24,6 +24,7 @@ const ReviewsScreen = ({navigation}: any) => {
     useProfile(navigation);
   const [activeTab, setActiveTab] = useState('readyForReview');
   console.log('stadiumsExcludingFeedback', stadiumsExcludingFeedback);
+  const palette = usePalette();
 
   const reviewedCards = [
     {id: '3', title: 'Game 3'},
@@ -35,17 +36,47 @@ const ReviewsScreen = ({navigation}: any) => {
       <Text>{item.title}</Text>
     </View>
   );
-
+  const styles = StyleSheet.create({
+    tabContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      backgroundColor: palette.darkBackgroundColor,
+      paddingVertical: 10,
+      width: '100%',
+      borderTopWidth: 2,
+      borderBottomWidth: 2,
+      borderColor: palette.lightBackgroundColor,
+    },
+    tabText: {
+      color: palette.secondaryTextColor,
+      fontSize: 16,
+    },
+    activeTabText: {
+      fontWeight: 'bold',
+    },
+    activeTabIndicator: {
+      height: 2,
+      backgroundColor: 'grey',
+      marginTop: 5,
+    },
+    card: {
+      backgroundColor: 'white',
+      padding: 20,
+      marginVertical: 10,
+      marginHorizontal: 20,
+      borderRadius: 10,
+    },
+  });
   return (
-    <ContainerAppReviews>
+    <ContainerAppReviews palette={palette}>
       <NavigateBack
         navigation={navigation}
         headerTitle={'Your reviews'}
-        // color={MatchMatePalette.darkBackgroundColor}
+        // color={palette.darkBackgroundColor}
       />
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
 
       <View style={styles.tabContainer}>
@@ -99,36 +130,6 @@ const ReviewsScreen = ({navigation}: any) => {
   );
 };
 
-const styles = StyleSheet.create({
-  tabContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: MatchMatePalette.darkBackgroundColor,
-    paddingVertical: 10,
-    width: '100%',
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
-    borderColor: MatchMatePalette.lightBackgroundColor,
-  },
-  tabText: {
-    color: MatchMatePalette.secondaryTextColor,
-    fontSize: 16,
-  },
-  activeTabText: {
-    fontWeight: 'bold',
-  },
-  activeTabIndicator: {
-    height: 2,
-    backgroundColor: 'grey',
-    marginTop: 5,
-  },
-  card: {
-    backgroundColor: 'white',
-    padding: 20,
-    marginVertical: 10,
-    marginHorizontal: 20,
-    borderRadius: 10,
-  },
-});
+
 
 export default ReviewsScreen;

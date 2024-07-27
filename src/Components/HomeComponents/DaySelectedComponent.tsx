@@ -11,10 +11,8 @@ import {
   DayText,
   MonthText,
 } from './StyledComponent/StyledComponent';
-import PreviousIconSVG from '../../assets/Icons/svg/PreviousIconSVG';
-import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
-import ExpandIconSVG from '../../assets/Icons/svg/ExpandIconSVG';
-import {MatchMatePalette} from '../../assets/color-palette';
+
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 interface DaySelectedComponentProps {
   selectedDay: object;
   item: any;
@@ -26,12 +24,17 @@ const DaySelectedComponent = ({
   setSelectedDay,
   item,
 }: DaySelectedComponentProps) => {
-  
+  const palette=usePalette()
+
   return (
-    <DayContent onPress={() => {setSelectedDay(item)}
-    }>
-      <DayText>{item.day}</DayText>
-      <MonthText>{item.date}</MonthText>
+    <DayContent onPress={() => {setSelectedDay(item)} 
+    }
+    palette={palette}
+>
+      <DayText     palette={palette}
+      >{item.day}</DayText>
+      <MonthText     palette={palette}
+      > {item.date}</MonthText>
       <View
         style={[selectedDay === item && styles.selectedDayContainer]}></View>
         </DayContent>

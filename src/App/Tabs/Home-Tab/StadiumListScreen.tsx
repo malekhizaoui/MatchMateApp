@@ -15,7 +15,7 @@ import {
 } from './StyledComponent/StyledComponent';
 import SearchCardComponent from '../../../Components/HomeComponents/SearchCardComponent';
 import ImageListStadiumComponent from '../../../Components/HomeComponents/ImageListStadiumComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
 import StadiumListMapScreen from './StadiumListMapScreen';
 import StadiumCardMapComponent from '../../../Components/HomeComponents/StadiumCardMapComponent';
@@ -32,6 +32,8 @@ interface StadiumListScreenProps {
 }
 
 export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation, route}) => {
+  const palette = usePalette();
+
   const {fieldDataPass} = route.params;
   const [showMap, setShowMap] = useState(true);
   const [filteredStadiums, setFilteredStadiums] = useState(fieldDataPass);
@@ -50,8 +52,8 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
           barStyle={'dark-content'}
           backgroundColor={
             !showMap
-              ? MatchMatePalette.darkBackgroundColor
-              : MatchMatePalette.darkBackgroundColor
+              ? palette.darkBackgroundColor
+              : palette.darkBackgroundColor
           }
         />
         <TouchableOpacity
@@ -61,8 +63,8 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
           <BackIconSVG
             color={
               showMap
-                ? MatchMatePalette.primaryColor
-                : MatchMatePalette.secondaryTextColor
+                ? palette.primaryColor
+                : palette.secondaryTextColor
             }
             btnClicked={() => {
               navigation.goBack();
@@ -74,11 +76,11 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
           onPress={() => {
             setShowMap(!showMap);
           }}>
-          <TextTypeOfRender
+          <TextTypeOfRender palette={palette}
             style={{
               color: showMap
-                ? MatchMatePalette.primaryColor
-                : MatchMatePalette.secondaryTextColor,
+                ? palette.primaryColor
+                : palette.secondaryTextColor,
             }}>
             {showMap ? 'Map' : 'List'}
           </TextTypeOfRender>
@@ -87,7 +89,7 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
       {showMap ? (
         <ContainerListStadiumScreen
           style={{
-            backgroundColor: MatchMatePalette.darkBackgroundColor,
+            backgroundColor: palette.darkBackgroundColor,
             marginTop: 0,
             paddingTop: 50,
           }}
@@ -100,7 +102,7 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
           <ListStadiumContainer>
             <Text
               style={{
-                color: MatchMatePalette.secondaryTextColor,
+                color: palette.secondaryTextColor,
                 fontSize: 15,
                 fontWeight: '600',
                 marginBottom: 10,

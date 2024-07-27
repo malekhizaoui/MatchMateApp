@@ -13,9 +13,9 @@ import ProfileSectionStack from './Stacks/ProfileSectionStack';
 import HomeSectionStack from './Stacks/HomeSectionStack';
 import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
 import { ScreenOptions } from './ScreenOptions';
-// import { ThemeProvider,MatchMatePalette } from '../assets/color-palette';
+// import { ThemeProvider,palette } from '../assets/color-palette';
 import LoadingScreen from '../App/Screens/Splach-screen/LoadingScreen';
-import { MatchMatePalette } from '../assets/color-palette';
+import { usePalette } from '../assets/color-palette/ThemeApp';
 
 function NavigationApp() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +24,7 @@ function NavigationApp() {
   const [barColor, setBarColor] = useState<string>('');
   const [signed, setSigned] = useState(true);
   const [routeName, setRouteName] = useState<string | undefined>();
-
+  const palette=usePalette()
   const retrieveUserSession = async () => {
     try {
       const res = await AsyncStorage.getItem('token');
@@ -80,12 +80,12 @@ function NavigationApp() {
         screenOptions={({ navigation, route }: any) => ({
           ...ScreenOptions({ navigation, route }),
           tabBarStyle: {
-            backgroundColor: MatchMatePalette.lightBackgroundColor,
+            backgroundColor: palette.lightBackgroundColor,
             padding: 10,
             height: '8%',
             width: '100%',
             alignSelf: 'center',
-            borderColor: MatchMatePalette.whiteColor,
+            borderColor: palette.whiteColor,
             border: 1,
           },
         })}>

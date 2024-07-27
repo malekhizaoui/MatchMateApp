@@ -11,7 +11,7 @@ import {
   AddReviewText,
 } from './StyledComponent/StyledComponent';
 import CardReviewComponent from '../../../Components/HomeComponents/CardReviewComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import NavigateBack from '../../../Components/NavigateBack';
 import ImageSlideComponent from '../../../Components/HomeComponents/ImageSlideComponent';
 import DescriptionStadiumComponent from '../../../Components/HomeComponents/DescriptionStadiumComponent';
@@ -45,6 +45,8 @@ export const StadiumDetailScreen = ({
   navigation,
   route,
 }: StadiumDetailScreenProps) => {
+  const palette = usePalette();
+
   const {stadiumId} = route.params;
   const [showMap, setShowMap] = useState(false);
   const [stadium, setStadium] = useState<Stadium | null>(null);
@@ -76,16 +78,16 @@ export const StadiumDetailScreen = ({
     navigation.navigate('ProfileTab', {Screen: 'ConnexionMethodScreen'});
   };
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <NavigateBack
         navigation={navigation}
         headerTitle={'Stadium Detail'}
-        color={MatchMatePalette.primaryColor}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        color={palette.primaryColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
       {!showMap && (
         <ContainerDetailScreen
@@ -109,7 +111,7 @@ export const StadiumDetailScreen = ({
               marginTop: 20,
               marginBottom: 10,
             }}>
-            <TxtContainer>Facilities</TxtContainer>
+            <TxtContainer palette={palette}>Facilities</TxtContainer>
           </TouchableOpacity>
           <LineStyle></LineStyle>
 
@@ -129,13 +131,13 @@ export const StadiumDetailScreen = ({
                 marginTop: 20,
                 marginBottom: 10,
               }}>
-              <TxtContainer>
+              <TxtContainer palette={palette}>
                 Reviews {feedbacks && getStarsReviw(feedbacks)}
               </TxtContainer>
-              <StarIconSVG color={MatchMatePalette.primaryColor} />
+              <StarIconSVG color={palette.primaryColor} />
             </View>
             <TouchableOpacity onPress={handleAddReview}>
-              <AddReviewText>Add Review</AddReviewText>
+              <AddReviewText palette={palette}>Add Review</AddReviewText>
             </TouchableOpacity>
           </View>
           <LineStyle></LineStyle>
@@ -160,7 +162,7 @@ export const StadiumDetailScreen = ({
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <TxtContainer>There is no Review to show</TxtContainer>
+                <TxtContainer palette={palette}>There is no Review to show</TxtContainer>
               </View>
             )}
           </View>
@@ -171,7 +173,7 @@ export const StadiumDetailScreen = ({
           <ImageLocation container={showMap && '100%'}>
             <StadiumLocationMapComponent stadium={stadium} />
 
-            <CloseContainerIcon
+            <CloseContainerIcon palette={palette}
               onPress={() => {
                 setShowMap(false);
               }}>
@@ -182,13 +184,13 @@ export const StadiumDetailScreen = ({
       )}
 
       {stadium?.status === 'private' && (
-        <BtnCheck
+        <BtnCheck palette={palette}
           onPress={() => {
             navigation.navigate('StadiumAvailability', {
               stadiumId: stadium?.id,
             });
           }}>
-          <TextButton>Check availability</TextButton>
+          <TextButton palette={palette}>Check availability</TextButton>
         </BtnCheck>
       )}
 

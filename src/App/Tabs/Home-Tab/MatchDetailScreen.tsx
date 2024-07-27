@@ -17,7 +17,7 @@ import {
   TeamPositionsBasketball,
   TeamPositionsVolleyBall,
 } from './StyledComponent/StyledComponent';
-import { MatchMatePalette } from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import NavigateBack from '../../../Components/NavigateBack';
 import PrimaryButtonComponant from '../../../Components/ButtonPrimaryComponent';
 import MatchDetailBoardComponent from '../../../Components/HomeComponents/MatchDetailBoardComponent';
@@ -29,6 +29,7 @@ import ModalQrCodeGenerateComponent from '../../../Components/HomeComponents/Mod
 
 export const MatchDetailScreen = ({ navigation, route }: any) => {
   const { stadium, timeSlot } = route.params;
+  const palette = usePalette();
 
   const [qrCode, setQrCode] = useState<string>(""); // State to store the QR code
   const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
@@ -68,7 +69,7 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
             height: 50,
             borderRadius: 25,
             borderWidth: 2,
-            borderColor: MatchMatePalette.whiteColor,
+            borderColor: palette.whiteColor,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -83,7 +84,7 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
             style={{ width: 48, height: 48, borderRadius: 25 }}
           />
         </View>
-        <Text style={{ color: MatchMatePalette.whiteColor }}>
+        <Text style={{ color: palette.whiteColor }}>
           {timeSlot.team[index] ? timeSlot.team[index].firstName : ''}
         </Text>
       </View>
@@ -92,7 +93,7 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
 
 
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <NavigateBack navigation={navigation} headerTitle={'Match Detail'} />
       <MatchDetailContainer>
         <MatchDetailBoardComponent stadium={stadium} timeSlot={timeSlot} />
@@ -109,8 +110,8 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
           />
         </FieldStyleContainer>
         <PrimaryButtonComponant
-          colorTxtBtn={MatchMatePalette.whiteColor}
-          colorbtn={MatchMatePalette.primaryColor}
+          colorTxtBtn={palette.whiteColor}
+          colorbtn={palette.primaryColor}
           event={joinTeam}
           radius={20}
           titlebtn="Join Team"
@@ -124,36 +125,5 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
   );
 };
 
-const styles = StyleSheet.create({
-  image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-    borderRadius: 20,
-  },
-  arrowButton: {
-    position: 'absolute',
-    top: '50%',
-    backgroundColor: 'rgba(0, 0, 0, 0.54)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '8%',
-    height: 30,
-    borderRadius: 15,
-  },
-  qrCodeContainer: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  qrCodeLabel: {
-    fontSize: 16,
-    marginBottom: 10,
-    color: MatchMatePalette.whiteColor,
-  },
-  qrCodeImage: {
-    width: 200,
-    height: 200,
-  },
-});
 
 export default MatchDetailScreen;

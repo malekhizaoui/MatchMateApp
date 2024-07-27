@@ -20,8 +20,7 @@ import {
   CancelButton,
   CancelButtonText,
 } from './StyledComponent/StyledComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
-import useBooking from './useBooking';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';import useBooking from './useBooking';
 import {
   formatDate,
   extractTimeFromDate,
@@ -32,21 +31,24 @@ import SkeletonBookingCard from '../../../Components/SkeletonLoadingComponents/S
 export const BookingScreen = ({navigation, route}: any) => {
   const {BookingList, removeBookingFromUser} = useBooking(route);
   const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
+  const palette = usePalette();
+
   const navigate = (timeSlotId: string) => {
+
     navigation.navigate('BookingDetail', {
       timeSlotId: timeSlotId,
     });
   };
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
       <Text
         style={{
           fontSize: 17,
-          color: MatchMatePalette.secondaryTextColor,
+          color: palette.secondaryTextColor,
           marginTop: 30,
           fontWeight: '700',
           paddingBottom: 20,

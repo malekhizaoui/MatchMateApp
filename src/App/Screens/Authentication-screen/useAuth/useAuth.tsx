@@ -9,13 +9,12 @@ import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-si
 import { handleRequests } from '../../../../services/HandleRequests';
 import { ToastAndroid } from 'react-native';
 import { useToast } from 'react-native-toast-notifications';
-import { MatchMatePalette } from '../../../../assets/color-palette';
-
+import { usePalette } from '../../../../assets/color-palette/ThemeApp';
 
 const CELL_COUNT = 6;
 
 export const useAuth = (navigation: any, route: any = false) => {
-  
+  const palette=usePalette()
   // State variables using useState hook
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -99,7 +98,7 @@ export const useAuth = (navigation: any, route: any = false) => {
     try {
       const res = await handleRequests('put', 'resendCode', { email });
       navigation.navigate('CodeVerification', { userId: res.data.id, codeVerification: res.data.code_verification, cameFrom: 'forgetPass' });
-      toast.show('A confirmation code has been sent to your email.', { type: 'success', placement: 'top', duration: 4000, style: { backgroundColor: MatchMatePalette.primaryColor } });
+      toast.show('A confirmation code has been sent to your email.', { type: 'success', placement: 'top', duration: 4000, style: { backgroundColor: palette.primaryColor } });
     } catch (error) {
       console.log('error', error);
     }
@@ -112,7 +111,7 @@ export const useAuth = (navigation: any, route: any = false) => {
         await handleRequests('put', `user/${userId}`, { is_verified: true });
         if (!cameFrom) {
           navigation.navigate('Signin');
-          toast.show('Your account is successfully created.', { type: 'success', placement: 'top', duration: 4000, style: { backgroundColor: MatchMatePalette.primaryColor } });
+          toast.show('Your account is successfully created.', { type: 'success', placement: 'top', duration: 4000, style: { backgroundColor: palette.primaryColor } });
         } else {
           navigation.navigate('PasswordForgotten', { step: 2 });
         }

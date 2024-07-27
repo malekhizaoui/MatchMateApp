@@ -1,7 +1,5 @@
 import styled from 'styled-components/native';
-import {Dimensions} from 'react-native';
-
-import {MatchMatePalette} from '../../../../assets/color-palette';
+import { Dimensions } from 'react-native';
 import {
   fontSizeTitleScreen,
   fontSizeLegendIcon,
@@ -9,58 +7,66 @@ import {
   fontSizeTextScreen,
   ContainerAppStyle,
 } from '../../../../assets/Styles/index';
+import { Theme } from '../../../models/Theme';
 
-export const ContainerApp = styled.SafeAreaView`
+interface PaletteProps {
+  palette: Theme;
+}
+
+export const ContainerApp = styled.SafeAreaView<PaletteProps>`
   flex: 1;
-  background-color: ${MatchMatePalette.primaryColor};
-  align-items: center;
-`;
-export const ContainerAppReviews = styled.SafeAreaView`
-  flex: 1;
-  background-color: ${MatchMatePalette.darkBackgroundColor};
-  align-items: center;
-`;
-export const ContainerAppDetailGame = styled.SafeAreaView`
-  flex: 1;
-  background-color: ${MatchMatePalette.darkBackgroundColor};
+  background-color: ${({ palette }) => palette.primaryColor};
   align-items: center;
 `;
 
-export const TextHeader = styled.Text`
-  color: ${MatchMatePalette.darkBackgroundColor};
+export const ContainerAppReviews = styled.SafeAreaView<PaletteProps>`
+  flex: 1;
+  background-color: ${({ palette }) => palette.darkBackgroundColor};
+  align-items: center;
+`;
+
+export const ContainerAppDetailGame = styled.SafeAreaView<PaletteProps>`
+  flex: 1;
+  background-color: ${({ palette }) => palette.darkBackgroundColor};
+  align-items: center;
+`;
+
+export const TextHeader = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.darkBackgroundColor};
   ${fontSizeTextScreen};
   font-weight: 800;
   margin-top: 30px;
 `;
 
-export const TextNameProfile = styled.Text`
+export const TextNameProfile = styled.Text<PaletteProps>`
   ${fontSizeTextScreen};
   font-weight: 700;
-  color: ${MatchMatePalette.whiteColor};
+  color: ${({ palette }) => palette.whiteColor};
 `;
-export const LineSperator = styled.View`
+
+export const LineSperator = styled.View<PaletteProps>`
   width: 100%;
   height: 1px;
-  background-color: ${MatchMatePalette.secondaryTextColor};
+  background-color: ${({ palette }) => palette.secondaryTextColor};
   margin-top: 20px;
   margin-bottom: 35px;
 `;
 
-export const ProfileHeaderContainer = styled.View`
+export const ProfileHeaderContainer = styled.View<PaletteProps>`
   width: 100%;
   height: 30%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: ${MatchMatePalette.primaryColor};
+  background-color: ${({ palette }) => palette.primaryColor};
 `;
 
-export const ImageProfile = styled.Image`
+export const ImageProfile = styled.Image<PaletteProps>`
   width: 120px;
   height: 120px;
   border-radius: 60px;
-  border-color: ${MatchMatePalette.whiteColor};
+  border-color: ${({ palette }) => palette.whiteColor};
   border-width: 2px;
   margin: 10px;
 `;
@@ -71,10 +77,10 @@ export const HeaderTitleContainer = styled.View`
   align-items: center;
 `;
 
-export const ProfilePropertiesContainer = styled.View`
+export const ProfilePropertiesContainer = styled.View<PaletteProps>`
   width: 100%;
   height: 70%;
-  background-color: ${MatchMatePalette.darkBackgroundColor};
+  background-color: ${({ palette }) => palette.darkBackgroundColor};
   border-top-right-radius: 40px;
   border-top-left-radius: 40px;
   display: flex;
@@ -92,20 +98,20 @@ export const ProfilePropertyContent = styled.View`
   margin-top: 20px;
 `;
 
-// editProfile
-export const EditProfileHeaderContainer = styled.View`
+export const EditProfileHeaderContainer = styled.View<PaletteProps>`
   width: 100%;
   height: 28%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: ${MatchMatePalette.primaryColor};
+  background-color: ${({ palette }) => palette.primaryColor};
 `;
-export const EditProfilePropertiesContainer = styled.View`
+
+export const EditProfilePropertiesContainer = styled.View<PaletteProps>`
   width: 100%;
   height: 72%;
-  background-color: ${MatchMatePalette.darkBackgroundColor};
+  background-color: ${({ palette }) => palette.darkBackgroundColor};
   border-top-right-radius: 40px;
   border-top-left-radius: 40px;
   display: flex;
@@ -114,38 +120,39 @@ export const EditProfilePropertiesContainer = styled.View`
   align-items: center;
 `;
 
-export const LineSperatorProperty = styled.View`
+export const LineSperatorProperty = styled.View<PaletteProps>`
   width: 100%;
   height: 1px;
-  background-color: ${MatchMatePalette.secondaryTextColor};
+  background-color: ${({ palette }) => palette.secondaryTextColor};
   margin-top: 15px;
   margin-bottom: 15px;
 `;
+
 export const EditIconContainer = styled.TouchableOpacity`
   position: absolute;
-  bottom: 0; /* Position at the bottom */
+  bottom: 0;
   width: 45%;
   align-items: center;
 `;
 
-export const EditIcon = styled.View`
+export const EditIcon = styled.View<PaletteProps>`
   width: 30px;
   height: 30px;
   border-radius: 15px;
-  background-color: ${MatchMatePalette.whiteColor};
+  background-color: ${({ palette }) => palette.whiteColor};
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export const TxtBtn = styled.Text`
+export const TxtBtn = styled.Text<PaletteProps>`
   ${fontSizeTextScreen};
-  color: ${MatchMatePalette.whiteColor};
+  color: ${({ palette }) => palette.whiteColor};
   font-weight: 600;
 `;
 
-export const BtnContainer = styled.TouchableOpacity`
-  background-color: ${MatchMatePalette.secondaryColor};
+export const BtnContainer = styled.TouchableOpacity<PaletteProps>`
+  background-color: ${({ palette }) => palette.secondaryColor};
   width: 70%;
   height: 50px;
   display: flex;
@@ -154,26 +161,24 @@ export const BtnContainer = styled.TouchableOpacity`
   align-items: center;
 `;
 
-// GameHistory Edit
-
-export const GameHistoryHeaderContainer = styled.View`
+export const GameHistoryHeaderContainer = styled.View<PaletteProps>`
   width: 100%;
   height: 20%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: ${MatchMatePalette.primaryColor};
+  background-color: ${({ palette }) => palette.primaryColor};
 `;
 
-export const GameHistoryPropertiesContainer = styled.ScrollView`
+export const GameHistoryPropertiesContainer = styled.ScrollView<PaletteProps>`
   width: 100%;
   height: 80%;
-  background-color: ${MatchMatePalette.darkBackgroundColor};
+  background-color: ${({ palette }) => palette.darkBackgroundColor};
   border-top-right-radius: 40px;
   border-top-left-radius: 40px;
   display: flex;
-  padding-top: 2 0px;
+  padding-top: 20px;
   padding-bottom: 70px;
 `;
 
@@ -186,12 +191,9 @@ export const GamePropertyContent = styled.View`
   margin-top: 20px;
 `;
 
-// GamehistoryDetailScreen
 export const ContainerDetailScreen = styled.ScrollView`
   display: flex;
   flex: 1;
   width: 90%;
   flex-direction: column;
 `;
-
-

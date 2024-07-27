@@ -2,7 +2,7 @@
 import React from 'react';
 import {YaMap, Marker} from 'react-native-yamap';
 import PinOrderSVG from '../../../assets/Icons/svg/TabsIcon/PinOrderSVG';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import {View, Text} from 'react-native';
 
 YaMap.init('ca4f9c56-2615-48b0-ab59-28438efd4454');
@@ -12,6 +12,8 @@ interface StadiumListMapProps {
 }
 
 const StadiumListMapScreen: React.FC<StadiumListMapProps> = ({stadiums}) => {
+  const palette = usePalette();
+
   // Set Switzerland as the default region
   const defaultRegion = {
     lat: 46.8182,
@@ -45,14 +47,14 @@ const StadiumListMapScreen: React.FC<StadiumListMapProps> = ({stadiums}) => {
               lon: parseFloat(stadium.longitude),
             }}>
             <PinOrderSVG
-              color={MatchMatePalette.primaryColor}
+              color={palette.primaryColor}
               order={index+1}
             />
           </Marker>
         ))
       ) : (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{color: MatchMatePalette.whiteColor}}>No stadiums available</Text>
+          <Text style={{color: palette.whiteColor}}>No stadiums available</Text>
         </View>
       )}
     </YaMap>

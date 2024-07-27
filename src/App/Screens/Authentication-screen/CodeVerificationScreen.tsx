@@ -15,7 +15,7 @@ import {
 } from './styledComponent/StyledComponent';
 import NavigateBack from '../../../Components/NavigateBack';
 import TickIconSVG from '../../../assets/Icons/svg/TickIconSVG';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
 import {
   CodeField,
@@ -25,6 +25,8 @@ import useAuth from './useAuth/useAuth';
 
 
 const CodeVerificationScreen = ({navigation,route}: any) => {
+  const palette = usePalette();
+
   const {
     verifyCode,
     ref,
@@ -34,22 +36,40 @@ const CodeVerificationScreen = ({navigation,route}: any) => {
     getCellOnLayoutHandler,
     CELL_COUNT,
   } = useAuth(navigation,route);
-  
+  const styles = StyleSheet.create({
+    codeFieldRoot: {marginTop: 40, marginBottom: 20},
+    cell: {
+      width: 50,
+      height: 50,
+      lineHeight: 38,
+      fontSize: 24,
+      borderWidth: 1,
+      borderColor: palette.secondaryTextColor,
+      textAlign: 'center',
+      backgroundColor: palette.blackColor,
+      borderRadius: 5,
+      color: palette.secondaryTextColor,
+      alignSelf: 'center',
+    },
+    focusCell: {
+      borderColor: palette.secondaryTextColor,
+    },
+  });
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
       <ContainerScreen showsVerticalScrollIndicator={false}>
         <View style={{marginTop: 20}}>
           <NavigateBack navigation={navigation} />
         </View>
         <HeaderConnexionScreen>
-          <LogoAppStyle>
-            <TickIconSVG color={MatchMatePalette.whiteColor} />
+          <LogoAppStyle palette={palette}>
+            <TickIconSVG color={palette.whiteColor} />
           </LogoAppStyle>
-          <HeaderTitleText>Code de confirmation</HeaderTitleText>
+          <HeaderTitleText palette={palette}>Code de confirmation</HeaderTitleText>
         </HeaderConnexionScreen>
         <CodeField
           ref={ref}
@@ -71,41 +91,24 @@ const CodeVerificationScreen = ({navigation,route}: any) => {
             </Text>
           )}
         />
-        <TextValidationCode>
+        <TextValidationCode palette={palette}>
           Un mail a été envoyé au adresse mail suivante maiek52su@gmail.com . Si
           vous n'avez rien recu , veuillez revenir en arriére et bien vérifier
           votre adresse mail
         </TextValidationCode>
         <ButtonAuthComponent
           btnText="Valider"
-          backgroundColor={MatchMatePalette.primaryColor}
-          btnTextColor={MatchMatePalette.whiteColor}
+          backgroundColor={palette.primaryColor}
+          btnTextColor={palette.whiteColor}
           btnClicked={verifyCode}
           iconComponent={""}
         />
       </ContainerScreen>
     </ContainerApp>
   );
+  
 };
 
 export default CodeVerificationScreen;
 
-const styles = StyleSheet.create({
-  codeFieldRoot: {marginTop: 40, marginBottom: 20},
-  cell: {
-    width: 50,
-    height: 50,
-    lineHeight: 38,
-    fontSize: 24,
-    borderWidth: 1,
-    borderColor: MatchMatePalette.secondaryTextColor,
-    textAlign: 'center',
-    backgroundColor: MatchMatePalette.blackColor,
-    borderRadius: 5,
-    color: MatchMatePalette.secondaryTextColor,
-    alignSelf: 'center',
-  },
-  focusCell: {
-    borderColor: MatchMatePalette.secondaryTextColor,
-  },
-});
+

@@ -8,11 +8,11 @@ import {
   TextDescription,
   StarsReviewContainer
 } from './StyledComponent/StyledComponent';
-import {MatchMatePalette} from '../../assets/color-palette';
 import SkeletonStadiumCard from '../SkeletonLoadingComponents/SkeletonStadiumCard';
 import { getStarsReviw } from '../../services/HelperFunctions';
 import { Feedback } from '../../App/models/Feedback';
 import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 interface StadiumCardComponentProps {
   titleDescription: string;
   backgroundImage?: string;
@@ -28,6 +28,8 @@ const StadiumCardComponent = ({
   isLoading = false,
   feedback
 }: StadiumCardComponentProps) => {
+  const palette=usePalette()
+
   const defaultImage =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpusOZAX4leJSqoJ6grIZPYdoDTgNfgKZXAA&s'; // Provide a valid default image URL
 
@@ -37,15 +39,15 @@ const StadiumCardComponent = ({
         <SkeletonStadiumCard/>
       ) : (
         <>
-          <StadiumContainer onPress={btnClicked}>
-            <StadiumImage source={{uri: backgroundImage || defaultImage}} />
+          <StadiumContainer palette={palette} onPress={btnClicked}>
+            <StadiumImage palette={palette} source={{uri: backgroundImage || defaultImage}} />
             <StadiumDescription>
-              <TitleDescription>Explore {titleDescription}</TitleDescription>
-              <TextDescription>Near court</TextDescription>
+              <TitleDescription palette={palette}>Explore {titleDescription}</TitleDescription>
+              <TextDescription palette={palette}>Near court</TextDescription>
             </StadiumDescription>
-            <StarsReviewContainer>
+            <StarsReviewContainer palette={palette}>
             <StarIconSVG color='yellow' size='17'/>
-            <Text style={{color: MatchMatePalette.whiteColor}}>{getStarsReviw(feedback)}</Text>
+            <Text style={{color: palette.whiteColor}}>{getStarsReviw(feedback)}</Text>
             </StarsReviewContainer>
           </StadiumContainer>
              

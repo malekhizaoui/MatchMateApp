@@ -6,8 +6,8 @@ import {
   TitleCard,
   TxtTitle,
 } from './StyledComponent/StyledComponent';
-import {MatchMatePalette} from '../../assets/color-palette';
 import SkeletonFieldCard from '../SkeletonLoadingComponents/SkeletonFieldCard';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 
 interface FieldsCardComponentProps {
   titleText: string;
@@ -24,28 +24,29 @@ const FieldsCardComponent = ({
   isSelected = false,
   isLoading = false,
 }: FieldsCardComponentProps) => {
+  const palette=usePalette()
 
   return (
     <>
       {isLoading ? (
         <SkeletonFieldCard />
       ) : (
-        <FieldContent
+        <FieldContent palette={palette}
           onPress={btnClicked}
           style={isLoading ? {borderColor: 'white', borderWidth: 1} : {}}>
-          <ImageField
+          <ImageField palette={palette}
             style={[
               styles.imageField,
               isSelected
-                ? {height: '95%', borderColor: MatchMatePalette.primaryColor}
-                : {borderColor: MatchMatePalette.whiteColor},
+                ? {height: '95%', borderColor: palette.primaryColor}
+                : {borderColor: palette.whiteColor},
             ]}
             source={{
               uri: backgroundImage,
             }}
           />
-          <TitleCard>
-            <TxtTitle>{titleText}</TxtTitle>
+          <TitleCard palette={palette}>
+            <TxtTitle palette={palette}>{titleText}</TxtTitle>
           </TitleCard>
         </FieldContent> 
       )}

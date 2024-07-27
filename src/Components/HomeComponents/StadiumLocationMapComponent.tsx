@@ -1,30 +1,15 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Dimensions,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
-import {
-  MatchDetailBoard,
-  StadiumTextname,
-  MatchTimeDetailContainer,
-  TimeText,
-  PlayerLeftText
-} from './StyledComponent/StyledComponent';
-import DurationIconSVG from '../../assets/Icons/svg/DurationIconSVG';
-import {MatchMatePalette} from '../../assets/color-palette';
-import PlayersIconSVG from '../../assets/Icons/svg/PlayersIconSVG';
-import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
+
 import {YaMap,Marker}  from 'react-native-yamap';
 import PinOrderSVG from '../../assets/Icons/svg/TabsIcon/PinOrderSVG';
-import { Stadium } from '../../App/models/Stadium';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 interface StadiumLocationMapComponentProps {
     stadium:any
 }
 
 const StadiumLocationMapComponent = ({stadium}: StadiumLocationMapComponentProps) => {
+  const palette=usePalette()
+
   return (
     <YaMap
             // nightMode={true}
@@ -45,7 +30,7 @@ const StadiumLocationMapComponent = ({stadium}: StadiumLocationMapComponentProps
                 lon: parseFloat(stadium.longitude),
               }}>
               <PinOrderSVG
-                color={MatchMatePalette.primaryColor}
+                color={palette.primaryColor}
                 order={stadium.id}
               />
             </Marker>

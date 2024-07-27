@@ -1,5 +1,5 @@
 import {useEffect, useState, useContext, useRef} from 'react';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import {Stadium} from '../../models/Stadium';
 import {Field} from '../../models/Field';
 import {ScrollView, StyleSheet, Text} from 'react-native';
@@ -19,6 +19,7 @@ export const useHome = (navigation:any, route: any=false) => {
   const [searchResults, setSearchResults] = useState<Stadium[]>([]);
   const [query, setQuery] = useState('');
   const [region, setRegion] = useState("Geneva");
+  const palette = usePalette();
 
 
   const searchFields = (query: string) => {
@@ -58,7 +59,7 @@ console.log("searchResults",searchResults);
         <Text
           style={[
             styles.label,
-            isFocus && {color: MatchMatePalette.primaryColor},
+            isFocus && {color: palette.primaryColor},
           ]}></Text>
       );
     }
@@ -99,7 +100,40 @@ console.log("searchResults",searchResults);
     {label: 'Lausanne', value: 'Lausanne'},
     {label: 'Geneva', value: 'Geneva'},
   ];
-
+  const styles = StyleSheet.create({
+    container: {
+      padding: 0,
+      width: '44%',
+    },
+    dropdown: {
+      height: 50,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+    },
+    icon: {
+      marginRight: 5,
+    },
+    label: {
+      position: 'absolute',
+      left: 22,
+      top: 8,
+      zIndex: 999,
+      paddingHorizontal: 8,
+      fontSize: 14,
+      color: palette.whiteColor,
+    },
+    placeholderStyle: {
+      fontSize: 16,
+    },
+    selectedTextStyle: {
+      fontSize: 16,
+      color: palette.primaryColor,
+    },
+    iconStyle: {
+      width: 20,
+      height: 20,
+    },
+  });
   return {
     fieldSelected,
     footballField,
@@ -122,38 +156,5 @@ console.log("searchResults",searchResults);
     
   };
 };
-export const styles = StyleSheet.create({
-  container: {
-    padding: 0,
-    width: '44%',
-  },
-  dropdown: {
-    height: 50,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-  },
-  icon: {
-    marginRight: 5,
-  },
-  label: {
-    position: 'absolute',
-    left: 22,
-    top: 8,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 14,
-    color: MatchMatePalette.whiteColor,
-  },
-  placeholderStyle: {
-    fontSize: 16,
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-    color: MatchMatePalette.primaryColor,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-});
+
 export default useHome;

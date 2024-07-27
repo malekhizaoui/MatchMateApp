@@ -1,10 +1,9 @@
 import styled from 'styled-components/native';
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
-import {MatchMatePalette} from '../../../../assets/color-palette';
 import {
   fontSizeTitleScreen,
   fontSizeLegendIcon,
@@ -12,7 +11,14 @@ import {
   fontSizeTextScreen,
   ContainerAppStyle,
 } from '../../../../assets/Styles/index';
+import { Theme } from '../../../models/Theme';
 
+// Define prop types for each styled component that uses palette
+interface PaletteProps {
+  palette: Theme;
+}
+
+// Continue with your styled components definition
 export const TeamPositionsFootball = [
   {
     top: '5%',
@@ -274,14 +280,13 @@ export const TeamPositionsVolleyBall = [
   },
 ];
 
-interface ContainerMap {
-  container?: any; // Define backgroundColor prop
-}
-
-export const ContainerApp = styled.SafeAreaView`
+export const ContainerApp = styled.SafeAreaView<PaletteProps>`
   ${ContainerAppStyle};
   display: flex;
   flex-direction: column;
+  background-color: ${({ palette }) => palette.darkBackgroundColor};
+
+  
 `;
 
 export const ContainerScreen = styled.ScrollView`
@@ -297,20 +302,24 @@ export const HeaderContainer = styled.View`
   width: 85%;
   align-self: center;
 `;
+
 export const ExploreRegionContainer = styled.View`
   display: flex;
   flex-direction: column;
 `;
+
 export const UpdateRegionContainer = styled.View`
   display: flex;
   flex-direction: row;
 `;
-export const RegionExploreTxt = styled.Text`
-  color: ${MatchMatePalette.secondaryTextColor};
+
+export const RegionExploreTxt = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.secondaryTextColor};
   ${fontSizeTextScreen};
 `;
-export const RegionTxt = styled.Text`
-  color: ${MatchMatePalette.primaryColor};
+
+export const RegionTxt = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.primaryColor};
   ${fontSizeTitleScreen};
 `;
 
@@ -322,17 +331,20 @@ export const TextContainer = styled.View`
   justify-content: space-between;
   flex-direction: row;
 `;
-export const TextTitleList = styled.Text`
-  color: ${MatchMatePalette.secondaryTextColor};
+
+export const TextTitleList = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.secondaryTextColor};
   ${fontSizeTextScreen};
   font-weight: 600;
 `;
-export const TextCheckAllList = styled.Text`
-  color: ${MatchMatePalette.primaryColor};
+
+export const TextCheckAllList = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.primaryColor};
   ${fontSizeTextScreen};
   text-decoration-line: underline;
   font-weight: 600;
 `;
+
 export const ListContainer = styled.ScrollView.attrs({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
@@ -350,42 +362,44 @@ export const ContainerDetailScreen = styled.ScrollView`
   width: 90%;
 `;
 
-export const InputContainer = styled.View`
+export const InputContainer = styled.View<PaletteProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 85%;
   height: 50px;
-  background-color: ${MatchMatePalette.whiteColor};
+  background-color: ${({ palette }) => palette.whiteColor};
   border-radius: 25px;
   align-self: center;
   margin-top: 10px;
-  border-color:${MatchMatePalette.secondaryTextColor};
-  border:1px
-`;
-export const TextInputStyle = styled.TextInput`
-  color: grey;
-  width:100%
+  border-color: ${({ palette }) => palette.secondaryTextColor};
+  border: 1px;
 `;
 
-export const TitleTextStadium = styled.Text`
-  color: ${MatchMatePalette.whiteColor};
+export const TextInputStyle = styled.TextInput`
+  color: grey;
+  width: 100%;
+`;
+
+export const TitleTextStadium = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.whiteColor};
   ${fontSizeSubTitleScreen};
   font-weight: 600;
 `;
 
-export const TxtShowMap = styled.Text`
-  color: ${MatchMatePalette.primaryColor};
+export const TxtShowMap = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.primaryColor};
   font-size: 15px;
   font-weight: 700;
 `;
-export const AddReviewText = styled.Text`
-  color: ${MatchMatePalette.primaryColor};
+
+export const AddReviewText = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.primaryColor};
   ${fontSizeLegendIcon};
   font-weight: 700;
-   text-decoration-line: underline;
-   margin-top: 20px;
-    margin-bottom: 10px;
+  text-decoration-line: underline;
+  margin-top: 20px;
+  margin-bottom: 10px;
 `;
 
 export const ExpandMore = styled.View`
@@ -393,27 +407,27 @@ export const ExpandMore = styled.View`
   flex-direction: row;
 `;
 
-export const TxtContainer = styled.Text`
-  color: ${MatchMatePalette.secondaryTextColor};
+export const TxtContainer = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.secondaryTextColor};
   ${fontSizeTextScreen};
   font-weight: 700;
   margin-right: 10px;
 `;
 
-export const ImageLocation = styled.View<ContainerMap>`
+export const ImageLocation = styled.View<{ container?: string}>`
   margin-top: 20px;
-  width: ${({container}) => container || '100%'};
-  height: ${({container}) => container || '166px'};
+  width: ${({ container }) => container || '100%'};
+  height: ${({ container }) => container || '166px'};
   border-radius: 30px;
   background-color: #f1f1f1;
   margin-bottom: 60px;
   position: relative;
 `;
 
-export const BtnCheck = styled.TouchableOpacity`
+export const BtnCheck = styled.TouchableOpacity<PaletteProps>`
   width: 70%;
   height: 40px;
-  background-color: ${MatchMatePalette.primaryColor};
+  background-color: ${({ palette }) => palette.primaryColor};
   justify-content: center;
   align-items: center;
   border-radius: 7px;
@@ -423,16 +437,18 @@ export const BtnCheck = styled.TouchableOpacity`
   bottom: 5px;
   align-self: center;
 `;
-export const TextButton = styled.Text`
-  color: ${MatchMatePalette.whiteColor};
+
+export const TextButton = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.whiteColor};
   ${fontSizeTextScreen};
   font-weight: 600;
 `;
-export const CloseContainerIcon = styled.TouchableOpacity`
+
+export const CloseContainerIcon = styled.TouchableOpacity<PaletteProps>`
   width: 40px;
   height: 40px;
   border-radius: 20px;
-  background-color: ${MatchMatePalette.blackColor};
+  background-color: ${({ palette }) => palette.blackColor};
   z-index: 99999;
   position: absolute;
   right: 10px;
@@ -456,6 +472,7 @@ export const ContainerListStadiumScreen = styled.ScrollView`
   margin-top: 60px;
   padding: 15px;
 `;
+
 export const HeaderListStadiumContainer = styled.View`
   flex-direction: row;
   align-items: center;
@@ -467,8 +484,8 @@ export const HeaderListStadiumContainer = styled.View`
   height: 60px;
 `;
 
-export const TextTypeOfRender = styled.Text`
-  color: ${MatchMatePalette.primaryColor};
+export const TextTypeOfRender = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.primaryColor};
   font-weight: 500;
   ${fontSizeTextScreen};
   width: 37px;
@@ -541,3 +558,4 @@ export const FlatListMapContainer = styled.ScrollView`
   bottom: 15px;
   align-self: center;
 `;
+

@@ -8,7 +8,7 @@ import {
   HeaderStepText,
   TextDescriptionForgetPass,
 } from './styledComponent/StyledComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import useAuth from './useAuth/useAuth';
 import LockerIconSVG from '../../../assets/Icons/svg/LockerIconSVG';
 import NavigateBack from '../../../Components/NavigateBack';
@@ -21,6 +21,8 @@ import TickIconSVG from '../../../assets/Icons/svg/TickIconSVG';
 
 
 const PasswordForgottenScreen = ({navigation, route}: any) => {
+  const palette = usePalette();
+
   const {
     setBarColorCntxt,
     email,
@@ -34,25 +36,25 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
     step,
   } = useAuth(navigation);
   useEffect(() => {
-    // setBarColorCntxt(MatchMatePalette.primaryColor);
+    // setBarColorCntxt(palette.primaryColor);
   }, []);
   console.log('route', route);
 
   return (
-    <ContainerPass>
+    <ContainerPass palette={palette}>
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.primaryColor}
+        backgroundColor={palette.primaryColor}
       />
       <ContainerScreen showsVerticalScrollIndicator={false}>
         <View>
           <NavigateBack navigation={navigation} color="white" />
         </View>
-        <ImagePasswordContainer>
+        <ImagePasswordContainer palette={palette}>
           {step !== 3 ? (
-            <LockerIconSVG color={MatchMatePalette.primaryColor} />
+            <LockerIconSVG color={palette.primaryColor} />
           ) : (
-            <TickIconSVG color={MatchMatePalette.secondaryTextColor} />
+            <TickIconSVG color={palette.secondaryTextColor} />
           )}
         </ImagePasswordContainer>
         {step !== 3 ? (
@@ -66,7 +68,7 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
                 setValue={setEmail}
                 valueInput={email}
                 iconComponent={
-                  <MailIconSVG color={MatchMatePalette.primaryColor} />
+                  <MailIconSVG color={palette.primaryColor} />
                 }
                 placeholder={'Tapez votre adresse mail ...'}
               />
@@ -76,8 +78,8 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
               </TextDescriptionForgetPass>
               <ButtonAuthComponent
                 btnText="Continuer"
-                backgroundColor={MatchMatePalette.darkBackgroundColor}
-                btnTextColor={MatchMatePalette.secondaryTextColor}
+                backgroundColor={palette.darkBackgroundColor}
+                btnTextColor={palette.secondaryTextColor}
                 btnClicked={resentCode}
                 iconComponent={''}
               />
@@ -92,7 +94,7 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
                 setValue={setPassword}
                 valueInput={password}
                 iconComponent={
-                  <PasswordIconSVG color={MatchMatePalette.primaryColor} />
+                  <PasswordIconSVG color={palette.primaryColor} />
                 }
                 placeholder={'Nouveau mot de passe ...'}
               />
@@ -100,7 +102,7 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
                 setValue={setNewPassword}
                 valueInput={newPassword}
                 iconComponent={
-                  <PasswordIconSVG color={MatchMatePalette.primaryColor} />
+                  <PasswordIconSVG color={palette.primaryColor} />
                 }
                 placeholder={'Nouveau mot de passe ...'}
               />
@@ -110,8 +112,8 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
               </TextDescriptionForgetPass>
               <ButtonAuthComponent
                 btnText="Continuer"
-                backgroundColor={MatchMatePalette.darkBackgroundColor}
-                btnTextColor={MatchMatePalette.secondaryTextColor}
+                backgroundColor={palette.darkBackgroundColor}
+                btnTextColor={palette.secondaryTextColor}
                 btnClicked={resetPassword}
                 iconComponent={''}
               />
@@ -129,8 +131,8 @@ const PasswordForgottenScreen = ({navigation, route}: any) => {
             </TextDescriptionForgetPass>
             <ButtonAuthComponent
               btnText="Connexion"
-              backgroundColor={MatchMatePalette.darkBackgroundColor}
-              btnTextColor={MatchMatePalette.secondaryTextColor}
+              backgroundColor={palette.darkBackgroundColor}
+              btnTextColor={palette.secondaryTextColor}
               btnClicked={()=>{navigation.navigate('Signin')}}
               iconComponent={''}
             />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar, Text } from 'react-native';
 import { ContainerAppDetailGame, ContainerDetailScreen,TextNameProfile } from './StyledComponent/StyledComponent';
-import { MatchMatePalette } from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import NavigateBack from '../../../Components/NavigateBack';
 import { GameHistory } from '../../models/GameHistory';
 import ImageSlideComponent from '../../../Components/HomeComponents/ImageSlideComponent';
@@ -11,6 +11,7 @@ import { handleRequests } from '../../../services/HandleRequests';
 const GameHistoryDetailScreen = ({ navigation, route }: any) => {
   const [gameHistoryDetail, setGameHistoryDetail] = useState<GameHistory | null>(null);
   const { gameHistoryId } = route.params;
+  const palette = usePalette();
 
   const getGameHistoryDetail = async () => {
     try {
@@ -26,19 +27,19 @@ const GameHistoryDetailScreen = ({ navigation, route }: any) => {
   }, []);
 
   return (
-    <ContainerAppDetailGame>
+    <ContainerAppDetailGame palette={palette}>
       <NavigateBack
         navigation={navigation}
         headerTitle={'Game history detail'}
-        color={MatchMatePalette.primaryColor}
+        color={palette.primaryColor}
       />
-      <StatusBar barStyle={'light-content'} backgroundColor={MatchMatePalette.darkBackgroundColor} />
+      <StatusBar barStyle={'light-content'} backgroundColor={palette.darkBackgroundColor} />
       <ContainerDetailScreen>
         {gameHistoryDetail ? (
           <>
-            <TextNameProfile>Stadium : {gameHistoryDetail.stadium.stadiumName}</TextNameProfile>
+            <TextNameProfile palette={palette}>Stadium : {gameHistoryDetail.stadium.stadiumName}</TextNameProfile>
              <ImageSlideComponent stadium={gameHistoryDetail.stadium} />
-             <TextNameProfile>Match detail</TextNameProfile>
+             <TextNameProfile palette={palette}>Match detail</TextNameProfile>
 
             <GameHistoryMatchComponent
               team={gameHistoryDetail.team}

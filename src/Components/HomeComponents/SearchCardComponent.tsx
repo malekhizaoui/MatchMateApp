@@ -18,21 +18,23 @@ import {
 
 import SearchIconSVG from '../../assets/Icons/svg/SearchIconSVG';
 import FilterIconSVG from '../../assets/Icons/svg/FilterIconSVG';
-import {MatchMatePalette} from '../../assets/color-palette';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 interface SearchCardComponentProps {
   showMap: boolean;
   onSearch: (query: string) => void;
 }
 
 const SearchCardComponent: React.FC<SearchCardComponentProps> = ({showMap, onSearch}) => {
+  const palette=usePalette()
+
   return (
-    <InputHeaderContainer
+    <InputHeaderContainer  palette={palette}
       style={{
-        borderColor: MatchMatePalette.secondaryTextColor,
+        borderColor: palette.secondaryTextColor,
         borderWidth: 1,
       }}>
       <InputIconContainer>
-        <SearchIconSVG color={MatchMatePalette.blackColor} />
+        <SearchIconSVG color={palette.blackColor} />
         <TextInputStyle
           placeholder="Search ..."
           onChangeText={onSearch}
@@ -42,7 +44,7 @@ const SearchCardComponent: React.FC<SearchCardComponentProps> = ({showMap, onSea
         <LineSperatorSearchBar></LineSperatorSearchBar>
       </FilterIconContainer>
       <LineSperatorSearchBar></LineSperatorSearchBar>
-      <FilterIconSVG color={MatchMatePalette.darkBackgroundColor} /> */}
+      <FilterIconSVG color={palette.darkBackgroundColor} /> */}
     </InputHeaderContainer>
   );
 };

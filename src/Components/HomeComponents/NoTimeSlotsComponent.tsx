@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Import Material Icons
 
 const NoTimeSlotsComponent = ({ selectedDay }: any) => {
+
   return (
     <View style={styles.container}>
       <Icon name="schedule" size={50} color="#666" /> 

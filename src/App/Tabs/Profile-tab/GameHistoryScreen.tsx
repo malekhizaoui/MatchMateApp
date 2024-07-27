@@ -11,40 +11,41 @@ import {
   GameHistoryPropertiesContainer,
   GamePropertyContent,
 } from './StyledComponent/StyledComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import NavigateBack from '../../../Components/NavigateBack';
 import useProfile from './useProfile';
 import GameHistoryCardComponent from '../../../Components/ProfileComponents/GameHistoryCardComponent';
 const GameHistoryScreen = ({navigation}: any) => {
   const {userData, gameHistory} = useProfile(navigation);
-  
+  const palette = usePalette();
+
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <NavigateBack
         navigation={navigation}
         headerTitle={'Game history'}
-        color={MatchMatePalette.darkBackgroundColor}
+        color={palette.darkBackgroundColor}
       />
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.primaryColor}
+        backgroundColor={palette.primaryColor}
       />
-      <ProfileHeaderContainer>
-        <ImageProfile
+      <ProfileHeaderContainer palette={palette}>
+        <ImageProfile palette={palette}
           source={
             userData?.image
               ? {uri: userData.image}
               : require('../../../assets/Images/userAnonymousImage.png')
           }></ImageProfile>
 
-        <GameHistoryHeaderContainer>
-          <TextNameProfile>
+        <GameHistoryHeaderContainer palette={palette}>
+          <TextNameProfile palette={palette}>
             {userData?.firstName} {userData?.lastName}
           </TextNameProfile>
-          <TextNameProfile>{userData?.email}</TextNameProfile>
+          <TextNameProfile palette={palette}>{userData?.email}</TextNameProfile>
         </GameHistoryHeaderContainer>
       </ProfileHeaderContainer>
-      <GameHistoryPropertiesContainer
+      <GameHistoryPropertiesContainer palette={palette}
         contentContainerStyle={{
           alignItems: 'center',
           justifyContent: 'space-between',

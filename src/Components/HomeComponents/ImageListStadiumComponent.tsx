@@ -11,7 +11,7 @@ import {
 import PreviousIconSVG from '../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
 import { Stadium } from '../../App/models/Stadium';
-import { MatchMatePalette } from '../../assets/color-palette';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 interface ImageListStadiumComponentProps {
   stadium:Stadium;
   btnClicked: () => void;
@@ -21,6 +21,8 @@ const ImageListStadiumComponent = ({
   stadium,
   btnClicked,
 }: ImageListStadiumComponentProps) => {
+  const palette=usePalette()
+
   return (
     <TouchableOpacity
     onPress={btnClicked}>
@@ -42,7 +44,7 @@ const ImageListStadiumComponent = ({
           height: 30,
           borderRadius: 15,
         }}>
-        <PreviousIconSVG color={MatchMatePalette.whiteColor} />
+        <PreviousIconSVG color={palette.whiteColor} />
       </TouchableOpacity>
       <TouchableOpacity
         style={{
@@ -57,7 +59,7 @@ const ImageListStadiumComponent = ({
           height: 30,
           borderRadius: 15,
         }}>
-        <NextIconSVG color={MatchMatePalette.whiteColor} />
+        <NextIconSVG color={palette.whiteColor} />
       </TouchableOpacity>
       <TouchableOpacity
         style={{
@@ -72,7 +74,7 @@ const ImageListStadiumComponent = ({
           height: 18,
           borderRadius: 5,
         }}>
-        <NumberOfCourt>1/4</NumberOfCourt>
+        <NumberOfCourt palette={palette}>1/4</NumberOfCourt>
       </TouchableOpacity>
       <TouchableOpacity
         style={{
@@ -89,14 +91,14 @@ const ImageListStadiumComponent = ({
         }}>
         <Text
           style={{
-            color: MatchMatePalette.whiteColor,
+            color: palette.whiteColor,
             fontSize: 12,
           }}>
           Rental
         </Text>
         <Text
           style={{
-            color: MatchMatePalette.whiteColor,
+            color: palette.whiteColor,
             fontSize: 12,
             fontWeight: '600',
           }}>
@@ -104,7 +106,7 @@ const ImageListStadiumComponent = ({
         </Text>
       </TouchableOpacity>
     </ImageContainer>
-    <TitleStadiumName>{stadium.stadiumName}</TitleStadiumName>
+    <TitleStadiumName palette={palette}>{stadium.stadiumName}</TitleStadiumName>
   </TouchableOpacity>
   );
 };

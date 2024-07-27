@@ -17,7 +17,7 @@ import MatchDetailComponent from '../../../Components/HomeComponents/MatchDetail
 import {getWeekDaysInfo} from '../../../services/HelperFunctions';
 import NoTimeSlotsComponent from '../../../Components/HomeComponents/NoTimeSlotsComponent';
 import {handleRequests} from '../../../services/HandleRequests';
-import { MatchMatePalette } from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 
 const days = getWeekDaysInfo();
 export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
@@ -26,6 +26,7 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
   const [stadium, setStadium] = useState<Stadium | null>(null);
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const {stadiumId} = route.params;
+  const palette = usePalette();
 
   const retrieveTimeSlots = async () => {
     try {
@@ -43,7 +44,7 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
   );
 
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <NavigateBack
         navigation={navigation}
         headerTitle={'Stadium Availability'}
@@ -75,12 +76,12 @@ export const StadiumAvailabilityScreen = ({navigation, route}: any) => {
             style={[styles.image, {opacity: fadeAnim}]}
           />
           <TouchableOpacity onPress={() => {}} style={styles.arrowButton}>
-            <PreviousIconSVG color={MatchMatePalette.whiteColor} />
+            <PreviousIconSVG color={palette.whiteColor} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {}}
             style={[styles.arrowButton, {right: 0}]}>
-            <NextIconSVG color={MatchMatePalette.whiteColor} />
+            <NextIconSVG color={palette.whiteColor} />
           </TouchableOpacity>
         </ImagesContent>
       </ImageConainer>

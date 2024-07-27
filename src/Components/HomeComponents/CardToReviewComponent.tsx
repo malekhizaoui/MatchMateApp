@@ -17,7 +17,6 @@ import {
 import PreviousIconSVG from '../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
 import PinIconSVG from '../../assets/Icons/svg/PinIconSVG';
-import { MatchMatePalette } from '../../assets/color-palette';
 import BasketBallHoopIconSVG from '../../assets/Icons/svg/BasketBallHoopIconSVG';
 import BasketBallCourtIconSVG from '../../assets/Icons/svg/BasketBallCourtIconSVG';
 import ShowerIconSVG from '../../assets/Icons/svg/ShowerIconSVG';
@@ -26,6 +25,7 @@ import FireIconSVG from '../../assets/Icons/svg/FireIconSVG';
 import StarIconNotFilledIconSVG from '../../assets/Icons/svg/StarIconNotFilledIconSVG';
 import { Stadium } from '../../App/models/Stadium';
 import ModalReviewComponent from './ModalReviewComponent';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 interface CardToReviewComponentProps {
 //   stadium:any;
 //   btnClicked: () => void;
@@ -39,7 +39,8 @@ stadiumUserReview
 }: CardToReviewComponentProps) => {
     const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
     console.log("modalVisible",modalVisible);
-    
+    const palette=usePalette()
+
   return (
     <>
     <CardReviewsContainer>
@@ -48,20 +49,20 @@ stadiumUserReview
           <ImageStadiumReview
             source={{uri:stadiumUserReview.imageURL}}
           />
-          <TextNameProfile>{stadiumUserReview.stadiumName}</TextNameProfile>
+          <TextNameProfile palette={palette}>{stadiumUserReview.stadiumName}</TextNameProfile>
         </HeaderDescriptionReview>
-        <ButtonToReview onPress={(()=>{setModalVisible(true)})}>
+        <ButtonToReview palette={palette} onPress={(()=>{setModalVisible(true)})}>
           <Text style={{fontSize: 12, color: 'white', fontWeight: '600'}}>
             Leave review
           </Text>
         </ButtonToReview>
       </CardReviewDetailContainer>
     </CardReviewsContainer>
-    <ReviewWaitContainer onPress={(()=>{setModalVisible(true)})}>
+    <ReviewWaitContainer palette={palette} onPress={(()=>{setModalVisible(true)})}>
       <HeaderDescriptionReview >
-        <FireIconSVG color={MatchMatePalette.primaryColor} />
+        <FireIconSVG color={palette.primaryColor} />
         <Text
-          style={{fontSize: 12, color: MatchMatePalette.primaryColor}}>
+          style={{fontSize: 12, color: palette.primaryColor}}>
           99+
         </Text>
         <Text style={{fontSize: 12, color: 'grey', fontWeight: '600'}}>
@@ -69,11 +70,11 @@ stadiumUserReview
         </Text>
       </HeaderDescriptionReview>
       <View style={{flexDirection: 'row', marginRight: 10}}>
-        <StarIconNotFilledIconSVG color={MatchMatePalette.primaryColor} />
-        <StarIconNotFilledIconSVG color={MatchMatePalette.primaryColor} />
-        <StarIconNotFilledIconSVG color={MatchMatePalette.primaryColor} />
-        <StarIconNotFilledIconSVG color={MatchMatePalette.primaryColor} />
-        <StarIconNotFilledIconSVG color={MatchMatePalette.primaryColor} />
+        <StarIconNotFilledIconSVG color={palette.primaryColor} />
+        <StarIconNotFilledIconSVG color={palette.primaryColor} />
+        <StarIconNotFilledIconSVG color={palette.primaryColor} />
+        <StarIconNotFilledIconSVG color={palette.primaryColor} />
+        <StarIconNotFilledIconSVG color={palette.primaryColor} />
       </View>
     </ReviewWaitContainer>
     {modalVisible && (

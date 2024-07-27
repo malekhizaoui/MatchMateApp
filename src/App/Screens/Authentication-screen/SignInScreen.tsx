@@ -14,7 +14,7 @@ import {
   LogoApp,
 } from './styledComponent/StyledComponent';
 import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import {InputAuthComponent} from '../../../Components/AuthComponents/InputAuthComponent';
 import useAuth from './useAuth/useAuth';
 import PasswordIconSVG from '../../../assets/Icons/svg/PasswordIconSVG';
@@ -24,14 +24,16 @@ import NavigateBack from '../../../Components/NavigateBack';
 
 
 const SignInScreen = ({navigation}: any) => {
+  const palette = usePalette();
+
   const {email, setEmail, password, setPassword, loginUser,loading } =
     useAuth(navigation);
   return (
     
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <StatusBar
         barStyle={'dark-content'}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
       <ContainerScreen showsVerticalScrollIndicator={false}>
         <View>
@@ -42,7 +44,7 @@ const SignInScreen = ({navigation}: any) => {
             // source={require('../../../assets/Logos/MatchMateDarkWhite.png')}
             source={require('../../../assets/Logos/MatchMate.png')}
           />
-          <HeaderTitleText>Se Connecter à MatchMate</HeaderTitleText>
+          <HeaderTitleText palette={palette}>Se Connecter à MatchMate</HeaderTitleText>
         </HeaderConnexionScreen>
         <ContainerForm>
           <InputAuthComponent
@@ -51,7 +53,7 @@ const SignInScreen = ({navigation}: any) => {
             setValue={setEmail}
             valueInput={email}
             iconComponent={
-              <MailIconSVG color={MatchMatePalette.primaryColor} />
+              <MailIconSVG color={palette.primaryColor} />
             }
           />
           <InputAuthComponent
@@ -60,30 +62,30 @@ const SignInScreen = ({navigation}: any) => {
             setValue={setPassword}
             valueInput={password}
             iconComponent={
-              <PasswordIconSVG color={MatchMatePalette.primaryColor} />
+              <PasswordIconSVG color={palette.primaryColor} />
             }
           />
           <ButtonAuthComponent
             btnText="Connexion"
-            backgroundColor={MatchMatePalette.primaryColor}
-            btnTextColor={MatchMatePalette.whiteColor}
+            backgroundColor={palette.primaryColor}
+            btnTextColor={palette.whiteColor}
             btnClicked={loginUser}
             iconComponent={''}
             loading ={loading}
           />
           <TouchableOpacity onPress={()=>{navigation.navigate('PasswordForgotten')}}>
-          <TextpasswordForgotten>Mot de passe oublié ?</TextpasswordForgotten>
+          <TextpasswordForgotten palette={palette}>Mot de passe oublié ?</TextpasswordForgotten>
 
           </TouchableOpacity>
           <ContainerDivideText>
-            <LineStyle></LineStyle>
-            <TextDivide>ou</TextDivide>
-            <LineStyle></LineStyle>
+            <LineStyle palette={palette}></LineStyle>
+            <TextDivide palette={palette}>ou</TextDivide>
+            <LineStyle palette={palette}></LineStyle>
           </ContainerDivideText>
           <ButtonAuthComponent
             btnText="Créer un compte"
-            backgroundColor={MatchMatePalette.primaryColor}
-            btnTextColor={MatchMatePalette.whiteColor}
+            backgroundColor={palette.primaryColor}
+            btnTextColor={palette.whiteColor}
             btnClicked={() => {
               // signIn()
               navigation.navigate('Signup');

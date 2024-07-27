@@ -1,11 +1,12 @@
 import React,{useRef} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity, StatusBar} from 'react-native';
 import PagerView from 'react-native-pager-view';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import NextIconSVG from '../../../assets/Icons/svg/NextIconSVG';
 
 const DemoScreen = () => {
     const pagerRef = useRef<PagerView>(null);
+    const palette = usePalette();
 
     const goToNextPage = (value: number) => {
       if (pagerRef.current) {
@@ -18,14 +19,14 @@ const DemoScreen = () => {
     <PagerView style={styles.pagerView} initialPage={1} useNext={false}  ref={pagerRef}>
     <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.primaryColor}
+        backgroundColor={palette.primaryColor}
       />
       <View
         key="1"
         style={{
           position: 'relative',
           flex: 1,
-          backgroundColor: MatchMatePalette.darkBackgroundColor,
+          backgroundColor: palette.darkBackgroundColor,
         }}>
         <Text>First page</Text>
         <View
@@ -34,7 +35,7 @@ const DemoScreen = () => {
             width: '2%',
             right: 0,
             height: '100%',
-            backgroundColor: MatchMatePalette.primaryColor,
+            backgroundColor: palette.primaryColor,
           }}></View>
         <View
           style={{
@@ -43,7 +44,7 @@ const DemoScreen = () => {
             right: -140,
             height: '40%',
             bottom: '10%',
-            backgroundColor: MatchMatePalette.primaryColor,
+            backgroundColor: palette.primaryColor,
             borderRadius: 390,
             display: 'flex',
             justifyContent: 'center',
@@ -54,14 +55,14 @@ const DemoScreen = () => {
               width: 50,
               height: 50,
               borderRadius: 25,
-              backgroundColor: MatchMatePalette.darkBackgroundColor,
+              backgroundColor: palette.darkBackgroundColor,
               marginLeft: 10,
               display: 'flex',
               justifyContent: 'center',
               alignItems:"center"
             }}>
             <NextIconSVG
-              color={MatchMatePalette.primaryColor}
+              color={palette.primaryColor}
               size={'20'}
             />
           </TouchableOpacity>
@@ -72,7 +73,7 @@ const DemoScreen = () => {
         style={{
           position: 'relative',
           flex: 1,
-          backgroundColor: MatchMatePalette.primaryColor,
+          backgroundColor: palette.primaryColor,
         }}>
         <Text>Second page</Text>
         <View
@@ -81,7 +82,7 @@ const DemoScreen = () => {
             width: '5%',
             right: 0,
             height: '100%',
-            backgroundColor: MatchMatePalette.darkBackgroundColor,
+            backgroundColor: palette.darkBackgroundColor,
           }}></View>
         <View
           style={{
@@ -90,7 +91,7 @@ const DemoScreen = () => {
             right: -140,
             height: '40%',
             bottom: '10%',
-            backgroundColor: MatchMatePalette.darkBackgroundColor,
+            backgroundColor: palette.darkBackgroundColor,
             borderRadius: 390,
             display: 'flex',
             justifyContent: 'center',
@@ -102,14 +103,14 @@ const DemoScreen = () => {
               width: 50,
               height: 50,
               borderRadius: 25,
-              backgroundColor: MatchMatePalette.primaryColor,
+              backgroundColor: palette.primaryColor,
               marginLeft: 10,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
             }}>
             <NextIconSVG
-              color={MatchMatePalette.darkBackgroundColor}
+              color={palette.darkBackgroundColor}
               size={'20'}
             />
           </TouchableOpacity>

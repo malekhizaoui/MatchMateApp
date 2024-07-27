@@ -9,7 +9,7 @@ import {
   SeperateLine,
 } from './styledComponent/StyledComponent';
 import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import {InputAuthComponent} from '../../../Components/AuthComponents/InputAuthComponent';
 import useAuth from './useAuth/useAuth';
 import UserNameIconSVG from '../../../assets/Icons/svg/UsernameIconSVG';
@@ -21,6 +21,8 @@ import NavigateBack from '../../../Components/NavigateBack';
 
 
 const SignUpScreen = ({navigation}: any) => {
+  const palette = usePalette();
+
   const {
     email,
     setEmail,
@@ -37,18 +39,18 @@ const SignUpScreen = ({navigation}: any) => {
   } = useAuth(navigation);
   
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
       <ContainerScreen showsVerticalScrollIndicator={false}>
         <HeaderRegisterScreen>
           <View style={{marginBottom:20}}>
           <NavigateBack navigation={navigation}/>
           </View>
-          <HeaderText>S'inscrire</HeaderText>
-          <HeaderText>Rapide et facile</HeaderText>
+          <HeaderText palette={palette}>S'inscrire</HeaderText>
+          <HeaderText palette={palette}>Rapide et facile</HeaderText>
         </HeaderRegisterScreen>
         
         <ContainerForm>
@@ -57,7 +59,7 @@ const SignUpScreen = ({navigation}: any) => {
             inputName="Adresse mail"
             setValue={setEmail}
             valueInput={email}
-            iconComponent={ <MailIconSVG color={MatchMatePalette.primaryColor}
+            iconComponent={ <MailIconSVG color={palette.primaryColor}
             />}
           />
           <InputAuthComponent
@@ -65,7 +67,7 @@ const SignUpScreen = ({navigation}: any) => {
             inputName="MOT DE PASSE"
             setValue={setPassword}
             valueInput={password}
-            iconComponent={ <PasswordIconSVG color={MatchMatePalette.primaryColor} />}
+            iconComponent={ <PasswordIconSVG color={palette.primaryColor} />}
 
           />
           <SeperateLine></SeperateLine>
@@ -74,7 +76,7 @@ const SignUpScreen = ({navigation}: any) => {
             inputName="PRENOM"
             setValue={setFirstName}
             valueInput={firstName}
-            iconComponent={ <UserNameIconSVG color={MatchMatePalette.primaryColor} />}
+            iconComponent={ <UserNameIconSVG color={palette.primaryColor} />}
 
           />
           <InputAuthComponent
@@ -82,7 +84,7 @@ const SignUpScreen = ({navigation}: any) => {
             inputName="NOM"
             setValue={setLastName}
             valueInput={lastName}
-            iconComponent={ <UserNameIconSVG color={MatchMatePalette.primaryColor} />}
+            iconComponent={ <UserNameIconSVG color={palette.primaryColor} />}
 
           />
           <InputAuthComponent
@@ -90,13 +92,13 @@ const SignUpScreen = ({navigation}: any) => {
             inputName="AGE"
             setValue={setAge}
             valueInput={age}
-            iconComponent={ <AgeIconSVG color={MatchMatePalette.primaryColor} />}
+            iconComponent={ <AgeIconSVG color={palette.primaryColor} />}
 
           />
           <ButtonAuthComponent
             btnText="Créer un compte"
-            backgroundColor={MatchMatePalette.primaryColor}
-            btnTextColor={MatchMatePalette.whiteColor}
+            backgroundColor={palette.primaryColor}
+            btnTextColor={palette.whiteColor}
             btnClicked={registerUser}
             iconComponent={""}
             loading={loading}

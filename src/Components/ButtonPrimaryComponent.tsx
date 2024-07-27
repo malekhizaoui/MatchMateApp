@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {BtnContainer, TextBtnContainer} from './StyledComponent';
-import { MatchMatePalette } from '../assets/color-palette';
+import { usePalette } from '../assets/color-palette/ThemeApp';
 interface PrimaryButtonProps {
   titlebtn: string;
   colorbtn: string;
@@ -19,13 +19,15 @@ const PrimaryButtonComponant = ({
   event,
   radius,
 }: PrimaryButtonProps) => {
+  const palette = usePalette();
+
   return (
     <BtnContainer
       onPress={event}
       style={{
         backgroundColor: colorbtn,
         width: widthPrimaryBtn,
-        borderColor: MatchMatePalette.primaryColor,
+        borderColor: palette.primaryColor,
         borderWidth: 1,
         borderRadius:radius
       }}>

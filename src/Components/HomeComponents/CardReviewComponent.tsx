@@ -16,7 +16,7 @@ import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
 import StarIconNotFilledIconSVG from '../../assets/Icons/svg/StarIconNotFilledIconSVG';
 import { User } from '../../App/models/User';
 import { formatDate } from '../../services/HelperFunctions';
-import { MatchMatePalette } from '../../assets/color-palette';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 
 
 interface CardReviewComponentProps {
@@ -32,14 +32,16 @@ const CardReviewComponent = ({
   comment,
   date
 }: CardReviewComponentProps) => {
+  const palette=usePalette()
 
   const renderStars = (stars: number) => {
+
     const starIcons = [];
     for (let i = 0; i < 5; i++) {
       if (i < stars) {
-        starIcons.push(<StarIconSVG key={i} color={MatchMatePalette.primaryColor} />);
+        starIcons.push(<StarIconSVG key={i} color={palette.primaryColor} />);
       } else {
-        starIcons.push(<StarIconNotFilledIconSVG key={i} color={MatchMatePalette.primaryColor} />);
+        starIcons.push(<StarIconNotFilledIconSVG key={i} color={palette.primaryColor} />);
       }
     }
     return starIcons;
@@ -51,13 +53,13 @@ const CardReviewComponent = ({
         <UserImageReview
           source={{ uri: user.image }}
         />
-        <UserNameReview>{user.firstName} {user.lastName}</UserNameReview>
-        <DateReviewtxt>created at {formatDate(date)}</DateReviewtxt>
+        <UserNameReview palette={palette}>{user.firstName} {user.lastName}</UserNameReview>
+        <DateReviewtxt palette={palette}>created at {formatDate(date)}</DateReviewtxt>
       </UserContainerReview>
       <StarsContainer>
         {renderStars(stars)}
       </StarsContainer>
-      <Reviewtxt>
+      <Reviewtxt palette={palette}>
         {comment}
       </Reviewtxt>
     </>

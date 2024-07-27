@@ -2,12 +2,12 @@ import React from 'react';
 import { StyleSheet, Dimensions, Text, View, TouchableOpacity } from 'react-native';
 import { MatchDetailContainer, DayDetailContainer, HeaderDetailContainer, TextHeaderTime, ContentMatchDetail, DescriptionContainer, TextDesciption, Seperator, BtnTxtContainer, TxtButton, TxtdetailLabel } from './StyledComponent/StyledComponent';
 import DurationIconSVG from '../../assets/Icons/svg/DurationIconSVG';
-import { MatchMatePalette } from '../../assets/color-palette';
 import PlayersIconSVG from '../../assets/Icons/svg/PlayersIconSVG';
 import { Stadium } from '../../App/models/Stadium';
 import { TimeSlot } from '../../App/models/TimeSlot';
 import { extractTimeFromDate } from '../../services/HelperFunctions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 interface MatchDetailComponentProps {
   navigation: any,
   timeSlot: TimeSlot
@@ -18,6 +18,7 @@ const MatchDetailComponent = ({ navigation, timeSlot, stadium }: MatchDetailComp
   // Format the start and end time of the match
   const startTime = extractTimeFromDate(timeSlot.startTime)
   const endTime = extractTimeFromDate(timeSlot.endTime)
+  const palette=usePalette()
 
   // Calculate duration between startTime and endTime in minutes
   const startDateTime = new Date(timeSlot.startTime).getTime();
@@ -35,44 +36,44 @@ const MatchDetailComponent = ({ navigation, timeSlot, stadium }: MatchDetailComp
   return (
     <MatchDetailContainer>
       <DayDetailContainer>
-        <HeaderDetailContainer>
+        <HeaderDetailContainer palette={palette}>
           {/* Display the start and end time of the match */}
-          <TextHeaderTime>{startTime}h - {endTime}h</TextHeaderTime>
+          <TextHeaderTime palette={palette}>{startTime}h - {endTime}h</TextHeaderTime>
         </HeaderDetailContainer>
         <ContentMatchDetail>
           <DescriptionContainer>
             <DurationIconSVG
-              color={MatchMatePalette.secondaryColor}
+              color={palette.secondaryColor}
               size={'25'}
             />
-            <TxtdetailLabel>Duration :</TxtdetailLabel>
+            <TxtdetailLabel palette={palette}>Duration :</TxtdetailLabel>
             {/* Display the calculated duration */}
-            <TextDesciption>{durationInMinutes} mins</TextDesciption>
+            <TextDesciption palette={palette}>{durationInMinutes} mins</TextDesciption>
           </DescriptionContainer>
           <DescriptionContainer>
             <PlayersIconSVG
-              color={MatchMatePalette.secondaryColor}
+              color={palette.secondaryColor}
               size={'25'}
             />
-            <TxtdetailLabel>Teams :</TxtdetailLabel>
-            <TextDesciption>2 teams of {stadium.capacity/2}</TextDesciption>
+            <TxtdetailLabel palette={palette}>Teams :</TxtdetailLabel>
+            <TextDesciption palette={palette}>2 teams of {stadium.capacity/2}</TextDesciption>
           </DescriptionContainer>
           <DescriptionContainer>
             <PlayersIconSVG
-              color={MatchMatePalette.secondaryColor}
+              color={palette.secondaryColor}
               size={'25'}
             />
-            <TxtdetailLabel>Players Left :</TxtdetailLabel>
-            <TextDesciption>{playersLeft}</TextDesciption>
+            <TxtdetailLabel palette={palette}>Players Left :</TxtdetailLabel>
+            <TextDesciption palette={palette}>{playersLeft}</TextDesciption>
           </DescriptionContainer>
         </ContentMatchDetail>
         <Seperator></Seperator>
         <BtnTxtContainer>
           <TouchableOpacity >
-            <TxtButton></TxtButton>
+            <TxtButton palette={palette}></TxtButton>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleDetailMatch}>
-            <TxtButton>See Details</TxtButton>
+            <TxtButton palette={palette}>See Details</TxtButton>
           </TouchableOpacity>
         </BtnTxtContainer>
       </DayDetailContainer>

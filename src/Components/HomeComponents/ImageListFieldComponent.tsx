@@ -17,6 +17,7 @@ import {
   StadiumImageContainer
 } from './StyledComponent/StyledComponent';
 import { Field } from '../../App/models/Field';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 
 interface ImageListFieldComponentProps {
     field: Field;
@@ -27,11 +28,12 @@ const ImageListFieldComponent = ({
   field,
   btnClicked,
 }: ImageListFieldComponentProps) => {
-    
+  const palette=usePalette()
+
   return (
     <Container onPress={btnClicked}>
       <ImageContainer>
-        <StadiumImageField source={{uri:field.imageURL}}/>
+        <StadiumImageField palette={palette} source={{uri:field.imageURL}}/>
         {/* <PreviousButton>
           <PreviousIconSVG color={MatchMatePalette.whiteColor} />
         </PreviousButton>
@@ -46,7 +48,7 @@ const ImageListFieldComponent = ({
           <RentalPrice>150 CHF</RentalPrice>
         </RentalContainer> */}
       </ImageContainer>
-      <StadiumTitle>{field.fieldName}</StadiumTitle>
+      <StadiumTitle palette={palette}>{field.fieldName}</StadiumTitle>
     </Container>
   );
 };

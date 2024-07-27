@@ -14,6 +14,7 @@ import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
 import ExpandIconSVG from '../../assets/Icons/svg/ExpandIconSVG';
 import { MatchMatePalette } from '../../assets/color-palette';
 import { Stadium } from '../../App/models/Stadium';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 interface DescriptionStadiumComponentProps {
   stadium:Stadium |null;
   btnClicked: () => void;
@@ -23,22 +24,23 @@ const DescriptionStadiumComponent = ({
   stadium,
   btnClicked,
 }: DescriptionStadiumComponentProps) => {
+  const palette=usePalette()
 
 return(
   <View>
-    <HeaderStadium>
-          <TitleTextStadium>{stadium?.stadiumName}</TitleTextStadium>
-          <TouchableOpacity onPress={btnClicked}>
-          <TxtShowMap >Show map</TxtShowMap>
+    <HeaderStadium >
+          <TitleTextStadium palette={palette}>{stadium?.stadiumName}</TitleTextStadium>
+          <TouchableOpacity   onPress={btnClicked}>
+          <TxtShowMap palette={palette} >Show map</TxtShowMap>
           </TouchableOpacity>
-        </HeaderStadium>
-        <StadiumDescriptionTxt>
+        </HeaderStadium >
+        <StadiumDescriptionTxt palette={palette}>
           Aspen is as close as one can get to a storybook alpine town in
           America. The choose your own adventure possibilities skiing, hiking,
           dining shopping and ....
         </StadiumDescriptionTxt>
         <ExpandMore>
-          <TxtShowMap>Read more</TxtShowMap>
+          <TxtShowMap palette={palette}>Read more</TxtShowMap>
           <ExpandIconSVG color={MatchMatePalette.primaryColor} />
         </ExpandMore>
         </View>

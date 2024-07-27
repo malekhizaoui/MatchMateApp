@@ -1,22 +1,46 @@
 import React from 'react';
 import {View, ActivityIndicator, StyleSheet, Text, StatusBar} from 'react-native';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import {Image} from 'react-native';
 import { fontSizeTextScreen } from '../../../assets/Styles';
 
 const LoadingScreen: React.FC = () => {
+  const palette = usePalette();
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: palette.darkBackgroundColor,
+      position:"relative"
+    },
+    imageContainer:{
+      width: 200,
+      height: 200,
+      borderRadius: 100,
+      alignSelf: 'center',
+    },
+    textStyle:{
+      color:palette.primaryColor,
+      fontWeight:"600",
+      fontSize:14,
+      position:"absolute",
+      bottom:30,
+      alignSelf:"center"
+    }
+  });
   return (
     <View style={styles.container}>
         <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
       <View>
         <Image
           source={require('../../../assets/Logos/MatchMate.png')}
           // source={require('../../../assets/Logos/MatchMateDarkTurq.png')}
           style={styles.imageContainer}></Image>
-        <ActivityIndicator size="large" color={MatchMatePalette.primaryColor} />
+        <ActivityIndicator size="large" color={palette.primaryColor} />
       </View>
 
         <Text style={styles.textStyle}>
@@ -27,28 +51,6 @@ const LoadingScreen: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: MatchMatePalette.darkBackgroundColor,
-    position:"relative"
-  },
-  imageContainer:{
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    alignSelf: 'center',
-  },
-  textStyle:{
-    color:MatchMatePalette.primaryColor,
-    fontWeight:"600",
-    fontSize:14,
-    position:"absolute",
-    bottom:30,
-    alignSelf:"center"
-  }
-});
+
 
 export default LoadingScreen;

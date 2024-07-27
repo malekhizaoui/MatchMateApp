@@ -10,19 +10,21 @@ import {
   LogoApp,
 } from './styledComponent/StyledComponent';
 
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
 import GoogleIconSVG from '../../../assets/Icons/svg/GoogleIconSVG';
 import useAuth from './useAuth/useAuth';
 
 
 const ConnexionMethodScreen = ({navigation}: any) => {
+  const palette = usePalette();
+
   const {googleSignInEvent} = useAuth(navigation);
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
       <ContainerScreenMethod>
         <HeaderConnexionMethodScreen>
@@ -30,7 +32,7 @@ const ConnexionMethodScreen = ({navigation}: any) => {
             source={require('../../../assets/Logos/MatchMate.png')}
             // source={require('../../../assets/Logos/MatchMateDarkWhite.png')}
           />
-          <HeaderTitleText>Bienvenue à MatchMate</HeaderTitleText>
+          <HeaderTitleText palette={palette}>Bienvenue à MatchMate</HeaderTitleText>
         </HeaderConnexionMethodScreen>
         <ContainerBtnMethod>
           <TextDescription>
@@ -38,18 +40,18 @@ const ConnexionMethodScreen = ({navigation}: any) => {
             de connexion
           </TextDescription>
 
-          {/* <ButtonAuthComponent btnText='Connexion avec Facebook' backgroundColor="#1d5dc4" btnTextColor={MatchMatePalette.whiteColor} btnClicked={()=>{}} iconComponent={<FacebookIconSVG color=''/>} /> */}
+          {/* <ButtonAuthComponent btnText='Connexion avec Facebook' backgroundColor="#1d5dc4" btnTextColor={palette.whiteColor} btnClicked={()=>{}} iconComponent={<FacebookIconSVG color=''/>} /> */}
           <ButtonAuthComponent
             btnText="Connexion avec Google"
-            backgroundColor={MatchMatePalette.blackColor}
-            btnTextColor={MatchMatePalette.whiteColor}
+            backgroundColor={palette.blackColor}
+            btnTextColor={palette.whiteColor}
             btnClicked={googleSignInEvent}
             iconComponent={<GoogleIconSVG color="" />}
           />
           <ButtonAuthComponent
             btnText="Connexion avec MatchMate"
-            backgroundColor={MatchMatePalette.primaryColor}
-            btnTextColor={MatchMatePalette.whiteColor}
+            backgroundColor={palette.primaryColor}
+            btnTextColor={palette.whiteColor}
             btnClicked={() => navigation.navigate('Signin')}
             iconComponent={''}
           />

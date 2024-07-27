@@ -19,7 +19,7 @@ import StarIconNotFilledIconSVG from '../../assets/Icons/svg/StarIconNotFilledIc
 import {User} from '../../App/models/User';
 import {formatDate} from '../../services/HelperFunctions';
 import {Feedback} from '../../App/models/Feedback';
-import { MatchMatePalette } from '../../assets/color-palette';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 
 
 interface CardStadiumReviewedComponentProps {
@@ -31,13 +31,15 @@ const CardStadiumReviewedComponent = ({
   feedback,
   user,
 }: CardStadiumReviewedComponentProps) => {
+  const palette=usePalette()
+
   const renderStars = (stars: number) => {
     const starIcons = [];
     for (let i = 0; i < 5; i++) {
       if (i < stars) {
-        starIcons.push(<StarIconSVG key={i} color={MatchMatePalette.primaryColor} />);
+        starIcons.push(<StarIconSVG key={i} color={palette.primaryColor} />);
       } else {
-        starIcons.push(<StarIconNotFilledIconSVG key={i} color={MatchMatePalette.primaryColor} />);
+        starIcons.push(<StarIconNotFilledIconSVG key={i} color={palette.primaryColor} />);
       }
     }
     return starIcons;
@@ -47,22 +49,22 @@ const CardStadiumReviewedComponent = ({
     <View style={{display:"flex",flexDirection:'column'}}>
       <UserContainerReview>
         <UserImageReview source={{uri: user.image}} />
-        <UserNameReview>
+        <UserNameReview palette={palette}>
           {user.firstName} {user.lastName}
         </UserNameReview>
-        <DateReviewtxt>
+        <DateReviewtxt palette={palette}>
           created at {formatDate(feedback.created_at)}
         </DateReviewtxt>
       </UserContainerReview>
       <StarsContainer>{renderStars(feedback.stars)}</StarsContainer>
-      <Reviewtxt>{feedback.stadium.stadiumName} court</Reviewtxt>
+      <Reviewtxt palette={palette}>{feedback.stadium.stadiumName} court</Reviewtxt>
       <CardReviewDetailContainer style={{width:"90%"}}>
         <HeaderDescriptionReview style={{width:"90%"}}>
           <ImageStadiumReview source={{uri: feedback.stadium.imageURL}} />
-          <Reviewtxt>{feedback.comment}</Reviewtxt>
+          <Reviewtxt palette={palette}>{feedback.comment}</Reviewtxt>
           </HeaderDescriptionReview>
       </CardReviewDetailContainer>
-      <LineSperator></LineSperator>
+      <LineSperator palette={palette}></LineSperator>
 
     </View>
   );

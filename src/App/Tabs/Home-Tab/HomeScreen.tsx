@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, StatusBar, TouchableOpacity, StyleSheet } from 'react-native';
 import {
   ContainerApp,
   ContainerScreen,
@@ -15,9 +15,9 @@ import {
   TextCheckAllList,
 } from './StyledComponent/StyledComponent';
 import { Dropdown } from 'react-native-element-dropdown';
-import { useHome, styles } from './useHome';
+import { useHome } from './useHome';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
-import { MatchMatePalette } from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
@@ -26,10 +26,45 @@ import { useColorScheme } from "react-native"
 import { Screen } from 'react-native-screens';
 
 export const HomeScreen = ({ navigation }: any) => {
+  const palette = usePalette();
+
   const colorScheme = useColorScheme();
 console.log("colorScheme",colorScheme);
 
-
+const styles = StyleSheet.create({
+  container: {
+    padding: 0,
+    width: '44%',
+  },
+  dropdown: {
+    height: 50,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  label: {
+    position: 'absolute',
+    left: 22,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+    color: palette.whiteColor,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+    color: palette.primaryColor,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+});
   const {
     fieldSelected,
     footballField,
@@ -50,16 +85,16 @@ console.log("colorScheme",colorScheme);
   } = useHome(navigation);
 
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <StatusBar
         barStyle={'dark-content'}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
       <ContainerScreen>
         <HeaderContainer>
           <ExploreRegionContainer>
-            <RegionExploreTxt>Explore</RegionExploreTxt>
-            <RegionTxt>{region}</RegionTxt>
+            <RegionExploreTxt palette={palette}>Explore</RegionExploreTxt>
+            <RegionTxt palette={palette}>{region}</RegionTxt>
           </ExploreRegionContainer>
           <View style={styles.container}>
             {renderLabel()}
@@ -82,12 +117,12 @@ console.log("colorScheme",colorScheme);
                 setFieldSelected('Basketball');
               }}
               renderLeftIcon={() => (
-                <PinIconSVG color={MatchMatePalette.primaryColor} size={'15'} />
+                <PinIconSVG color={palette.primaryColor} size={'15'} />
               )}
             />
           </View>
         </HeaderContainer>
-        <InputContainer>
+        <InputContainer palette={palette}>
           <SearchIconSVG color="grey" />
           <TextInputStyle
             placeholder="Search..."
@@ -98,13 +133,13 @@ console.log("colorScheme",colorScheme);
         </InputContainer>
 
         <TextContainer>
-          <TextTitleList>Most fields</TextTitleList>
+          <TextTitleList palette={palette}>Most fields</TextTitleList>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('FieldList', { field: fieldDataPut });
               // navigation.navigate('AuthTab',{Screen:"ConnexionMethodScreen"})
             }}>
-            <TextCheckAllList>Discover All</TextCheckAllList>
+            <TextCheckAllList palette={palette}>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>
         <ListContainer
@@ -141,7 +176,7 @@ console.log("colorScheme",colorScheme);
           )}
         </ListContainer>
         <TextContainer>
-          <TextTitleList>Recommended</TextTitleList>
+          <TextTitleList palette={palette}>Recommended</TextTitleList>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('StadiumList', {
@@ -153,7 +188,7 @@ console.log("colorScheme",colorScheme);
                     : volleyballField,
               });
             }}>
-            <TextCheckAllList>Discover All</TextCheckAllList>
+            <TextCheckAllList palette={palette}>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>
         <ListContainer horizontal showsHorizontalScrollIndicator={false}>

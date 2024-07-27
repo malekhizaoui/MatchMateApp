@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StatusBar} from 'react-native';
+import {View, StatusBar, StyleSheet} from 'react-native';
 import {
   ContainerApp,
   ContainerDetailScreen,
@@ -10,13 +10,15 @@ import {
   ListStadiumContainer,
 } from './StyledComponent/StyledComponent';
 import {Dropdown} from 'react-native-element-dropdown';
-import useHome, {styles} from './useHome';
+import useHome from './useHome';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
-import {MatchMatePalette} from '../../../assets/color-palette';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import ImageListFieldComponent from '../../../Components/HomeComponents/ImageListFieldComponent';
 import NavigateBack from '../../../Components/NavigateBack';
 
 export const FieldListScreen = ({navigation}: any) => {
+  const palette = usePalette();
+
   const {
     renderLabel,
     isFocus,
@@ -35,19 +37,52 @@ export const FieldListScreen = ({navigation}: any) => {
     setIsFocus(false);
     setFieldSelected('Basketball'); // Example of resetting field selection
   };
-
+   const styles = StyleSheet.create({
+    container: {
+      padding: 0,
+      width: '44%',
+    },
+    dropdown: {
+      height: 50,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+    },
+    icon: {
+      marginRight: 5,
+    },
+    label: {
+      position: 'absolute',
+      left: 22,
+      top: 8,
+      zIndex: 999,
+      paddingHorizontal: 8,
+      fontSize: 14,
+      color: palette.whiteColor,
+    },
+    placeholderStyle: {
+      fontSize: 16,
+    },
+    selectedTextStyle: {
+      fontSize: 16,
+      color: palette.primaryColor,
+    },
+    iconStyle: {
+      width: 20,
+      height: 20,
+    },
+  });
   return (
-    <ContainerApp>
+    <ContainerApp palette={palette}>
       <NavigateBack navigation={navigation} headerTitle={'Field List'} />
       <StatusBar
         barStyle={'light-content'}
-        backgroundColor={MatchMatePalette.darkBackgroundColor}
+        backgroundColor={palette.darkBackgroundColor}
       />
       <ContainerDetailScreen>
         <HeaderContainer>
           <ExploreRegionContainer>
-            <RegionExploreTxt>Explore</RegionExploreTxt>
-            <RegionTxt>{region}</RegionTxt>
+            <RegionExploreTxt palette={palette}>Explore</RegionExploreTxt>
+            <RegionTxt palette={palette}>{region}</RegionTxt>
           </ExploreRegionContainer>
           <View style={styles.container}>
             {renderLabel()}
@@ -66,7 +101,7 @@ export const FieldListScreen = ({navigation}: any) => {
               onBlur={() => setIsFocus(false)}
               onChange={handleRegionChange}
               renderLeftIcon={() => (
-                <PinIconSVG color={MatchMatePalette.primaryColor} size={'15'} />
+                <PinIconSVG color={palette.primaryColor} size={'15'} />
               )}
             />
           </View>

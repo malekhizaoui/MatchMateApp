@@ -13,7 +13,7 @@ import PreviousIconSVG from '../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
 import SearchIconSVG from '../../assets/Icons/svg/SearchIconSVG';
 import FilterIconSVG from '../../assets/Icons/svg/FilterIconSVG';
-import { MatchMatePalette } from '../../assets/color-palette';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 interface SearchCardComponentProps {
  
 }
@@ -21,17 +21,19 @@ interface SearchCardComponentProps {
 const SearchCardComponent = ({
 
 }: SearchCardComponentProps) => {
+  const palette=usePalette()
+
   return (
-    <InputHeaderContainer style={{backgroundColor:MatchMatePalette.whiteColor}}>
+    <InputHeaderContainer palette={palette} style={{backgroundColor:palette.whiteColor}}>
           <InputIconContainer>
-            <SearchIconSVG color={MatchMatePalette.lightBackgroundColor} />
+            <SearchIconSVG color={palette.lightBackgroundColor} />
             <TextInputStyle placeholder="Search ..."></TextInputStyle>
           </InputIconContainer>
           <FilterIconContainer>
-            <LineSperator></LineSperator>
+            <LineSperator palette={palette}></LineSperator>
           </FilterIconContainer>
-          <LineSperator></LineSperator>
-          <FilterIconSVG color={MatchMatePalette.darkBackgroundColor} />
+          <LineSperator palette={palette}></LineSperator>
+          <FilterIconSVG color={palette.darkBackgroundColor} />
         </InputHeaderContainer>
   );
 };
