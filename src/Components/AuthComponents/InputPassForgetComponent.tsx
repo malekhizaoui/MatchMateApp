@@ -5,10 +5,8 @@ import {
   TextInputStyle,
   IconStyle,
 } from './StyledComponent/StyledComponent';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import UserNameIconSVG from '../../assets/Icons/svg/UsernameIconSVG';
-import {MatchMatePalette} from '../../assets/color-palette';
-import MailIconSVG from '../../assets/Icons/svg/MailIconSVG';
+
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 
 interface InputPassForgetComponentProps {
   setValue: React.Dispatch<React.SetStateAction<string>>;
@@ -23,8 +21,11 @@ export const InputPassForgetComponent = ({
   valueInput,
   placeholder,
 }: InputPassForgetComponentProps) => {
+  const palette=usePalette()
+
   return (
-    <ContainerInputPassForget>
+    <ContainerInputPassForget     palette={palette}
+>
       <IconStyle>{iconComponent}</IconStyle>
       <TextInputStyle
         value={valueInput}

@@ -20,10 +20,10 @@ import {
   TxtdetailLabel,
 } from './StyledComponent/StyledComponent';
 import DurationIconSVG from '../../assets/Icons/svg/DurationIconSVG';
-import {MatchMatePalette} from '../../assets/color-palette';
 import PlayersIconSVG from '../../assets/Icons/svg/PlayersIconSVG';
 import {Stadium} from '../../App/models/Stadium';
 import {GameHistory} from '../../App/models/gameHistory';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 
 interface GameHistoryCardComponentProps {
   navigation: any;
@@ -38,6 +38,7 @@ const GameHistoryCardComponent = ({
   backgroundColor,
   gameHistoryId
 }: GameHistoryCardComponentProps) => {
+  const palette=usePalette()
   // Format the start and end time of the match
   const startTime = new Date(gameHistory.startTime).toLocaleTimeString('en-US', {
     hour: '2-digit',
@@ -70,42 +71,42 @@ const GameHistoryCardComponent = ({
   return (
     <MatchDetailContainer>
       <DayDetailContainer>
-        <HeaderDetailContainer
-          backgroundColor={MatchMatePalette.secondaryColor}>
+        <HeaderDetailContainer palette={palette}
+          backgroundColor={palette.secondaryColor}>
           {/* Display the start and end time of the match */}
-          <TextHeaderTime>{day}</TextHeaderTime>
+          <TextHeaderTime palette={palette}>{day}</TextHeaderTime>
         </HeaderDetailContainer>
         <ContentMatchDetail>
           <DescriptionContainer>
             <DurationIconSVG
-              color={MatchMatePalette.primaryColor}
+              color={palette.primaryColor}
               size={'25'}
             />
-            <TxtdetailLabel>Duration :</TxtdetailLabel>
+            <TxtdetailLabel palette={palette}>Duration :</TxtdetailLabel>
             {/* Display the calculated duration */}
-            <TextDesciption>{durationInMinutes} mins</TextDesciption>
+            <TextDesciption palette={palette}>{durationInMinutes} mins</TextDesciption>
           </DescriptionContainer>
           <DescriptionContainer>
-            <PlayersIconSVG color={MatchMatePalette.primaryColor} size={'25'} />
-            <TxtdetailLabel>Time :</TxtdetailLabel>
-            <TextDesciption>
+            <PlayersIconSVG color={palette.primaryColor} size={'25'} />
+            <TxtdetailLabel palette={palette}>Time :</TxtdetailLabel>
+            <TextDesciption palette={palette}>
               {startTime} - {endTime}
             </TextDesciption>
           </DescriptionContainer>
           <DescriptionContainer>
-            <PlayersIconSVG color={MatchMatePalette.primaryColor} size={'25'} />
-            <TxtdetailLabel>Players Left :</TxtdetailLabel>
-            <TextDesciption>7</TextDesciption>
+            <PlayersIconSVG color={palette.primaryColor} size={'25'} />
+            <TxtdetailLabel palette={palette}>Players Left :</TxtdetailLabel>
+            <TextDesciption palette={palette}>7</TextDesciption>
           </DescriptionContainer>
         </ContentMatchDetail>
         <Seperator></Seperator>
         <BtnTxtContainer>
           <TouchableOpacity style={{flexDirection: 'row'}}>
-          <TxtButton color={gameHistory.team.length>gameHistory.stadium.capacity?MatchMatePalette.secondaryColor:"#c62525"}>Status : </TxtButton>
-            <TxtButton color={gameHistory.team.length>gameHistory.stadium.capacity?MatchMatePalette.secondaryColor:"#c62525"}>{gameHistory.team.length>gameHistory.stadium.capacity?"game sucessfully played":"team didn't complete"}</TxtButton>
+          <TxtButton palette={palette} color={gameHistory.team.length>gameHistory.stadium.capacity?palette.secondaryColor:"#c62525"}>Status : </TxtButton>
+            <TxtButton palette={palette} color={gameHistory.team.length>gameHistory.stadium.capacity?palette.secondaryColor:"#c62525"}>{gameHistory.team.length>gameHistory.stadium.capacity?"game sucessfully played":"team didn't complete"}</TxtButton>
           </TouchableOpacity>
           <TouchableOpacity onPress={()=>{navigation.navigate('GameHistoryDetail',{gameHistoryId})}}>
-          <TxtButton color={MatchMatePalette.primaryColor}>Detail</TxtButton>
+          <TxtButton palette={palette} color={palette.primaryColor}>Detail</TxtButton>
           </TouchableOpacity>
         </BtnTxtContainer>
       </DayDetailContainer>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ViewStyle } from 'react-native';
 import { GameHistoryDetailContainer, FieldStyleContainer, FieldImage } from './StyledComponent/StyledComponent';
-import { MatchMatePalette } from '../../assets/color-palette';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 
 const GameHistoryMatchComponent = ({ team, fieldName }: any) => {
+  const palette=usePalette()
   const TeamPositionsFootball: ViewStyle[] = [
     { top: '5%', left: '45%' }, { top: '15%', left: '10%' }, { top: '15%', right: '10%' },
     { top: '25%', right: '25%' }, { top: '25%', left: '25%' }, { top: '35%', left: '45%' },
@@ -27,7 +28,32 @@ const GameHistoryMatchComponent = ({ team, fieldName }: any) => {
     fieldName === 'Basketball' ? TeamPositionsBasketball :
     fieldName === 'FootBall' ? TeamPositionsFootball :
     TeamPositionsVolleyBall;
-
+    const styles = StyleSheet.create({
+      playerIcon: {
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        maxWidth: 40,
+        zIndex:9999
+      },
+      playerIconImageContainer: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        borderWidth: 2,
+        borderColor: palette.whiteColor,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      playerIconImage: {
+        width: 48,
+        height: 48,
+        borderRadius: 25,
+      },
+      playerIconText: {
+        color: palette.whiteColor,
+      },
+    });
   const renderPlayerIcons = (players: any) => {
     return currentSport.map((position, index) => (
       <View key={index} style={[styles.playerIcon, position]}>
@@ -62,31 +88,6 @@ const GameHistoryMatchComponent = ({ team, fieldName }: any) => {
   );
 };
 
-const styles = StyleSheet.create({
-  playerIcon: {
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    maxWidth: 40,
-    zIndex:9999
-  },
-  playerIconImageContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    borderWidth: 2,
-    borderColor: MatchMatePalette.whiteColor,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  playerIconImage: {
-    width: 48,
-    height: 48,
-    borderRadius: 25,
-  },
-  playerIconText: {
-    color: MatchMatePalette.whiteColor,
-  },
-});
+
 
 export default GameHistoryMatchComponent;

@@ -1,7 +1,5 @@
 import styled from 'styled-components/native';
 import {Dimensions} from 'react-native';
-
-import {MatchMatePalette} from '../../../assets/color-palette/index';
 import {
   fontSizeTitleScreen,
   fontSizeLegendIcon,
@@ -9,20 +7,25 @@ import {
   fontSizeTextScreen,
   ContainerAppStyle,
 } from '../../../assets/Styles/index';
-
-//Input style
-export const ContainerInput = styled.View`
+import { Theme } from '../../../App/models/Theme';
+interface PaletteProps {
+  palette: Theme;
+}
+// Input style
+export const ContainerInput = styled.View<PaletteProps>`
   width: 100%;
   height: 70px;
   border-radius: 10px;
-  border: 1px solid ${MatchMatePalette.secondaryTextColor};
+  border: 1px solid ${({ palette  }) => palette .secondaryTextColor};
   margin-bottom: 20px;
 `;
+
 export const ContainerContentInput = styled.View`
   padding: 10px;
   display: flex;
   flex-direction: row;
 `;
+
 export const ContentInput = styled.View`
   display: flex;
   flex-direction: column;
@@ -30,8 +33,8 @@ export const ContentInput = styled.View`
   padding-bottom: 22px;
 `;
 
-export const TextTitleInput = styled.Text`
-  color: ${MatchMatePalette.primaryColor};
+export const TextTitleInput = styled.Text<PaletteProps>`
+  color: ${({ palette  }) => palette .primaryColor};
   ${fontSizeTextScreen};
   font-weight: 500;
   padding: 0;
@@ -48,31 +51,32 @@ export const IconStyle = styled.View`
 `;
 
 // Button style
-export const ButtonStyle = styled.TouchableOpacity`
+export const ButtonStyle = styled.TouchableOpacity<PaletteProps>`
   width: 100%;
   height: 50px;
-  backgroundcolor: ${MatchMatePalette.primaryColor};
+  background-color: ${({ palette  }) => palette .primaryColor};
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   margin-bottom: 5px;
   flex-direction: row;
 `;
-export const TextButton = styled.Text`
-  color: ${MatchMatePalette.secondaryTextColor};
+
+export const TextButton = styled.Text<PaletteProps>`
+  color: ${({ palette  }) => palette .secondaryTextColor};
   margin-left: 10px;
-  font-weight:600;
+  font-weight: 600;
 `;
 
-//
-export const ContainerInputPassForget = styled.View`
+// Input field for forgotten password or similar
+export const ContainerInputPassForget = styled.View<PaletteProps>`
   width: 100%;
   height: 60px;
   border-radius: 10px;
   margin-bottom: 20px;
-  background-color:${MatchMatePalette.darkBackgroundColor};
-   padding: 10px;
+  background-color: ${({ palette  }) => palette .darkBackgroundColor};
+  padding: 10px;
   display: flex;
   flex-direction: row;
-  align-items:center;
+  align-items: center;
 `;

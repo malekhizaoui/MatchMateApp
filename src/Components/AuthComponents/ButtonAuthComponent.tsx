@@ -1,6 +1,7 @@
 import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import {ButtonStyle, TextButton} from './StyledComponent/StyledComponent';
+import {usePalette} from '../../assets/color-palette/ThemeApp';
 
 interface ButtonAuthComponentProps {
   btnText: string;
@@ -19,8 +20,10 @@ const ButtonAuthComponent = ({
   iconComponent,
   loading,
 }: ButtonAuthComponentProps) => {
+  const palette = usePalette();
   return (
     <ButtonStyle
+      palette={palette}
       style={{backgroundColor}}
       onPress={btnClicked}
       disabled={loading}>
@@ -30,7 +33,9 @@ const ButtonAuthComponent = ({
       ) : (
         <>
           {iconComponent}
-          <TextButton style={{color: btnTextColor}}>{btnText}</TextButton>
+          <TextButton palette={palette} style={{color: btnTextColor}}>
+            {btnText}
+          </TextButton>
         </>
       )}
     </ButtonStyle>

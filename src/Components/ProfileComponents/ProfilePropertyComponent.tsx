@@ -11,9 +11,8 @@ import {
     TextProperty
 } from './StyledComponent/StyledComponent';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
-import PreviousIconSVG from '../../assets/Icons/svg/PreviousIconSVG';
-import ExpandIconSVG from '../../assets/Icons/svg/ExpandIconSVG';
-import {MatchMatePalette} from '../../assets/color-palette';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
+
 interface ProfilePropertyComponentProps {
 propertyText:string,
 icon:any,
@@ -25,16 +24,16 @@ const ProfilePropertyComponent = ({
     icon,
     toNavigate
 }: ProfilePropertyComponentProps) => {
-  
+  const palette=usePalette()
   return (
     <PropertyContainer onPress={toNavigate}>
         <View style={{display:"flex",flexDirection:'row'}}>
             {icon}
-        <TextProperty>
+        <TextProperty palette={palette}>
             {propertyText}
         </TextProperty>
         </View>
-        <NextIconSVG color={MatchMatePalette.secondaryTextColor} />
+        <NextIconSVG color={palette.secondaryTextColor} />
         </PropertyContainer>
   );
 };

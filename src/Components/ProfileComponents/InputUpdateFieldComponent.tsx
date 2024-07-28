@@ -6,7 +6,7 @@ import {
   TextTitleInput,
   TextInputStyle,
 } from './StyledComponent/StyledComponent';
-import { MatchMatePalette } from '../../assets/color-palette';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 
 interface InputUpdateFieldComponentProps {
   placeholder: string;
@@ -21,11 +21,12 @@ export const InputUpdateFieldComponent = ({
   setValue,
   value,
 }: InputUpdateFieldComponentProps) => {
+  const palette=usePalette()
   return (
     <ContainerInput>
       <ContainerContentInput>
         <ContentInput>
-          <TextTitleInput>{inputName} :</TextTitleInput>
+          <TextTitleInput palette={palette}>{inputName} :</TextTitleInput>
           <TextInputStyle
             value={value}
             onChangeText={(text) => setValue(text)} // Ensure onChangeText correctly invokes setValue

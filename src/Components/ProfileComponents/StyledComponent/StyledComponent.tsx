@@ -1,9 +1,10 @@
 import styled from 'styled-components/native';
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
-import {MatchMatePalette} from '../../../assets/color-palette/index';
+
+import { MatchMatePalette } from '../../../assets/color-palette/index';
 import {
   fontSizeTitleScreen,
   fontSizeLegendIcon,
@@ -11,12 +12,20 @@ import {
   fontSizeTextScreen,
   ContainerAppStyle,
 } from '../../../assets/Styles/index';
-interface HeaderDetailContainerProps {
-  backgroundColor?: string; // Define backgroundColor prop
+import { Theme } from '../../../App/models/Theme';
+
+interface PaletteProps {
+  palette: Theme;
 }
-interface TxtButtonProps {
-  color?: string; // Define backgroundColor prop
+
+interface HeaderDetailContainerProps extends PaletteProps {
+  backgroundColor?: string;
 }
+
+interface TxtButtonProps extends PaletteProps {
+  color?: string;
+}
+
 export const PropertyContainer = styled.TouchableOpacity`
   display: flex;
   justify-content: space-between;
@@ -24,51 +33,50 @@ export const PropertyContainer = styled.TouchableOpacity`
   flex-direction: row;
 `;
 
-export const TextProperty = styled.Text`
+export const TextProperty = styled.Text<PaletteProps>`
   ${fontSizeTextScreen};
-  color: ${MatchMatePalette.secondaryTextColor};
+  color: ${({ palette }) => palette.secondaryTextColor};
   margin-left: 20px;
   font-weight: 600;
 `;
 
+// Input style
+export const ContainerInput = styled.View`
+  width: 100%;
+  height: 70px;
+`;
 
-//Input style
-export const ContainerInput=styled.View`
-width: 100%;
-height: 70px;
-`
-export const ContainerContentInput=styled.View`
-  padding:10px;
-  display:flex;
-  flex-direction:row;
-`
-export const ContentInput=styled.View`
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-height:90%;
-padding:2px
+export const ContainerContentInput = styled.View`
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+`;
 
-`
+export const ContentInput = styled.View`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+  padding: 2px;
+`;
 
-export const TextTitleInput =styled.Text`
-color:${MatchMatePalette.primaryColor};
-font-size: 17px;
-font-weight:500
-`
+export const TextTitleInput = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.primaryColor};
+  font-size: 17px;
+  font-weight: 500;
+`;
 
-export const TextInputStyle =styled.TextInput`
-color:grey;
-margin-bottom:10px;
-font-size: 15px
+export const TextInputStyle = styled.TextInput`
+  color: grey;
+  margin-bottom: 10px;
+  font-size: 15px;
+`;
 
-`
-
-export const IconStyle =styled.View`
-width:50px;
-align-items:center;
-padding-top:2px
-`
+export const IconStyle = styled.View`
+  width: 50px;
+  align-items: center;
+  padding-top: 2px;
+`;
 
 // GameHistory design
 export const MatchDetailContainer = styled.View`
@@ -76,6 +84,7 @@ export const MatchDetailContainer = styled.View`
   width: 110%;
   margin-top: 10px;
 `;
+
 export const DayDetailContainer = styled.View`
   border-radius: 10px;
   width: 100%;
@@ -89,7 +98,7 @@ export const DayDetailContainer = styled.View`
 
 export const HeaderDetailContainer = styled.View<HeaderDetailContainerProps>`
   width: 100%;
-  background-color: ${({ backgroundColor }) => backgroundColor || MatchMatePalette.lightBackgroundColor};
+  background-color: ${({ backgroundColor, palette }) => backgroundColor || palette.lightBackgroundColor};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   display: flex;
@@ -99,12 +108,13 @@ export const HeaderDetailContainer = styled.View<HeaderDetailContainerProps>`
   justify-content: center;
 `;
 
-export const TextHeaderTime = styled.Text`
-  color: ${MatchMatePalette.whiteColor};
+export const TextHeaderTime = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.whiteColor};
   ${fontSizeTextScreen};
   font-weight: bold;
   margin: 10px;
 `;
+
 export const ContentMatchDetail = styled.View`
   width: 90%;
   flex-direction: column;
@@ -115,14 +125,16 @@ export const DescriptionContainer = styled.View`
   flex-direction: row;
   align-items: center;
 `;
-export const TxtdetailLabel = styled.Text`
-  color: ${MatchMatePalette.lightColor};
+
+export const TxtdetailLabel = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.lightColor};
   font-weight: bold;
   ${fontSizeTextScreen};
   margin-left: 10px;
 `;
-export const TextDesciption = styled.Text`
-  color: ${MatchMatePalette.secondaryTextColor};
+
+export const TextDesciption = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.secondaryTextColor};
   ${fontSizeTextScreen};
   margin-left: 10px;
   margin-bottom: 4px;
@@ -147,12 +159,11 @@ export const BtnTxtContainer = styled.View`
 `;
 
 export const TxtButton = styled.Text<TxtButtonProps>`
-  color: ${({ color }) => color || MatchMatePalette.lightBackgroundColor};
+  color: ${({ color, palette }) => color || palette.lightBackgroundColor};
   ${fontSizeTextScreen};
   font-weight: 600;
 `;
 
-// 
 export const GameHistoryDetailContainer = styled.View`
   display: flex;
   flex-direction: column;

@@ -8,9 +8,7 @@ import {
   TextInputStyle,
   IconStyle,
 } from './StyledComponent/StyledComponent';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import UserNameIconSVG from '../../assets/Icons/svg/UsernameIconSVG';
-import { MatchMatePalette } from '../../assets/color-palette';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 interface InputAuthComponentProps{
   placeholder:string,
   inputName:string,
@@ -21,15 +19,18 @@ interface InputAuthComponentProps{
 
 
 export const InputAuthComponent = ({placeholder,inputName,setValue,valueInput,iconComponent }:InputAuthComponentProps) => {
+  const palette=usePalette()
 
   return (
-    <ContainerInput>
+    <ContainerInput     palette={palette}
+>
             <ContainerContentInput>
               <IconStyle>
               {iconComponent}
               </IconStyle>
               <ContentInput>
-                <TextTitleInput>{inputName} :</TextTitleInput>
+                <TextTitleInput     palette={palette}
+                >{inputName} :</TextTitleInput>
                 <TextInputStyle
                 
                   value={valueInput}

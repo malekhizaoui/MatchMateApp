@@ -1,7 +1,7 @@
 import React from 'react';
 import BackIconSVG from '../assets/Icons/svg/BackIconSVG';
 import {View, TouchableOpacity, Text} from 'react-native';
-import {MatchMatePalette} from '../assets/color-palette';
+import { usePalette } from '../assets/color-palette/ThemeApp';
 interface NavigateBackComponentProps{
   color?:string ,
   navigation:any,
@@ -10,6 +10,7 @@ interface NavigateBackComponentProps{
 }
 
 export const NavigateBack = ({navigation, headerTitle,color,backgroundColor}: NavigateBackComponentProps) => {
+  const palette=usePalette()
   return (
     <View
       style={{
@@ -26,10 +27,10 @@ export const NavigateBack = ({navigation, headerTitle,color,backgroundColor}: Na
         backgroundColor:backgroundColor
       }}>
     
-        <BackIconSVG color={color?color:MatchMatePalette.primaryColor} btnClicked={()=>{navigation.goBack()}}/>
+        <BackIconSVG color={color?color:palette.primaryColor} btnClicked={()=>{navigation.goBack()}}/>
       <Text
         style={{
-          color: color?color:MatchMatePalette.primaryColor,
+          color: color?color:palette.primaryColor,
           fontSize: 20,
           fontWeight: '600',
           marginLeft: 30,

@@ -1,10 +1,12 @@
 import React from 'react';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import { MatchMatePalette } from '../../assets/color-palette';
+import { usePalette } from '../../assets/color-palette/ThemeApp';
 
 const SkeletonLeaderBoardCard = () => {
+  const palette=usePalette()
+
   return (
-    <SkeletonPlaceholder borderRadius={4} highlightColor={MatchMatePalette.lightBackgroundColor} backgroundColor={MatchMatePalette.whiteColor}>
+    <SkeletonPlaceholder borderRadius={4} highlightColor={palette.lightBackgroundColor} backgroundColor={palette.whiteColor}>
     <SkeletonPlaceholder.Item flexDirection="row" alignItems="center" justifyContent='space-between'   >
     <SkeletonPlaceholder.Item flexDirection="row" alignItems="center"   >
       <SkeletonPlaceholder.Item width={40}  borderRadius={20} height={40} marginRight={20}/>

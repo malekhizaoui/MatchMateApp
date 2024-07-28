@@ -18,7 +18,6 @@ import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
 import StarIconNotFilledIconSVG from '../../assets/Icons/svg/StarIconNotFilledIconSVG';
 import {User} from '../../App/models/User';
 import {formatDate} from '../../services/HelperFunctions';
-import {MatchMatePalette} from '../../assets/color-palette';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
 
 
@@ -78,7 +77,7 @@ const CardBookingComponents = ({
     /** Card */
     card: {
       borderRadius: 8,
-      backgroundColor: MatchMatePalette.darkBackgroundColor,
+      backgroundColor: palette.darkBackgroundColor,
       marginBottom: 16,
       shadowColor: 'rgba(0, 0, 0, 0.5)',
       shadowOffset: {
@@ -90,7 +89,7 @@ const CardBookingComponents = ({
       elevation: 2,
       width: '90%',
       borderWidth:2,
-      borderColor:MatchMatePalette.lightBackgroundColor
+      borderColor:palette.lightBackgroundColor
     },
     cardLikeWrapper: {
       position: 'absolute',
@@ -102,7 +101,7 @@ const CardBookingComponents = ({
       width: 40,
       height: 40,
       borderRadius: 9999,
-      backgroundColor: MatchMatePalette.lightBackgroundColor,
+      backgroundColor: palette.lightBackgroundColor,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -127,7 +126,7 @@ const CardBookingComponents = ({
     cardTitle: {
       fontSize: 18,
       fontWeight: '500',
-      color: MatchMatePalette.secondaryTextColor,
+      color: palette.secondaryTextColor,
       marginRight: 'auto',
   
     },

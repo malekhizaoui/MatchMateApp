@@ -13,8 +13,9 @@ import {
   ImageRankContainer,
   ContainerRankBoard,
 } from './StyledComponent/styledComponent';
-import {MatchMatePalette} from '../../assets/color-palette';
-import { User } from '../../App/models/User';
+import {palette} from '../../assets/color-palette';
+import {User} from '../../App/models/User';
+import {usePalette} from '../../assets/color-palette/ThemeApp';
 
 interface UserLeaderCardComponentProps {
   rank: number;
@@ -29,28 +30,34 @@ const UserLeaderCardComponent = ({
   user,
   backgroundColor,
   event,
-  profileHovered
+  profileHovered,
 }: UserLeaderCardComponentProps) => {
+  const palette = usePalette();
   return (
     <ContainerRankBoard
+      palette={palette}
       backgroundColor={
-        profileHovered===user.id
-          ? MatchMatePalette.secondaryColor
-          : MatchMatePalette.darkBackgroundColor
+        profileHovered === user.id
+          ? palette.secondaryColor
+          : palette.darkBackgroundColor
       }
       onPress={() => {
         event();
       }}>
       <ImageRankContainer>
-        <TextNameLeader>{rank + 4}</TextNameLeader>
+        <TextNameLeader palette={palette}>{rank + 4}</TextNameLeader>
         <ImageUser
           source={{
             uri: user.image,
           }}
         />
-        <TextNameLeader>{user.firstName} {user.lastName}</TextNameLeader>
+        <TextNameLeader palette={palette}>
+          {user.firstName} {user.lastName}
+        </TextNameLeader>
       </ImageRankContainer>
-      <TextPointLeader>{user.gameHistories.length} pts</TextPointLeader>
+      <TextPointLeader palette={palette}>
+        {user.gameHistories.length} pts
+      </TextPointLeader>
     </ContainerRankBoard>
   );
 };

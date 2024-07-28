@@ -46,7 +46,7 @@ const CodeVerificationScreen = ({navigation,route}: any) => {
       borderWidth: 1,
       borderColor: palette.secondaryTextColor,
       textAlign: 'center',
-      backgroundColor: palette.blackColor,
+      backgroundColor: palette.primaryTextColor,
       borderRadius: 5,
       color: palette.secondaryTextColor,
       alignSelf: 'center',
