@@ -3,16 +3,18 @@ import React, {useState} from 'react';
 import {YaMap,Marker}  from 'react-native-yamap';
 import PinOrderSVG from '../../assets/Icons/svg/TabsIcon/PinOrderSVG';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
+import { useColorScheme } from 'react-native';
 interface StadiumLocationMapComponentProps {
     stadium:any
 }
 
 const StadiumLocationMapComponent = ({stadium}: StadiumLocationMapComponentProps) => {
   const palette=usePalette()
+  const colorScheme = useColorScheme();
 
   return (
     <YaMap
-            // nightMode={true}
+            nightMode={colorScheme==="dark"?true:false}
             style={{flex: 1 }}
             showUserPosition={true}
             initialRegion={{

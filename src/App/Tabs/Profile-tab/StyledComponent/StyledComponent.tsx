@@ -60,6 +60,7 @@ export const ProfileHeaderContainer = styled.View<PaletteProps>`
   flex-direction: column;
   justify-content: center;
   background-color: ${({ palette }) => palette.primaryColor};
+  position:relative;
 `;
 
 export const ImageProfile = styled.Image<PaletteProps>`

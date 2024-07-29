@@ -14,10 +14,14 @@ import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
 import GoogleIconSVG from '../../../assets/Icons/svg/GoogleIconSVG';
 import useAuth from './useAuth/useAuth';
+import { useColorScheme } from 'react-native';
 
 
 const ConnexionMethodScreen = ({navigation}: any) => {
   const palette = usePalette();
+  const colorScheme = useColorScheme();
+console.log("colorSchemesssss",colorScheme);
+
 
   const {googleSignInEvent} = useAuth(navigation);
   return (
@@ -29,7 +33,7 @@ const ConnexionMethodScreen = ({navigation}: any) => {
       <ContainerScreenMethod>
         <HeaderConnexionMethodScreen>
           <LogoApp
-            source={require('../../../assets/Logos/MatchMate.png')}
+            source={colorScheme==="light"?require('../../../assets/Logos/MatchMate.png'):require('../../../assets/Logos/MatchMateDarkWhite.png')}
             // source={require('../../../assets/Logos/MatchMateDarkWhite.png')}
           />
           <HeaderTitleText palette={palette}>Bienvenue à MatchMate</HeaderTitleText>

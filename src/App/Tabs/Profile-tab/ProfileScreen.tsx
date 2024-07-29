@@ -1,4 +1,4 @@
-import React,{useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -18,8 +18,7 @@ import {
   ProfilePropertiesContainer,
   ProfilePropertyContent,
 } from './StyledComponent/StyledComponent';
-import { AuthContext } from '../../../services/Context/AuthContext';
-import { usePalette } from '../../../assets/color-palette/ThemeApp';
+import {usePalette} from '../../../assets/color-palette/ThemeApp';
 import GameHistoryIconSVG from '../../../assets/Icons/svg/GameHistoryIconSVG';
 import InfoPersoIconSVG from '../../../assets/Icons/svg/InfoPersoIconSVG';
 import SettingsIconSVG from '../../../assets/Icons/svg/SettingsIconSVG';
@@ -28,9 +27,10 @@ import ProfilePropertyComponent from '../../../Components/ProfileComponents/Prof
 import useProfile from './useProfile';
 import ReviewsIconSVG from '../../../assets/Icons/svg/ReviewsIconSVG';
 import SkeletonHeaderProfileUser from '../../../Components/SkeletonLoadingComponents/SkeletonHeaderProfileUser';
+import InfoIconSVG from "../../../assets/Icons/svg/InfoIconSVG"
 const ProfileScreen = ({navigation}: any) => {
-const {userData,signOut}=useProfile(navigation)
-const palette = usePalette();
+  const {userData, signOut, gameHistory} = useProfile(navigation);
+  const palette = usePalette();
 
   return (
     <ContainerApp palette={palette}>
@@ -39,15 +39,27 @@ const palette = usePalette();
         backgroundColor={palette.primaryColor}
       />
       <TextHeader palette={palette}>Profile</TextHeader>
-      {userData?.image?(<ProfileHeaderContainer palette={palette}>
-        <ImageProfile palette={palette}
-          source={{uri:userData.image}}/>
+      <TouchableOpacity style={{position:"absolute",top:25,right:20}} onPress={()=>{navigation.navigate('Settings')}}>
+          <SettingsIconSVG color={palette.whiteColor} />
+          </TouchableOpacity>
+      {userData?.image ? (
+        <ProfileHeaderContainer palette={palette}>
+          <ImageProfile palette={palette} source={{uri: userData.image}} />
 
-        <HeaderTitleContainer>
-          <TextNameProfile palette={palette}>{userData?.firstName} {userData?.lastName}</TextNameProfile>
-          <TextNameProfile palette={palette}>{userData?.email}</TextNameProfile>
-        </HeaderTitleContainer>
-      </ProfileHeaderContainer>):<SkeletonHeaderProfileUser/>}
+          <HeaderTitleContainer>
+            <TextNameProfile palette={palette}>
+              {userData?.firstName} {userData?.lastName}
+            </TextNameProfile>
+            <TextNameProfile palette={palette}>
+              {userData?.email}
+            </TextNameProfile>
+          </HeaderTitleContainer>
+         
+        </ProfileHeaderContainer>
+        
+      ) : (
+        <SkeletonHeaderProfileUser />
+      )}
       <ProfilePropertiesContainer palette={palette}>
         <ProfilePropertyContent>
           <ProfilePropertyComponent
@@ -57,14 +69,7 @@ const palette = usePalette();
               navigation.navigate('EditProfile');
             }}
           />
-          <LineSperator palette={palette}></LineSperator>
-          <ProfilePropertyComponent
-            propertyText="Settings"
-            icon={<SettingsIconSVG color={palette.secondaryTextColor} />}
-            toNavigate={() => {
-              navigation.navigate('EditProfile');
-            }}
-          />
+         
           <LineSperator palette={palette}></LineSperator>
           <ProfilePropertyComponent
             propertyText="Your reviews"
@@ -78,7 +83,15 @@ const palette = usePalette();
             propertyText="Game history"
             icon={<GameHistoryIconSVG color={palette.secondaryTextColor} />}
             toNavigate={() => {
-              navigation.navigate('GameHistory');
+              navigation.navigate('GameHistory', {user: userData, gameHistory});
+            }}
+          />
+           <LineSperator palette={palette}></LineSperator>
+          <ProfilePropertyComponent
+            propertyText="About App"
+            icon={<InfoIconSVG color={palette.secondaryTextColor} />}
+            toNavigate={() => {
+              navigation.navigate('About');
             }}
           />
           <LineSperator palette={palette}></LineSperator>

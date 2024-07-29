@@ -1,4 +1,4 @@
-import {StatusBar, TouchableOpacity, View} from 'react-native';
+import {StatusBar, TouchableOpacity, useColorScheme, View} from 'react-native';
 import React from 'react';
 import {
   ContainerApp,
@@ -25,6 +25,7 @@ import NavigateBack from '../../../Components/NavigateBack';
 
 const SignInScreen = ({navigation}: any) => {
   const palette = usePalette();
+  const colorScheme = useColorScheme();
 
   const {email, setEmail, password, setPassword, loginUser,loading } =
     useAuth(navigation);
@@ -42,7 +43,7 @@ const SignInScreen = ({navigation}: any) => {
         <HeaderConnexionScreen>
           <LogoApp
             // source={require('../../../assets/Logos/MatchMateDarkWhite.png')}
-            source={require('../../../assets/Logos/MatchMate.png')}
+            source={colorScheme==="light"?require('../../../assets/Logos/MatchMate.png'):require('../../../assets/Logos/MatchMateDarkWhite.png')}
           />
           <HeaderTitleText palette={palette}>Se Connecter à MatchMate</HeaderTitleText>
         </HeaderConnexionScreen>

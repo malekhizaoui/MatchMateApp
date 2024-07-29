@@ -21,50 +21,52 @@ import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
-import { useColorScheme } from "react-native"
+import { useColorScheme } from 'react-native';
 
-import { Screen } from 'react-native-screens';
-
-export const HomeScreen = ({ navigation }: any) => {
+export const HomeScreen = ({ navigation }:any) => {
   const palette = usePalette();
-
   const colorScheme = useColorScheme();
-console.log("colorScheme",colorScheme);
+  console.log('colorScheme', colorScheme);
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 0,
-    width: '44%',
-  },
-  dropdown: {
-    height: 50,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-  },
-  icon: {
-    marginRight: 5,
-  },
-  label: {
-    position: 'absolute',
-    left: 22,
-    top: 8,
-    zIndex: 999,
-    paddingHorizontal: 8,
-    fontSize: 14,
-    color: palette.whiteColor,
-  },
-  placeholderStyle: {
-    fontSize: 16,
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-    color: palette.primaryColor,
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-});
+  const styles = StyleSheet.create({
+    container: {
+      padding: 0,
+      width: '44%',
+    },
+    dropdown: {
+      height: 50,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+      backgroundColor:palette.lightBackgroundColor
+    },
+    icon: {
+      marginRight: 5,
+    },
+    label: {
+      position: 'absolute',
+      left: 22,
+      top: 8,
+      zIndex: 999,
+      paddingHorizontal: 8,
+      fontSize: 14,
+    },
+    placeholderStyle: {
+      fontSize: 16,
+    },
+    selectedTextStyle: {
+      fontSize: 16,
+      color: palette.secondaryTextColor,
+    },
+    itemStyle: {
+      padding: 10,
+      borderRadius: 8,
+    },
+    iconStyle: {
+      width: 20,
+      height: 20,
+    },
+  });
+
   const {
     fieldSelected,
     footballField,
@@ -86,10 +88,7 @@ const styles = StyleSheet.create({
 
   return (
     <ContainerApp palette={palette}>
-      <StatusBar
-        barStyle={'dark-content'}
-        backgroundColor={palette.darkBackgroundColor}
-      />
+      <StatusBar barStyle={'dark-content'} backgroundColor={palette.darkBackgroundColor} />
       <ContainerScreen>
         <HeaderContainer>
           <ExploreRegionContainer>
@@ -119,6 +118,20 @@ const styles = StyleSheet.create({
               renderLeftIcon={() => (
                 <PinIconSVG color={palette.primaryColor} size={'15'} />
               )}
+              renderItem={(item) => (
+                <View
+                
+                >
+                  <Text
+                    style={[
+                      styles.selectedTextStyle,
+                      { backgroundColor: palette.primaryTextColor,padding:10 },
+                    ]}
+                  >
+                    {item.label}
+                  </Text>
+                </View>
+              )}
             />
           </View>
         </HeaderContainer>
@@ -137,15 +150,12 @@ const styles = StyleSheet.create({
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('FieldList', { field: fieldDataPut });
-              // navigation.navigate('AuthTab',{Screen:"ConnexionMethodScreen"})
-            }}>
+            }}
+          >
             <TextCheckAllList palette={palette}>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>
-        <ListContainer
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          ref={scrollViewRef}>
+        <ListContainer horizontal={true} showsHorizontalScrollIndicator={false} ref={scrollViewRef}>
           {fieldDataPut?.length < 1 ? (
             [1, 2, 3].map((item, i) => (
               <FieldsCardComponent
@@ -161,7 +171,8 @@ const styles = StyleSheet.create({
               />
             ))
           ) : (
-            fieldDataPut&& fieldDataPut.map((field, i) => (
+            fieldDataPut &&
+            fieldDataPut.map((field, i) => (
               <FieldsCardComponent
                 key={i}
                 isSelected={i === 0} // Adjust isSelected logic as needed
@@ -187,7 +198,8 @@ const styles = StyleSheet.create({
                     ? basketballField
                     : volleyballField,
               });
-            }}>
+            }}
+          >
             <TextCheckAllList palette={palette}>Discover All</TextCheckAllList>
           </TouchableOpacity>
         </TextContainer>
@@ -205,13 +217,16 @@ const styles = StyleSheet.create({
                 backgroundImage={stadium.imageURL}
                 btnClicked={() => {
                   navigation.navigate('StadiumDetail', { stadiumId: stadium.id });
-                } }
-                isLoading={fieldSelected === 'Football'
-                  ? !footballField.length
-                  : fieldSelected === 'Basketball'
+                }}
+                isLoading={
+                  fieldSelected === 'Football'
+                    ? !footballField.length
+                    : fieldSelected === 'Basketball'
                     ? !basketballField.length
-                    : !volleyballField.length} 
-                feedback={stadium.feedbacks}/>
+                    : !volleyballField.length
+                }
+                feedback={stadium.feedbacks}
+              />
             ))
           ) : (
             [1, 2, 3, 4].map((_, i) => (
@@ -219,8 +234,10 @@ const styles = StyleSheet.create({
                 key={i}
                 titleDescription={''}
                 backgroundImage={''}
-                btnClicked={() => { } }
-                isLoading={true} feedback={[]}              />
+                btnClicked={() => {}}
+                isLoading={true}
+                feedback={[]}
+              />
             ))
           )}
         </ListContainer>

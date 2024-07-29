@@ -42,7 +42,7 @@ export const BookingScreen = ({navigation, route}: any) => {
   return (
     <ContainerApp palette={palette}>
       <StatusBar
-        barStyle={'light-content'}
+        barStyle={'dark-content'}
         backgroundColor={palette.darkBackgroundColor}
       />
       <Text

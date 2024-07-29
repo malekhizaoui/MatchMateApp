@@ -1,6 +1,9 @@
 import React from 'react';
 import {
   StatusBar,
+  View,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 import {
   ContainerApp,
@@ -15,9 +18,12 @@ import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import NavigateBack from '../../../Components/NavigateBack';
 import useProfile from './useProfile';
 import GameHistoryCardComponent from '../../../Components/ProfileComponents/GameHistoryCardComponent';
-const GameHistoryScreen = ({navigation}: any) => {
-  const {userData, gameHistory} = useProfile(navigation);
+import SkeletonBookingCard from '../../../Components/SkeletonLoadingComponents/SkeletonBookingCard';
+
+const GameHistoryScreen = ({ navigation, route }:any) => {
+  const { userData, gameHistory, loadMoreGameHistory } = useProfile(navigation);
   const palette = usePalette();
+  const { user } = route.params;
 
   return (
     <ContainerApp palette={palette}>
@@ -33,16 +39,16 @@ const GameHistoryScreen = ({navigation}: any) => {
       <ProfileHeaderContainer palette={palette}>
         <ImageProfile palette={palette}
           source={
-            userData?.image
-              ? {uri: userData.image}
+            user.image
+              ? { uri: user.image }
               : require('../../../assets/Images/userAnonymousImage.png')
           }></ImageProfile>
 
         <GameHistoryHeaderContainer palette={palette}>
           <TextNameProfile palette={palette}>
-            {userData?.firstName} {userData?.lastName}
+            {user.firstName} {user.lastName}
           </TextNameProfile>
-          <TextNameProfile palette={palette}>{userData?.email}</TextNameProfile>
+          <TextNameProfile palette={palette}>{user?.email}</TextNameProfile>
         </GameHistoryHeaderContainer>
       </ProfileHeaderContainer>
       <GameHistoryPropertiesContainer palette={palette}
@@ -50,18 +56,22 @@ const GameHistoryScreen = ({navigation}: any) => {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-        <GamePropertyContent style={{alignContent:"center"}}>
-            {gameHistory?.map((gameHistory,index)=>{
-                return (
-                    <GameHistoryCardComponent
-                 key={index}
-                 navigation={navigation}
-                 gameHistory={gameHistory}
-                 gameHistoryId={gameHistory.id}
-                //  stadium={stadium}
-            />
-                )
-            })}
+        <GamePropertyContent style={{ alignContent: "center" }}>
+          {
+            gameHistory.map((game, index) => (
+              <GameHistoryCardComponent
+                key={index}
+                navigation={navigation}
+                gameHistory={game}
+                gameHistoryId={game.id}
+              />
+            ))
+          }
+          {gameHistory && gameHistory.length % 4 === 0 && (
+            <TouchableOpacity onPress={loadMoreGameHistory}>
+              <Text style={{ color: palette.primaryColor, marginBottom: 60,fontSize:18,fontWeight:"600" }}>More detail...</Text>
+            </TouchableOpacity>
+          )}
         </GamePropertyContent>
       </GameHistoryPropertiesContainer>
     </ContainerApp>

@@ -1,11 +1,13 @@
 import React from 'react';
-import {View, ActivityIndicator, StyleSheet, Text, StatusBar} from 'react-native';
+import {View, ActivityIndicator, StyleSheet, Text, StatusBar, useColorScheme} from 'react-native';
 import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import {Image} from 'react-native';
 import { fontSizeTextScreen } from '../../../assets/Styles';
 
 const LoadingScreen: React.FC = () => {
   const palette = usePalette();
+  const colorScheme = useColorScheme();
+
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -37,8 +39,8 @@ const LoadingScreen: React.FC = () => {
       />
       <View>
         <Image
-          source={require('../../../assets/Logos/MatchMate.png')}
-          // source={require('../../../assets/Logos/MatchMateDarkTurq.png')}
+            source={colorScheme==="light"?require('../../../assets/Logos/MatchMate.png'):require('../../../assets/Logos/MatchMateDarkWhite.png')}
+            // source={require('../../../assets/Logos/MatchMateDarkTurq.png')}
           style={styles.imageContainer}></Image>
         <ActivityIndicator size="large" color={palette.primaryColor} />
       </View>
