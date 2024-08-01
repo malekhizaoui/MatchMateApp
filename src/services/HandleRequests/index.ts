@@ -31,7 +31,7 @@ export const handleRequests = async (
     response = await axios
       .put(`${BaseUrl}/${end_point}`, requestBody)
       .then(res => res)
-      .catch(erreur => console.log(erreur));
+      .catch(erreur => console.log("put error",erreur));
   } else if (method === 'delete') {
     response = await axios.delete(`${BaseUrl}/${end_point}`);
   }  

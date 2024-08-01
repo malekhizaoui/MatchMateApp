@@ -67,7 +67,7 @@ export const HeaderConnexionScreen = styled.View`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 20px;
 `;
 
@@ -182,5 +182,19 @@ export const HeaderStepText = styled.Text`
   color: white;
   font-weight: 600;
   margin-top: 20px;
+  margin-bottom: 10px;
+`;
+// 
+export const TextAddPicture = styled.Text<PaletteProps>`
+  color: ${({ palette }) => palette.whiteColor};
+  ${fontSizeTextScreen};
+  margin-top: 10px;
   margin-bottom: 20px;
+`;
+export const ImageProfile = styled.Image`
+  width: 160px;
+  height: 160px;
+  border-radius: 80px;
+  border-color: white;
+  border-width: 2px;
 `;

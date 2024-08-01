@@ -6,6 +6,7 @@ import SignInScreen from '../../App/Screens/Authentication-screen/SignInScreen';
 import CodeVerificationScreen from '../../App/Screens/Authentication-screen/CodeVerificationScreen';
 import PasswordForgottenScreen from '../../App/Screens/Authentication-screen/PasswordForgottenScreen';
 import DemoScreen from '../../App/Screens/Splach-screen/DemoScreen';
+import AddPictureScreen from '../../App/Screens/Authentication-screen/AddPictureScreen';
 const AuthStack = createNativeStackNavigator();
 
 export const UnauthenticatedStack = () => {
@@ -40,6 +41,11 @@ export const UnauthenticatedStack = () => {
       <AuthStack.Screen
         name="PasswordForgotten"
         component={PasswordForgottenScreen}
+        options={{ headerShown: false }}
+      />
+      <AuthStack.Screen
+        name="AddPicture"
+        component={AddPictureScreen}
         options={{ headerShown: false }}
       />
     </AuthStack.Navigator>

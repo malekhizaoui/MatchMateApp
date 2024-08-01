@@ -6,8 +6,12 @@ import { AuthContext } from '../../../services/Context/AuthContext';
 import { GameHistory } from '../../models/GameHistory';
 import { handleRequests } from '../../../services/HandleRequests';
 import { Stadium } from '../../models/Stadium';
+import { launchImageLibrary as _launchImageLibrary, launchCamera as _launchCamera, OptionsCommon } from 'react-native-image-picker';
 
-const useProfile = ({navigation}:any) => {
+let launchImageLibrary = _launchImageLibrary;
+let launchCamera = _launchCamera;
+
+const useProfile = ({ navigation }:any) => {
   const [userData, setUserData] = useState<User | null>(null);
   const [gameHistory, setGameHistory] = useState<GameHistory[]>([]);
   const [displayedGameHistory, setDisplayedGameHistory] = useState<GameHistory[]>([]);
@@ -18,9 +22,19 @@ const useProfile = ({navigation}:any) => {
   const [lastName, setLastName] = useState<string | null>(null);
   const [age, setAge] = useState<string | null>(null);
   const [stadiumsExcludingFeedback, setStadiumsExcludingFeedback] = useState<Stadium[]>([]);
-  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
+  const [modalVisible, setModalVisible] = useState(false);
 
   const ITEMS_PER_PAGE = 4;
+
+  const updateProfilePicture = async (imageUri: string) => {
+    const userId = await AsyncStorage.getItem('userId');
+    try {
+      await handleRequests('put', `user/${userId}/updateProfilePicture`, { imageUri });
+      getUserData();
+    } catch (error) {
+      console.error('Error updating profile picture:', error);
+    }
+  };
 
   const getUserData = async () => {
     const userId = await AsyncStorage.getItem('userId');
@@ -32,25 +46,63 @@ const useProfile = ({navigation}:any) => {
     }
   };
 
-  const updateUser = async () => {
-    const userId = await AsyncStorage.getItem('userId');
-    const updateData: any = {}; // Object to store fields to update
+  const openImagePicker = () => {
+    const options:OptionsCommon = {
+      mediaType: 'photo',
+      includeBase64: false,
+      maxHeight: 2000,
+      maxWidth: 2000,
+    };
 
-    // Add fields to updateData if they are not null or undefined
-    if (firstName !== null && firstName !== undefined) {
+    launchImageLibrary(options, handleResponse);
+  };
+
+  const handleCameraLaunch = () => {
+    const options:OptionsCommon = {
+      mediaType: 'photo',
+      includeBase64: false,
+      maxHeight: 2000,
+      maxWidth: 2000,
+    };
+
+    launchCamera(options, handleResponse);
+  };
+
+  const handleResponse = (response: any) => {
+    if (response.didCancel) {
+      console.log('User cancelled image picker');
+    } else if (response.error) {
+      console.log('Image picker error: ', response.error);
+    } else {
+      let imageUri = response.uri || response.assets?.[0]?.uri;
+      // setSelectedImage(imageUri);
+      updateUser(imageUri);
+    }
+  };
+
+ const updateUser = async (imageUser?:string) => {
+    const userId = await AsyncStorage.getItem('userId');
+    const updateData: any = {};
+    
+    if (firstName !== null && firstName !== "") {
       updateData.firstName = firstName;
     }
-    if (lastName !== null && lastName !== undefined) {
+    if (lastName !== null && lastName !== "") {
       updateData.lastName = lastName;
     }
-    if (age !== null && age !== undefined) {
+    if (age !== null && age !== "") {
       updateData.age = age;
     }
-    if (password !== null && password !== undefined) {
+    if (password !== null && password !== "") {
       updateData.password = password;
     }
-
+    if (imageUser) {
+      updateData.image = imageUser;
+    }
+    
     try {
+      console.log("updateData",updateData);
+
       await handleRequests('put', `user/${userId}`, updateData);
       navigation.navigate('Profile');
     } catch (error) {
@@ -65,7 +117,7 @@ const useProfile = ({navigation}:any) => {
       setGameHistory(res.data);
       setDisplayedGameHistory(res.data.slice(0, ITEMS_PER_PAGE));
     } catch (error) {
-      console.log("err", error);
+      console.log('err', error);
     }
   };
 
@@ -85,12 +137,12 @@ const useProfile = ({navigation}:any) => {
   );
 
   const getStadiumsExcludingFeedback = async () => {
-    const userId = await AsyncStorage.getItem("userId");
+    const userId = await AsyncStorage.getItem('userId');
     try {
       const res = await handleRequests('get', `userStadium/${userId}`);
       setStadiumsExcludingFeedback(res.data);
     } catch (error) {
-      console.log("error", error);
+      console.log('error', error);
     }
   };
 
@@ -109,7 +161,11 @@ const useProfile = ({navigation}:any) => {
     gameHistory: displayedGameHistory,
     loadMoreGameHistory,
     stadiumsExcludingFeedback,
-    modalVisible, setModalVisible
+    modalVisible,
+    setModalVisible,
+    openImagePicker,
+    handleCameraLaunch,
+    updateProfilePicture,
   };
 };
 

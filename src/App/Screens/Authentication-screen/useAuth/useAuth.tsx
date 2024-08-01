@@ -10,6 +10,10 @@ import { handleRequests } from '../../../../services/HandleRequests';
 import { ToastAndroid } from 'react-native';
 import { useToast } from 'react-native-toast-notifications';
 import { usePalette } from '../../../../assets/color-palette/ThemeApp';
+import { launchImageLibrary as _launchImageLibrary, launchCamera as _launchCamera, OptionsCommon } from 'react-native-image-picker';
+
+let launchImageLibrary = _launchImageLibrary;
+let launchCamera = _launchCamera;
 
 const CELL_COUNT = 6;
 
@@ -110,7 +114,7 @@ export const useAuth = (navigation: any, route: any = false) => {
       try {
         await handleRequests('put', `user/${userId}`, { is_verified: true });
         if (!cameFrom) {
-          navigation.navigate('Signin');
+          navigation.navigate('AddPicture',{userId});
           toast.show('Your account is successfully created.', { type: 'success', placement: 'top', duration: 4000, style: { backgroundColor: palette.primaryColor } });
         } else {
           navigation.navigate('PasswordForgotten', { step: 2 });
@@ -138,7 +142,52 @@ export const useAuth = (navigation: any, route: any = false) => {
       console.log('Error resetting password:', error);
     }
   };
-
+ 
+  const openImagePicker = () => {
+      const options:OptionsCommon = {
+        mediaType: 'photo',
+        includeBase64: false,
+        maxHeight: 2000,
+        maxWidth: 2000,
+      };
+  
+      launchImageLibrary(options, handleResponse);
+    };
+  
+    const handleCameraLaunch = () => {
+      const options:OptionsCommon = {
+        mediaType: 'photo',
+        includeBase64: false,
+        maxHeight: 2000,
+        maxWidth: 2000,
+      };
+  
+      launchCamera(options, handleResponse);
+    };
+    const updateUserImage = async (imageUser?:string) => {
+      const updateData: any = {};
+      updateData.image = imageUser;
+      try {
+        console.log("updateData",updateData);
+  
+        await handleRequests('put', `user/${userId}`, updateData);
+        navigation.navigate('Signin');
+      } catch (error) {
+        console.error('Error updating user:', error);
+      }
+    };
+    const handleResponse = (response: any) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('Image picker error: ', response.error);
+      } else {
+        let imageUri = response.uri || response.assets?.[0]?.uri;
+        // setSelectedImage(imageUri);
+        updateUserImage(imageUri);
+      }
+    };
+   
   // Returning necessary variables and functions
   return {
     email,
@@ -168,7 +217,9 @@ export const useAuth = (navigation: any, route: any = false) => {
     newPassword,
     setNewPassword,
     step,
-    loading
+    loading,
+    handleCameraLaunch,
+    openImagePicker
   };
 };
 
