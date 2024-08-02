@@ -35,10 +35,10 @@ const ImageListFieldComponent = ({
       <ImageContainer>
         <StadiumImageField palette={palette} source={{uri:field.imageURL}}/>
         {/* <PreviousButton>
-          <PreviousIconSVG color={MatchMatePalette.whiteColor} />
+          <PreviousIconSVG color={.whiteColor} />
         </PreviousButton>
         <NextButton>
-          <NextIconSVG color={MatchMatePalette.whiteColor} />
+          <NextIconSVG color={.whiteColor} />
         </NextButton>
         <CourtNumberContainer>
           <NumberOfCourt>1/4</NumberOfCourt>

@@ -86,14 +86,6 @@ const ProfileScreen = ({navigation}: any) => {
               navigation.navigate('GameHistory', {user: userData, gameHistory});
             }}
           />
-           <LineSperator palette={palette}></LineSperator>
-          <ProfilePropertyComponent
-            propertyText="About App"
-            icon={<InfoIconSVG color={palette.secondaryTextColor} />}
-            toNavigate={() => {
-              navigation.navigate('About');
-            }}
-          />
           <LineSperator palette={palette}></LineSperator>
           <ProfilePropertyComponent
             propertyText="Log out"
@@ -103,13 +95,7 @@ const ProfileScreen = ({navigation}: any) => {
           <LineSperator palette={palette}></LineSperator>
         </ProfilePropertyContent>
 
-        {/* <TouchableOpacity style={{backgroundColor:palette.primaryColor,width:'70%',height:50,display:"flex",borderRadius:20,justifyContent:"center",alignItems:"center"}}>
-                <Text  style={{
-                  fontSize: 16,
-                  color: '${palette.whiteColor}',
-                  fontWeight: '600',
-                }}>Logout</Text>
-                </TouchableOpacity> */}
+  
       </ProfilePropertiesContainer>
     </ContainerApp>
   );

@@ -6,8 +6,6 @@ import {ScrollView, StyleSheet, Text} from 'react-native';
 import { handleRequests } from '../../../services/HandleRequests';
 
 export const useHome = (navigation:any, route: any=false) => {
-  // HomeScreen
-
   const scrollViewRef = useRef<ScrollView>(null);
   const [basketballField, setBasketballField] = useState<Stadium[]>([]);
   const [footballField, setFootballField] = useState<Stadium[]>([]);
@@ -16,90 +14,77 @@ export const useHome = (navigation:any, route: any=false) => {
   const [fieldSelected, setFieldSelected] = useState('Basketball');
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
-  const [searchResults, setSearchResults] = useState<Stadium[]>([]);
+  const [searchResults, setSearchResults] = useState<{fields: Field[], stadiums: Stadium[]}>({fields: [], stadiums: []});
   const [query, setQuery] = useState('');
   const [region, setRegion] = useState("Geneva");
   const palette = usePalette();
 
-
   const searchFields = (query: string) => {
     if (query.length < 1) {
-      setSearchResults([]);
+      setSearchResults({fields: [], stadiums: []});
       return;
     }
-console.log("searchResults",searchResults);
 
-    const allStadiums = [...basketballField, ...footballField,...volleyballField];
+    const allStadiums = [...basketballField, ...footballField, ...volleyballField];
     const filteredStadiums = allStadiums.filter(stadium => {
-   
-      
-      const nameMatch = stadium.stadiumName
-        .toLowerCase()
-        .includes(query.toLowerCase());
-
-      const statusMatch =
-        stadium.status &&
-        stadium.status.toLowerCase().includes(query.toLowerCase());
-        
+      const nameMatch = stadium.stadiumName.toLowerCase().includes(query.toLowerCase());
+      const statusMatch = stadium.status && stadium.status.toLowerCase().includes(query.toLowerCase());
       return nameMatch || statusMatch;
     });
-    
-    setSearchResults(filteredStadiums);
+
+    const filteredFields = fieldDataPut.filter(field => 
+      field.fieldName.toLowerCase().includes(query.toLowerCase())
+    );
+
+    setSearchResults({fields: filteredFields, stadiums: filteredStadiums});
   };
 
   const handleSearch = (valueText: string) => {
-    console.log("sss");
-    
     setQuery(valueText);
     searchFields(valueText);
   };
+
   const renderLabel = () => {
     if (value || isFocus) {
       return (
-        <Text
-          style={[
-            styles.label,
-            isFocus && {color: palette.primaryColor},
-          ]}></Text>
+        <Text style={[styles.label, isFocus && {color: palette.primaryColor}]}></Text>
       );
     }
     return null;
   };
+
   const updateFieldData = (index: number) => {
     const reorderedFieldData = [
       fieldDataPut[index],
       ...fieldDataPut.slice(0, index),
       ...fieldDataPut.slice(index + 1),
     ];
-    reorderedFieldData&& setfieldDataPut(reorderedFieldData);
+    reorderedFieldData && setfieldDataPut(reorderedFieldData);
     setFieldSelected(fieldDataPut[index].fieldName);
     scrollViewRef.current?.scrollTo({x: 0, y: 0, animated: true});
   };
 
-
-  const getFieldsBaseOnRegion = async () => {    
+  const getFieldsBaseOnRegion = async () => {
     try {
-     const res=await handleRequests('get',`fieldRegion/${region}`)  
-         console.log("resssssssssssssssssssssss",res[0].stadiums);
-         
-     res&& setfieldDataPut(res);
+      const res = await handleRequests('get', `fieldRegion/${region}`);
+      res && setfieldDataPut(res);
       setBasketballField(res[0].stadiums);
       setFootballField(res[1].stadiums);
       setVolleyballField(res[2].stadiums);
     } catch (error) {
-      console.log("err",error);
-      
+      console.log("err", error);
     }
   };
 
   useEffect(() => {
     getFieldsBaseOnRegion();
-    
   }, [region]);
+
   const data = [
     {label: 'Lausanne', value: 'Lausanne'},
     {label: 'Geneva', value: 'Geneva'},
   ];
+
   const styles = StyleSheet.create({
     container: {
       padding: 0,
@@ -134,12 +119,12 @@ console.log("searchResults",searchResults);
       height: 20,
     },
   });
+
   return {
     fieldSelected,
     footballField,
     basketballField,
     volleyballField,
-
     renderLabel,
     isFocus,
     data,
@@ -151,9 +136,8 @@ console.log("searchResults",searchResults);
     fieldDataPut,
     updateFieldData,
     region,
-    setRegion
-    // fieldList
-    
+    setRegion,
+    searchResults
   };
 };
 

@@ -2,10 +2,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthContext, AuthContextProps } from '../services/Context/AuthContext';
 import UnauthenticatedStack from './Stacks/UnauthenticatedStack';
-import {
-  NavigationContainer,
-  createNavigationContainerRef,
-} from '@react-navigation/native';
+import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BookingSectionStack from './Stacks/BookingSectionStack';
@@ -13,18 +10,18 @@ import ProfileSectionStack from './Stacks/ProfileSectionStack';
 import HomeSectionStack from './Stacks/HomeSectionStack';
 import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
 import { ScreenOptions } from './ScreenOptions';
-// import { ThemeProvider,palette } from '../assets/color-palette';
 import LoadingScreen from '../App/Screens/Splach-screen/LoadingScreen';
 import { usePalette } from '../assets/color-palette/ThemeApp';
 
 function NavigationApp() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedin, setIsLoggedin] = useState(false);
-  const [choix, setChoix] = useState<string>('');
   const [barColor, setBarColor] = useState<string>('');
   const [signed, setSigned] = useState(true);
   const [routeName, setRouteName] = useState<string | undefined>();
-  const palette=usePalette()
+  const [lightModeStatus, setLightModeStatus] = useState<string | null>(null);
+  const palette = usePalette();
+
   const retrieveUserSession = async () => {
     try {
       const res = await AsyncStorage.getItem('token');
@@ -45,50 +42,65 @@ function NavigationApp() {
     }
   };
 
+  const retrievePaletteApp = async () => {
+    try {
+      const lightningModeCheck = await AsyncStorage.getItem('lightningMode');
+      setLightModeStatus(lightningModeCheck);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     retrieveUserSession();
+    retrievePaletteApp();
   }, []);
 
-  const authContext: AuthContextProps = useMemo(() => {
-    return {
-      signIn: () => {
-        retrieveUserSession();
-        setSigned(false);
-      },
-      signOut: () => {
-        removeUserSession();
-      },
-      setChoix: setChoix,
-      choix,
-      setBarColorCntxt: (color: string) => {
-        setBarColor(color);
-      },
-    };
-  }, [choix]);
+  const authContext: AuthContextProps = useMemo(() => ({
+    signIn: () => {
+      retrieveUserSession();
+      setSigned(false);
+    },
+    signOut: () => {
+      removeUserSession();
+    },
+    setBarColorCntxt: (color: string) => {
+      setBarColor(color);
+    },
+    setLightModeStatusContext: (mode: string |null) => {
+      setLightModeStatus(mode);
+
+    },
+    lightModeStatus,
+  }), [lightModeStatus]);
 
   const SplashApp = createNativeStackNavigator();
   const TabBarDourbia = createBottomTabNavigator();
   const ref = createNavigationContainerRef();
 
   const TabNav = ({ routeName, authenticated = false }: any) => {
-    // 
     const hide = routeName === 'MatchDetail';
-
+  
     return (
       <TabBarDourbia.Navigator
         initialRouteName={authenticated ? 'Home' : 'ProfileTab'}
-        screenOptions={({ navigation, route }: any) => ({
-          ...ScreenOptions({ navigation, route }),
-          tabBarStyle: {
-            backgroundColor: palette.lightBackgroundColor,
-            padding: 10,
-            height: '8%',
-            width: '100%',
-            alignSelf: 'center',
-            borderColor: palette.whiteColor,
-            border: 1,
-          },
-        })}>
+        screenOptions={({ navigation, route }: any) => {
+          const palette = usePalette(); // Ensure this is up-to-date
+          console.log("TabNav palette:", palette); // Debugging
+  
+          return {
+            ...ScreenOptions({ navigation, route }),
+            tabBarStyle: {
+              backgroundColor: palette.lightBackgroundColor,
+              padding: 10,
+              height: '8%',
+              width: '100%',
+              alignSelf: 'center',
+              borderColor: palette.whiteColor,
+              borderWidth: 1,
+            },
+          };
+        }}>
         <TabBarDourbia.Screen name="HomeTab" component={HomeSectionStack} />
         <TabBarDourbia.Screen name="LeaderboardTab" component={LeaderboardSectionStack} />
         {authenticated ? (
@@ -97,11 +109,12 @@ function NavigationApp() {
             <TabBarDourbia.Screen name="ProfileTab" component={ProfileSectionStack} />
           </>
         ) : (
-          <TabBarDourbia.Screen name="ProfileTab" component={UnauthenticatedStack}  />
+          <TabBarDourbia.Screen name="ProfileTab" component={UnauthenticatedStack} />
         )}
       </TabBarDourbia.Navigator>
     );
   };
+  
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -109,11 +122,9 @@ function NavigationApp() {
 
   return (
     <AuthContext.Provider value={authContext}>
-      {/* <ThemeProvider> */}
-        <NavigationContainer>
-          <TabNav routeName={routeName} authenticated={!signed} />
-        </NavigationContainer>
-      {/* </ThemeProvider> */}
+      <NavigationContainer>
+        <TabNav routeName={routeName} authenticated={!signed} />
+      </NavigationContainer>
     </AuthContext.Provider>
   );
 }

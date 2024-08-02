@@ -1,5 +1,11 @@
-import React from 'react';
-import { View, Text, StatusBar, TouchableOpacity, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StatusBar,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import {
   ContainerApp,
   ContainerScreen,
@@ -14,19 +20,18 @@ import {
   TextTitleList,
   TextCheckAllList,
 } from './StyledComponent/StyledComponent';
-import { Dropdown } from 'react-native-element-dropdown';
-import { useHome } from './useHome';
+import {Dropdown} from 'react-native-element-dropdown';
+import {useHome} from './useHome';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
-import { usePalette } from '../../../assets/color-palette/ThemeApp';
+import {usePalette} from '../../../assets/color-palette/ThemeApp';
 import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
-import { useColorScheme } from 'react-native';
+import {useColorScheme} from 'react-native';
 
-export const HomeScreen = ({ navigation }:any) => {
+export const HomeScreen = ({navigation}: any) => {
   const palette = usePalette();
   const colorScheme = useColorScheme();
-  console.log('colorScheme', colorScheme);
 
   const styles = StyleSheet.create({
     container: {
@@ -37,7 +42,7 @@ export const HomeScreen = ({ navigation }:any) => {
       height: 50,
       borderRadius: 8,
       paddingHorizontal: 8,
-      backgroundColor:palette.lightBackgroundColor
+      backgroundColor: palette.lightBackgroundColor,
     },
     icon: {
       marginRight: 5,
@@ -85,56 +90,62 @@ export const HomeScreen = ({ navigation }:any) => {
     region,
     setRegion,
   } = useHome(navigation);
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   return (
     <ContainerApp palette={palette}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={palette.darkBackgroundColor} />
+      <StatusBar
+        barStyle={'dark-content'}
+        backgroundColor={palette.darkBackgroundColor}
+      />
       <ContainerScreen>
-        <HeaderContainer>
-          <ExploreRegionContainer>
-            <RegionExploreTxt palette={palette}>Explore</RegionExploreTxt>
-            <RegionTxt palette={palette}>{region}</RegionTxt>
-          </ExploreRegionContainer>
-          <View style={styles.container}>
-            {renderLabel()}
-            <Dropdown
-              style={[styles.dropdown, isFocus && { borderColor: 'red' }]}
-              placeholderStyle={styles.placeholderStyle}
-              selectedTextStyle={styles.selectedTextStyle}
-              iconStyle={styles.iconStyle}
-              data={data}
-              maxHeight={300}
-              labelField="label"
-              valueField="value"
-              placeholder={region}
-              value={region}
-              onFocus={() => setIsFocus(true)}
-              onBlur={() => setIsFocus(false)}
-              onChange={(item) => {
-                setRegion(item.value);
-                setIsFocus(false);
-                setFieldSelected('Basketball');
-              }}
-              renderLeftIcon={() => (
-                <PinIconSVG color={palette.primaryColor} size={'15'} />
-              )}
-              renderItem={(item) => (
-                <View
-                
-                >
-                  <Text
-                    style={[
-                      styles.selectedTextStyle,
-                      { backgroundColor: palette.primaryTextColor,padding:10 },
-                    ]}
-                  >
-                    {item.label}
-                  </Text>
-                </View>
-              )}
-            />
-          </View>
-        </HeaderContainer>
+        {!isInputFocused && (
+          <HeaderContainer>
+            <ExploreRegionContainer>
+              <RegionExploreTxt palette={palette}>Explore</RegionExploreTxt>
+              <RegionTxt palette={palette}>{region}</RegionTxt>
+            </ExploreRegionContainer>
+            <View style={styles.container}>
+              {renderLabel()}
+              <Dropdown
+                style={[styles.dropdown]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                iconStyle={styles.iconStyle}
+                data={data}
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={region}
+                value={region}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={item => {
+                  setRegion(item.value);
+                  setIsFocus(false);
+                  setFieldSelected('Basketball');
+                }}
+                renderLeftIcon={() => (
+                  <PinIconSVG color={palette.primaryColor} size={'15'} />
+                )}
+                renderItem={item => (
+                  <View>
+                    <Text
+                      style={[
+                        styles.selectedTextStyle,
+                        {
+                          backgroundColor: palette.primaryTextColor,
+                          padding: 10,
+                        },
+                      ]}>
+                      {item.label}
+                    </Text>
+                  </View>
+                )}
+              />
+            </View>
+          </HeaderContainer>
+        )}
         <InputContainer palette={palette}>
           <SearchIconSVG color="grey" />
           <TextInputStyle
@@ -142,105 +153,115 @@ export const HomeScreen = ({ navigation }:any) => {
             placeholderTextColor={'grey'}
             onChangeText={handleSearch}
             value={query}
+            onFocus={() => setIsInputFocused(true)}
+            onBlur={() => setIsInputFocused(false)}
           />
         </InputContainer>
-
-        <TextContainer>
-          <TextTitleList palette={palette}>Most fields</TextTitleList>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('FieldList', { field: fieldDataPut });
-            }}
-          >
-            <TextCheckAllList palette={palette}>Discover All</TextCheckAllList>
-          </TouchableOpacity>
-        </TextContainer>
-        <ListContainer horizontal={true} showsHorizontalScrollIndicator={false} ref={scrollViewRef}>
-          {fieldDataPut?.length < 1 ? (
-            [1, 2, 3].map((item, i) => (
-              <FieldsCardComponent
-                key={i}
-                isSelected={i === 0} // Adjust isSelected logic as needed
-                titleText={``} // Example title text
-                backgroundImage={''} // Example default image URL
-                btnClicked={() => {
-                  // Handle click logic for default items
-                  console.log(`Default item ${item} clicked`);
-                }}
-                isLoading={true} // Adjust loading state as needed
-              />
-            ))
-          ) : (
-            fieldDataPut &&
-            fieldDataPut.map((field, i) => (
-              <FieldsCardComponent
-                key={i}
-                isSelected={i === 0} // Adjust isSelected logic as needed
-                titleText={field.fieldName}
-                backgroundImage={field.imageURL}
-                btnClicked={() => {
-                  updateFieldData(i);
-                }}
-                isLoading={!fieldDataPut.length}
-              />
-            ))
-          )}
-        </ListContainer>
-        <TextContainer>
-          <TextTitleList palette={palette}>Recommended</TextTitleList>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('StadiumList', {
-                fieldDataPass:
-                  fieldSelected === 'Football'
+        
+        {!isInputFocused && (
+          <>
+            <TextContainer>
+              <TextTitleList palette={palette}>Most fields</TextTitleList>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('FieldList', {field: fieldDataPut});
+                }}>
+                <TextCheckAllList palette={palette}>
+                  Discover All
+                </TextCheckAllList>
+              </TouchableOpacity>
+            </TextContainer>
+            <ListContainer
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              ref={scrollViewRef}>
+              {fieldDataPut?.length < 1
+                ? [1, 2, 3].map((item, i) => (
+                    <FieldsCardComponent
+                      key={i}
+                      isSelected={i === 0} // Adjust isSelected logic as needed
+                      titleText={``} // Example title text
+                      backgroundImage={''} // Example default image URL
+                      btnClicked={() => {
+                        // Handle click logic for default items
+                        console.log(`Default item ${item} clicked`);
+                      }}
+                      isLoading={true} // Adjust loading state as needed
+                    />
+                  ))
+                : fieldDataPut &&
+                  fieldDataPut.map((field, i) => (
+                    <FieldsCardComponent
+                      key={i}
+                      isSelected={i === 0} // Adjust isSelected logic as needed
+                      titleText={field.fieldName}
+                      backgroundImage={field.imageURL}
+                      btnClicked={() => {
+                        updateFieldData(i);
+                      }}
+                      isLoading={!fieldDataPut.length}
+                    />
+                  ))}
+            </ListContainer>
+            <TextContainer>
+              <TextTitleList palette={palette}>Recommended</TextTitleList>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('StadiumList', {
+                    fieldDataPass:
+                      fieldSelected === 'Football'
+                        ? footballField
+                        : fieldSelected === 'Basketball'
+                        ? basketballField
+                        : volleyballField,
+                  });
+                }}>
+                <TextCheckAllList palette={palette}>
+                  Discover All
+                </TextCheckAllList>
+              </TouchableOpacity>
+            </TextContainer>
+            <ListContainer horizontal showsHorizontalScrollIndicator={false}>
+              {(footballField || basketballField || volleyballField)?.length > 0
+                ? (fieldSelected === 'Football'
                     ? footballField
                     : fieldSelected === 'Basketball'
                     ? basketballField
-                    : volleyballField,
-              });
-            }}
-          >
-            <TextCheckAllList palette={palette}>Discover All</TextCheckAllList>
-          </TouchableOpacity>
-        </TextContainer>
-        <ListContainer horizontal showsHorizontalScrollIndicator={false}>
-          {(footballField || basketballField || volleyballField)?.length > 0 ? (
-            (fieldSelected === 'Football'
-              ? footballField
-              : fieldSelected === 'Basketball'
-              ? basketballField
-              : volleyballField
-            ).map((stadium, i) => (
-              <StadiumCardComponent
-                key={i}
-                titleDescription={stadium.stadiumName}
-                backgroundImage={stadium.imageURL}
-                btnClicked={() => {
-                  navigation.navigate('StadiumDetail', { stadiumId: stadium.id });
-                }}
-                isLoading={
-                  fieldSelected === 'Football'
-                    ? !footballField.length
-                    : fieldSelected === 'Basketball'
-                    ? !basketballField.length
-                    : !volleyballField.length
-                }
-                feedback={stadium.feedbacks}
-              />
-            ))
-          ) : (
-            [1, 2, 3, 4].map((_, i) => (
-              <StadiumCardComponent
-                key={i}
-                titleDescription={''}
-                backgroundImage={''}
-                btnClicked={() => {}}
-                isLoading={true}
-                feedback={[]}
-              />
-            ))
-          )}
-        </ListContainer>
+                    : volleyballField
+                  ).map((stadium, i) => (
+                    <StadiumCardComponent
+                      key={i}
+                      titleDescription={stadium.stadiumName}
+                      backgroundImage={stadium.imageURL}
+                      btnClicked={() => {
+                        navigation.navigate('StadiumDetail', {
+                          stadiumId: stadium.id,
+                        });
+                      }}
+                      isLoading={
+                        fieldSelected === 'Football'
+                          ? !footballField.length
+                          : fieldSelected === 'Basketball'
+                          ? !basketballField.length
+                          : !volleyballField.length
+                      }
+                      feedback={stadium.feedbacks}
+                    />
+                  ))
+                : [1, 2, 3, 4].map((_, i) => (
+                    <StadiumCardComponent
+                      key={i}
+                      titleDescription={''}
+                      backgroundImage={''}
+                      btnClicked={() => {}}
+                      isLoading={true}
+                      feedback={[]}
+                    />
+                  ))}
+            </ListContainer>
+          </>
+        )}
+
       </ContainerScreen>
     </ContainerApp>
   );

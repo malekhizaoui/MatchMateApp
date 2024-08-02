@@ -6,6 +6,7 @@ import GameHistoryScreen from '../../App/Tabs/Profile-tab/GameHistoryScreen';
 import GameHistoryDetailScreen from '../../App/Tabs/Profile-tab/GameHistoryDetailScreen';
 import ReviewsScreen from '../../App/Tabs/Profile-tab/ReviewsScreen';
 import AboutScreen from '../../App/Tabs/Profile-tab/AboutScreen';
+import SettingsScreen from '../../App/Tabs/Profile-tab/SettingsScreen';
 const HomeStack = createNativeStackNavigator();
 
 export const ProfileSectionStack = () => {
@@ -19,6 +20,11 @@ export const ProfileSectionStack = () => {
       <HomeStack.Screen
         name="About"
         component={AboutScreen}
+        options={{ headerShown: false }}
+      />
+      <HomeStack.Screen
+        name="Settings"
+        component={SettingsScreen}
         options={{ headerShown: false }}
       />
       <HomeStack.Screen

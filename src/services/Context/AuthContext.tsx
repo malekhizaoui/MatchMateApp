@@ -1,17 +1,17 @@
-import React, {useState, createContext, Dispatch, SetStateAction} from 'react';
+import React, {createContext, Dispatch, SetStateAction} from 'react';
 
 export interface AuthContextProps {
-  choix: string;
-  setChoix: Dispatch<SetStateAction<string>>;
-  signIn: () => void; // Include signIn function in the interface
+  lightModeStatus: string | null; // Update to allow null
+  setLightModeStatusContext: (color: string|null) => void; // Update to allow null
+  signIn: () => void;
   signOut: () => void;
-  setBarColorCntxt:(color:string)=>void
-
+  setBarColorCntxt: (color: string) => void;
 }
 
+
 export const AuthContext = createContext<AuthContextProps>({
-  choix: '',
-  setChoix: () => {},
+  lightModeStatus: '',
+  setLightModeStatusContext: (color:string|null)=>{},
   signIn: () => {},
   signOut: () => {},
   setBarColorCntxt:(color:string)=>{}

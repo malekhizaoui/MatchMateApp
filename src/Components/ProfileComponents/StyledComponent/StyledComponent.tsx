@@ -4,7 +4,6 @@ import { Dimensions } from 'react-native';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
-import { MatchMatePalette } from '../../../assets/color-palette/index';
 import {
   fontSizeTitleScreen,
   fontSizeLegendIcon,

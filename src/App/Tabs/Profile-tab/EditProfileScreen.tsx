@@ -347,7 +347,9 @@ const EditProfileScreen = ({ navigation }:any) => {
           <TextNameProfile palette={palette}>{userData?.email}</TextNameProfile>
         </HeaderTitleContainer>
       </EditProfileHeaderContainer>
-      <EditProfilePropertiesContainer palette={palette}>
+      <EditProfilePropertiesContainer  
+      contentContainerStyle={{justifyContent:"space-between",alignItems:"center"}}
+      palette={palette}>
         <ProfilePropertyContent>
           <InputUpdateFieldComponent
             inputName="First name"

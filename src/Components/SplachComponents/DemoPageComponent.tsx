@@ -9,7 +9,6 @@
 // import {
 
 // } from './StyledComponent/StyledComponent';
-// import {MatchMatePalette} from '../../assets/color-palette';
 // import { User } from '../../App/models/User';
 
 // interface DemoPageComponentProps {
@@ -26,7 +25,7 @@
 //         style={{
 //           position: 'relative',
 //           flex: 1,
-//           backgroundColor: MatchMatePalette.primaryColor,
+//           backgroundColor: .primaryColor,
 //         }}>
 //         <Text>Second page</Text>
 //         <View
@@ -35,7 +34,7 @@
 //             width: '5%',
 //             right: 0,
 //             height: '100%',
-//             backgroundColor: MatchMatePalette.darkBackgroundColor,
+//             backgroundColor: .darkBackgroundColor,
 //           }}></View>
 //         <View
 //           style={{
@@ -44,7 +43,7 @@
 //             right: -140,
 //             height: '40%',
 //             bottom: '10%',
-//             backgroundColor: MatchMatePalette.darkBackgroundColor,
+//             backgroundColor: .darkBackgroundColor,
 //             borderRadius: 390,
 //             display: 'flex',
 //             justifyContent: 'center',
@@ -56,14 +55,14 @@
 //               width: 50,
 //               height: 50,
 //               borderRadius: 25,
-//               backgroundColor: MatchMatePalette.primaryColor,
+//               backgroundColor: .primaryColor,
 //               marginLeft: 10,
 //               display: 'flex',
 //               justifyContent: 'center',
 //               alignItems: 'center',
 //             }}>
 //             <NextIconSVG
-//               color={MatchMatePalette.darkBackgroundColor}
+//               color={.darkBackgroundColor}
 //               size={'20'}
 //             />
 //           </TouchableOpacity>

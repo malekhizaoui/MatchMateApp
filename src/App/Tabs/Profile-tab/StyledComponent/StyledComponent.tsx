@@ -109,7 +109,7 @@ export const EditProfileHeaderContainer = styled.View<PaletteProps>`
   background-color: ${({ palette }) => palette.primaryColor};
 `;
 
-export const EditProfilePropertiesContainer = styled.View<PaletteProps>`
+export const EditProfilePropertiesContainer = styled.ScrollView<PaletteProps>`
   width: 100%;
   height: 72%;
   background-color: ${({ palette }) => palette.darkBackgroundColor};
@@ -117,8 +117,7 @@ export const EditProfilePropertiesContainer = styled.View<PaletteProps>`
   border-top-left-radius: 40px;
   display: flex;
   padding-bottom: 70px;
-  justify-content: space-between;
-  align-items: center;
+  
 `;
 
 export const LineSperatorProperty = styled.View<PaletteProps>`
@@ -160,6 +159,7 @@ export const BtnContainer = styled.TouchableOpacity<PaletteProps>`
   border-radius: 20px;
   justify-content: center;
   align-items: center;
+  margin-bottom:20px
 `;
 
 export const GameHistoryHeaderContainer = styled.View<PaletteProps>`
@@ -197,4 +197,23 @@ export const ContainerDetailScreen = styled.ScrollView`
   flex: 1;
   width: 90%;
   flex-direction: column;
+`;
+// Settings Screen
+export const SettingsPropertiesContainer = styled.View<PaletteProps>`
+  width: 100%;
+  height: 70%;
+  background-color: ${({ palette }) => palette.darkBackgroundColor};
+  border-top-right-radius: 40px;
+  border-top-left-radius: 40px;
+  display: flex;
+  padding-bottom: 70px;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const SettingsPropertyContent = styled.View`
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
 `;

@@ -39,8 +39,8 @@ const AddPictureScreen = ({navigation, route}: any) => {
         </HeaderConnexionScreen>
 
         <TextAddPicture palette={palette}>
-          Dabchy est avant tout une communauté ou règne la confiance et la
-          sécurité dans les transactions et les échanges. Nous tenons, donc, à
+          Match Mate est avant tout une communauté ou règne la confiance et la
+          sécurité dans les échanges. Nous tenons, donc, à
           ce que tous les membres soient identifiés par une photo de profil !
         </TextAddPicture>
         <ButtonAuthComponent
