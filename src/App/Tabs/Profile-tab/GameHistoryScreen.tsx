@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StatusBar,
   View,
@@ -20,8 +20,8 @@ import useProfile from './useProfile';
 import GameHistoryCardComponent from '../../../Components/ProfileComponents/GameHistoryCardComponent';
 import SkeletonBookingCard from '../../../Components/SkeletonLoadingComponents/SkeletonBookingCard';
 
-const GameHistoryScreen = ({ navigation, route }:any) => {
-  const { userData, gameHistory, loadMoreGameHistory } = useProfile(navigation);
+const GameHistoryScreen = ({ navigation, route }: any) => {
+  const { userData, gameHistory, loadMoreGameHistory, isLoading } = useProfile(navigation); // Add isLoading from useProfile
   const palette = usePalette();
   const { user } = route.params;
 
@@ -57,7 +57,15 @@ const GameHistoryScreen = ({ navigation, route }:any) => {
           justifyContent: 'space-between',
         }}>
         <GamePropertyContent style={{ alignContent: "center" }}>
-          {
+          {isLoading ? (
+            [1, 2, 3, 4].map((_, index) => (
+              <View
+                key={index}
+                style={{ width: '90%', marginBottom: 10, height: 260 }}>
+                <SkeletonBookingCard />
+              </View>
+            ))
+          ) : gameHistory && gameHistory.length > 0 ? (
             gameHistory.map((game, index) => (
               <GameHistoryCardComponent
                 key={index}
@@ -66,10 +74,51 @@ const GameHistoryScreen = ({ navigation, route }:any) => {
                 gameHistoryId={game.id}
               />
             ))
-          }
-          {gameHistory && gameHistory.length % 4 === 0 && (
+          ) : (
+            <View
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                marginTop: 50,
+              }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: palette.secondaryTextColor,
+                  fontWeight: '600',
+                  marginTop: 20,
+                  textAlign: 'center',
+                }}>
+                No Game History Yet
+              </Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: palette.secondaryTextColor,
+                  marginTop: 10,
+                  textAlign: 'center',
+                  paddingHorizontal: 20,
+                }}>
+                You haven't played any games yet. Start exploring our stadiums and book your favorite time slot now!
+              </Text>
+              <TouchableOpacity
+                style={{
+                  marginTop: 30,
+                  backgroundColor: palette.primaryColor,
+                  paddingVertical: 10,
+                  paddingHorizontal: 20,
+                  borderRadius: 5,
+                }}
+                onPress={() => navigation.navigate('HomeTab', { Screen: "Home" })}
+              >
+                <Text style={{ color: 'white', fontSize: 16 }}>Explore Stadiums</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {!isLoading && gameHistory && gameHistory.length > 0 && gameHistory.length % 4 === 0 && (
             <TouchableOpacity onPress={loadMoreGameHistory}>
-              <Text style={{ color: palette.primaryColor, marginBottom: 60,fontSize:18,fontWeight:"600" }}>More detail...</Text>
+              <Text style={{ color: palette.primaryColor, marginBottom: 60, fontSize: 18, fontWeight: "600" }}>More detail...</Text>
             </TouchableOpacity>
           )}
         </GamePropertyContent>

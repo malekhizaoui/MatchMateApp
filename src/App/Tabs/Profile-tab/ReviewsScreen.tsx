@@ -1,41 +1,26 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   StatusBar,
   Text,
   TouchableOpacity,
   View,
   StyleSheet,
-  FlatList,
-  Modal,
   ScrollView,
 } from 'react-native';
-import {ContainerAppReviews} from './StyledComponent/StyledComponent';
+import { ContainerAppReviews } from './StyledComponent/StyledComponent';
 import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import NavigateBack from '../../../Components/NavigateBack';
 import useProfile from './useProfile';
-import FireIconSVG from '../../../assets/Icons/svg/FireIconSVG';
-import StarIconNotFilledIconSVG from '../../../assets/Icons/svg/StarIconNotFilledIconSVG';
 import CardToReviewComponent from '../../../Components/HomeComponents/CardToReviewComponent';
-import ModalReviewComponent from '../../../Components/HomeComponents/ModalReviewComponent';
 import CardStadiumReviewedComponent from '../../../Components/HomeComponents/CardStadiumReviewedComponent';
+import SkeletonBookingCard from '../../../Components/SkeletonLoadingComponents/SkeletonBookingCard';
+import ReviewsIconSVG from '../../../assets/Icons/svg/ReviewsIconSVG'; // Import ReviewsIconSVG
 
-const ReviewsScreen = ({navigation}: any) => {
-  const {setModalVisible, userData, stadiumsExcludingFeedback} =
-    useProfile(navigation);
+const ReviewsScreen = ({ navigation }: any) => {
+  const { setModalVisible, userData, stadiumsExcludingFeedback, isLoading } = useProfile(navigation);
   const [activeTab, setActiveTab] = useState('readyForReview');
-  console.log('stadiumsExcludingFeedback', stadiumsExcludingFeedback);
   const palette = usePalette();
 
-  const reviewedCards = [
-    {id: '3', title: 'Game 3'},
-    {id: '4', title: 'Game 4'},
-  ];
-
-  const renderCard = ({item}: any) => (
-    <View style={styles.card}>
-      <Text>{item.title}</Text>
-    </View>
-  );
   const styles = StyleSheet.create({
     tabContainer: {
       flexDirection: 'row',
@@ -66,13 +51,89 @@ const ReviewsScreen = ({navigation}: any) => {
       marginHorizontal: 20,
       borderRadius: 10,
     },
+    emptyMessageContainer: {
+      alignItems: 'center',
+      marginTop: 100,
+    },
+    emptyMessageText: {
+      color: palette.secondaryTextColor,
+      textAlign: 'center',
+      marginTop: 10,
+      fontSize:15,
+      fontWeight:"600"
+    },
+    emptyMessageDetail: {
+      color: palette.secondaryTextColor,
+      textAlign: 'center',
+      marginTop: 5,
+      marginBottom: 20,
+    },
   });
+
+  const renderEmptyContent = () => (
+    <View style={styles.emptyMessageContainer}>
+      <ReviewsIconSVG color={palette.primaryColor} size={"100"} />
+      <Text style={styles.emptyMessageText}>No reviews available.</Text>
+      <Text style={styles.emptyMessageDetail}>
+        When you review a stadium, it will appear here. Start exploring and reviewing stadiums!
+      </Text>
+      <TouchableOpacity
+                style={{
+                  marginTop: 30,
+                  backgroundColor: palette.primaryColor,
+                  paddingVertical: 10,
+                  paddingHorizontal: 20,
+                  borderRadius: 5,
+                }}
+                onPress={() => navigation.navigate('HomeTab', { Screen: "Home" })}
+              >
+                <Text style={{ color: 'white', fontSize: 16 }}>Explore Stadiums</Text>
+              </TouchableOpacity>
+    </View>
+  );
+
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <View>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <SkeletonBookingCard key={index} />
+          ))}
+        </View>
+      );
+    }
+
+    if (activeTab === 'readyForReview') {
+      return stadiumsExcludingFeedback.length > 0 ? (
+        stadiumsExcludingFeedback.map((stadiumUserReview, index) => (
+          <CardToReviewComponent
+            stadiumUserReview={stadiumUserReview}
+            key={index}
+          />
+        ))
+      ) : (
+        renderEmptyContent()
+      );
+    } else {
+      return userData&& userData?.feedbacks.length > 0 ? (
+        userData?.feedbacks.map((feedback, index) => (
+          <CardStadiumReviewedComponent
+            user={userData}
+            feedback={feedback}
+            key={index}
+          />
+        ))
+      ) : (
+        renderEmptyContent()
+      );
+    }
+  };
+
   return (
     <ContainerAppReviews palette={palette}>
       <NavigateBack
         navigation={navigation}
         headerTitle={'Your reviews'}
-        // color={palette.darkBackgroundColor}
       />
       <StatusBar
         barStyle={'light-content'}
@@ -85,7 +146,8 @@ const ReviewsScreen = ({navigation}: any) => {
             style={[
               styles.tabText,
               activeTab === 'readyForReview' && styles.activeTabText,
-            ]}>
+            ]}
+          >
             Ready for Review {`(${stadiumsExcludingFeedback.length})`}
           </Text>
           {activeTab === 'readyForReview' && (
@@ -97,7 +159,8 @@ const ReviewsScreen = ({navigation}: any) => {
             style={[
               styles.tabText,
               activeTab === 'reviewed' && styles.activeTabText,
-            ]}>
+            ]}
+          >
             Reviewed {`(${userData?.feedbacks.length})`}
           </Text>
           {activeTab === 'reviewed' && (
@@ -105,31 +168,12 @@ const ReviewsScreen = ({navigation}: any) => {
           )}
         </TouchableOpacity>
       </View>
-      <ScrollView style={{width:"90%"}} >
-        {activeTab === 'readyForReview'
-          ? stadiumsExcludingFeedback.map((stadiumUserReview, index) => {
-              return (
-                <CardToReviewComponent
-                  stadiumUserReview={stadiumUserReview}
-                  key={index}
-                />
-              );
-            })
-          : userData?.feedbacks.map((feedback, index) => {
-              return (
-                <CardStadiumReviewedComponent
-                  user={userData}
-                  feedback={feedback}
-                  key={index}
-                />
-              );
-            })}
-            <View style={{marginBottom:30}}></View>
+      <ScrollView style={{ width: "90%" }}>
+        {renderContent()}
+        <View style={{ marginBottom: 30 }}></View>
       </ScrollView>
     </ContainerAppReviews>
   );
 };
-
-
 
 export default ReviewsScreen;

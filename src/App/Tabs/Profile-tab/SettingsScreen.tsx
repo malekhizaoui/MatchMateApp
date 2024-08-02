@@ -19,10 +19,12 @@ import LightModeIconSVG from '../../../assets/Icons/svg/LightModeIconSVG';
 import { Dropdown } from 'react-native-element-dropdown';
 import useProfile from './useProfile';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LanguagesIconSVG from '../../../assets/Icons/svg/LanguagesIconSVG';
+import FranceIconSVG from '../../../assets/Icons/svg/FranceIconSVG';
 
 const SettingsScreen = ({ navigation }:any) => {
   const palette = usePalette();
-  const { isFocus, setIsFocus, theme, setTheme, data,setLightModeStatusContext } = useProfile(navigation);
+  const { isFocus, setIsFocus, theme, setTheme, languages,data,setLightModeStatusContext } = useProfile(navigation);
 
   const styles = StyleSheet.create({
     container: {
@@ -73,14 +75,7 @@ const SettingsScreen = ({ navigation }:any) => {
       />
       <SettingsPropertiesContainer palette={palette}>
         <SettingsPropertyContent>
-          <ProfilePropertyComponent
-            propertyText="About App"
-            icon={<InfoIconSVG color={palette.secondaryTextColor} />}
-            toNavigate={() => {
-              navigation.navigate('About');
-            }}
-          />
-          <LineSperator palette={palette}></LineSperator>
+          
           <ProfilePropertyComponent
             propertyText="Lightning mode"
             icon={<LightModeIconSVG color={palette.secondaryTextColor} />}
@@ -89,7 +84,6 @@ const SettingsScreen = ({ navigation }:any) => {
             }}
           />
           <View>
-            {isFocus && (
               <View style={styles.container}>
                 <Dropdown
                   style={[styles.dropdown, isFocus && { borderColor: 'red' }]}
@@ -132,8 +126,63 @@ const SettingsScreen = ({ navigation }:any) => {
                   )}
                 />
               </View>
-            )}
+            
           </View>
+          <LineSperator palette={palette}></LineSperator>
+
+          <ProfilePropertyComponent
+            propertyText="Languages"
+            icon={<LanguagesIconSVG color={palette.secondaryTextColor
+            } />}
+            toNavigate={() => {
+              setIsFocus(!isFocus);
+            }}
+          />
+          <View>
+              <View style={styles.container}>
+                <Dropdown
+                  style={[styles.dropdown, isFocus && { borderColor: 'red' }]}
+                  placeholderStyle={styles.placeholderStyle}
+                  selectedTextStyle={styles.selectedTextStyle}
+                  iconStyle={styles.iconStyle}
+                  data={languages}
+                  maxHeight={300}
+                  labelField="label"
+                  valueField="value"
+                  value={"xsdsd"}
+                  // onFocus={() => setIsFocus(true)}
+                  // onBlur={() => setIsFocus(false)}
+                  onChange={()=>{}}
+                  renderLeftIcon={() => (
+                    <FranceIconSVG />
+                  )}
+                  renderItem={item => (
+                    <View>
+                      <Text
+                        style={[
+                          styles.selectedTextStyle,
+                          {
+                            backgroundColor: palette.primaryTextColor,
+                            padding: 10,
+                          },
+                        ]}>
+                        {item.label}
+                      </Text>
+                    </View>
+                  )}
+                />
+              </View>
+              
+            
+          </View>
+          <LineSperator palette={palette}></LineSperator>
+          <ProfilePropertyComponent
+            propertyText="About App"
+            icon={<InfoIconSVG color={palette.secondaryTextColor} />}
+            toNavigate={() => {
+              navigation.navigate('About');
+            }}
+          />
           <LineSperator palette={palette}></LineSperator>
         </SettingsPropertyContent>
       </SettingsPropertiesContainer>

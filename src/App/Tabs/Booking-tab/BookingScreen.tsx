@@ -28,6 +28,7 @@ import {
 import ModalQrCodeGenerateComponent from '../../../Components/HomeComponents/ModalQrCodeGenerateComponent';
 import CardBookingComponents from '../../../Components/HomeComponents/CardBookingComponents';
 import SkeletonBookingCard from '../../../Components/SkeletonLoadingComponents/SkeletonBookingCard';
+import BookingIconSVG from '../../../assets/Icons/svg/TabsIcon/BookingIconSVG';
 export const BookingScreen = ({navigation, route}: any) => {
   const {BookingList, removeBookingFromUser} = useBooking(route);
   const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
@@ -62,7 +63,7 @@ export const BookingScreen = ({navigation, route}: any) => {
           justifyContent: 'space-between',
         }}>
         {BookingList
-          ? BookingList.map((el, i) => {
+          ?BookingList.length!==0? BookingList.map((el, i) => {
               return (
                 <View
                   style={{
@@ -99,7 +100,50 @@ export const BookingScreen = ({navigation, route}: any) => {
                   )}
                 </View>
               );
-            })
+            }):(  <View
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                marginTop: 50,
+              }}
+            >
+              <BookingIconSVG size={"100"}  color={palette.primaryColor} />
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: palette.secondaryTextColor,
+                  fontWeight: '600',
+                  marginTop: 20,
+                  textAlign: 'center',
+                }}
+              >
+                No Bookings Yet
+              </Text>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: palette.secondaryTextColor,
+                  marginTop: 10,
+                  textAlign: 'center',
+                  paddingHorizontal: 20,
+                }}
+              >
+                You haven't made any bookings yet or delay is over. Start exploring our stadiums and book your favorite time slot now!
+              </Text>
+              <TouchableOpacity
+                style={{
+                  marginTop: 30,
+                  backgroundColor: palette.primaryColor,
+                  paddingVertical: 10,
+                  paddingHorizontal: 20,
+                  borderRadius: 5,
+                }}
+                onPress={() => navigation.navigate('HomeTab',{Screen:"Home"})}
+              >
+                <Text style={{ color: 'white', fontSize: 16 }}>Explore Stadiums</Text>
+              </TouchableOpacity>
+            </View>)
           : [1, 2, 3, 4].map((_, index) => (
               <View
                 key={index}

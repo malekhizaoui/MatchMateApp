@@ -27,12 +27,19 @@ const useProfile = ({ navigation }: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [theme, setTheme] = useState(lightModeStatus==="light"?"light":lightModeStatus==="dark"?"dark":"automatic");
   const [isFocus, setIsFocus] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+
   const palette = usePalette();
   const ITEMS_PER_PAGE = 4;
   const data = [
     { label: 'Light Mode', value: 'light' },
     { label: 'Dark Mode', value: 'dark' },
     { label: 'Automatic', value: 'automatic' },
+  ];
+  const languages = [
+    { label: 'french', value: 'french' },
+    { label: 'English', value: 'English' },
+    { label: 'Italian', value: 'Italian' },
   ];
 
 
@@ -54,6 +61,8 @@ const useProfile = ({ navigation }: any) => {
       setUserData(res.data);
     } catch (error) {
       console.error('Error fetching user data:', error);
+    }finally {
+      setIsLoading(false);
     }
   };
 
@@ -198,9 +207,10 @@ const useProfile = ({ navigation }: any) => {
     isFocus,
     setIsFocus,
     data,
-    
+    languages,
     handleThemeChange,
-    setLightModeStatusContext
+    setLightModeStatusContext,
+    isLoading
   };
 };
 
