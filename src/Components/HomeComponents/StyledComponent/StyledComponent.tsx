@@ -171,7 +171,7 @@ export const FacilityContentContainer = styled.View<PaletteProps>`
 `;
 
 export const TextFacility = styled.Text<PaletteProps>`
-  color: ${({ palette }) => palette.secondaryTextColor};
+  color: ${({ palette }) => palette.blackColor};
   font-weight: 500;
   ${fontSizeLegendIcon};
 `;

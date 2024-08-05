@@ -31,12 +31,13 @@ import { User } from '../../models/User';
 import { handleRequests } from '../../../services/HandleRequests';
 import SkeletonHeaderLeaderBoard from '../../../Components/SkeletonLoadingComponents/SkeletonHeaderLeaderBoard';
 import SkeletonLeaderBoardCard from '../../../Components/SkeletonLoadingComponents/SkeletonLeaderBoardCard';
+import { useTranslation } from 'react-i18next';
 
 const LeaderBoardScreen = ({ navigation }: any) => {
   const [profileHovered, setProfileHovered] = useState<number | null>(null);
   const [usersRank, setUsersRank] = useState<User[] >([]);
   const palette = usePalette();
-
+  const {t,i18n}=useTranslation()
   const getAllRankedUsers = async () => {
     try {
       const res = await handleRequests('get','users');
@@ -61,11 +62,8 @@ const LeaderBoardScreen = ({ navigation }: any) => {
 
   return (
     <ContainerApp palette={palette}>
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.primaryColor}
-      />
-      <TextHeader palette={palette}>LeaderBoard</TextHeader>
+      
+      <TextHeader palette={palette}>{t("leaderboard.leaderboard")}</TextHeader>
       <LeaderHeaderContainer palette={palette}>
         {usersRank.length>0 ?usersRank[0] && (
           <ConatinerLeaders>

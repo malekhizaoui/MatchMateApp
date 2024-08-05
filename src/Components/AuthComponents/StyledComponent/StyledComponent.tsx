@@ -31,6 +31,7 @@ export const ContentInput = styled.View`
   flex-direction: column;
   height: 90%;
   padding-bottom: 22px;
+  width:100%  
 `;
 
 export const TextTitleInput = styled.Text<PaletteProps>`
@@ -42,6 +43,7 @@ export const TextTitleInput = styled.Text<PaletteProps>`
 
 export const TextInputStyle = styled.TextInput`
   color: grey;
+  width:100%
 `;
 
 export const IconStyle = styled.View`

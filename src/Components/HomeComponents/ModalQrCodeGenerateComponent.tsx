@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Overlay,
   CenteredView,
@@ -9,19 +9,12 @@ import {
 import {
   Modal,
   View,
-  TextInput,
   StyleSheet,
-  TouchableOpacity,
-  Text,
   Image
-} from 'react-native'; // Import TextInput and StyleSheet
-import StarIconNotFilledIconSVG from '../../assets/Icons/svg/StarIconNotFilledIconSVG';
-import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
+} from 'react-native';
 import CloseIconSVG from '../../assets/Icons/svg/CloseIconSVG';
-import {handleRequests} from '../../services/HandleRequests';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useToast} from 'react-native-toast-notifications';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
+import { useTranslation } from 'react-i18next';
 
 interface ModalQrCodeGenerateComponentProps {
   modalVisible: boolean;
@@ -36,7 +29,9 @@ const ModalQrCodeGenerateComponent = ({
   stadiumId,
   qrCode,
 }: ModalQrCodeGenerateComponentProps) => {
-  const palette=usePalette()
+  const { t } = useTranslation();
+  const palette = usePalette();
+  
   const styles = StyleSheet.create({
     inputContainer: {
       marginTop: 20,
@@ -52,7 +47,7 @@ const ModalQrCodeGenerateComponent = ({
       width: '70%',
       height: 40,
       borderRadius: 20,
-      backgroundColor: palette.primaryColor, // Example background color
+      backgroundColor: palette.primaryColor,
       marginTop: 20,
       justifyContent: 'center',
       alignItems: 'center',
@@ -71,6 +66,7 @@ const ModalQrCodeGenerateComponent = ({
       height: 200,
     },
   });
+
   return (
     <Overlay>
       <Modal
@@ -82,25 +78,20 @@ const ModalQrCodeGenerateComponent = ({
         }}>
         <CenteredView>
           <ModalView palette={palette}>
-            <CloseButton  palette={palette} onPress={() => setModalVisible(false)}>
+            <CloseButton palette={palette} onPress={() => setModalVisible(false)}>
               <CloseIconSVG />
             </CloseButton>
             <TextReviewQs palette={palette}>
-              Your QrCode for this Booking has been successfully created
+              {t('home.stadiumAvailability.qrCodeMessage')}
             </TextReviewQs>
-         
             <View style={styles.qrCodeContainer}>
-            <Image source={{ uri: qrCode }} style={styles.qrCodeImage} />
-          </View>
-       
+              <Image source={{ uri: qrCode }} style={styles.qrCodeImage} />
+            </View>
           </ModalView>
         </CenteredView>
       </Modal>
     </Overlay>
   );
 };
-
-
-
 
 export default ModalQrCodeGenerateComponent;

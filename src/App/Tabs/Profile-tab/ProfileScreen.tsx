@@ -1,10 +1,8 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext } from 'react';
 import {
   Text,
   View,
   StatusBar,
-  Image,
-  Button,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -18,7 +16,7 @@ import {
   ProfilePropertiesContainer,
   ProfilePropertyContent,
 } from './StyledComponent/StyledComponent';
-import {usePalette} from '../../../assets/color-palette/ThemeApp';
+import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import GameHistoryIconSVG from '../../../assets/Icons/svg/GameHistoryIconSVG';
 import InfoPersoIconSVG from '../../../assets/Icons/svg/InfoPersoIconSVG';
 import SettingsIconSVG from '../../../assets/Icons/svg/SettingsIconSVG';
@@ -27,25 +25,28 @@ import ProfilePropertyComponent from '../../../Components/ProfileComponents/Prof
 import useProfile from './useProfile';
 import ReviewsIconSVG from '../../../assets/Icons/svg/ReviewsIconSVG';
 import SkeletonHeaderProfileUser from '../../../Components/SkeletonLoadingComponents/SkeletonHeaderProfileUser';
-import InfoIconSVG from "../../../assets/Icons/svg/InfoIconSVG"
-const ProfileScreen = ({navigation}: any) => {
-  const {userData, signOut, gameHistory} = useProfile(navigation);
+import { AuthContext } from '../../../services/Context/AuthContext';
+import { useTranslation } from 'react-i18next';
+
+const ProfileScreen = ({ navigation }: any) => {
+  const { userData, signOut, gameHistory } = useProfile(navigation);
   const palette = usePalette();
+  const { lightModeStatus } = useContext(AuthContext);
+  const { t } = useTranslation(); // Use the useTranslation hook
 
   return (
     <ContainerApp palette={palette}>
       <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.primaryColor}
+        barStyle={lightModeStatus === "light" ? "dark-content" : "light-content"}
+        backgroundColor={palette.darkBackgroundColor}
       />
-      <TextHeader palette={palette}>Profile</TextHeader>
-      <TouchableOpacity style={{position:"absolute",top:25,right:20}} onPress={()=>{navigation.navigate('Settings')}}>
-          <SettingsIconSVG color={palette.whiteColor} />
-          </TouchableOpacity>
+      <TextHeader palette={palette}>{t('profile.profile.header')}</TextHeader>
+      <TouchableOpacity style={{ position: "absolute", top: 25, right: 20 }} onPress={() => { navigation.navigate('Settings') }}>
+        <SettingsIconSVG color={palette.whiteColor} />
+      </TouchableOpacity>
       {userData?.image ? (
         <ProfileHeaderContainer palette={palette}>
-          <ImageProfile palette={palette} source={{uri: userData.image}} />
-
+          <ImageProfile palette={palette} source={{ uri: userData.image }} />
           <HeaderTitleContainer>
             <TextNameProfile palette={palette}>
               {userData?.firstName} {userData?.lastName}
@@ -54,25 +55,22 @@ const ProfileScreen = ({navigation}: any) => {
               {userData?.email}
             </TextNameProfile>
           </HeaderTitleContainer>
-         
         </ProfileHeaderContainer>
-        
       ) : (
         <SkeletonHeaderProfileUser />
       )}
       <ProfilePropertiesContainer palette={palette}>
         <ProfilePropertyContent>
           <ProfilePropertyComponent
-            propertyText="Personal information"
+            propertyText={t('profile.profile.personalInfo')}
             icon={<InfoPersoIconSVG color={palette.secondaryTextColor} />}
             toNavigate={() => {
               navigation.navigate('EditProfile');
             }}
           />
-         
           <LineSperator palette={palette}></LineSperator>
           <ProfilePropertyComponent
-            propertyText="Your reviews"
+            propertyText={t('profile.profile.reviews')}
             icon={<ReviewsIconSVG color={palette.secondaryTextColor} />}
             toNavigate={() => {
               navigation.navigate('Reviews');
@@ -80,22 +78,20 @@ const ProfileScreen = ({navigation}: any) => {
           />
           <LineSperator palette={palette}></LineSperator>
           <ProfilePropertyComponent
-            propertyText="Game history"
+            propertyText={t('profile.profile.gameHistory')}
             icon={<GameHistoryIconSVG color={palette.secondaryTextColor} />}
             toNavigate={() => {
-              navigation.navigate('GameHistory', {user: userData, gameHistory});
+              navigation.navigate('GameHistory', { user: userData, gameHistory });
             }}
           />
           <LineSperator palette={palette}></LineSperator>
           <ProfilePropertyComponent
-            propertyText="Log out"
+            propertyText={t('profile.profile.logout')}
             icon={<LogoutIconSVG color={palette.secondaryTextColor} />}
             toNavigate={signOut}
           />
           <LineSperator palette={palette}></LineSperator>
         </ProfilePropertyContent>
-
-  
       </ProfilePropertiesContainer>
     </ContainerApp>
   );

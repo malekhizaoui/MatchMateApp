@@ -1,0 +1,170 @@
+{
+    "translation": {
+        "authentication": {
+            "welcome": "Welcome to MatchMate",
+            "signInWithGoogle": "Sign in with Google",
+            "signInWithMatchMate": "Sign in with MatchMate",
+            "signUpOrSignInWith": "Sign up or sign in using one of these methods",
+            "signInToMatchMate": "Sign in to MatchMate",
+            "emailPlaceholder": "e.g. email@example.com",
+            "emailAddress": "Email address",
+            "passwordPlaceholder": "Enter your password",
+            "password": "Password",
+            "signIn": "Sign in",
+            "forgotPassword": "Forgot password?",
+            "or": "or",
+            "createAccount": "Create an account",
+            "signUp": "Sign up",
+            "quickAndEasy": "Quick and easy",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "age": "Age",
+            "newPassword": "New password",
+            "continue": "Continue",
+            "passwordChanged": "Your password has been successfully changed!",
+            "connectWithNewPassword": "Please sign in now with your new password",
+            "confirmationCode": "Confirmation code",
+            "verificationMailSent": "An email has been sent to the following address",
+            "verifyEmailPrompt": "If you haven't received anything, please go back and check your email address",
+            "validate": "Validate",
+            "chooseProfilePicture": "Choose a nice profile picture or take a selfie!",
+            "communityTrustSafety": "MatchMate is above all a community where trust and safety are paramount in exchanges. Therefore, we want all members to be identified by a profile picture!",
+            "takeSelfie": "Take a selfie",
+            "choosePicture": "Choose a picture",
+            "skip": "Skip",
+            "step1of2": "Step 1 of 2",
+            "step2of2": "Step 2 of 2",
+            "enterYourInfo": "Please enter your information:",
+            "confirmationCodeDescription": "You will receive a confirmation code by email to recover your account.",
+            "enterNewPassword": "Please enter your new password:",
+            "newPasswordDescription": "Once you create a new password, you will regain access to your account."
+        },
+        "profile": {
+            "profile": {
+                "header": "Profile",
+                "personalInfo": "Personal information",
+                "reviews": "Your reviews",
+                "gameHistory": "Game history",
+                "logout": "Logout"
+            },
+            "editProfile": {
+                "header": "Edit profile",
+                "firstName": "First name",
+                "lastName": "Last name",
+                "age": "Age",
+                "password": "Password",
+                "saveChanges": "Save changes",
+                "takeSelfie": "Take a selfie",
+                "chooseFromGallery": "Choose from gallery",
+                "cancel": "Cancel"
+            },
+            "settings": {
+                "header": "Settings",
+                "lightMode": "Light mode",
+                "languages": "Languages",
+                "aboutApp": "About the app"
+            },
+            "reviews": {
+                "header": "Your reviews",
+                "readyForReview": "Ready for review",
+                "reviewed": "Reviewed",
+                "noReviews": "No reviews available.",
+                "noReviewsDetail": "When you review a stadium, it will appear here. Start exploring and reviewing stadiums!",
+                "exploreStadiums": "Explore stadiums",
+                "leaveReview": "Leave a review",
+                "peopleWaiting": "People are waiting for your review"
+            },
+            "gameHistory": {
+                "header": "Game history",
+                "noGameHistory": "No game history yet",
+                "noGameHistoryDetail": "You haven't played any games yet. Start exploring our stadiums and book your favorite slot now!",
+                "exploreStadiums": "Explore stadiums",
+                "moreDetail": "More details..."
+            },
+            "aboutScreen": {
+                "headerTitle": "About the app",
+                "appName": "MatchMate",
+                "description": "MatchMate is your ultimate companion for finding and joining sports activities in your area. Whether you're a basketball, soccer, or volleyball enthusiast, MatchMate connects you with local games and teams. Book stadium slots, generate QR codes for entry, and track your sports activities in one place.",
+                "keyFeaturesTitle": "Key features:",
+                "features": {
+                    "joinTeams": "• Join teams and play sports: Find and join teams to play basketball, soccer, volleyball, and more with people in your area.",
+                    "bookSlots": "• Book stadium slots: Easily book available slots at local stadiums directly through the app.",
+                    "generateQR": "• Generate QR codes: Get a QR code for your bookings to ease your stadium entry.",
+                    "profileManagement": "• Profile management: View and manage your profile, including personal information and sports preferences.",
+                    "gameHistory": "• Game history: Track all the games you’ve played with detailed history and statistics.",
+                    "userReviews": "• User reviews: Read and write reviews about players and games, contributing to a trusted community.",
+                    "leaderboard": "• Leaderboard: Discover the most active players with our leaderboard, showing top players based on games played."
+                },
+                "contactUsTitle": "Contact us:",
+                "contactUs": "For help, feedback, or questions, please contact us at:",
+                "contactDetails": {
+                    "email": "Email: support@matchmate.com",
+                    "phone": "Phone: +123-456-7890"
+                },
+                "versionTitle": "Version:",
+                "version": "App version: 1.0.0",
+                "legalTitle": "Legal:",
+                "privacyPolicy": "Privacy policy",
+                "termsOfService": "Terms of service",
+                "links": {
+                    "privacyPolicy": "https://www.matchmate.com/privacy-policy",
+                    "termsOfService": "https://www.matchmate.com/terms-of-service"
+                }
+            }
+        },
+        "leaderboard": {
+            "leaderboard": "Leaderboard"
+        },
+        "booking": {
+            "bookingScreen": {
+                "title": "Stadium booking",
+                "noBookingsTitle": "No bookings yet",
+                "noBookingsMessage": "You haven't made any bookings yet or the booking period has expired. Start exploring our stadiums and book your favorite slot now!",
+                "exploreButton": "Explore stadiums"
+            },
+            "bookingDetailScreen": {
+                "headerTitle": "Booking detail",
+                "cancelButton": "Cancel booking",
+                "loading": "Loading..."
+            }
+        },
+        "home": {
+            "homeScreen": {
+                "explore": "Explore",
+                "mostFields": "Most searched",
+                "discoverAll": "Discover all",
+                "recommended": "Recommended",
+                "searchPlaceholder": "Search...",
+                "nearCourt": "Near the court"
+            },
+            "stadiumDetail": {
+                "headerTitle": "Stadium details",
+                "facilities": "Facilities",
+                "reviews": "Reviews",
+                "addReview": "Add a review",
+                "noReviews": "There are no reviews to display",
+                "checkAvailability": "Check availability",
+                "show_map": "Show map",
+                "stadium_description": "Aspen is as close as it gets to a fairy tale alpine town in America. The possibilities to choose your own adventure: skiing, hiking, dining, shopping and ....",
+                "read_more": "Read more"
+            },
+            "stadiumAvailability": {
+                "headerTitle": "Stadium availability",
+                "noTimeSlotsTitle": "No time slots yet",
+                "noTimeSlotsMessage": "There are no time slots available for {{selectedDay}}. Check other days.",
+                "defaultImageDescription": "Default image for stadium",
+                "duration": "Duration:",
+                "teams": "Teams:",
+                "playersLeft": "Players left:",
+                "seeDetails": "See details",
+                "mins": "mins",
+                "teamsFormat": "2 teams of {{teamSize}}",
+                "numberOfPlayersLeft": "{{count}} players left",
+                "court": "court",
+                "qrCodeMessage": "Your QR code for this booking has been successfully created",
+                "today": "Today",
+                "tomorrow": "Tomorrow"
+            }
+        }
+    }
+}

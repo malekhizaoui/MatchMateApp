@@ -33,7 +33,6 @@ const GameHistoryDetailScreen = ({ navigation, route }: any) => {
         headerTitle={'Game history detail'}
         color={palette.primaryColor}
       />
-      <StatusBar barStyle={'light-content'} backgroundColor={palette.darkBackgroundColor} />
       <ContainerDetailScreen>
         {gameHistoryDetail ? (
           <>

@@ -12,6 +12,7 @@ import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
 import { ScreenOptions } from './ScreenOptions';
 import LoadingScreen from '../App/Screens/Splach-screen/LoadingScreen';
 import { usePalette } from '../assets/color-palette/ThemeApp';
+import { StatusBar } from 'react-native';
 
 function NavigationApp() {
   const [isLoading, setIsLoading] = useState(true);
@@ -86,7 +87,6 @@ function NavigationApp() {
         initialRouteName={authenticated ? 'Home' : 'ProfileTab'}
         screenOptions={({ navigation, route }: any) => {
           const palette = usePalette(); // Ensure this is up-to-date
-          console.log("TabNav palette:", palette); // Debugging
   
           return {
             ...ScreenOptions({ navigation, route }),
@@ -96,7 +96,7 @@ function NavigationApp() {
               height: '8%',
               width: '100%',
               alignSelf: 'center',
-              borderColor: palette.whiteColor,
+              borderColor: palette.blackColor,
               borderWidth: 1,
             },
           };
@@ -119,9 +119,14 @@ function NavigationApp() {
   if (isLoading) {
     return <LoadingScreen />;
   }
+console.log("lightModeStatus",lightModeStatus);
 
   return (
     <AuthContext.Provider value={authContext}>
+      <StatusBar 
+        barStyle={lightModeStatus==="light"?"dark-content":"light-content"}
+        backgroundColor={palette.darkBackgroundColor}
+      />
       <NavigationContainer>
         <TabNav routeName={routeName} authenticated={!signed} />
       </NavigationContainer>

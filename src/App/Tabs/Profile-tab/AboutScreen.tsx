@@ -75,10 +75,7 @@ const AboutScreen = ({ navigation }:any) => {
         navigation={navigation}
         headerTitle={'About App'}
       />
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.darkBackgroundColor}
-      />
+      
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.logoContainer}>
           <LogoApp

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  StatusBar,
   Text,
   TouchableOpacity,
   View,
@@ -14,9 +13,11 @@ import useProfile from './useProfile';
 import CardToReviewComponent from '../../../Components/HomeComponents/CardToReviewComponent';
 import CardStadiumReviewedComponent from '../../../Components/HomeComponents/CardStadiumReviewedComponent';
 import SkeletonBookingCard from '../../../Components/SkeletonLoadingComponents/SkeletonBookingCard';
-import ReviewsIconSVG from '../../../assets/Icons/svg/ReviewsIconSVG'; // Import ReviewsIconSVG
+import ReviewsIconSVG from '../../../assets/Icons/svg/ReviewsIconSVG';
+import { useTranslation } from 'react-i18next';
 
 const ReviewsScreen = ({ navigation }: any) => {
+  const { t } = useTranslation();
   const { setModalVisible, userData, stadiumsExcludingFeedback, isLoading } = useProfile(navigation);
   const [activeTab, setActiveTab] = useState('readyForReview');
   const palette = usePalette();
@@ -59,8 +60,8 @@ const ReviewsScreen = ({ navigation }: any) => {
       color: palette.secondaryTextColor,
       textAlign: 'center',
       marginTop: 10,
-      fontSize:15,
-      fontWeight:"600"
+      fontSize: 15,
+      fontWeight: "600"
     },
     emptyMessageDetail: {
       color: palette.secondaryTextColor,
@@ -73,22 +74,22 @@ const ReviewsScreen = ({ navigation }: any) => {
   const renderEmptyContent = () => (
     <View style={styles.emptyMessageContainer}>
       <ReviewsIconSVG color={palette.primaryColor} size={"100"} />
-      <Text style={styles.emptyMessageText}>No reviews available.</Text>
+      <Text style={styles.emptyMessageText}>{t('profile.reviews.noReviews')}</Text>
       <Text style={styles.emptyMessageDetail}>
-        When you review a stadium, it will appear here. Start exploring and reviewing stadiums!
+        {t('profile.reviews.noReviewsDetail')}
       </Text>
       <TouchableOpacity
-                style={{
-                  marginTop: 30,
-                  backgroundColor: palette.primaryColor,
-                  paddingVertical: 10,
-                  paddingHorizontal: 20,
-                  borderRadius: 5,
-                }}
-                onPress={() => navigation.navigate('HomeTab', { Screen: "Home" })}
-              >
-                <Text style={{ color: 'white', fontSize: 16 }}>Explore Stadiums</Text>
-              </TouchableOpacity>
+        style={{
+          marginTop: 30,
+          backgroundColor: palette.primaryColor,
+          paddingVertical: 10,
+          paddingHorizontal: 20,
+          borderRadius: 5,
+        }}
+        onPress={() => navigation.navigate('HomeTab', { Screen: "Home" })}
+      >
+        <Text style={{ color: 'white', fontSize: 16 }}>{t('profile.reviews.exploreStadiums')}</Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -115,7 +116,7 @@ const ReviewsScreen = ({ navigation }: any) => {
         renderEmptyContent()
       );
     } else {
-      return userData&& userData?.feedbacks.length > 0 ? (
+      return userData && userData?.feedbacks.length > 0 ? (
         userData?.feedbacks.map((feedback, index) => (
           <CardStadiumReviewedComponent
             user={userData}
@@ -133,11 +134,7 @@ const ReviewsScreen = ({ navigation }: any) => {
     <ContainerAppReviews palette={palette}>
       <NavigateBack
         navigation={navigation}
-        headerTitle={'Your reviews'}
-      />
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.darkBackgroundColor}
+        headerTitle={t('profile.reviews.header')}
       />
 
       <View style={styles.tabContainer}>
@@ -148,7 +145,7 @@ const ReviewsScreen = ({ navigation }: any) => {
               activeTab === 'readyForReview' && styles.activeTabText,
             ]}
           >
-            Ready for Review {`(${stadiumsExcludingFeedback.length})`}
+            {t('profile.reviews.readyForReview')} {`(${stadiumsExcludingFeedback.length})`}
           </Text>
           {activeTab === 'readyForReview' && (
             <View style={styles.activeTabIndicator} />
@@ -161,7 +158,7 @@ const ReviewsScreen = ({ navigation }: any) => {
               activeTab === 'reviewed' && styles.activeTabText,
             ]}
           >
-            Reviewed {`(${userData?.feedbacks.length})`}
+            {t('profile.reviews.reviewed')} {`(${userData?.feedbacks.length})`}
           </Text>
           {activeTab === 'reviewed' && (
             <View style={styles.activeTabIndicator} />

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -28,11 +28,14 @@ import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
 import {useColorScheme} from 'react-native';
+import { AuthContext } from '../../../services/Context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 export const HomeScreen = ({navigation}: any) => {
+  const { t } = useTranslation();
   const palette = usePalette();
   const colorScheme = useColorScheme();
-
+  const {lightModeStatus} = useContext(AuthContext)
   const styles = StyleSheet.create({
     container: {
       padding: 0,
@@ -85,7 +88,7 @@ export const HomeScreen = ({navigation}: any) => {
     handleSearch,
     query,
     scrollViewRef,
-    fieldDataPut,
+    fieldData,
     updateFieldData,
     region,
     setRegion,
@@ -94,15 +97,15 @@ export const HomeScreen = ({navigation}: any) => {
 
   return (
     <ContainerApp palette={palette}>
-      <StatusBar
-        barStyle={'dark-content'}
+      <StatusBar 
+        barStyle={lightModeStatus==="light"?"dark-content":"light-content"}
         backgroundColor={palette.darkBackgroundColor}
       />
       <ContainerScreen>
         {!isInputFocused && (
           <HeaderContainer>
             <ExploreRegionContainer>
-              <RegionExploreTxt palette={palette}>Explore</RegionExploreTxt>
+              <RegionExploreTxt palette={palette}>{t('home.homeScreen.explore')}</RegionExploreTxt>
               <RegionTxt palette={palette}>{region}</RegionTxt>
             </ExploreRegionContainer>
             <View style={styles.container}>
@@ -149,7 +152,7 @@ export const HomeScreen = ({navigation}: any) => {
         <InputContainer palette={palette}>
           <SearchIconSVG color="grey" />
           <TextInputStyle
-            placeholder="Search..."
+            placeholder={t('home.homeScreen.searchPlaceholder')}
             placeholderTextColor={'grey'}
             onChangeText={handleSearch}
             value={query}
@@ -161,13 +164,13 @@ export const HomeScreen = ({navigation}: any) => {
         {!isInputFocused && (
           <>
             <TextContainer>
-              <TextTitleList palette={palette}>Most fields</TextTitleList>
+              <TextTitleList palette={palette}>{t('home.homeScreen.mostFields')}</TextTitleList>
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('FieldList', {field: fieldDataPut});
+                  navigation.navigate('FieldList', {field: fieldData});
                 }}>
                 <TextCheckAllList palette={palette}>
-                  Discover All
+                  {t('home.homeScreen.discoverAll')}
                 </TextCheckAllList>
               </TouchableOpacity>
             </TextContainer>
@@ -175,7 +178,7 @@ export const HomeScreen = ({navigation}: any) => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               ref={scrollViewRef}>
-              {fieldDataPut?.length < 1
+              {fieldData?.length < 1
                 ? [1, 2, 3].map((item, i) => (
                     <FieldsCardComponent
                       key={i}
@@ -189,8 +192,8 @@ export const HomeScreen = ({navigation}: any) => {
                       isLoading={true} // Adjust loading state as needed
                     />
                   ))
-                : fieldDataPut &&
-                  fieldDataPut.map((field, i) => (
+                : fieldData &&
+                  fieldData.map((field, i) => (
                     <FieldsCardComponent
                       key={i}
                       isSelected={i === 0} // Adjust isSelected logic as needed
@@ -199,12 +202,12 @@ export const HomeScreen = ({navigation}: any) => {
                       btnClicked={() => {
                         updateFieldData(i);
                       }}
-                      isLoading={!fieldDataPut.length}
+                      isLoading={!fieldData.length}
                     />
                   ))}
             </ListContainer>
             <TextContainer>
-              <TextTitleList palette={palette}>Recommended</TextTitleList>
+              <TextTitleList palette={palette}>{t('home.homeScreen.recommended')}</TextTitleList>
               <TouchableOpacity
                 onPress={() => {
                   navigation.navigate('StadiumList', {
@@ -217,7 +220,7 @@ export const HomeScreen = ({navigation}: any) => {
                   });
                 }}>
                 <TextCheckAllList palette={palette}>
-                  Discover All
+                  {t('home.homeScreen.discoverAll')}
                 </TextCheckAllList>
               </TouchableOpacity>
             </TextContainer>

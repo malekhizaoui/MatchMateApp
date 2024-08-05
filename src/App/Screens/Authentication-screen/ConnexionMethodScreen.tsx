@@ -1,4 +1,4 @@
-import {StatusBar} from 'react-native';
+import { StatusBar } from 'react-native';
 import React from 'react';
 import {
   ContainerApp,
@@ -15,45 +15,37 @@ import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthCo
 import GoogleIconSVG from '../../../assets/Icons/svg/GoogleIconSVG';
 import useAuth from './useAuth/useAuth';
 import { useColorScheme } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
-
-const ConnexionMethodScreen = ({navigation}: any) => {
+const ConnexionMethodScreen = ({ navigation }:any) => {
   const palette = usePalette();
   const colorScheme = useColorScheme();
-console.log("colorSchemesssss",colorScheme);
+  const { t, i18n } = useTranslation();
 
-
-  const {googleSignInEvent} = useAuth(navigation);
+  const { googleSignInEvent } = useAuth(navigation);
   return (
     <ContainerApp palette={palette}>
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.darkBackgroundColor}
-      />
       <ContainerScreenMethod>
         <HeaderConnexionMethodScreen>
           <LogoApp
-            source={colorScheme==="light"?require('../../../assets/Logos/MatchMate.png'):require('../../../assets/Logos/MatchMateDarkWhite.png')}
-            // source={require('../../../assets/Logos/MatchMateDarkWhite.png')}
+            source={colorScheme === "light" ? require('../../../assets/Logos/MatchMate.png') : require('../../../assets/Logos/MatchMateDarkWhite.png')}
           />
-          <HeaderTitleText palette={palette}>Bienvenue à MatchMate</HeaderTitleText>
+          <HeaderTitleText palette={palette}>{t("authentication.welcome")}</HeaderTitleText>
         </HeaderConnexionMethodScreen>
         <ContainerBtnMethod>
           <TextDescription>
-            Inscrivez-vous ou connectez-vous en utilisant l'une de ces méthodes
-            de connexion
+            {t("authentication.signUpOrSignInWith")}
           </TextDescription>
 
-          {/* <ButtonAuthComponent btnText='Connexion avec Facebook' backgroundColor="#1d5dc4" btnTextColor={palette.whiteColor} btnClicked={()=>{}} iconComponent={<FacebookIconSVG color=''/>} /> */}
           <ButtonAuthComponent
-            btnText="Connexion avec Google"
+            btnText={t("authentication.signInWithGoogle")}
             backgroundColor={palette.blackColor}
             btnTextColor={palette.whiteColor}
             btnClicked={googleSignInEvent}
             iconComponent={<GoogleIconSVG color="" />}
           />
           <ButtonAuthComponent
-            btnText="Connexion avec MatchMate"
+            btnText={t("authentication.signInWithMatchMate")}
             backgroundColor={palette.primaryColor}
             btnTextColor={palette.whiteColor}
             btnClicked={() => navigation.navigate('Signin')}

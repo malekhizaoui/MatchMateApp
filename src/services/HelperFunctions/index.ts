@@ -1,4 +1,5 @@
 import { Feedback } from "../../App/models/Feedback";
+import i18n from 'i18next'; // Ensure you have your i18next setup properly
 
 export const extractTimeFromDate=(dateString:Date)=> {
     const date = new Date(dateString);
@@ -22,43 +23,43 @@ export const extractTimeFromDate=(dateString:Date)=> {
     return `${day} ${weekday}, ${year}`;
   };
 
-  export const getWeekDaysInfo = () => {
-    const today = new Date();
-    const daysInfo = [];
-    daysInfo.push({
-      day: 'today',
-      date: `${today.getDate()} ${today.toLocaleDateString('en-US', {
-        month: 'long',
-      })}`,
-      realDay: today.toLocaleDateString('en-US', {weekday: 'long'}), // Actual day of the week
-    });
-  
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    daysInfo.push({
-      day: 'tomorrow',
-      date: `${tomorrow.getDate()} ${tomorrow.toLocaleDateString('en-US', {
-        month: 'long',
-      })}`,
-      realDay: tomorrow.toLocaleDateString('en-US', {weekday: 'long'}), // Actual day of the week
-    });
-  
-    for (let i = 2; i < 7; i++) {
-      const nextDay = new Date(today);
-      nextDay.setDate(today.getDate() + i);
-      daysInfo.push({
-        day: nextDay.toLocaleDateString('en-US', {
-          weekday: 'long',
-        }),
-        date: `${nextDay.getDate()} ${nextDay.toLocaleDateString('en-US', {
-          month: 'long',
-        })}`,
-        realDay: nextDay.toLocaleDateString('en-US', {weekday: 'long'}), // Actual day of the week
-      });
-    }
-  
-    return daysInfo;
+  const capitalizeFirstLetter = (string:string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   };
+ export const getWeekDaysInfo = () => {
+  const today = new Date();
+  const daysInfo = [];
+  
+  const options = { month: 'long', weekday: 'long' };
+  const language = i18n.language || 'en'; // Fallback to 'en' if language is not set
+
+  daysInfo.push({
+    day: capitalizeFirstLetter(i18n.t('home.stadiumAvailability.today')),
+    date: `${today.getDate()} ${capitalizeFirstLetter(today.toLocaleDateString(language, { month: 'long' }))}`,
+    realDay: capitalizeFirstLetter(today.toLocaleDateString(language, { weekday: 'long' })), // Actual day of the week
+  });
+
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  daysInfo.push({
+    day: capitalizeFirstLetter(i18n.t('home.stadiumAvailability.tomorrow')),
+    date: `${tomorrow.getDate()} ${capitalizeFirstLetter(tomorrow.toLocaleDateString(language, { month: 'long' }))}`,
+    realDay: capitalizeFirstLetter(tomorrow.toLocaleDateString(language, { weekday: 'long' })), // Actual day of the week
+  });
+
+  for (let i = 2; i < 7; i++) {
+    const nextDay = new Date(today);
+    nextDay.setDate(today.getDate() + i);
+    daysInfo.push({
+      day: capitalizeFirstLetter(nextDay.toLocaleDateString(language, { weekday: 'long' })),
+      date: `${nextDay.getDate()} ${capitalizeFirstLetter(nextDay.toLocaleDateString(language, { month: 'long' }))}`,
+      realDay: capitalizeFirstLetter(nextDay.toLocaleDateString(language, { weekday: 'long' })), // Actual day of the week
+    });
+  }
+
+  return daysInfo;
+};
+  
 
   export const getStarsReviw = (feedbacks: Feedback[]): string => {
     let totalStars: number = 0;

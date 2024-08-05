@@ -32,10 +32,7 @@ const GameHistoryScreen = ({ navigation, route }: any) => {
         headerTitle={'Game history'}
         color={palette.darkBackgroundColor}
       />
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.primaryColor}
-      />
+      
       <ProfileHeaderContainer palette={palette}>
         <ImageProfile palette={palette}
           source={

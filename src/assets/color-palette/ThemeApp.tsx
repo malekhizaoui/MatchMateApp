@@ -30,16 +30,17 @@ export const usePalette = () => {
   const colorScheme = useColorScheme();
   const { lightModeStatus } = useContext(AuthContext);
 
-  console.log("lightModeStatus",lightModeStatus);
-  
-  const palette =
-    lightModeStatus === 'light'
+  const palette = lightModeStatus !== null
+    ? lightModeStatus === 'light'
       ? lightPalette
       : lightModeStatus === 'dark'
       ? darkPalette
       : colorScheme === 'dark'
       ? darkPalette
-      : lightPalette;
+      : darkPalette
+    : colorScheme === 'dark'
+    ? darkPalette
+    : lightPalette;
 
   return palette;
 };

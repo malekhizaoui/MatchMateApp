@@ -69,10 +69,7 @@ const SettingsScreen = ({ navigation }:any) => {
   return (
     <ContainerAppReviews palette={palette}>
       <NavigateBack navigation={navigation} headerTitle={'Settings'} />
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.darkBackgroundColor}
-      />
+      
       <SettingsPropertiesContainer palette={palette}>
         <SettingsPropertyContent>
           

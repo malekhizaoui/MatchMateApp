@@ -101,7 +101,7 @@ export const useAuth = (navigation: any, route: any = false) => {
   const resentCode = async () => {
     try {
       const res = await handleRequests('put', 'resendCode', { email });
-      navigation.navigate('CodeVerification', { userId: res.data.id, codeVerification: res.data.code_verification, cameFrom: 'forgetPass' });
+      navigation.navigate('CodeVerification', { userId: res.data.id, codeVerification: res.data.code_verification, cameFrom: 'forgetPass',email });
       toast.show('A confirmation code has been sent to your email.', { type: 'success', placement: 'top', duration: 4000, style: { backgroundColor: palette.primaryColor } });
     } catch (error) {
       console.log('error', error);

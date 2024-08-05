@@ -17,10 +17,7 @@ const DemoScreen = () => {
     <>
     
     <PagerView style={styles.pagerView} initialPage={1} useNext={false}  ref={pagerRef}>
-    <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.primaryColor}
-      />
+    
       <View
         key="1"
         style={{

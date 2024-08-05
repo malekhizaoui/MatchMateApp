@@ -22,11 +22,11 @@ import {
   Cursor
 } from 'react-native-confirmation-code-field';
 import useAuth from './useAuth/useAuth';
+import { useTranslation } from 'react-i18next';
 
-
-const CodeVerificationScreen = ({navigation,route}: any) => {
+const CodeVerificationScreen = ({ navigation, route }:any) => {
   const palette = usePalette();
-
+  const email = route?.params.email;
   const {
     verifyCode,
     ref,
@@ -35,9 +35,11 @@ const CodeVerificationScreen = ({navigation,route}: any) => {
     setValue,
     getCellOnLayoutHandler,
     CELL_COUNT,
-  } = useAuth(navigation,route);
+  } = useAuth(navigation, route);
+  const { t, i18n } = useTranslation();
+
   const styles = StyleSheet.create({
-    codeFieldRoot: {marginTop: 40, marginBottom: 20},
+    codeFieldRoot: { marginTop: 40, marginBottom: 20 },
     cell: {
       width: 50,
       height: 50,
@@ -57,24 +59,19 @@ const CodeVerificationScreen = ({navigation,route}: any) => {
   });
   return (
     <ContainerApp palette={palette}>
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.darkBackgroundColor}
-      />
       <ContainerScreen showsVerticalScrollIndicator={false}>
-        <View style={{marginTop: 20}}>
+        <View style={{ marginTop: 20 }}>
           <NavigateBack navigation={navigation} />
         </View>
         <HeaderConnexionScreen>
           <LogoAppStyle palette={palette}>
             <TickIconSVG color={palette.whiteColor} />
           </LogoAppStyle>
-          <HeaderTitleText palette={palette}>Code de confirmation</HeaderTitleText>
+          <HeaderTitleText palette={palette}>{t("authentication.confirmationCode")}</HeaderTitleText>
         </HeaderConnexionScreen>
         <CodeField
           ref={ref}
           {...props}
-          //   Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
           caretHidden={false}
           value={value}
           onChangeText={setValue}
@@ -82,7 +79,7 @@ const CodeVerificationScreen = ({navigation,route}: any) => {
           rootStyle={styles.codeFieldRoot}
           keyboardType="number-pad"
           textContentType="oneTimeCode"
-          renderCell={({index, symbol, isFocused}) => (
+          renderCell={({ index, symbol, isFocused }) => (
             <Text
               key={index}
               style={[styles.cell, isFocused && styles.focusCell]}
@@ -92,12 +89,10 @@ const CodeVerificationScreen = ({navigation,route}: any) => {
           )}
         />
         <TextValidationCode palette={palette}>
-          Un mail a été envoyé au adresse mail suivante maiek52su@gmail.com . Si
-          vous n'avez rien recu , veuillez revenir en arriére et bien vérifier
-          votre adresse mail
+          {t("authentication.verificationMailSent")} {email}. {t("authentication.verifyEmailPrompt")}
         </TextValidationCode>
         <ButtonAuthComponent
-          btnText="Valider"
+          btnText={t("authentication.validate")}
           backgroundColor={palette.primaryColor}
           btnTextColor={palette.whiteColor}
           btnClicked={verifyCode}
@@ -106,9 +101,6 @@ const CodeVerificationScreen = ({navigation,route}: any) => {
       </ContainerScreen>
     </ContainerApp>
   );
-  
 };
 
 export default CodeVerificationScreen;
-
-

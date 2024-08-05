@@ -34,6 +34,7 @@ import {Feedback} from '../../models/Feedback';
 import {getStarsReviw} from '../../../services/HelperFunctions';
 import ModalReviewComponent from '../../../Components/HomeComponents/ModalReviewComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTranslation } from 'react-i18next';
 
 interface StadiumDetailScreenProps {
   navigation: any;
@@ -45,6 +46,7 @@ export const StadiumDetailScreen = ({
   navigation,
   route,
 }: StadiumDetailScreenProps) => {
+  const { t } = useTranslation();
   const palette = usePalette();
 
   const {stadiumId} = route.params;
@@ -53,7 +55,6 @@ export const StadiumDetailScreen = ({
   const [feedbacks, setFeedbacks] = useState<Feedback[] | null>(null);
   const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
   
-
   const getStadiumById = async () => {
     try {
       const res = await handleRequests('get', `stadium/${stadiumId}`);
@@ -69,26 +70,25 @@ export const StadiumDetailScreen = ({
   useEffect(() => {
     getStadiumById();
   }, [modalVisible]);
+  
   const handleAddReview = async () => {
     const token = await AsyncStorage.getItem('token');
     if (token) {
-    setModalVisible(true);
-    return;
+      setModalVisible(true);
+      return;
     }
     navigation.navigate('ProfileTab', {Screen: 'ConnexionMethodScreen'});
   };
+  
   return (
     <ContainerApp palette={palette}>
       <NavigateBack
         navigation={navigation}
-        headerTitle={'Stadium Detail'}
+        headerTitle={t('home.stadiumDetail.headerTitle')}
         color={palette.primaryColor}
         backgroundColor={palette.darkBackgroundColor}
       />
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.darkBackgroundColor}
-      />
+      
       {!showMap && (
         <ContainerDetailScreen
           horizontal={false}
@@ -111,7 +111,7 @@ export const StadiumDetailScreen = ({
               marginTop: 20,
               marginBottom: 10,
             }}>
-            <TxtContainer palette={palette}>Facilities</TxtContainer>
+            <TxtContainer palette={palette}>{t('home.stadiumDetail.facilities')}</TxtContainer>
           </TouchableOpacity>
           <LineStyle></LineStyle>
 
@@ -132,12 +132,12 @@ export const StadiumDetailScreen = ({
                 marginBottom: 10,
               }}>
               <TxtContainer palette={palette}>
-                Reviews {feedbacks && getStarsReviw(feedbacks)}
+                {t('home.stadiumDetail.reviews')} {feedbacks && getStarsReviw(feedbacks)}
               </TxtContainer>
               <StarIconSVG color={palette.primaryColor} />
             </View>
             <TouchableOpacity onPress={handleAddReview}>
-              <AddReviewText palette={palette}>Add Review</AddReviewText>
+              <AddReviewText palette={palette}>{t('home.stadiumDetail.addReview')}</AddReviewText>
             </TouchableOpacity>
           </View>
           <LineStyle></LineStyle>
@@ -162,7 +162,7 @@ export const StadiumDetailScreen = ({
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <TxtContainer palette={palette}>There is no Review to show</TxtContainer>
+                <TxtContainer palette={palette}>{t('home.stadiumDetail.noReviews')}</TxtContainer>
               </View>
             )}
           </View>
@@ -172,7 +172,6 @@ export const StadiumDetailScreen = ({
         <>
           <ImageLocation container={showMap && '100%'}>
             <StadiumLocationMapComponent stadium={stadium} />
-
             <CloseContainerIcon palette={palette}
               onPress={() => {
                 setShowMap(false);
@@ -190,7 +189,7 @@ export const StadiumDetailScreen = ({
               stadiumId: stadium?.id,
             });
           }}>
-          <TextButton palette={palette}>Check availability</TextButton>
+          <TextButton palette={palette}>{t('home.stadiumDetail.checkAvailability')}</TextButton>
         </BtnCheck>
       )}
 
@@ -204,3 +203,5 @@ export const StadiumDetailScreen = ({
     </ContainerApp>
   );
 };
+
+export default StadiumDetailScreen;

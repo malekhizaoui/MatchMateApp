@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, Dimensions, Text, View} from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity } from 'react-native';
 import {
   ContainerInput,
   ContentInput,
@@ -9,36 +9,61 @@ import {
   IconStyle,
 } from './StyledComponent/StyledComponent';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
-interface InputAuthComponentProps{
-  placeholder:string,
-  inputName:string,
-  setValue: React.Dispatch<React.SetStateAction<string>>,
-  valueInput : string ,
-  iconComponent :any
+import Icon from 'react-native-vector-icons/MaterialIcons'; // Assuming you're using MaterialIcons
+
+interface InputAuthComponentProps {
+  placeholder: string;
+  inputName: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  valueInput: string;
+  iconComponent: any;
+  secureTextEntry?: boolean;
 }
 
+export const InputAuthComponent = ({
+  placeholder,
+  inputName,
+  setValue,
+  valueInput,
+  iconComponent,
+  secureTextEntry = false,
+}: InputAuthComponentProps) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(!secureTextEntry);
+  const palette = usePalette();
 
-export const InputAuthComponent = ({placeholder,inputName,setValue,valueInput,iconComponent }:InputAuthComponentProps) => {
-  const palette=usePalette()
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   return (
-    <ContainerInput     palette={palette}
->
-            <ContainerContentInput>
-              <IconStyle>
-              {iconComponent}
-              </IconStyle>
-              <ContentInput>
-                <TextTitleInput     palette={palette}
-                >{inputName} :</TextTitleInput>
-                <TextInputStyle
-                
-                  value={valueInput}
-                  onChangeText={value=>setValue(value)}
-                  placeholder={placeholder}
-                  placeholderTextColor={'grey'}></TextInputStyle>
-              </ContentInput>
-            </ContainerContentInput>
-          </ContainerInput>
-  )
-}
+    <ContainerInput palette={palette}>
+      <ContainerContentInput>
+        <IconStyle>
+          {iconComponent}
+        </IconStyle>
+        <ContentInput>
+          <TextTitleInput palette={palette}>{inputName} :</TextTitleInput>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',width:"80%" }}>
+            <TextInputStyle
+              value={valueInput}
+              onChangeText={value => setValue(value)}
+              placeholder={placeholder}
+              placeholderTextColor={'grey'}
+              secureTextEntry={!isPasswordVisible}
+              style={{ flex: 1 }}
+            />
+            {secureTextEntry && (
+              <TouchableOpacity onPress={togglePasswordVisibility}>
+                <Icon
+                  name={isPasswordVisible ? 'visibility' : 'visibility-off'}
+                  size={20}
+                  color="grey"
+                />
+              </TouchableOpacity>
+            )}
+          </View>
+        </ContentInput>
+      </ContainerContentInput>
+    </ContainerInput>
+  );
+};

@@ -48,6 +48,8 @@ const GameHistoryCardComponent = ({
     hour: '2-digit',
     minute: '2-digit',
   });
+  console.log("gameHistory",gameHistory);
+  
 
   // Calculate duration between startTime and endTime in minutes
   const startDateTime = new Date(gameHistory.startTime).getTime();
@@ -55,6 +57,7 @@ const GameHistoryCardComponent = ({
   const durationInMinutes = Math.floor(
     (endDateTime - startDateTime) / (1000 * 60),
   );
+  const PlayerLeft=gameHistory.stadium.capacity-gameHistory.team.length
   const formatDate = () => {
     const date = new Date(gameHistory.startTime);
 
@@ -96,7 +99,7 @@ const GameHistoryCardComponent = ({
           <DescriptionContainer>
             <PlayersIconSVG color={palette.primaryColor} size={'25'} />
             <TxtdetailLabel palette={palette}>Players Left :</TxtdetailLabel>
-            <TextDesciption palette={palette}>7</TextDesciption>
+            <TextDesciption palette={palette}>{PlayerLeft}</TextDesciption>
           </DescriptionContainer>
         </ContentMatchDetail>
         <Seperator></Seperator>

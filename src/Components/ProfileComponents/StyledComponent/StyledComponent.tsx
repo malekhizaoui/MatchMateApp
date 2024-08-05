@@ -49,6 +49,7 @@ export const ContainerContentInput = styled.View`
   padding: 10px;
   display: flex;
   flex-direction: row;
+  width:100%
 `;
 
 export const ContentInput = styled.View`
@@ -57,18 +58,21 @@ export const ContentInput = styled.View`
   justify-content: space-between;
   height: 90%;
   padding: 2px;
+  width:100%
 `;
 
 export const TextTitleInput = styled.Text<PaletteProps>`
   color: ${({ palette }) => palette.primaryColor};
   font-size: 17px;
   font-weight: 500;
+  width:100%
 `;
 
 export const TextInputStyle = styled.TextInput`
   color: grey;
   margin-bottom: 10px;
   font-size: 15px;
+  width:100%
 `;
 
 export const IconStyle = styled.View`

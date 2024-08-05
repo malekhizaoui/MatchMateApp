@@ -1,4 +1,4 @@
-import {StatusBar, TouchableOpacity, useColorScheme, View} from 'react-native';
+import { StatusBar, TouchableOpacity, useColorScheme, View } from 'react-native';
 import React from 'react';
 import {
   ContainerApp,
@@ -15,82 +15,73 @@ import {
 } from './styledComponent/StyledComponent';
 import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
 import { usePalette } from '../../../assets/color-palette/ThemeApp';
-import {InputAuthComponent} from '../../../Components/AuthComponents/InputAuthComponent';
+import { InputAuthComponent } from '../../../Components/AuthComponents/InputAuthComponent';
 import useAuth from './useAuth/useAuth';
 import PasswordIconSVG from '../../../assets/Icons/svg/PasswordIconSVG';
 import MailIconSVG from '../../../assets/Icons/svg/MailIconSVG';
-import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
 import NavigateBack from '../../../Components/NavigateBack';
+import { useTranslation } from 'react-i18next';
 
-
-const SignInScreen = ({navigation}: any) => {
+const SignInScreen = ({ navigation }:any) => {
   const palette = usePalette();
   const colorScheme = useColorScheme();
+  const { t, i18n } = useTranslation();
 
-  const {email, setEmail, password, setPassword, loginUser,loading } =
-    useAuth(navigation);
+  const { email, setEmail, password, setPassword, loginUser, loading } = useAuth(navigation);
+
   return (
-    
     <ContainerApp palette={palette}>
-      <StatusBar
-        barStyle={'dark-content'}
-        backgroundColor={palette.darkBackgroundColor}
-      />
       <ContainerScreen showsVerticalScrollIndicator={false}>
         <View>
           <NavigateBack navigation={navigation} />
         </View>
         <HeaderConnexionScreen>
           <LogoApp
-            // source={require('../../../assets/Logos/MatchMateDarkWhite.png')}
-            source={colorScheme==="light"?require('../../../assets/Logos/MatchMate.png'):require('../../../assets/Logos/MatchMateDarkWhite.png')}
+            source={
+              colorScheme === "light"
+                ? require('../../../assets/Logos/MatchMate.png')
+                : require('../../../assets/Logos/MatchMateDarkWhite.png')
+            }
           />
-          <HeaderTitleText palette={palette}>Se Connecter à MatchMate</HeaderTitleText>
+          <HeaderTitleText palette={palette}>{t("authentication.signInToMatchMate")}</HeaderTitleText>
         </HeaderConnexionScreen>
         <ContainerForm>
           <InputAuthComponent
-            placeholder="Ex : email@example.com"
-            inputName="Adresse mail"
+            placeholder={t("authentication.emailPlaceholder")}
+            inputName={t("authentication.emailAddress")}
             setValue={setEmail}
             valueInput={email}
-            iconComponent={
-              <MailIconSVG color={palette.primaryColor} />
-            }
+            iconComponent={<MailIconSVG color={palette.primaryColor} />}
           />
           <InputAuthComponent
-            placeholder="Choisissez un mot de passe"
-            inputName="MOT DE PASSE mail"
+            placeholder={t("authentication.passwordPlaceholder")}
+            inputName={t("authentication.password")}
             setValue={setPassword}
             valueInput={password}
-            iconComponent={
-              <PasswordIconSVG color={palette.primaryColor} />
-            }
+            secureTextEntry={true}
+            iconComponent={<PasswordIconSVG color={palette.primaryColor} />}
           />
           <ButtonAuthComponent
-            btnText="Connexion"
+            btnText={t("authentication.signIn")}
             backgroundColor={palette.primaryColor}
             btnTextColor={palette.whiteColor}
             btnClicked={loginUser}
             iconComponent={''}
-            loading ={loading}
+            loading={loading}
           />
-          <TouchableOpacity onPress={()=>{navigation.navigate('PasswordForgotten')}}>
-          <TextpasswordForgotten palette={palette}>Mot de passe oublié ?</TextpasswordForgotten>
-
+          <TouchableOpacity onPress={() => { navigation.navigate('PasswordForgotten') }}>
+            <TextpasswordForgotten palette={palette}>{t("authentication.forgotPassword")}</TextpasswordForgotten>
           </TouchableOpacity>
           <ContainerDivideText>
             <LineStyle palette={palette}></LineStyle>
-            <TextDivide palette={palette}>ou</TextDivide>
+            <TextDivide palette={palette}>{t("authentication.or")}</TextDivide>
             <LineStyle palette={palette}></LineStyle>
           </ContainerDivideText>
           <ButtonAuthComponent
-            btnText="Créer un compte"
+            btnText={t("authentication.createAccount")}
             backgroundColor={palette.primaryColor}
             btnTextColor={palette.whiteColor}
-            btnClicked={() => {
-              // signIn()
-              navigation.navigate('Signup');
-            }}
+            btnClicked={() => { navigation.navigate('Signup'); }}
             iconComponent={''}
           />
         </ContainerForm>

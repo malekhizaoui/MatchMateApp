@@ -10,7 +10,7 @@ export const useHome = (navigation:any, route: any=false) => {
   const [basketballField, setBasketballField] = useState<Stadium[]>([]);
   const [footballField, setFootballField] = useState<Stadium[]>([]);
   const [volleyballField, setVolleyballField] = useState<Stadium[]>([]);
-  const [fieldDataPut, setfieldDataPut] = useState<Field[]>([]);
+  const [fieldData, setfieldData] = useState<Field[]>([]);
   const [fieldSelected, setFieldSelected] = useState('Basketball');
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
@@ -32,7 +32,7 @@ export const useHome = (navigation:any, route: any=false) => {
       return nameMatch || statusMatch;
     });
 
-    const filteredFields = fieldDataPut.filter(field => 
+    const filteredFields = fieldData.filter(field => 
       field.fieldName.toLowerCase().includes(query.toLowerCase())
     );
 
@@ -55,19 +55,19 @@ export const useHome = (navigation:any, route: any=false) => {
 
   const updateFieldData = (index: number) => {
     const reorderedFieldData = [
-      fieldDataPut[index],
-      ...fieldDataPut.slice(0, index),
-      ...fieldDataPut.slice(index + 1),
+      fieldData[index],
+      ...fieldData.slice(0, index),
+      ...fieldData.slice(index + 1),
     ];
-    reorderedFieldData && setfieldDataPut(reorderedFieldData);
-    setFieldSelected(fieldDataPut[index].fieldName);
+    reorderedFieldData && setfieldData(reorderedFieldData);
+    setFieldSelected(fieldData[index].fieldName);
     scrollViewRef.current?.scrollTo({x: 0, y: 0, animated: true});
   };
 
   const getFieldsBaseOnRegion = async () => {
     try {
       const res = await handleRequests('get', `fieldRegion/${region}`);
-      res && setfieldDataPut(res);
+      res && setfieldData(res);
       setBasketballField(res[0].stadiums);
       setFootballField(res[1].stadiums);
       setVolleyballField(res[2].stadiums);
@@ -133,7 +133,7 @@ export const useHome = (navigation:any, route: any=false) => {
     handleSearch,
     query,
     scrollViewRef,
-    fieldDataPut,
+    fieldData,
     updateFieldData,
     region,
     setRegion,

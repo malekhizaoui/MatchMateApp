@@ -1,20 +1,20 @@
-import React, {createContext, Dispatch, SetStateAction} from 'react';
+import React, { createContext, Dispatch, SetStateAction } from 'react';
 
 export interface AuthContextProps {
-  lightModeStatus: string | null; // Update to allow null
-  setLightModeStatusContext: (color: string|null) => void; // Update to allow null
+  lightModeStatus: string | null; // Allows null when status is not yet set
+  setLightModeStatusContext: (color: string | null) => void; // Allows null
   signIn: () => void;
   signOut: () => void;
   setBarColorCntxt: (color: string) => void;
 }
 
-
-export const AuthContext = createContext<AuthContextProps>({
-  lightModeStatus: '',
-  setLightModeStatusContext: (color:string|null)=>{},
+// Default values for the context
+const defaultContextValue: AuthContextProps = {
+  lightModeStatus: null,
+  setLightModeStatusContext: () => {},
   signIn: () => {},
   signOut: () => {},
-  setBarColorCntxt:(color:string)=>{}
+  setBarColorCntxt: () => {},
+};
 
-   // Provide a default empty function
-});
+export const AuthContext = createContext<AuthContextProps>(defaultContextValue);

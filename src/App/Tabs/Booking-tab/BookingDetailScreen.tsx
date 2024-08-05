@@ -25,10 +25,7 @@ const BookingDetailScreen = ({navigation, route}: any) => {
         headerTitle={'Booking detail'}
         color={palette.primaryColor}
       />
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.darkBackgroundColor}
-      />
+      
       <ContainerDetailScreen>
         {bookingDetail ? (
           <>

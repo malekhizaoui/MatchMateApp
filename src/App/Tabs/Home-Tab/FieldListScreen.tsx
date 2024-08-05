@@ -25,7 +25,7 @@ export const FieldListScreen = ({navigation}: any) => {
     data,
     setIsFocus,
     setFieldSelected,
-    fieldDataPut,
+    fieldData,
     region,
     setRegion,
   } = useHome(navigation);
@@ -74,10 +74,7 @@ export const FieldListScreen = ({navigation}: any) => {
   return (
     <ContainerApp palette={palette}>
       <NavigateBack navigation={navigation} headerTitle={'Field List'} />
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={palette.darkBackgroundColor}
-      />
+      
       <ContainerDetailScreen>
         <HeaderContainer>
           <ExploreRegionContainer>
@@ -107,7 +104,7 @@ export const FieldListScreen = ({navigation}: any) => {
           </View>
         </HeaderContainer>
         <ListStadiumContainer>
-          {fieldDataPut.map((field: any, i: number) => {
+          {fieldData.map((field: any, i: number) => {
             return (
               <ImageListFieldComponent
                 key={i}

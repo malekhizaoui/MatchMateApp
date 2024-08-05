@@ -48,14 +48,6 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
   return (
     <>
       <HeaderListStadiumContainer>
-        <StatusBar
-          barStyle={'dark-content'}
-          backgroundColor={
-            !showMap
-              ? palette.darkBackgroundColor
-              : palette.darkBackgroundColor
-          }
-        />
         <TouchableOpacity
           onPress={() => {
             navigation.goBack();
