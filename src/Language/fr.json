@@ -60,9 +60,19 @@
             },
             "settings": {
                 "header": "Paramètres",
+                "lightModes": "Modes d'éclairage",
                 "lightMode": "Mode clair",
                 "languages": "Langues",
-                "aboutApp": "À propos de l'application"
+                "aboutApp": "À propos de l'application",
+                "darkMode":"mode sombre",
+                "automatic":"Automatique",
+                "languageOptions": {
+                    "french": "Français",
+                    "english": "Anglais",
+                    "italian": "italien",
+                    "spanish": "espagnol",
+                    "automatic": "Automatique"
+                  }
             },
             "reviews": {
                 "header": "Vos avis",

@@ -9,11 +9,13 @@ import {
   useColorScheme,
 } from 'react-native';
 import styled from 'styled-components/native';
-import { ContainerAppReviews,LineSperator } from './StyledComponent/StyledComponent';
+import { ContainerAppReviews, LineSperator } from './StyledComponent/StyledComponent';
 import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import NavigateBack from '../../../Components/NavigateBack';
+import { useTranslation } from 'react-i18next';
 
-const AboutScreen = ({ navigation }:any) => {
+const AboutScreen = ({ navigation }: any) => {
+  const { t } = useTranslation();
   const palette = usePalette();
   const colorScheme = useColorScheme();
 
@@ -65,7 +67,7 @@ const AboutScreen = ({ navigation }:any) => {
     },
   });
 
-  const handleLinkPress = ({url}:any) => {
+  const handleLinkPress = (url: string) => {
     Linking.openURL(url);
   };
 
@@ -73,48 +75,58 @@ const AboutScreen = ({ navigation }:any) => {
     <ContainerAppReviews palette={palette}>
       <NavigateBack
         navigation={navigation}
-        headerTitle={'About App'}
+        headerTitle={t('profile.aboutScreen.headerTitle')}
       />
       
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.logoContainer}>
           <LogoApp
-            source={colorScheme==="light"?require('../../../assets/Logos/MatchMate.png'):require('../../../assets/Logos/MatchMateDarkWhite.png')}
-            />
+            source={
+              colorScheme === 'light'
+                ? require('../../../assets/Logos/MatchMate.png')
+                : require('../../../assets/Logos/MatchMateDarkWhite.png')
+            }
+          />
         </View>
         <Text style={styles.title}>MatchMate</Text>
         <Text style={styles.description}>
-          MatchMate is your ultimate companion for finding and joining sports activities in your area. Whether you're into basketball, football, or volleyball, MatchMate connects you with local games and teams. Book stadium time slots, generate QR codes for entry, and track your sports activities all in one place.
+          {t('profile.aboutScreen.description')}
         </Text>
         <LineSperator palette={palette}></LineSperator>
-        <Text style={styles.featureTitle}>Key Features:</Text>
-        <Text style={styles.featureItem}>• Join Teams and Play Sports: Find and join teams to play basketball, football, volleyball, and more with people in your locality.</Text>
-        <Text style={styles.featureItem}>• Book Stadium Time Slots: Easily book available time slots at local stadiums directly through the app.</Text>
-        <Text style={styles.featureItem}>• Generate QR Codes: Get a QR code for your bookings to streamline your stadium entry process.</Text>
-        <Text style={styles.featureItem}>• Profile Management: View and manage your profile, including your personal details and sports preferences.</Text>
-        <Text style={styles.featureItem}>• Game History: Keep track of all the games you've played, with detailed history and stats.</Text>
-        <Text style={styles.featureItem}>• User Reviews: Read and write reviews for players and games, helping to build a trusted community.</Text>
-        <Text style={styles.featureItem}>• Leaderboard: See who the most active players are with our leaderboard, showcasing the top players based on games played.</Text>
+        <Text style={styles.featureTitle}>{t('profile.aboutScreen.keyFeaturesTitle')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.joinTeams')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.bookSlots')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.generateQR')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.profileManagement')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.gameHistory')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.userReviews')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.leaderboard')}</Text>
         <LineSperator palette={palette}></LineSperator>
-        <Text style={styles.sectionTitle}>Contact Us:</Text>
-        <Text style={styles.featureItem}>For support, feedback, or inquiries, please contact us at:</Text>
-        <Text style={styles.featureItem}>Email: support@matchmate.com</Text>
-        <Text style={styles.featureItem}>Phone: +123-456-7890</Text>
-        <LineSperator palette={palette}></LineSperator>
-
-        <Text style={styles.sectionTitle}>Version:</Text>
-        <Text style={styles.featureItem}>App Version: 1.0.0</Text>
+        <Text style={styles.sectionTitle}>{t('profile.aboutScreen.contactUsTitle')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.contactUs')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.contactDetails.email')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.contactDetails.phone')}</Text>
         <LineSperator palette={palette}></LineSperator>
 
-        <Text style={styles.sectionTitle}>Legal:</Text>
+        <Text style={styles.sectionTitle}>{t('profile.aboutScreen.versionTitle')}</Text>
+        <Text style={styles.featureItem}>{t('profile.aboutScreen.version')}</Text>
+        <LineSperator palette={palette}></LineSperator>
+
+        <Text style={styles.sectionTitle}>{t('profile.aboutScreen.legalTitle')}</Text>
         <Text style={styles.featureItem}>
-          <Text style={styles.link} onPress={() => handleLinkPress('https://www.matchmate.com/privacy-policy')}>
-            Privacy Policy
+          <Text
+            style={styles.link}
+            onPress={() => handleLinkPress('https://www.matchmate.com/privacy-policy')}
+          >
+            {t('profile.aboutScreen.links.privacyPolicy')}
           </Text>
         </Text>
         <Text style={styles.featureItem}>
-          <Text style={styles.link} onPress={() => handleLinkPress('https://www.matchmate.com/terms-of-service')}>
-            Terms of Service
+          <Text
+            style={styles.link}
+            onPress={() => handleLinkPress('https://www.matchmate.com/terms-of-service')}
+          >
+            {t('profile.aboutScreen.links.termsOfService')}
           </Text>
         </Text>
       </ScrollView>

@@ -3,11 +3,14 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import eng from './eng.json';
 import fr from './fr.json';
-
+import it from './it.json'
+import esp from "./esp.json"
 i18n.use(initReactI18next).init({
   resources: {
     fr,
     eng,
+    it,
+    esp
   },
   lng: 'eng', // Set the default language
   fallbackLng: 'eng', // Set the fallback language

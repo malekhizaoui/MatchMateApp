@@ -31,7 +31,7 @@ export const extractTimeFromDate=(dateString:Date)=> {
   const daysInfo = [];
   
   const options = { month: 'long', weekday: 'long' };
-  const language = i18n.language || 'en'; // Fallback to 'en' if language is not set
+  const language = i18n.language ; 
 
   daysInfo.push({
     day: capitalizeFirstLetter(i18n.t('home.stadiumAvailability.today')),

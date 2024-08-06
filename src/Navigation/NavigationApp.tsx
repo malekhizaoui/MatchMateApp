@@ -13,6 +13,7 @@ import { ScreenOptions } from './ScreenOptions';
 import LoadingScreen from '../App/Screens/Splach-screen/LoadingScreen';
 import { usePalette } from '../assets/color-palette/ThemeApp';
 import { StatusBar } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 function NavigationApp() {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,8 @@ function NavigationApp() {
   const [routeName, setRouteName] = useState<string | undefined>();
   const [lightModeStatus, setLightModeStatus] = useState<string | null>(null);
   const palette = usePalette();
+  const {i18n} = useTranslation();
+  const [language, setLanguage] = useState(null);
 
   const retrieveUserSession = async () => {
     try {
@@ -43,6 +46,26 @@ function NavigationApp() {
     }
   };
 
+  const getLanguage = async () => {
+    try {
+      await AsyncStorage.getItem('language').then((res:any) => {
+        console.log("resss",res);
+
+        if(res){
+          setLanguage(res)
+          i18n.changeLanguage(res);
+
+        }else{
+          i18n.changeLanguage("en");
+        }
+
+        // setLanguage("en");
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const retrievePaletteApp = async () => {
     try {
       const lightningModeCheck = await AsyncStorage.getItem('lightningMode');
@@ -55,6 +78,7 @@ function NavigationApp() {
   useEffect(() => {
     retrieveUserSession();
     retrievePaletteApp();
+    getLanguage()
   }, []);
 
   const authContext: AuthContextProps = useMemo(() => ({
@@ -116,7 +140,7 @@ function NavigationApp() {
   };
   
 
-  if (isLoading) {
+  if (!language) {
     return <LoadingScreen />;
   }
 console.log("lightModeStatus",lightModeStatus);

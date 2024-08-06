@@ -17,10 +17,12 @@ const useBooking = (route: any) => {
       console.log('err', error);
     }
   };
+console.log("BookingList",BookingList);
 
   const getUserBooking = async () => {
     const userId = await AsyncStorage.getItem('userId');
     try {
+      
       const res = await handleRequests('get', `users/${userId}`);
       setBookingList(res.data.timeSlots);
     } catch (error) {
@@ -40,7 +42,7 @@ const useBooking = (route: any) => {
 
   useEffect(() => {
     getBookingDetail();
-  }, []);
+  }, [BookingList]);
 
   useFocusEffect(
     useCallback(() => {

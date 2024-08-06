@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, ActivityIndicator, Text} from 'react-native';
+import { StyleSheet, ActivityIndicator, Text } from 'react-native';
 import {
   StadiumContainer,
   StadiumImage,
@@ -13,12 +13,14 @@ import { getStarsReviw } from '../../services/HelperFunctions';
 import { Feedback } from '../../App/models/Feedback';
 import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
+
 interface StadiumCardComponentProps {
   titleDescription: string;
   backgroundImage?: string;
   btnClicked: () => void;
   isLoading?: boolean; // Add isLoading prop
-  feedback:Feedback[]
+  feedback: Feedback[];
 }
 
 const StadiumCardComponent = ({
@@ -28,7 +30,8 @@ const StadiumCardComponent = ({
   isLoading = false,
   feedback
 }: StadiumCardComponentProps) => {
-  const palette=usePalette()
+  const palette = usePalette();
+  const { t } = useTranslation(); // Initialize useTranslation
 
   const defaultImage =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpusOZAX4leJSqoJ6grIZPYdoDTgNfgKZXAA&s'; // Provide a valid default image URL
@@ -36,21 +39,20 @@ const StadiumCardComponent = ({
   return (
     <>
       {isLoading ? ( // Render skeleton or placeholder when isLoading is true
-        <SkeletonStadiumCard/>
+        <SkeletonStadiumCard />
       ) : (
         <>
           <StadiumContainer palette={palette} onPress={btnClicked}>
-            <StadiumImage palette={palette} source={{uri: backgroundImage || defaultImage}} />
+            <StadiumImage palette={palette} source={{ uri: backgroundImage || defaultImage }} />
             <StadiumDescription>
-              <TitleDescription palette={palette}>Explore {titleDescription}</TitleDescription>
-              <TextDescription palette={palette}>Near court</TextDescription>
+              <TitleDescription palette={palette}>{t('home.homeScreen.explore')} {titleDescription}</TitleDescription>
+              <TextDescription palette={palette}>{t('home.homeScreen.nearCourt')}</TextDescription>
             </StadiumDescription>
             <StarsReviewContainer palette={palette}>
-            <StarIconSVG color='yellow' size='17'/>
-            <Text style={{color: palette.whiteColor}}>{getStarsReviw(feedback)}</Text>
+              <StarIconSVG color='yellow' size='17' />
+              <Text style={{ color: palette.whiteColor }}>{getStarsReviw(feedback)}</Text>
             </StarsReviewContainer>
           </StadiumContainer>
-             
         </>
       )}
     </>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Overlay,
   CenteredView,
@@ -13,14 +13,15 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-} from 'react-native'; // Import TextInput and StyleSheet
+} from 'react-native';
 import StarIconNotFilledIconSVG from '../../assets/Icons/svg/StarIconNotFilledIconSVG';
 import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
 import CloseIconSVG from '../../assets/Icons/svg/CloseIconSVG';
-import {handleRequests} from '../../services/HandleRequests';
+import { handleRequests } from '../../services/HandleRequests';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useToast } from 'react-native-toast-notifications';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 interface ModalReviewComponentProps {
   modalVisible: boolean;
@@ -33,9 +34,10 @@ const ModalReviewComponent = ({
   setModalVisible,
   stadiumId,
 }: ModalReviewComponentProps) => {
-  const palette=usePalette()
+  const palette = usePalette();
+  const { t } = useTranslation(); // Initialize useTranslation
 
-  const toast =useToast()
+  const toast = useToast();
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
 
@@ -46,12 +48,13 @@ const ModalReviewComponent = ({
         stars: rating,
         comment: reviewText,
       });
-      toast.show('Your Feedback has bee successfully added', { type: 'success', placement: 'center', duration: 4000,style: { backgroundColor: palette.primaryColor }  });
+      toast.show(t('modalReview.successMessage'), { type: 'success', placement: 'center', duration: 4000, style: { backgroundColor: palette.primaryColor } });
       setModalVisible(false);
     } catch (error) {
       console.log('err', error);
     }
   };
+
   const styles = StyleSheet.create({
     inputContainer: {
       marginTop: 20,
@@ -76,6 +79,7 @@ const ModalReviewComponent = ({
       alignItems: 'center',
     },
   });
+
   return (
     <Overlay>
       <Modal
@@ -91,15 +95,15 @@ const ModalReviewComponent = ({
               <CloseIconSVG />
             </CloseButton>
             <TextReviewQs palette={palette}>
-              Select stars and tags to leave a quick review.
+              {t('modalReview.selectStarsAndTags')}
             </TextReviewQs>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               {[1, 2, 3, 4, 5].map(star => (
                 <TouchableOpacity
                   key={star}
                   onPress={() => setRating(star)}
                   activeOpacity={0.7}
-                  style={{marginRight: 5, marginTop: 10}}>
+                  style={{ marginRight: 5, marginTop: 10 }}>
                   {star <= rating ? (
                     <StarIconSVG
                       color={palette.primaryColor}
@@ -117,18 +121,18 @@ const ModalReviewComponent = ({
             <View style={styles.inputContainer}>
               <TextInput
                 placeholderTextColor={palette.secondaryTextColor}
-                placeholder="Write your review here..."
+                placeholder={t('modalReview.writeReview')}
                 value={reviewText}
                 onChangeText={setReviewText}
                 multiline
-                style={[styles.input, {textAlignVertical: 'top'}]}
+                style={[styles.input, { textAlignVertical: 'top' }]}
               />
             </View>
             <TouchableOpacity
               style={styles.button}
               onPress={addFeedback}
               activeOpacity={0.7}>
-              <Text style={{color: palette.whiteColor}}>Submit</Text>
+              <Text style={{ color: palette.whiteColor }}>{t('modalReview.submit')}</Text>
             </TouchableOpacity>
           </ModalView>
         </CenteredView>
@@ -136,7 +140,5 @@ const ModalReviewComponent = ({
     </Overlay>
   );
 };
-
-
 
 export default ModalReviewComponent;
