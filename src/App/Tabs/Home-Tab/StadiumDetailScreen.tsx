@@ -9,6 +9,7 @@ import {
   CloseContainerIcon,
   LineStyle,
   AddReviewText,
+  DirectionContainerIcon
 } from './StyledComponent/StyledComponent';
 import CardReviewComponent from '../../../Components/HomeComponents/CardReviewComponent';
 import { usePalette } from '../../../assets/color-palette/ThemeApp';
@@ -23,6 +24,7 @@ import {
   Modal,
   TouchableHighlight,
   Text,
+  Linking,
 } from 'react-native';
 import StadiumLocationMapComponent from '../../../Components/HomeComponents/StadiumLocationMapComponent';
 import CloseIconSVG from '../../../assets/Icons/svg/CloseIconSVG';
@@ -35,6 +37,7 @@ import {getStarsReviw} from '../../../services/HelperFunctions';
 import ModalReviewComponent from '../../../Components/HomeComponents/ModalReviewComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
+import DirectionIconSVG from '../../../assets/Icons/svg/DirectionIconSVG';
 
 interface StadiumDetailScreenProps {
   navigation: any;
@@ -79,7 +82,10 @@ export const StadiumDetailScreen = ({
     }
     navigation.navigate('ProfileTab', {Screen: 'ConnexionMethodScreen'});
   };
-  
+  const handleDirectionClick = (stadium:any) => {
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${stadium.latitude},${stadium.longitude}`;
+    Linking.openURL(url);
+};
   return (
     <ContainerApp palette={palette}>
       <NavigateBack
@@ -115,7 +121,7 @@ export const StadiumDetailScreen = ({
           </TouchableOpacity>
           <LineStyle></LineStyle>
 
-          <FacilityCardComponent />
+          <FacilityCardComponent stadium={stadium} />
           <View
             style={{
               display: 'flex',
@@ -178,6 +184,18 @@ export const StadiumDetailScreen = ({
               }}>
               <CloseIconSVG />
             </CloseContainerIcon>
+            <DirectionContainerIcon palette={palette}
+              onPress={() => {
+                handleDirectionClick(stadium);
+              }}>
+              <DirectionIconSVG color={palette.whiteColor}/>
+            </DirectionContainerIcon>
+            <DirectionContainerIcon palette={palette}
+              onPress={() => {
+                handleDirectionClick(stadium);
+              }}>
+              <DirectionIconSVG color={palette.whiteColor}/>
+            </DirectionContainerIcon>
           </ImageLocation>
         </>
       )}

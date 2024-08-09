@@ -1,25 +1,25 @@
 import { useState, useContext } from 'react';
-import {
-  useBlurOnFulfill,
-  useClearByFocusCell,
-} from 'react-native-confirmation-code-field';
-import { AuthContext } from '../../../../services/Context/AuthContext';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
-import { handleRequests } from '../../../../services/HandleRequests';
 import { ToastAndroid } from 'react-native';
 import { useToast } from 'react-native-toast-notifications';
-import { usePalette } from '../../../../assets/color-palette/ThemeApp';
+import { useTranslation } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { useBlurOnFulfill, useClearByFocusCell } from 'react-native-confirmation-code-field';
 import { launchImageLibrary as _launchImageLibrary, launchCamera as _launchCamera, OptionsCommon } from 'react-native-image-picker';
 
-let launchImageLibrary = _launchImageLibrary;
-let launchCamera = _launchCamera;
+import { AuthContext } from '../../../../services/Context/AuthContext';
+import { handleRequests } from '../../../../services/HandleRequests';
+import { usePalette } from '../../../../assets/color-palette/ThemeApp';
 
 const CELL_COUNT = 6;
 
 export const useAuth = (navigation: any, route: any = false) => {
-  const palette=usePalette()
-  // State variables using useState hook
+  const { t } = useTranslation();
+  const palette = usePalette();
+  const toast = useToast();
+  const { signIn, setBarColorCntxt } = useContext(AuthContext);
+
+  // State variables
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -28,198 +28,170 @@ export const useAuth = (navigation: any, route: any = false) => {
   const [age, setAge] = useState('');
   const [value, setValue] = useState('');
   const [step, setStep] = useState<number>(0);
-  const [loading, setLoading] = useState(false); // 1. Add loading state
-
+  const [loading, setLoading] = useState(false);
 
   // Confirmation code field hooks
   const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({ value, setValue });
 
-  // Destructuring from route params and AuthContext
-  const { userId, codeVerification, cameFrom } = route && route.params;
-  const { signIn, setBarColorCntxt } = useContext(AuthContext);
+  // Destructuring from route params
+  const { userId, codeVerification, cameFrom } = route.params || {};
 
-  // Toast notification hook
-  const toast = useToast();
+  // Function to handle API requests
+  const handleApiRequest = async (method: string, endpoint: string, data?: object) => {
+    try {
+      setLoading(true);
+      const response = await handleRequests(method, endpoint, data);
+      return response.data;
+    } catch (error) {
+      console.error(`Error in ${endpoint}:`, error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // Login user function
+  // Login user
   const loginUser = async () => {
-    if (email !== '' && password !== '') {
+    if (email && password) {
       try {
-        setLoading(true); // Start loading when login process begins
-        const res = await handleRequests('post', 'login', { email, password });
-        if (res.data.token) {
-          AsyncStorage.setItem('token', res.data.token);
-          AsyncStorage.setItem('userId', JSON.stringify(res.data.findUser.id));
+        const data = await handleApiRequest('post', 'login', { email, password });
+        if (data.token) {
+          await AsyncStorage.multiSet([
+            ['token', data.token],
+            ['userId', JSON.stringify(data.findUser.id)],
+          ]);
           signIn();
+        } else {
+          showToast('authentication.errors.invalidEmailPassword', 'danger');
         }
-      } catch (err) {
-        toast.show('Email or Password is invalid', { type: 'danger', placement: 'bottom', duration: 4000 });
-        console.log('err', err);
-      } finally {
-        setLoading(false); // Stop loading when login process completes
+      } catch {
+        showToast('authentication.errors.invalidEmailPassword', 'danger');
       }
     } else {
-      toast.show('You should type your email and password please', { type: 'danger', placement: 'bottom', duration: 4000 });
+      showToast('authentication.errors.enterEmailPassword', 'danger');
     }
   };
 
-  // Register user function
+  // Register user
   const registerUser = async () => {
     try {
-      setLoading(true); // Start loading when registration process begins
-      const res = await handleRequests('post', 'register', { email, password, firstName, lastName, age });
-      navigation.navigate('CodeVerification', { userId: res.data.user.id, codeVerification: res.data.user.code_verification });
-      toast.show('A confirmation code has been sent to your email.', { type: 'custom', placement: 'top', duration: 4000 });
-    } catch (err) {
-      console.log('err', err);
-    } finally {
-      setLoading(false); // Stop loading when registration process completes
+      const data = await handleApiRequest('post', 'register', { email, password, firstName, lastName, age });
+      navigation.navigate('CodeVerification', { userId: data.user.id, codeVerification: data.user.code_verification });
+      showToast('authentication.messages.confirmationCodeSent', 'custom');
+    } catch (error) {
+      console.error('Registration error:', error);
     }
   };
 
-  // Google sign-in function
+  // Google Sign-In
   const googleSignInEvent = async () => {
     GoogleSignin.configure({
-      webClientId: '597756036187-tlrpf1jnr3l5fg7575uj4qjelg8062es.apps.googleusercontent.com',
+      webClientId: 'YOUR_WEB_CLIENT_ID',
       offlineAccess: true,
     });
+
     try {
-      const hasPlayService = await GoogleSignin.hasPlayServices();
-      if (hasPlayService) {
+      const hasPlayServices = await GoogleSignin.hasPlayServices();
+      if (hasPlayServices) {
         const userInfo = await GoogleSignin.signIn();
         const tokenId = userInfo.idToken;
-        console.log('tokenId', tokenId);
+        console.log('Google Token ID:', tokenId);
         // Handle backend request with tokenId
       }
     } catch (error) {
-      console.log('erroro google', error);
+      console.error('Google Sign-In error:', error);
     }
   };
 
-  // Resend confirmation code function
+  // Resend confirmation code
   const resentCode = async () => {
     try {
-      const res = await handleRequests('put', 'resendCode', { email });
-      navigation.navigate('CodeVerification', { userId: res.data.id, codeVerification: res.data.code_verification, cameFrom: 'forgetPass',email });
-      toast.show('A confirmation code has been sent to your email.', { type: 'success', placement: 'top', duration: 4000, style: { backgroundColor: palette.primaryColor } });
+      const data = await handleApiRequest('put', 'resendCode', { email });
+      navigation.navigate('CodeVerification', { userId: data.id, codeVerification: data.code_verification, cameFrom: 'forgetPass', email });
+      showToast('authentication.messages.confirmationCodeSent', 'success');
     } catch (error) {
-      console.log('error', error);
+      console.error('Error resending code:', error);
     }
   };
 
-  // Verify confirmation code function
+  // Verify confirmation code
   const verifyCode = async () => {
     if (Number(value) === Number(codeVerification)) {
       try {
-        await handleRequests('put', `user/${userId}`, { is_verified: true });
-        if (!cameFrom) {
-          navigation.navigate('AddPicture',{userId});
-          toast.show('Your account is successfully created.', { type: 'success', placement: 'top', duration: 4000, style: { backgroundColor: palette.primaryColor } });
-        } else {
-          navigation.navigate('PasswordForgotten', { step: 2 });
-        }
+        await handleApiRequest('put', `user/${userId}`, { is_verified: true });
+        navigation.navigate(cameFrom ? 'PasswordForgotten' : 'AddPicture', { userId });
+        showToast('authentication.messages.accountCreated', 'success');
       } catch (error) {
-        console.log('Error verifying code:', error);
+        console.error('Error verifying code:', error);
       }
     } else {
-      console.log('Verification code is wrong');
-      ToastAndroid.show('Verification code is wrong', ToastAndroid.LONG);
+      showToast('authentication.errors.verificationCodeWrong', 'danger');
     }
   };
 
-  // Reset password function
+  // Reset password
   const resetPassword = async () => {
-    try {
-      if (password === newPassword) {
-        await handleRequests('put', 'resetpassword', { email, newPassword: password });
+    if (password === newPassword) {
+      try {
+        await handleApiRequest('put', 'resetpassword', { email, newPassword: password });
         setStep(3);
-        ToastAndroid.show('Your password has been successfully changed', ToastAndroid.LONG);
-      } else {
-        ToastAndroid.show("Your passwords don't match", ToastAndroid.LONG);
+        showToast('authentication.messages.passwordChanged', 'success');
+      } catch (error) {
+        console.error('Error resetting password:', error);
       }
-    } catch (error) {
-      console.log('Error resetting password:', error);
+    } else {
+      showToast('authentication.errors.passwordsDontMatch', 'danger');
     }
   };
- 
+
+  // Image picker functions
   const openImagePicker = () => {
-      const options:OptionsCommon = {
-        mediaType: 'photo',
-        includeBase64: false,
-        maxHeight: 2000,
-        maxWidth: 2000,
-      };
-  
-      launchImageLibrary(options, handleResponse);
-    };
-  
-    const handleCameraLaunch = () => {
-      const options:OptionsCommon = {
-        mediaType: 'photo',
-        includeBase64: false,
-        maxHeight: 2000,
-        maxWidth: 2000,
-      };
-  
-      launchCamera(options, handleResponse);
-    };
-    const updateUserImage = async (imageUser?:string) => {
-      const updateData: any = {};
-      updateData.image = imageUser;
-      try {
-        console.log("updateData",updateData);
-  
-        await handleRequests('put', `user/${userId}`, updateData);
-        navigation.navigate('Signin');
-      } catch (error) {
-        console.error('Error updating user:', error);
-      }
-    };
-    const handleResponse = (response: any) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('Image picker error: ', response.error);
-      } else {
-        let imageUri = response.uri || response.assets?.[0]?.uri;
-        // setSelectedImage(imageUri);
-        updateUserImage(imageUri);
-      }
-    };
-   
-  // Returning necessary variables and functions
+    const options: OptionsCommon = { mediaType: 'photo', includeBase64: false, maxHeight: 2000, maxWidth: 2000 };
+    _launchImageLibrary(options, handleImageResponse);
+  };
+
+  const handleCameraLaunch = () => {
+    const options: OptionsCommon = { mediaType: 'photo', includeBase64: false, maxHeight: 2000, maxWidth: 2000 };
+    _launchCamera(options, handleImageResponse);
+  };
+
+  const updateUserImage = async (imageUser?: string) => {
+    try {
+      await handleApiRequest('put', `user/${userId}`, { image: imageUser });
+      navigation.navigate('Signin');
+    } catch (error) {
+      console.error('Error updating user image:', error);
+    }
+  };
+
+  const handleImageResponse = (response: any) => {
+    if (response.didCancel) {
+      console.log('User cancelled image picker');
+    } else if (response.error) {
+      console.error('Image picker error:', response.error);
+    } else {
+      const imageUri = response.uri || response.assets?.[0]?.uri;
+      updateUserImage(imageUri);
+    }
+  };
+
+  // Utility function to show toast messages
+  const showToast = (messageKey: string, type: 'success' | 'danger' | 'custom') => {
+    toast.show(t(messageKey), {
+      type,
+      placement: 'top',
+      duration: 4000,
+      style: type === 'success' ? { backgroundColor: palette.primaryColor } : {},
+    });
+  };
+
+  // Return hook values and functions
   return {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    age,
-    setAge,
-    loginUser,
-    registerUser,
-    verifyCode,
-    ref,
-    props,
-    value,
-    setValue,
-    getCellOnLayoutHandler,
-    CELL_COUNT,
-    signIn,
-    googleSignInEvent,
-    setBarColorCntxt,
-    resetPassword,
-    resentCode,
-    newPassword,
-    setNewPassword,
-    step,
-    loading,
-    handleCameraLaunch,
-    openImagePicker
+    email, setEmail, password, setPassword, firstName, setFirstName, lastName, setLastName, age, setAge,
+    loginUser, registerUser, verifyCode, ref, props, value, setValue, getCellOnLayoutHandler, CELL_COUNT,
+    signIn, googleSignInEvent, setBarColorCntxt, resetPassword, resentCode, newPassword, setNewPassword,
+    step, loading, handleCameraLaunch, openImagePicker
   };
 };
 

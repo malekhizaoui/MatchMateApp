@@ -12,27 +12,34 @@ const baseWidth = 375;
 const scale = (size:any) => (width / baseWidth) * size;
 
 
-export const fontSiszeTest = `${scale(12)}px`; // Responsive title font size
 
 export const ContainerAppStyle=`
 flex:1;
 backgroundColor:${MatchMatePalette.darkBackgroundColor};
 align-items:center;
+
 `
 
 export const fontSizeTitleScreen = `
 font-size: ${scale(24)}px;
+font-family: 'Lucida Sans Unicode';
 `;
 
 export const fontSizeSubTitleScreen = `
 font-size: ${scale(20)}px;
+font-family: 'Lucida Sans Unicode';
+
 `;
 
 export const fontSizeTextScreen = `
 font-size: ${scale(15)}px;
+font-family: 'Lucida Sans Unicode';
+
 `;
 
 export const fontSizeLegendIcon = `
 font-size: ${scale(12)}px;
+font-family: 'Lucida Sans Unicode';
+
 `;
 

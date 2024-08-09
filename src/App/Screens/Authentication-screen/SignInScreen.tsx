@@ -1,5 +1,5 @@
 import { StatusBar, TouchableOpacity, useColorScheme, View } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   ContainerApp,
   ContainerScreen,
@@ -21,11 +21,13 @@ import PasswordIconSVG from '../../../assets/Icons/svg/PasswordIconSVG';
 import MailIconSVG from '../../../assets/Icons/svg/MailIconSVG';
 import NavigateBack from '../../../Components/NavigateBack';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../../../services/Context/AuthContext';
 
 const SignInScreen = ({ navigation }:any) => {
   const palette = usePalette();
   const colorScheme = useColorScheme();
   const { t, i18n } = useTranslation();
+  const{lightModeStatus}=useContext(AuthContext)
 
   const { email, setEmail, password, setPassword, loginUser, loading } = useAuth(navigation);
 
@@ -37,11 +39,15 @@ const SignInScreen = ({ navigation }:any) => {
         </View>
         <HeaderConnexionScreen>
           <LogoApp
-            source={
-              colorScheme === "light"
+           source={
+            !lightModeStatus
+              ? colorScheme === 'light'
                 ? require('../../../assets/Logos/MatchMate.png')
                 : require('../../../assets/Logos/MatchMateDarkWhite.png')
-            }
+              : lightModeStatus === 'light'
+              ? require('../../../assets/Logos/MatchMate.png')
+              : require('../../../assets/Logos/MatchMateDarkWhite.png')
+          }
           />
           <HeaderTitleText palette={palette}>{t("authentication.signInToMatchMate")}</HeaderTitleText>
         </HeaderConnexionScreen>

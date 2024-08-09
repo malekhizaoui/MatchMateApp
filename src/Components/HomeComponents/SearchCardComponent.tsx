@@ -1,24 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
-  StyleSheet,
-  Dimensions,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
-import {
-  ImagesStadiumContainer,
-  ImageStadium,
+
   InputHeaderContainer,
   InputIconContainer,
   TextInputStyle,
-  LineSperatorSearchBar,
-  FilterIconContainer,
 } from './StyledComponent/StyledComponent';
 
 import SearchIconSVG from '../../assets/Icons/svg/SearchIconSVG';
-import FilterIconSVG from '../../assets/Icons/svg/FilterIconSVG';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
+import { useTranslation } from 'react-i18next';
 interface SearchCardComponentProps {
   showMap: boolean;
   onSearch: (query: string) => void;
@@ -26,7 +16,7 @@ interface SearchCardComponentProps {
 
 const SearchCardComponent: React.FC<SearchCardComponentProps> = ({showMap, onSearch}) => {
   const palette=usePalette()
-
+  const {t}=useTranslation()
   return (
     <InputHeaderContainer  palette={palette}
       style={{
@@ -36,8 +26,9 @@ const SearchCardComponent: React.FC<SearchCardComponentProps> = ({showMap, onSea
       <InputIconContainer>
         <SearchIconSVG color={palette.blackColor} />
         <TextInputStyle
-          placeholder="Search ..."
+          placeholder={t("home.homeScreen.searchPlaceholder")}
           onChangeText={onSearch}
+          placeholderTextColor={palette.blackColor}
         />
       </InputIconContainer>
       {/* <FilterIconContainer>

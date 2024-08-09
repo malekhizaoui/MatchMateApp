@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   StatusBar,
   Text,
@@ -9,16 +9,20 @@ import {
   useColorScheme,
 } from 'react-native';
 import styled from 'styled-components/native';
-import { ContainerAppReviews, LineSperator } from './StyledComponent/StyledComponent';
-import { usePalette } from '../../../assets/color-palette/ThemeApp';
+import {
+  ContainerAppReviews,
+  LineSperator,
+} from './StyledComponent/StyledComponent';
+import {usePalette} from '../../../assets/color-palette/ThemeApp';
 import NavigateBack from '../../../Components/NavigateBack';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import {AuthContext} from '../../../services/Context/AuthContext';
 
-const AboutScreen = ({ navigation }: any) => {
-  const { t } = useTranslation();
+const AboutScreen = ({navigation}: any) => {
+  const {t} = useTranslation();
   const palette = usePalette();
   const colorScheme = useColorScheme();
-
+  const {lightModeStatus} = useContext(AuthContext);
   const styles = StyleSheet.create({
     container: {
       flexGrow: 1,
@@ -77,12 +81,16 @@ const AboutScreen = ({ navigation }: any) => {
         navigation={navigation}
         headerTitle={t('profile.aboutScreen.headerTitle')}
       />
-      
+
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.logoContainer}>
           <LogoApp
             source={
-              colorScheme === 'light'
+              !lightModeStatus
+                ? colorScheme === 'light'
+                  ? require('../../../assets/Logos/MatchMate.png')
+                  : require('../../../assets/Logos/MatchMateDarkWhite.png')
+                : lightModeStatus === 'light'
                 ? require('../../../assets/Logos/MatchMate.png')
                 : require('../../../assets/Logos/MatchMateDarkWhite.png')
             }
@@ -93,39 +101,71 @@ const AboutScreen = ({ navigation }: any) => {
           {t('profile.aboutScreen.description')}
         </Text>
         <LineSperator palette={palette}></LineSperator>
-        <Text style={styles.featureTitle}>{t('profile.aboutScreen.keyFeaturesTitle')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.joinTeams')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.bookSlots')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.generateQR')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.profileManagement')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.gameHistory')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.userReviews')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.features.leaderboard')}</Text>
+        <Text style={styles.featureTitle}>
+          {t('profile.aboutScreen.keyFeaturesTitle')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.features.joinTeams')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.features.bookSlots')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.features.generateQR')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.features.profileManagement')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.features.gameHistory')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.features.userReviews')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.features.leaderboard')}
+        </Text>
         <LineSperator palette={palette}></LineSperator>
-        <Text style={styles.sectionTitle}>{t('profile.aboutScreen.contactUsTitle')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.contactUs')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.contactDetails.email')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.contactDetails.phone')}</Text>
+        <Text style={styles.sectionTitle}>
+          {t('profile.aboutScreen.contactUsTitle')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.contactUs')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.contactDetails.email')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.contactDetails.phone')}
+        </Text>
         <LineSperator palette={palette}></LineSperator>
 
-        <Text style={styles.sectionTitle}>{t('profile.aboutScreen.versionTitle')}</Text>
-        <Text style={styles.featureItem}>{t('profile.aboutScreen.version')}</Text>
+        <Text style={styles.sectionTitle}>
+          {t('profile.aboutScreen.versionTitle')}
+        </Text>
+        <Text style={styles.featureItem}>
+          {t('profile.aboutScreen.version')}
+        </Text>
         <LineSperator palette={palette}></LineSperator>
 
-        <Text style={styles.sectionTitle}>{t('profile.aboutScreen.legalTitle')}</Text>
+        <Text style={styles.sectionTitle}>
+          {t('profile.aboutScreen.legalTitle')}
+        </Text>
         <Text style={styles.featureItem}>
           <Text
             style={styles.link}
-            onPress={() => handleLinkPress('https://www.matchmate.com/privacy-policy')}
-          >
+            onPress={() =>
+              handleLinkPress('https://www.matchmate.com/privacy-policy')
+            }>
             {t('profile.aboutScreen.links.privacyPolicy')}
           </Text>
         </Text>
         <Text style={styles.featureItem}>
           <Text
             style={styles.link}
-            onPress={() => handleLinkPress('https://www.matchmate.com/terms-of-service')}
-          >
+            onPress={() =>
+              handleLinkPress('https://www.matchmate.com/terms-of-service')
+            }>
             {t('profile.aboutScreen.links.termsOfService')}
           </Text>
         </Text>

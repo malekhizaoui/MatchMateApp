@@ -4,6 +4,7 @@ import HomeIconSVG from '../../assets/Icons/svg/TabsIcon/HomeIconSVG';
 import LeaderboardIconSCG from '../../assets/Icons/svg/TabsIcon/LeaderboardIconSCG';
 import BookingIconSVG from '../../assets/Icons/svg/TabsIcon/BookingIconSVG';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
+import { useTranslation } from 'react-i18next';
 
 interface ScreenOptions {
   color: string;
@@ -12,6 +13,7 @@ interface ScreenOptions {
 
 export const ScreenOptions = ({ navigation, route }:any) => {
   const palette=usePalette()
+  const {t}=useTranslation()
   return ({
   title: '',
   headerShown: false,
@@ -20,16 +22,16 @@ export const ScreenOptions = ({ navigation, route }:any) => {
     let name;
     if (route.name === 'HomeTab') {
       iconName = focused ? <HomeIconSVG color={palette.primaryColor} /> : <HomeIconSVG color={palette.secondaryTextColor} />;
-      name = 'Home';
+      name = t("tabs.home");
     } else if (route.name === 'ProfileTab') {
       iconName = focused ? <ProfileIconSVG color={palette.primaryColor} /> : <ProfileIconSVG color={palette.secondaryTextColor} />;
-      name = 'Profile';
+      name = t("tabs.profile");
     } else if (route.name === 'LeaderboardTab') {
       iconName = focused ? <LeaderboardIconSCG color={palette.primaryColor} /> : <LeaderboardIconSCG color={palette.secondaryTextColor} />;
-      name = 'Leaderboard';
+      name = t("tabs.leaderboard");
     } else if (route.name === 'BookingTab') {
       iconName = focused ? <BookingIconSVG color={palette.primaryColor} /> : <BookingIconSVG color={palette.secondaryTextColor} />;
-      name = 'Booking';
+      name = t("tabs.booking");
     
     } 
 

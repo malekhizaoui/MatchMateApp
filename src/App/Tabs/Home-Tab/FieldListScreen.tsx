@@ -28,6 +28,7 @@ export const FieldListScreen = ({navigation}: any) => {
     fieldData,
     region,
     setRegion,
+    t
   } = useHome(navigation);
   
 
@@ -73,12 +74,12 @@ export const FieldListScreen = ({navigation}: any) => {
   });
   return (
     <ContainerApp palette={palette}>
-      <NavigateBack navigation={navigation} headerTitle={'Field List'} />
+      <NavigateBack navigation={navigation} headerTitle={t("home.fieldListScreen.headerTitle")} />
       
       <ContainerDetailScreen>
         <HeaderContainer>
           <ExploreRegionContainer>
-            <RegionExploreTxt palette={palette}>Explore</RegionExploreTxt>
+            <RegionExploreTxt palette={palette}>{t("home.fieldListScreen.explore")}</RegionExploreTxt>
             <RegionTxt palette={palette}>{region}</RegionTxt>
           </ExploreRegionContainer>
           <View style={styles.container}>

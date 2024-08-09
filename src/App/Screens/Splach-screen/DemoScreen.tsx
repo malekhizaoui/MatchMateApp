@@ -1,119 +1,55 @@
-import React,{useRef} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, StatusBar} from 'react-native';
+import React,{useContext, useRef} from 'react';
+import {StyleSheet, View, Text, TouchableOpacity, StatusBar, useColorScheme} from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import NextIconSVG from '../../../assets/Icons/svg/NextIconSVG';
+import { OnboardFlow } from 'react-native-onboard';
+import { AuthContext } from '../../../services/Context/AuthContext';
 
-const DemoScreen = () => {
+const DemoScreen = ({navigation}:any) => {
     const pagerRef = useRef<PagerView>(null);
     const palette = usePalette();
+    const { lightModeStatus } = useContext(AuthContext);
+    const colorScheme = useColorScheme();
 
     const goToNextPage = (value: number) => {
       if (pagerRef.current) {
         pagerRef.current.setPage(value);
       }
     };
-  return (
-    <>
-    
-    <PagerView style={styles.pagerView} initialPage={1} useNext={false}  ref={pagerRef}>
-    
-      <View
-        key="1"
-        style={{
-          position: 'relative',
-          flex: 1,
-          backgroundColor: palette.darkBackgroundColor,
-        }}>
-        <Text>First page</Text>
-        <View
-          style={{
-            position: 'absolute', 
-            width: '2%',
-            right: 0,
-            height: '100%',
-            backgroundColor: palette.primaryColor,
-          }}></View>
-        <View
-          style={{
-            position: 'absolute',
-            width: 150,
-            right: -140,
-            height: '40%',
-            bottom: '10%',
-            backgroundColor: palette.primaryColor,
-            borderRadius: 390,
-            display: 'flex',
-            justifyContent: 'center',
-          }}>
-          <TouchableOpacity
-           onPress={() => goToNextPage(1)}
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: 25,
-              backgroundColor: palette.darkBackgroundColor,
-              marginLeft: 10,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems:"center"
-            }}>
-            <NextIconSVG
-              color={palette.primaryColor}
-              size={'20'}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View
-        key="2"
-        style={{
-          position: 'relative',
-          flex: 1,
-          backgroundColor: palette.primaryColor,
-        }}>
-        <Text>Second page</Text>
-        <View
-          style={{
-            position: 'absolute',
-            width: '5%',
-            right: 0,
-            height: '100%',
-            backgroundColor: palette.darkBackgroundColor,
-          }}></View>
-        <View
-          style={{
-            position: 'absolute',
-            width: '50%',
-            right: -140,
-            height: '40%',
-            bottom: '10%',
-            backgroundColor: palette.darkBackgroundColor,
-            borderRadius: 390,
-            display: 'flex',
-            justifyContent: 'center',
-          }}>
-          <TouchableOpacity
-                    onPress={()=>goToNextPage(0)}
+   return (<>
+   {/* StatusBar configuration based on theme and mode */}
+   <StatusBar
+        barStyle={
+          lightModeStatus
+            ? lightModeStatus === 'light'
+              ? 'dark-content'
+              : 'light-content'
+            : colorScheme === 'light'
+            ? 'dark-content'
+            : 'light-content'
+        }
+        backgroundColor={palette.darkBackgroundColor}
+      />
+    <OnboardFlow
+  onNext={()=>{navigation.navigate('ConnexionMethod')}}
+    style={{backgroundColor:palette.darkBackgroundColor}}
+      pages={[
+        {
+          title: 'Welcome to my app',
+          subtitle: 'This is page 1',
+          imageUri: 'https://static.mycity.travel/manage/uploads/6/30/432076/1/vidy-beach-volley_2000.jpg',
+          
+        },
+        {
+          title: 'Page 2 header',
+          subtitle: 'This is page 2',
+          imageUri: 'https://static.mycity.travel/manage/uploads/6/30/432076/1/vidy-beach-volley_2000.jpg',
+        }
+      ]}
+      type={'fullscreen'}
 
-            style={{
-              width: 50,
-              height: 50,
-              borderRadius: 25,
-              backgroundColor: palette.primaryColor,
-              marginLeft: 10,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <NextIconSVG
-              color={palette.darkBackgroundColor}
-              size={'20'}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-    </PagerView>
+    />
     </>
   );
 };

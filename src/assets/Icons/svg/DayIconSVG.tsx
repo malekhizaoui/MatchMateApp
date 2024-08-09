@@ -12,7 +12,7 @@ import {
 } from 'react-native-svg';
 interface DayIconSVG {
   color: string;
-  size:string
+  size?:string
 }
 const DayIconSVG = ({color,size}: DayIconSVG) => {
   return (

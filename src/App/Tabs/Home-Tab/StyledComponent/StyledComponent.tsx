@@ -389,7 +389,7 @@ export const TitleTextStadium = styled.Text<PaletteProps>`
 
 export const TxtShowMap = styled.Text<PaletteProps>`
   color: ${({ palette }) => palette.primaryColor};
-  font-size: 15px;
+  ${fontSizeTextScreen}
   font-weight: 700;
 `;
 
@@ -453,6 +453,32 @@ export const CloseContainerIcon = styled.TouchableOpacity<PaletteProps>`
   position: absolute;
   right: 10px;
   top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const DirectionContainerIcon = styled.TouchableOpacity<PaletteProps>`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: ${({ palette }) => palette.blackColor};
+  z-index: 99999;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const NavigateUserContainerIcon = styled.TouchableOpacity<PaletteProps>`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: ${({ palette }) => palette.blackColor};
+  z-index: 99999;
+  position: absolute;
+  left: 10px;
+  top: 70px;
   display: flex;
   justify-content: center;
   align-items: center;

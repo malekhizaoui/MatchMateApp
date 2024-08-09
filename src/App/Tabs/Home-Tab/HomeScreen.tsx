@@ -98,7 +98,15 @@ export const HomeScreen = ({navigation}: any) => {
   return (
     <ContainerApp palette={palette}>
       <StatusBar 
-        barStyle={lightModeStatus==="light"?"dark-content":"light-content"}
+        barStyle={
+          lightModeStatus
+            ? lightModeStatus === 'light'
+              ? 'dark-content'
+              : 'light-content'
+            : colorScheme === 'light'
+            ? 'dark-content'
+            : 'dark-content'
+        }
         backgroundColor={palette.darkBackgroundColor}
       />
       <ContainerScreen>

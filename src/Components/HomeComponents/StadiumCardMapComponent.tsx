@@ -1,11 +1,6 @@
-import React, {useState} from 'react';
-import {StyleSheet, Dimensions, Text, View} from 'react-native';
+import React from 'react';
+import {Text, View} from 'react-native';
 import {
-  StadiumContainer,
-  StadiumImage,
-  StadiumDescription,
-  TitleDescription,
-  TextDescription,
   StadiumCardContainer,
   ImageContainerCard,
   StarsReviewContainer
@@ -26,7 +21,7 @@ const StadiumCardMapComponent = ({stadium,navigation,index,feedback}: StadiumCar
   const palette=usePalette()
 
   return (
-    <StadiumCardContainer palette={palette} onPress={()=>{navigation.navigate('StadiumDetail',{stadium})}}>
+    <StadiumCardContainer palette={palette} onPress={()=>{navigation.navigate('StadiumDetail',{stadiumId:stadium.id})}}>
       <ImageContainerCard palette={palette} 
         source={{
           uri: stadium.imageURL,
@@ -37,30 +32,6 @@ const StadiumCardMapComponent = ({stadium,navigation,index,feedback}: StadiumCar
             <StarIconSVG color='yellow' size='17'/>
             <Text style={{color: palette.whiteColor}}>{getStarsReviw(feedback)}</Text>
             </StarsReviewContainer>
-      {/* <View
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          marginTop:10
-        }}>
-        <Text
-          style={{
-            color: palette.lightBackgroundColor,
-            fontSize: 16,
-            fontWeight: '600',
-          }}>
-          {stadium.stadiumName}
-        </Text>
-        <Text
-          style={{
-            color: palette.lightBackgroundColor,
-            fontSize: 16,
-            fontWeight: '600',
-          }}>
-          Sunset evening
-        </Text>
-      </View> */}
     </StadiumCardContainer>
   );
 };

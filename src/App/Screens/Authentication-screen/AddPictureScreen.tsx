@@ -1,16 +1,14 @@
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import {View } from 'react-native';
 import React from 'react';
 import {
   ContainerPass,
   HeaderStepText,
   HeaderConnexionScreen,
-  LogoAppStyle,
   ContainerScreen,
   TextAddPicture,
   ImageProfile,
 } from './styledComponent/StyledComponent';
 import NavigateBack from '../../../Components/NavigateBack';
-import TickIconSVG from '../../../assets/Icons/svg/TickIconSVG';
 import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
 import useAuth from './useAuth/useAuth';

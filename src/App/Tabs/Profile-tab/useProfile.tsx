@@ -33,6 +33,8 @@ const useProfile = ({ navigation }: any) => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language); // Add this state
 
+  console.log('i18n.language',i18n.language);
+  
   const palette = usePalette();
   const ITEMS_PER_PAGE = 4;
   const data = [

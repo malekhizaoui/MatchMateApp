@@ -1,5 +1,11 @@
 {
     "translation": {
+        "tabs": {
+    "home": "Inicio",
+    "leaderboard": "Clasificación",
+    "booking": "Reservas",
+    "profile": "Perfil"
+},
         "authentication": {
             "welcome": "Bienvenido a MatchMate",
             "signInWithGoogle": "Iniciar sesión con Google",
@@ -178,6 +184,9 @@
                 "qrCodeMessage": "Tu código QR para esta reserva se ha creado con éxito",
                 "today": "Hoy",
                 "tomorrow": "Mañana"
+            },
+            "fieldListScreen":{
+                "headerTitle": "Lista de campos"
             }
         }
     }

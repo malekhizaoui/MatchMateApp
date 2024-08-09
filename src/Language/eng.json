@@ -1,5 +1,11 @@
 {
     "translation": {
+        "tabs":{
+            "home":"Home",
+            "leaderboard":"Leaderboard",
+             "booking":"Booking",
+             "profile":"Profile"
+        },
         "authentication": {
             "welcome": "Welcome to MatchMate",
             "signInWithGoogle": "Sign in with Google",
@@ -37,7 +43,18 @@
             "enterYourInfo": "Please enter your information:",
             "confirmationCodeDescription": "You will receive a confirmation code by email to recover your account.",
             "enterNewPassword": "Please enter your new password:",
-            "newPasswordDescription": "Once you have created a new password, you will regain access to your account."
+            "newPasswordDescription": "Once you have created a new password, you will regain access to your account.",
+            "errors": {
+                "invalidEmailPassword": "Email or Password is invalid",
+                "enterEmailPassword": "You should type your email and password please",
+                "verificationCodeWrong": "Verification code is wrong",
+                "passwordsDontMatch": "Your passwords don't match"
+              },
+              "messages": {
+                "confirmationCodeSent": "A confirmation code has been sent to your email.",
+                "accountCreated": "Your account is successfully created.",
+                "passwordChanged": "Your password has been successfully changed"
+              }
         },
         "profile": {
             "profile": {
@@ -84,6 +101,7 @@
                 "exploreStadiums": "Explore Stadiums",
                 "leaveReview": "Leave a Review",
                 "peopleWaiting": "People are waiting for your review"
+                
             },
             "gameHistory": {
                 "header": "Game History",
@@ -131,7 +149,9 @@
                 "title": "Stadium Booking",
                 "noBookingsTitle": "No Bookings Yet",
                 "noBookingsMessage": "You haven't made any bookings yet or the time has expired. Start exploring our stadiums and book your favorite slot now!",
-                "exploreButton": "Explore Stadiums"
+                "exploreButton": "Explore Stadiums",
+                "showQr":"Show qrCode",
+                "detail":"Detail"
             },
             "bookingDetailScreen": {
                 "headerTitle": "Booking Detail",
@@ -142,11 +162,13 @@
         "home": {
             "homeScreen": {
                 "explore": "Explore",
-                "mostFields": "Most Sought After",
+                "mostFields": "Fields",
                 "discoverAll": "Discover All",
                 "recommended": "Recommended",
                 "searchPlaceholder": "Search...",
-                "nearCourt": "Near the Court"
+                "nearCourt": "Near the Court",
+                "Lausanne":"Lausanne",
+                "geneva":"Geneva"
             },
             "stadiumDetail": {
                 "headerTitle": "Stadium Details",
@@ -157,7 +179,11 @@
                 "checkAvailability": "Check Availability",
                 "show_map": "View Map",
                 "stadium_description": "Aspen is as close as it gets to a fairy tale alpine town in America. The possibilities for choosing your own adventure: skiing, hiking, dining, shopping and....",
-                "read_more": "Read more"
+                "read_more": "Read more",
+                "selectStarsAndTags": "Select stars and tags to leave a quick review.",
+                "writeReview": "Write your review here...",
+                "submit": "Submit",
+                "successMessage": "Your feedback has been successfully added"
             },
             "stadiumAvailability": {
                 "headerTitle": "Stadium Availability",
@@ -175,6 +201,17 @@
                 "qrCodeMessage": "Your QR code for this booking has been successfully created",
                 "today": "Today",
                 "tomorrow": "Tomorrow"
+            }, 
+            "fieldListScreen":{
+                "headerTitle": "Field List",
+                "explore":"Explore"
+            },
+            "listStadiumScreen":{
+                "search":"Search...",
+                "listingCourt":"Listings court",
+                "map":"Map",
+                "rental":"Rental",
+                "list":"List"
             }
         }
     }

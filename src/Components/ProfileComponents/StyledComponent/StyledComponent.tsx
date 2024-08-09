@@ -63,7 +63,7 @@ export const ContentInput = styled.View`
 
 export const TextTitleInput = styled.Text<PaletteProps>`
   color: ${({ palette }) => palette.primaryColor};
-  font-size: 17px;
+  ${fontSizeTextScreen}
   font-weight: 500;
   width:100%
 `;

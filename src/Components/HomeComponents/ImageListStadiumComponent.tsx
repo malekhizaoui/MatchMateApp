@@ -12,6 +12,7 @@ import PreviousIconSVG from '../../assets/Icons/svg/PreviousIconSVG';
 import NextIconSVG from '../../assets/Icons/svg/NextIconSVG';
 import { Stadium } from '../../App/models/Stadium';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
+import { useTranslation } from 'react-i18next';
 interface ImageListStadiumComponentProps {
   stadium:Stadium;
   btnClicked: () => void;
@@ -22,7 +23,7 @@ const ImageListStadiumComponent = ({
   btnClicked,
 }: ImageListStadiumComponentProps) => {
   const palette=usePalette()
-
+  const {t}=useTranslation()
   return (
     <TouchableOpacity
     onPress={btnClicked}>
@@ -94,7 +95,7 @@ const ImageListStadiumComponent = ({
             color: palette.whiteColor,
             fontSize: 12,
           }}>
-          Rental
+          {t("home.listStadiumScreen.rental")}
         </Text>
         <Text
           style={{

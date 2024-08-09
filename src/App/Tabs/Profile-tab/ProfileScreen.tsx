@@ -4,6 +4,7 @@ import {
   View,
   StatusBar,
   TouchableOpacity,
+  useColorScheme,
 } from 'react-native';
 import {
   ContainerApp,
@@ -33,11 +34,20 @@ const ProfileScreen = ({ navigation }: any) => {
   const palette = usePalette();
   const { lightModeStatus } = useContext(AuthContext);
   const { t } = useTranslation(); // Use the useTranslation hook
-
+  const colorScheme=useColorScheme()
+  
   return (
     <ContainerApp palette={palette}>
       <StatusBar
-        barStyle={lightModeStatus === "light" ? "dark-content" : "light-content"}
+        barStyle={
+          lightModeStatus
+            ? lightModeStatus === 'light'
+              ? 'dark-content'
+              : 'light-content'
+            : colorScheme === 'light'
+            ? 'dark-content'
+            : 'light-content'
+        }
         backgroundColor={palette.darkBackgroundColor}
       />
       <TextHeader palette={palette}>{t('profile.profile.header')}</TextHeader>

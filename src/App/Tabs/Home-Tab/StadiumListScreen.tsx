@@ -20,6 +20,7 @@ import BackIconSVG from '../../../assets/Icons/svg/BackIconSVG';
 import StadiumListMapScreen from './StadiumListMapScreen';
 import StadiumCardMapComponent from '../../../Components/HomeComponents/StadiumCardMapComponent';
 import { Stadium } from '../../models/Stadium';
+import { useTranslation } from 'react-i18next';
 
 
 interface RouteParams {
@@ -33,7 +34,7 @@ interface StadiumListScreenProps {
 
 export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation, route}) => {
   const palette = usePalette();
-
+  const {t}=useTranslation()
   const {fieldDataPass} = route.params;
   const [showMap, setShowMap] = useState(true);
   const [filteredStadiums, setFilteredStadiums] = useState(fieldDataPass);
@@ -44,6 +45,7 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
     );
     setFilteredStadiums(filtered);
   };
+console.log("filteredStadiums",filteredStadiums[0]);
 
   return (
     <>
@@ -74,7 +76,7 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
                 ? palette.primaryColor
                 : palette.secondaryTextColor,
             }}>
-            {showMap ? 'Map' : 'List'}
+            {showMap ? t('home.listStadiumScreen.map') : t('home.listStadiumScreen.list')}
           </TextTypeOfRender>
         </TouchableOpacity>
       </HeaderListStadiumContainer>
@@ -99,7 +101,7 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
                 fontWeight: '600',
                 marginBottom: 10,
               }}>
-              {filteredStadiums.length} listings court
+              {filteredStadiums.length} {t('home.listStadiumScreen.listingCourt')}
             </Text>
             {filteredStadiums.map((stadium, i) => {
               return (
@@ -107,7 +109,7 @@ export const StadiumListScreen: React.FC<StadiumListScreenProps> = ({navigation,
                   key={i}
                   stadium={stadium}
                   btnClicked={() => {
-                    navigation.navigate('StadiumDetail', {stadium});
+                    navigation.navigate('StadiumDetail', {stadiumId:stadium.id});
                   }}
                 />
               );

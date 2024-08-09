@@ -4,6 +4,7 @@ import {Stadium} from '../../models/Stadium';
 import {Field} from '../../models/Field';
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import { handleRequests } from '../../../services/HandleRequests';
+import { useTranslation } from 'react-i18next';
 
 export const useHome = (navigation:any, route: any=false) => {
   const scrollViewRef = useRef<ScrollView>(null);
@@ -18,7 +19,7 @@ export const useHome = (navigation:any, route: any=false) => {
   const [query, setQuery] = useState('');
   const [region, setRegion] = useState("Geneva");
   const palette = usePalette();
-
+  const {t}=useTranslation()
   const searchFields = (query: string) => {
     if (query.length < 1) {
       setSearchResults({fields: [], stadiums: []});
@@ -137,7 +138,8 @@ export const useHome = (navigation:any, route: any=false) => {
     updateFieldData,
     region,
     setRegion,
-    searchResults
+    searchResults,
+    t
   };
 };
 

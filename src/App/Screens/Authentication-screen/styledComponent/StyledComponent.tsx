@@ -178,7 +178,7 @@ export const ResetPaswordStepsContainer = styled.View`
 `;
 
 export const HeaderStepText = styled.Text`
-  font-size: 28px;
+  ${fontSizeTitleScreen};
   color: white;
   font-weight: 600;
   margin-top: 20px;

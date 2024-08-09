@@ -19,6 +19,7 @@ import StarIconNotFilledIconSVG from '../../assets/Icons/svg/StarIconNotFilledIc
 import {User} from '../../App/models/User';
 import {formatDate} from '../../services/HelperFunctions';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
+import { useTranslation } from 'react-i18next';
 
 
 interface CardBookingComponentsProps {
@@ -41,6 +42,7 @@ const CardBookingComponents = ({
   removeBooking
 }: CardBookingComponentsProps) => {
   const palette=usePalette()
+  const {t}=useTranslation()
   const styles = StyleSheet.create({
     container: {
       padding: 0,
@@ -175,7 +177,7 @@ const CardBookingComponents = ({
         <View style={styles.cardHeader}>
           <Text style={styles.cardTitle}>{name}</Text>
           <TouchableOpacity onPress={navigation}>
-            <BookingDetailText palette={palette}>Detail</BookingDetailText>
+            <BookingDetailText palette={palette}>{t("booking.bookingScreen.detail")}</BookingDetailText>
           </TouchableOpacity>
         </View>
         <Text style={styles.cardDates}>{day}</Text>
@@ -183,7 +185,7 @@ const CardBookingComponents = ({
         <Text style={styles.cardPrice}>
 
           <TouchableOpacity onPress={showQrCode}>
-            <BookingDetailText palette={palette}>show qrcode</BookingDetailText>
+            <BookingDetailText palette={palette}>{t("booking.bookingScreen.showQr")}</BookingDetailText>
           </TouchableOpacity>
 
         </Text>

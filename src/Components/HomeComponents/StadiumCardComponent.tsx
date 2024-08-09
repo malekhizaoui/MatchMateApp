@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ActivityIndicator, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import {
   StadiumContainer,
   StadiumImage,
@@ -13,13 +13,13 @@ import { getStarsReviw } from '../../services/HelperFunctions';
 import { Feedback } from '../../App/models/Feedback';
 import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
-import { useTranslation } from 'react-i18next'; // Import useTranslation
+import { useTranslation } from 'react-i18next'; 
 
 interface StadiumCardComponentProps {
   titleDescription: string;
   backgroundImage?: string;
   btnClicked: () => void;
-  isLoading?: boolean; // Add isLoading prop
+  isLoading?: boolean; 
   feedback: Feedback[];
 }
 
@@ -34,11 +34,11 @@ const StadiumCardComponent = ({
   const { t } = useTranslation(); // Initialize useTranslation
 
   const defaultImage =
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpusOZAX4leJSqoJ6grIZPYdoDTgNfgKZXAA&s'; // Provide a valid default image URL
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpusOZAX4leJSqoJ6grIZPYdoDTgNfgKZXAA&s'; 
 
   return (
     <>
-      {isLoading ? ( // Render skeleton or placeholder when isLoading is true
+      {isLoading ? ( 
         <SkeletonStadiumCard />
       ) : (
         <>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 200, // Adjust height as needed
+    height: 200, 
   },
 });
 

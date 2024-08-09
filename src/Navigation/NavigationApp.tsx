@@ -1,19 +1,22 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, {useMemo, useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AuthContext, AuthContextProps } from '../services/Context/AuthContext';
+import {AuthContext, AuthContextProps} from '../services/Context/AuthContext';
 import UnauthenticatedStack from './Stacks/UnauthenticatedStack';
-import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  NavigationContainer,
+  createNavigationContainerRef,
+} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import BookingSectionStack from './Stacks/BookingSectionStack';
 import ProfileSectionStack from './Stacks/ProfileSectionStack';
 import HomeSectionStack from './Stacks/HomeSectionStack';
 import LeaderboardSectionStack from './Stacks/LeaderboardSectionStack';
-import { ScreenOptions } from './ScreenOptions';
+import {ScreenOptions} from './ScreenOptions';
 import LoadingScreen from '../App/Screens/Splach-screen/LoadingScreen';
-import { usePalette } from '../assets/color-palette/ThemeApp';
-import { StatusBar } from 'react-native';
-import { useTranslation } from 'react-i18next';
+import {usePalette} from '../assets/color-palette/ThemeApp';
+import {StatusBar, useColorScheme} from 'react-native';
+import {useTranslation} from 'react-i18next';
 
 function NavigationApp() {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +27,8 @@ function NavigationApp() {
   const [lightModeStatus, setLightModeStatus] = useState<string | null>(null);
   const palette = usePalette();
   const {i18n} = useTranslation();
-  const [language, setLanguage] = useState(null);
+  const [language, setLanguage] = useState<string | null>(null);
+  const colorScheme = useColorScheme();
 
   const retrieveUserSession = async () => {
     try {
@@ -48,15 +52,15 @@ function NavigationApp() {
 
   const getLanguage = async () => {
     try {
-      await AsyncStorage.getItem('language').then((res:any) => {
-        console.log("resss",res);
+      await AsyncStorage.getItem('language').then((res: any) => {
+        console.log('resss', res);
 
-        if(res){
-          setLanguage(res)
+        if (res) {
+          setLanguage(res);
           i18n.changeLanguage(res);
-
-        }else{
-          i18n.changeLanguage("en");
+        } else {
+          i18n.changeLanguage('en');
+          setLanguage('eng');
         }
 
         // setLanguage("en");
@@ -78,42 +82,44 @@ function NavigationApp() {
   useEffect(() => {
     retrieveUserSession();
     retrievePaletteApp();
-    getLanguage()
+    getLanguage();
   }, []);
 
-  const authContext: AuthContextProps = useMemo(() => ({
-    signIn: () => {
-      retrieveUserSession();
-      setSigned(false);
-    },
-    signOut: () => {
-      removeUserSession();
-    },
-    setBarColorCntxt: (color: string) => {
-      setBarColor(color);
-    },
-    setLightModeStatusContext: (mode: string |null) => {
-      setLightModeStatus(mode);
-
-    },
-    lightModeStatus,
-  }), [lightModeStatus]);
+  const authContext: AuthContextProps = useMemo(
+    () => ({
+      signIn: () => {
+        retrieveUserSession();
+        setSigned(false);
+      },
+      signOut: () => {
+        removeUserSession();
+      },
+      setBarColorCntxt: (color: string) => {
+        setBarColor(color);
+      },
+      setLightModeStatusContext: (mode: string | null) => {
+        setLightModeStatus(mode);
+      },
+      lightModeStatus,
+    }),
+    [lightModeStatus],
+  );
 
   const SplashApp = createNativeStackNavigator();
   const TabBarDourbia = createBottomTabNavigator();
   const ref = createNavigationContainerRef();
 
-  const TabNav = ({ routeName, authenticated = false }: any) => {
+  const TabNav = ({routeName, authenticated = false}: any) => {
     const hide = routeName === 'MatchDetail';
-  
+
     return (
       <TabBarDourbia.Navigator
         initialRouteName={authenticated ? 'Home' : 'ProfileTab'}
-        screenOptions={({ navigation, route }: any) => {
+        screenOptions={({navigation, route}: any) => {
           const palette = usePalette(); // Ensure this is up-to-date
-  
+
           return {
-            ...ScreenOptions({ navigation, route }),
+            ...ScreenOptions({navigation, route}),
             tabBarStyle: {
               backgroundColor: palette.lightBackgroundColor,
               padding: 10,
@@ -126,29 +132,50 @@ function NavigationApp() {
           };
         }}>
         <TabBarDourbia.Screen name="HomeTab" component={HomeSectionStack} />
-        <TabBarDourbia.Screen name="LeaderboardTab" component={LeaderboardSectionStack} />
+        <TabBarDourbia.Screen
+          name="LeaderboardTab"
+          component={LeaderboardSectionStack}
+        />
         {authenticated ? (
           <>
-            <TabBarDourbia.Screen name="BookingTab" component={BookingSectionStack} />
-            <TabBarDourbia.Screen name="ProfileTab" component={ProfileSectionStack} />
+            <TabBarDourbia.Screen
+              name="BookingTab"
+              component={BookingSectionStack}
+            />
+            <TabBarDourbia.Screen
+              name="ProfileTab"
+              component={ProfileSectionStack}
+            />
           </>
         ) : (
-          <TabBarDourbia.Screen name="ProfileTab" component={UnauthenticatedStack} />
+          <TabBarDourbia.Screen
+            name="ProfileTab"
+            component={UnauthenticatedStack}
+          />
         )}
       </TabBarDourbia.Navigator>
     );
   };
-  
 
   if (!language) {
     return <LoadingScreen />;
   }
-console.log("lightModeStatus",lightModeStatus);
+  console.log('lightModeStatus', !!lightModeStatus);
+  console.log('colorScheme', colorScheme);
 
   return (
     <AuthContext.Provider value={authContext}>
-      <StatusBar 
-        barStyle={lightModeStatus==="light"?"dark-content":"light-content"}
+      <StatusBar
+      
+        barStyle={
+          lightModeStatus
+            ? lightModeStatus === 'light'
+              ? 'dark-content'
+              : 'light-content'
+            : colorScheme === 'light'
+            ? 'dark-content'
+            : 'light-content'
+        }
         backgroundColor={palette.darkBackgroundColor}
       />
       <NavigationContainer>

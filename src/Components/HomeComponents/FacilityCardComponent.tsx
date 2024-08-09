@@ -15,34 +15,36 @@ import BasketBallCourtIconSVG from '../../assets/Icons/svg/BasketBallCourtIconSV
 import ShowerIconSVG from '../../assets/Icons/svg/ShowerIconSVG';
 import LightningIconSVG from '../../assets/Icons/svg/LightningIconSVG';
 import { usePalette } from '../../assets/color-palette/ThemeApp';
+import { Stadium } from '../../App/models/Stadium';
 interface FacilityCardComponentProps {
-//   stadium:any;
+  stadium:Stadium| null;
 //   btnClicked: () => void;
 }
 
 const FacilityCardComponent = ({
 //   stadium,
 //   btnClicked,
+stadium
 }: FacilityCardComponentProps) => {
   const palette=usePalette()
 
   return (
     <AttributContainer>
-    <FacilityContentContainer palette={palette}>
+    {stadium?.field.fieldName==="Basketball"&&<FacilityContentContainer palette={palette}>
       <BasketBallHoopIconSVG color={palette.primaryColor} size={"35"}  />
       <TextFacility palette={palette}>2 Hoops</TextFacility>
-    </FacilityContentContainer>
+    </FacilityContentContainer>}
     <FacilityContentContainer palette={palette}>
       <BasketBallCourtIconSVG color={palette.primaryColor} size={"35"}/>
       <TextFacility palette={palette}>1 Court</TextFacility>
     </FacilityContentContainer>
     <FacilityContentContainer palette={palette}>
       <ShowerIconSVG color={palette.primaryColor} size={'35'} />
-      <TextFacility palette={palette}>None</TextFacility>
+      <TextFacility palette={palette}>{!stadium?.hasShower&&"none"}</TextFacility>
     </FacilityContentContainer>
     <FacilityContentContainer palette={palette} >
       <LightningIconSVG color={palette.primaryColor} size={'35'} />
-      <TextFacility palette={palette}>Lightning</TextFacility>
+      <TextFacility palette={palette}>{!stadium?.hasShower?"none":"Lightning"}</TextFacility>
     </FacilityContentContainer>
   </AttributContainer>
   );

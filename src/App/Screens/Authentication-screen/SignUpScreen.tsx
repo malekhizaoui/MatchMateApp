@@ -1,54 +1,73 @@
-import { StatusBar, TouchableOpacity, View } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
+import { StatusBar, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+
 import {
   ContainerApp,
   ContainerScreen,
-  HeaderRegisterScreen,
-  HeaderText,
   ContainerForm,
-  SeperateLine,
+  HeaderConnexionScreen,
+  LogoAppStyle,
+  TextpasswordForgotten,
+  ContainerDivideText,
+  LineStyle,
+  HeaderTitleText,
+  TextDivide,
+  LogoApp,
 } from './styledComponent/StyledComponent';
+
 import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthComponent';
 import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import { InputAuthComponent } from '../../../Components/AuthComponents/InputAuthComponent';
 import useAuth from './useAuth/useAuth';
-import UserNameIconSVG from '../../../assets/Icons/svg/UsernameIconSVG';
 import PasswordIconSVG from '../../../assets/Icons/svg/PasswordIconSVG';
 import MailIconSVG from '../../../assets/Icons/svg/MailIconSVG';
 import NavigateBack from '../../../Components/NavigateBack';
-import { useTranslation } from 'react-i18next';
-import AgeIconSVG from '../../../assets/Icons/svg/AgeIconSV';
+import { AuthContext } from '../../../services/Context/AuthContext';
 
-const SignUpScreen = ({ navigation }: any) => {
+const SignInScreen = ({ navigation }: any) => {
+  // Get color palette for theming
   const palette = usePalette();
-  const { t, i18n } = useTranslation();
+  
+  // Determine the color scheme (light or dark)
+  const colorScheme = useColorScheme();
+  
+  // Translation hook for internationalization
+  const { t } = useTranslation();
+  
+  // Access light mode status from context
+  const { lightModeStatus } = useContext(AuthContext);
 
-  const {
-    email,
-    setEmail,
-    password,
-    setPassword,
-    firstName,
-    setFirstName,
-    lastName,
-    setLastName,
-    age,
-    setAge,
-    registerUser,
-    loading
-  } = useAuth(navigation);
+  // Destructure authentication-related functions and states from the custom hook
+  const { email, setEmail, password, setPassword, loginUser, loading } = useAuth(navigation);
 
   return (
     <ContainerApp palette={palette}>
       <ContainerScreen showsVerticalScrollIndicator={false}>
-        <HeaderRegisterScreen>
-          <View style={{ marginBottom: 20 }}>
-            <NavigateBack navigation={navigation} />
-          </View>
-          <HeaderText palette={palette}>{t("authentication.signUp")}</HeaderText>
-          <HeaderText palette={palette}>{t("authentication.quickAndEasy")}</HeaderText>
-        </HeaderRegisterScreen>
+        <View>
+          {/* NavigateBack component for going back to the previous screen */}
+          <NavigateBack navigation={navigation} />
+        </View>
+
+        <HeaderConnexionScreen>
+          {/* Display logo with conditional source based on color scheme and light mode */}
+          <LogoApp
+            source={
+              !lightModeStatus
+                ? colorScheme === 'light'
+                  ? require('../../../assets/Logos/MatchMate.png')
+                  : require('../../../assets/Logos/MatchMateDarkWhite.png')
+                : lightModeStatus === 'light'
+                ? require('../../../assets/Logos/MatchMate.png')
+                : require('../../../assets/Logos/MatchMateDarkWhite.png')
+            }
+          />
+          {/* Display header title */}
+          <HeaderTitleText palette={palette}>{t("authentication.signInToMatchMate")}</HeaderTitleText>
+        </HeaderConnexionScreen>
+
         <ContainerForm>
+          {/* Input field for email */}
           <InputAuthComponent
             placeholder={t("authentication.emailPlaceholder")}
             inputName={t("authentication.emailAddress")}
@@ -56,6 +75,8 @@ const SignUpScreen = ({ navigation }: any) => {
             valueInput={email}
             iconComponent={<MailIconSVG color={palette.primaryColor} />}
           />
+          
+          {/* Input field for password */}
           <InputAuthComponent
             placeholder={t("authentication.passwordPlaceholder")}
             inputName={t("authentication.password")}
@@ -64,35 +85,36 @@ const SignUpScreen = ({ navigation }: any) => {
             secureTextEntry={true}
             iconComponent={<PasswordIconSVG color={palette.primaryColor} />}
           />
-          <SeperateLine />
-          <InputAuthComponent
-            placeholder={t("authentication.firstName")}
-            inputName={t("authentication.firstName")}
-            setValue={setFirstName}
-            valueInput={firstName}
-            iconComponent={<UserNameIconSVG color={palette.primaryColor} />}
+          
+          {/* Sign In button */}
+          <ButtonAuthComponent
+            btnText={t("authentication.signIn")}
+            backgroundColor={palette.primaryColor}
+            btnTextColor={palette.whiteColor}
+            btnClicked={loginUser}
+            iconComponent={''}
+            loading={loading}
           />
-          <InputAuthComponent
-            placeholder={t("authentication.lastName")}
-            inputName={t("authentication.lastName")}
-            setValue={setLastName}
-            valueInput={lastName}
-            iconComponent={<UserNameIconSVG color={palette.primaryColor} />}
-          />
-          <InputAuthComponent
-            placeholder={t("authentication.age")}
-            inputName={t("authentication.age")}
-            setValue={setAge}
-            valueInput={age}
-            iconComponent={<AgeIconSVG color={palette.primaryColor} />}
-          />
+          
+          {/* Link to password forgotten screen */}
+          <TouchableOpacity onPress={() => { navigation.navigate('PasswordForgotten') }}>
+            <TextpasswordForgotten palette={palette}>{t("authentication.forgotPassword")}</TextpasswordForgotten>
+          </TouchableOpacity>
+          
+          {/* Divider with text */}
+          <ContainerDivideText>
+            <LineStyle palette={palette}></LineStyle>
+            <TextDivide palette={palette}>{t("authentication.or")}</TextDivide>
+            <LineStyle palette={palette}></LineStyle>
+          </ContainerDivideText>
+          
+          {/* Button to navigate to the sign-up screen */}
           <ButtonAuthComponent
             btnText={t("authentication.createAccount")}
             backgroundColor={palette.primaryColor}
             btnTextColor={palette.whiteColor}
-            btnClicked={registerUser}
-            iconComponent={""}
-            loading={loading}
+            btnClicked={() => { navigation.navigate('Signup'); }}
+            iconComponent={''}
           />
         </ContainerForm>
       </ContainerScreen>
@@ -100,4 +122,4 @@ const SignUpScreen = ({ navigation }: any) => {
   );
 };
 
-export default SignUpScreen;
+export default SignInScreen;

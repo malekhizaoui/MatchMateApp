@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react';
+import { useCallback, useState, useRef, useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { Animated, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { ContainerApp, DaysContainer, ImageConainer, ImagesContent } from './StyledComponent/StyledComponent';
@@ -14,16 +14,16 @@ import { handleRequests } from '../../../services/HandleRequests';
 import { usePalette } from '../../../assets/color-palette/ThemeApp';
 import { useTranslation } from 'react-i18next';
 
-const days = getWeekDaysInfo();
+const day = getWeekDaysInfo();
 export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
-    const [selectedDay, setSelectedDay] = useState(days[0]);
+    const [selectedDay, setSelectedDay] = useState(day[0]);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [stadium, setStadium] = useState<Stadium | null>(null);
     const fadeAnim = useRef(new Animated.Value(1)).current;
     const { stadiumId } = route.params;
     const palette = usePalette();
     const { t } = useTranslation();
-
+    const [days,setDays]=useState(day)
     const retrieveTimeSlots = async () => {
         try {
             const res = await handleRequests('get', `stadium/${stadiumId}`);
@@ -38,7 +38,10 @@ export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
             retrieveTimeSlots();
         }, [currentImageIndex, fadeAnim, selectedDay]),
     );
-
+    useEffect(()=>{
+        const updateddays=getWeekDaysInfo()
+        setDays(updateddays)
+    },[])
     return (
         <ContainerApp palette={palette}>
             <NavigateBack
