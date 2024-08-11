@@ -23,7 +23,7 @@ Follow these steps to set up and start the project:
 1. Clone the repository:
     ```bash
     git clone https://github.com/malekhizaoui/MatchMateApp.git
-    cd MatchMateApp
+    cd matchmateapp
     ```
 
 2. Install dependencies using yarn:
@@ -31,14 +31,28 @@ Follow these steps to set up and start the project:
     yarn
     ```
 
-3. Start the development server:
+3. Configure the `BaseUrl`:
+    - Navigate to the `src/services/BaseUrl/index.tsx` file.
+    - Update the `BaseUrl` variable with your local IP address:
+      ```typescript
+      let BaseUrl = '';
+
+      {
+        Platform.OS == 'android'
+          ? (BaseUrl = 'http://[provided address]:3009/api/v1')
+          : (BaseUrl = 'http://[provided address]:3009/api/v1');
+      }
+      ```
+    - To find your local IP address:
+      1. Open Command Prompt (cmd) and type `ipconfig`.
+      2. Look for the `IPv4 Address` in the output and replace `[provided address]` with this address in the `BaseUrl` configuration.
+
+4. Start the development server:
     ```bash
     yarn start
     ```
 
-4. To run the app on an Android emulator or device:
-## Running on a virtual Android Device
-
+5. To run the app on an Android emulator or device:
     - Make sure you have Android Studio installed on your machine.
     - Press `a` in the terminal where the development server is running to launch the app on the Android emulator or connected Android device.
 
@@ -47,7 +61,7 @@ Follow these steps to set up and start the project:
 To run the app on your Android smartphone, follow these steps:
 
 1. Open Developer Mode on your Android device:
-    - Go to `Settings` > `About phone` and tap on `Build number` multiple times ( 7 times ) until Developer Mode is activated.
+    - Go to `Settings` > `About phone` and tap on `Build number` multiple times until Developer Mode is activated.
 
 2. Enable Developer Mode and configure it:
     - Go to `Settings` > `System` > `Developer options`.
@@ -75,6 +89,6 @@ To run the app on your Android smartphone, follow these steps:
 
 ## Contributors
 
-- Malek Habib Hizaoui
+    - Malek habib hizaoui
 
 Feel free to contribute or report issues! Happy coding!
