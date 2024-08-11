@@ -53,6 +53,8 @@ Follow these steps to set up and start the project:
     ```
 
 5. To run the app on an Android emulator or device:
+## Running on a Virtual Android Device
+
     - Make sure you have Android Studio installed on your machine.
     - Press `a` in the terminal where the development server is running to launch the app on the Android emulator or connected Android device.
 
@@ -86,7 +88,14 @@ To run the app on your Android smartphone, follow these steps:
     ```bash
     yarn start
     ```
+## Testing the App
 
+For better testing, you can use the following account:
+
+- **Email:** hizaoui.malek.habib@gmail.com
+- **Password:** 123456789
+
+Use these credentials to log in and explore the app's features.
 ## Contributors
 
     - Malek habib hizaoui
