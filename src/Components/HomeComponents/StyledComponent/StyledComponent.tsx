@@ -215,7 +215,7 @@ export const LineSperatorSearchBar = styled.View<PaletteProps>`
 `;
 
 export const TextInputStyle = styled.TextInput`
-  color: red;
+  color: grey;
 `;
 
 // ImageListStadiumComponent Design

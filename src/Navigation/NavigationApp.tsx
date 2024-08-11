@@ -126,7 +126,7 @@ function NavigationApp() {
               height: '8%',
               width: '100%',
               alignSelf: 'center',
-              borderColor: palette.blackColor,
+              borderColor: palette.primaryTextColor,
               borderWidth: 1,
             },
           };

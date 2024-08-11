@@ -9,4 +9,5 @@ let BaseUrl = '';
 }
 // 192.168.1.112
 // 16.171.175.193
+// 172.20.10.2
 export default BaseUrl;

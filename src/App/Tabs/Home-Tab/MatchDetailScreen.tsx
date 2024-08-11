@@ -25,12 +25,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { handleRequests } from '../../../services/HandleRequests';
 import ModalReviewComponent from '../../../Components/HomeComponents/ModalReviewComponent';
 import ModalQrCodeGenerateComponent from '../../../Components/HomeComponents/ModalQrCodeGenerateComponent';
+import { useTranslation } from 'react-i18next';
 
 
 export const MatchDetailScreen = ({ navigation, route }: any) => {
   const { stadium, timeSlot } = route.params;
   const palette = usePalette();
-
+  const {t}=useTranslation()
   const [qrCode, setQrCode] = useState<string>(""); // State to store the QR code
   const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
   const [loading,setLoading]=useState(false)
@@ -114,7 +115,7 @@ export const MatchDetailScreen = ({ navigation, route }: any) => {
           colorbtn={palette.primaryColor}
           event={joinTeam}
           radius={20}
-          titlebtn="Join Team"
+          titlebtn={t('home.matchDetailScreen.joinTeam')}
           widthPrimaryBtn={'95%'}
         />
         {modalVisible && (

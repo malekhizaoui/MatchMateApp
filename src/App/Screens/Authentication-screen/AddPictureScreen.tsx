@@ -1,4 +1,4 @@
-import {View } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import {
   ContainerPass,
@@ -14,29 +14,41 @@ import ButtonAuthComponent from '../../../Components/AuthComponents/ButtonAuthCo
 import useAuth from './useAuth/useAuth';
 import { useTranslation } from 'react-i18next';
 
-const AddPictureScreen = ({ navigation, route }:any) => {
+// Functional component for the AddPictureScreen
+const AddPictureScreen = ({ navigation, route }: any) => {
+  // Retrieve color palette and translation functions
   const palette = usePalette();
   const { handleCameraLaunch, openImagePicker } = useAuth(navigation, route);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
+    // Main container with styling
     <ContainerPass palette={palette}>
       <ContainerScreen showsVerticalScrollIndicator={false}>
+        {/* Back navigation button */}
         <View style={{ marginTop: 20 }}>
           <NavigateBack navigation={navigation} />
         </View>
+
+        {/* Header section with profile image and title */}
         <HeaderConnexionScreen>
           <ImageProfile
+            // Placeholder profile image
             source={{ uri: 'https://images.alphacoders.com/752/752287.jpg' }}
           />
           <HeaderStepText>
+            {/* Translated text for choosing a profile picture */}
             {t("authentication.chooseProfilePicture")}
           </HeaderStepText>
         </HeaderConnexionScreen>
 
+        {/* Description text below the header */}
         <TextAddPicture palette={palette}>
+          {/* Translated text for community trust and safety */}
           {t("authentication.communityTrustSafety")}
         </TextAddPicture>
+
+        {/* Button to take a selfie */}
         <ButtonAuthComponent
           btnText={t("authentication.takeSelfie")}
           backgroundColor={palette.whiteColor}
@@ -44,6 +56,8 @@ const AddPictureScreen = ({ navigation, route }:any) => {
           btnClicked={handleCameraLaunch}
           iconComponent={''}
         />
+
+        {/* Button to choose a picture from gallery */}
         <ButtonAuthComponent
           btnText={t("authentication.choosePicture")}
           backgroundColor={palette.whiteColor}
@@ -51,11 +65,14 @@ const AddPictureScreen = ({ navigation, route }:any) => {
           btnClicked={openImagePicker}
           iconComponent={''}
         />
+
+        {/* Button to skip the profile picture step */}
         <ButtonAuthComponent
           btnText={t("authentication.skip")}
           backgroundColor={palette.secondaryColor}
           btnTextColor={palette.whiteColor}
           btnClicked={() => {
+            // Navigate to Signin screen
             navigation.navigate('Signin');
           }}
           iconComponent={''}

@@ -77,8 +77,15 @@ export const useAuth = (navigation: any, route: any = false) => {
   const registerUser = async () => {
     try {
       const data = await handleApiRequest('post', 'register', { email, password, firstName, lastName, age });
-      navigation.navigate('CodeVerification', { userId: data.user.id, codeVerification: data.user.code_verification });
-      showToast('authentication.messages.confirmationCodeSent', 'custom');
+      console.log("data",data);
+        if(data.sucess){
+          navigation.navigate('CodeVerification', { userId: data.user.id, codeVerification: data.user.code_verification });
+          showToast('authentication.messages.confirmationCodeSent', 'custom');
+        }else{
+          showToast('authentication.errors.invalidEmailPassword', 'custom');
+
+        }
+
     } catch (error) {
       console.error('Registration error:', error);
     }

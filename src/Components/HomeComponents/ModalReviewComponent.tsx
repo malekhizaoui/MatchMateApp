@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Overlay,
   CenteredView,
@@ -17,11 +17,11 @@ import {
 import StarIconNotFilledIconSVG from '../../assets/Icons/svg/StarIconNotFilledIconSVG';
 import StarIconSVG from '../../assets/Icons/svg/StarIconSVG';
 import CloseIconSVG from '../../assets/Icons/svg/CloseIconSVG';
-import { handleRequests } from '../../services/HandleRequests';
+import {handleRequests} from '../../services/HandleRequests';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useToast } from 'react-native-toast-notifications';
-import { usePalette } from '../../assets/color-palette/ThemeApp';
-import { useTranslation } from 'react-i18next'; // Import useTranslation
+import {useToast} from 'react-native-toast-notifications';
+import {usePalette} from '../../assets/color-palette/ThemeApp';
+import {useTranslation} from 'react-i18next'; // Import useTranslation
 
 interface ModalReviewComponentProps {
   modalVisible: boolean;
@@ -35,7 +35,7 @@ const ModalReviewComponent = ({
   stadiumId,
 }: ModalReviewComponentProps) => {
   const palette = usePalette();
-  const { t } = useTranslation(); // Initialize useTranslation
+  const {t} = useTranslation(); // Initialize useTranslation
 
   const toast = useToast();
   const [rating, setRating] = useState(0);
@@ -44,11 +44,30 @@ const ModalReviewComponent = ({
   const addFeedback = async () => {
     const userId = await AsyncStorage.getItem('userId');
     try {
-      handleRequests('post', `feedback/${userId}/${stadiumId}`, {
-        stars: rating,
-        comment: reviewText,
-      });
-      toast.show(t('modalReview.successMessage'), { type: 'success', placement: 'center', duration: 4000, style: { backgroundColor: palette.primaryColor } });
+      const res = await handleRequests(
+        'post',
+        `feedback/${userId}/${stadiumId}`,
+        {
+          stars: rating,
+          comment: reviewText,
+        },
+      );
+      console.log('resFEDBACKKK', res.data.success);
+      if (res.data.success) {
+        toast.show(t('profile.reviews.modalReview.successMessage'), {
+          type: 'success',
+          placement: 'center',
+          duration: 4000,
+          style: {backgroundColor: palette.primaryColor},
+        });
+      } else {
+        toast.show(res.data.message), {
+          type: 'danger',
+          placement: 'center',
+          duration: 4000,
+          style: {backgroundColor: palette.primaryColor},
+        };
+      }
       setModalVisible(false);
     } catch (error) {
       console.log('err', error);
@@ -91,24 +110,23 @@ const ModalReviewComponent = ({
         }}>
         <CenteredView>
           <ModalView palette={palette}>
-            <CloseButton palette={palette} onPress={() => setModalVisible(false)}>
+            <CloseButton
+              palette={palette}
+              onPress={() => setModalVisible(false)}>
               <CloseIconSVG />
             </CloseButton>
             <TextReviewQs palette={palette}>
-              {t('modalReview.selectStarsAndTags')}
+              {t('profile.reviews.modalReview.selectStarsAndTags')}
             </TextReviewQs>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               {[1, 2, 3, 4, 5].map(star => (
                 <TouchableOpacity
                   key={star}
                   onPress={() => setRating(star)}
                   activeOpacity={0.7}
-                  style={{ marginRight: 5, marginTop: 10 }}>
+                  style={{marginRight: 5, marginTop: 10}}>
                   {star <= rating ? (
-                    <StarIconSVG
-                      color={palette.primaryColor}
-                      size="35"
-                    />
+                    <StarIconSVG color={palette.primaryColor} size="35" />
                   ) : (
                     <StarIconNotFilledIconSVG
                       color={palette.primaryColor}
@@ -121,18 +139,20 @@ const ModalReviewComponent = ({
             <View style={styles.inputContainer}>
               <TextInput
                 placeholderTextColor={palette.secondaryTextColor}
-                placeholder={t('modalReview.writeReview')}
+                placeholder={t('profile.reviews.modalReview.writeReview')}
                 value={reviewText}
                 onChangeText={setReviewText}
                 multiline
-                style={[styles.input, { textAlignVertical: 'top' }]}
+                style={[styles.input, {textAlignVertical: 'top'}]}
               />
             </View>
             <TouchableOpacity
               style={styles.button}
               onPress={addFeedback}
               activeOpacity={0.7}>
-              <Text style={{ color: palette.whiteColor }}>{t('modalReview.submit')}</Text>
+              <Text style={{color: palette.whiteColor}}>
+                {t('profile.reviews.modalReview.submit')}
+              </Text>
             </TouchableOpacity>
           </ModalView>
         </CenteredView>

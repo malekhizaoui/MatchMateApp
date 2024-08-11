@@ -75,6 +75,7 @@ console.log("filteredStadiums",filteredStadiums[0]);
               color: showMap
                 ? palette.primaryColor
                 : palette.secondaryTextColor,
+                width:45
             }}>
             {showMap ? t('home.listStadiumScreen.map') : t('home.listStadiumScreen.list')}
           </TextTypeOfRender>

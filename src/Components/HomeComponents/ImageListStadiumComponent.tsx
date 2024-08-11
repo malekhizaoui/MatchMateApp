@@ -103,7 +103,7 @@ const ImageListStadiumComponent = ({
             fontSize: 12,
             fontWeight: '600',
           }}>
-          150 CHF
+          {stadium.price} CHF
         </Text>
       </TouchableOpacity>
     </ImageContainer>

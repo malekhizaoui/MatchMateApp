@@ -19,6 +19,7 @@ interface StadiumCardMapComponentProps {
 
 const StadiumCardMapComponent = ({stadium,navigation,index,feedback}: StadiumCardMapComponentProps) => {
   const palette=usePalette()
+  const starsReview = getStarsReviw(feedback);
 
   return (
     <StadiumCardContainer palette={palette} onPress={()=>{navigation.navigate('StadiumDetail',{stadiumId:stadium.id})}}>
@@ -28,10 +29,10 @@ const StadiumCardMapComponent = ({stadium,navigation,index,feedback}: StadiumCar
         }}></ImageContainerCard>
         <Text style={{position:"absolute",color:"white",fontSize:20,fontWeight:"700",zIndex:999,top:"40%" }}>{index}-{stadium.stadiumName}</Text>
         <View style={{position:"absolute",width:"100%",height:"100%", backgroundColor:'rgba(38, 38, 38, 0.3)',borderRadius:20}}></View>
-        <StarsReviewContainer palette={palette} >
-            <StarIconSVG color='yellow' size='17'/>
-            <Text style={{color: palette.whiteColor}}>{getStarsReviw(feedback)}</Text>
-            </StarsReviewContainer>
+        {starsReview!=="NaN"&&<StarsReviewContainer palette={palette}>
+              <StarIconSVG color='yellow' size='17' />
+              <Text style={{ color: palette.whiteColor }}>{starsReview}</Text>
+            </StarsReviewContainer>}
     </StadiumCardContainer>
   );
 };

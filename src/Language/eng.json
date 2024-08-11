@@ -1,16 +1,16 @@
 {
     "translation": {
-        "tabs":{
-            "home":"Home",
-            "leaderboard":"Leaderboard",
-             "booking":"Booking",
-             "profile":"Profile"
+        "tabs": {
+            "home": "Home",
+            "leaderboard": "Leaderboard",
+            "booking": "Booking",
+            "profile": "Profile"
         },
         "authentication": {
             "welcome": "Welcome to MatchMate",
             "signInWithGoogle": "Sign in with Google",
             "signInWithMatchMate": "Sign in with MatchMate",
-            "signUpOrSignInWith": "Sign up or sign in using one of these login methods",
+            "signUpOrSignInWith": "Sign up or sign in with one of these methods",
             "signInToMatchMate": "Sign in to MatchMate",
             "emailPlaceholder": "e.g., email@example.com",
             "emailAddress": "Email Address",
@@ -28,33 +28,33 @@
             "newPassword": "New Password",
             "continue": "Continue",
             "passwordChanged": "Your password has been successfully changed!",
-            "connectWithNewPassword": "Please sign in now with your new password",
+            "connectWithNewPassword": "Please sign in with your new password now",
             "confirmationCode": "Confirmation Code",
             "verificationMailSent": "An email has been sent to the following address",
-            "verifyEmailPrompt": "If you haven't received anything, please go back and verify your email address",
+            "verifyEmailPrompt": "If you haven't received anything, please go back and check your email address",
             "validate": "Validate",
             "chooseProfilePicture": "Choose a nice profile picture or take a selfie!",
-            "communityTrustSafety": "MatchMate is primarily a community where trust and safety are paramount in interactions. Therefore, we want all members to be identified by a profile picture!",
+            "communityTrustSafety": "MatchMate is primarily a community where trust and safety are paramount. Therefore, we want all members to be identified by a profile picture!",
             "takeSelfie": "Take a Selfie",
             "choosePicture": "Choose a Picture",
             "skip": "Skip",
             "step1of2": "Step 1 of 2",
             "step2of2": "Step 2 of 2",
             "enterYourInfo": "Please enter your information:",
-            "confirmationCodeDescription": "You will receive a confirmation code by email to recover your account.",
+            "confirmationCodeDescription": "You will receive a confirmation code via email to restore your account.",
             "enterNewPassword": "Please enter your new password:",
-            "newPasswordDescription": "Once you have created a new password, you will regain access to your account.",
+            "newPasswordDescription": "Once you create a new password, you will regain access to your account.",
             "errors": {
-                "invalidEmailPassword": "Email or Password is invalid",
-                "enterEmailPassword": "You should type your email and password please",
-                "verificationCodeWrong": "Verification code is wrong",
-                "passwordsDontMatch": "Your passwords don't match"
-              },
-              "messages": {
+                "invalidEmailPassword": "Email or password is invalid",
+                "enterEmailPassword": "Please enter your email and password",
+                "verificationCodeWrong": "The confirmation code is incorrect",
+                "passwordsDontMatch": "Your passwords do not match"
+            },
+            "messages": {
                 "confirmationCodeSent": "A confirmation code has been sent to your email.",
-                "accountCreated": "Your account is successfully created.",
+                "accountCreated": "Your account has been successfully created.",
                 "passwordChanged": "Your password has been successfully changed"
-              }
+            }
         },
         "profile": {
             "profile": {
@@ -77,52 +77,58 @@
             },
             "settings": {
                 "header": "Settings",
-                "lightModes": "Light Modes",
+                "lightModes": "Brightness Modes",
                 "lightMode": "Light Mode",
                 "languages": "Languages",
-                "aboutApp": "About App",
+                "aboutApp": "About the App",
                 "darkMode": "Dark Mode",
                 "automatic": "Automatic",
                 "languageOptions": {
                     "french": "French",
                     "english": "English",
-                    "italian": "italian",
-                    "spanish": "spanish",
-
+                    "italian": "Italian",
+                    "spanish": "Spanish",
+                    "german": "German",
                     "automatic": "Automatic"
                 }
+                
             },
             "reviews": {
                 "header": "Your Reviews",
                 "readyForReview": "Ready for Review",
                 "reviewed": "Reviewed",
                 "noReviews": "No reviews available.",
-                "noReviewsDetail": "When you review a stadium, it will appear here. Start exploring and reviewing stadiums!",
+                "noReviewsDetail": "When you rate a stadium, it will appear here. Explore stadiums and leave reviews!",
                 "exploreStadiums": "Explore Stadiums",
                 "leaveReview": "Leave a Review",
-                "peopleWaiting": "People are waiting for your review"
-                
+                "peopleWaiting": "People are waiting for your review",
+                "modalReview": {
+                    "successMessage": "Your feedback has been successfully added",
+                    "selectStarsAndTags": "Select stars and tags to give a quick review.",
+                    "writeReview": "Write your review here...",
+                    "submit": "Submit"
+                }
             },
             "gameHistory": {
                 "header": "Game History",
-                "noGameHistory": "No game history yet",
-                "noGameHistoryDetail": "You haven't played any games yet. Start exploring our stadiums and book your favorite slot now!",
+                "noGameHistory": "No Game History Yet",
+                "noGameHistoryDetail": "You haven't played any games yet. Explore our stadiums and book your favorite time slot now!",
                 "exploreStadiums": "Explore Stadiums",
                 "moreDetail": "More details..."
             },
             "aboutScreen": {
-                "headerTitle": "About App",
+                "headerTitle": "About the App",
                 "appName": "MatchMate",
-                "description": "MatchMate is your ultimate companion for finding and joining sports activities in your area. Whether you're into basketball, football, or volleyball, MatchMate connects you with local games and teams. Book stadium time slots, generate QR codes for entry, and track your sports activities all in one place.",
+                "description": "MatchMate is your ultimate companion to find and participate in sports activities near you. Whether you want to play basketball, football, or volleyball, MatchMate connects you with local games and teams. Book stadium times, create QR codes for entry, and track your sports activities all in one place.",
                 "keyFeaturesTitle": "Key Features:",
                 "features": {
-                    "joinTeams": "• Join Teams and Play Sports: Find and join teams to play basketball, football, volleyball, and more with people in your locality.",
-                    "bookSlots": "• Book Stadium Time Slots: Easily book available time slots at local stadiums directly through the app.",
-                    "generateQR": "• Generate QR Codes: Get a QR code for your bookings to streamline your stadium entry process.",
-                    "profileManagement": "• Profile Management: View and manage your profile, including your personal details and sports preferences.",
-                    "gameHistory": "• Game History: Keep track of all the games you've played, with detailed history and stats.",
-                    "userReviews": "• User Reviews: Read and write reviews for players and games, helping to build a trusted community.",
-                    "leaderboard": "• Leaderboard: See who the most active players are with our leaderboard, showcasing the top players based on games played."
+                    "joinTeams": "• Join teams and play sports: Find and join teams to play basketball, football, volleyball, and more with people near you.",
+                    "bookSlots": "• Book stadium slots: Book available time slots in local stadiums directly through the app.",
+                    "generateQR": "• Generate QR codes: Create a QR code for your bookings to facilitate entry into the stadium.",
+                    "profileManagement": "• Profile management: View and manage your profile, including your personal information and sports preferences.",
+                    "gameHistory": "• Game history: Track all the games you have played with detailed history and statistics.",
+                    "userReviews": "• User reviews: Read and write reviews for players and games to build a trusted community.",
+                    "leaderboard": "• Leaderboard: See who the most active players are with our leaderboard showing the top players based on games played."
                 },
                 "contactUsTitle": "Contact Us:",
                 "contactUs": "For support, feedback, or inquiries, please contact us at:",
@@ -148,13 +154,13 @@
             "bookingScreen": {
                 "title": "Stadium Booking",
                 "noBookingsTitle": "No Bookings Yet",
-                "noBookingsMessage": "You haven't made any bookings yet or the time has expired. Start exploring our stadiums and book your favorite slot now!",
+                "noBookingsMessage": "You haven't made any bookings yet or the time has expired. Explore our stadiums and book your favorite time slot now!",
                 "exploreButton": "Explore Stadiums",
-                "showQr":"Show qrCode",
-                "detail":"Detail"
+                "showQr": "Show QR Code",
+                "detail": "Detail"
             },
             "bookingDetailScreen": {
-                "headerTitle": "Booking Detail",
+                "headerTitle": "Booking Details",
                 "cancelButton": "Cancel Booking",
                 "loading": "Loading..."
             }
@@ -166,21 +172,21 @@
                 "discoverAll": "Discover All",
                 "recommended": "Recommended",
                 "searchPlaceholder": "Search...",
-                "nearCourt": "Near the Court",
-                "Lausanne":"Lausanne",
-                "geneva":"Geneva"
+                "nearCourt": "Near Court",
+                "Lausanne": "Lausanne",
+                "geneva": "Geneva"
             },
             "stadiumDetail": {
                 "headerTitle": "Stadium Details",
                 "facilities": "Facilities",
                 "reviews": "Reviews",
                 "addReview": "Add a Review",
-                "noReviews": "There are no reviews to display",
+                "noReviews": "No Reviews Available",
                 "checkAvailability": "Check Availability",
-                "show_map": "View Map",
-                "stadium_description": "Aspen is as close as it gets to a fairy tale alpine town in America. The possibilities for choosing your own adventure: skiing, hiking, dining, shopping and....",
-                "read_more": "Read more",
-                "selectStarsAndTags": "Select stars and tags to leave a quick review.",
+                "show_map": "Show Map",
+                "stadium_description": "Aspen is as close as it gets in America. The possibilities to choose your own adventure: skiing, hiking, dining, shopping, and...",
+                "read_more": "Read More",
+                "selectStarsAndTags": "Select stars and tags to give a quick review.",
                 "writeReview": "Write your review here...",
                 "submit": "Submit",
                 "successMessage": "Your feedback has been successfully added"
@@ -188,30 +194,33 @@
             "stadiumAvailability": {
                 "headerTitle": "Stadium Availability",
                 "noTimeSlotsTitle": "No Time Slots Yet",
-                "noTimeSlotsMessage": "There are no time slots available for {{selectedDay}}. Check other days.",
+                "noTimeSlotsMessage": "No time slots available for {{selectedDay}}. Check other days.",
                 "defaultImageDescription": "Default image for stadium",
                 "duration": "Duration:",
                 "teams": "Teams:",
                 "playersLeft": "Players Left:",
                 "seeDetails": "See Details",
-                "mins": "mins",
-                "teamsFormat": "2 teams of {{teamSize}}",
+                "mins": "Minutes",
+                "teamsFormat": "2 Teams with {{teamSize}} players",
                 "numberOfPlayersLeft": "{{count}} players left",
-                "court": "court",
-                "qrCodeMessage": "Your QR code for this booking has been successfully created",
+                "court": "Court",
+                "qrCodeMessage": "Your QR code for this booking has been successfully generated",
                 "today": "Today",
                 "tomorrow": "Tomorrow"
-            }, 
-            "fieldListScreen":{
-                "headerTitle": "Field List",
-                "explore":"Explore"
             },
-            "listStadiumScreen":{
-                "search":"Search...",
-                "listingCourt":"Listings court",
-                "map":"Map",
-                "rental":"Rental",
-                "list":"List"
+            "fieldListScreen": {
+                "headerTitle": "Field List",
+                "explore": "Explore"
+            },
+            "listStadiumScreen": {
+                "search": "Search...",  
+                "listingCourt": "Listing Court",
+                "map": "Map",
+                "rental": "Rental",
+                "list": "List"
+            },
+            "matchDetailScreen":{
+                "joinTeam":"Join Team"
             }
         }
     }

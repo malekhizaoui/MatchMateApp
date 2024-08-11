@@ -132,7 +132,7 @@ export const TeamPositionsFootball = [
 
 export const TeamPositionsBasketball = [
   {
-    top: '5%',
+    top: '3%',
     left: '20%',
     position: 'absolute',
     zIndex: 999,
@@ -141,7 +141,7 @@ export const TeamPositionsBasketball = [
     maxWidth: 40,
   },
   {
-    top: '5%',
+    top: '3%',
     right: '20%',
     position: 'absolute',
     zIndex: 999,
@@ -150,7 +150,7 @@ export const TeamPositionsBasketball = [
     maxWidth: 40,
   },
   {
-    top: '17%',
+    top: '19%',
     left: '25%',
     position: 'absolute',
     zIndex: 999,
@@ -159,7 +159,7 @@ export const TeamPositionsBasketball = [
     maxWidth: 40,
   },
   {
-    top: '17%',
+    top: '19%',
     right: '25%',
     position: 'absolute',
     zIndex: 999,
@@ -168,7 +168,7 @@ export const TeamPositionsBasketball = [
     maxWidth: 40,
   },
   {
-    top: '27%',
+    top: '29%',
     right: '45%',
     position: 'absolute',
     zIndex: 999,
@@ -177,7 +177,7 @@ export const TeamPositionsBasketball = [
     maxWidth: 40,
   },
   {
-    bottom: '5%',
+    bottom: '3%',
     left: '20%',
     position: 'absolute',
     zIndex: 999,
@@ -186,7 +186,7 @@ export const TeamPositionsBasketball = [
     maxWidth: 40,
   },
   {
-    bottom: '5%',
+    bottom: '3%',
     right: '20%',
     position: 'absolute',
     zIndex: 999,
@@ -195,7 +195,7 @@ export const TeamPositionsBasketball = [
     maxWidth: 40,
   },
   {
-    bottom: '17%',
+    bottom: '19%',
     left: '25%',
     position: 'absolute',
     zIndex: 999,
@@ -204,7 +204,7 @@ export const TeamPositionsBasketball = [
     maxWidth: 40,
   },
   {
-    bottom: '17%',
+    bottom: '19%',
     right: '25%',
     position: 'absolute',
     zIndex: 999,
@@ -213,7 +213,7 @@ export const TeamPositionsBasketball = [
     maxWidth: 40,
   },
   {
-    bottom: '27%',
+    bottom: '29%',
     right: '45%',
     position: 'absolute',
     zIndex: 999,

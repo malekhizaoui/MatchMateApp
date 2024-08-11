@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {
-  StatusBar,
-  View,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import {
   ContainerApp,
   TextNameProfile,
@@ -20,8 +16,9 @@ import useProfile from './useProfile';
 import GameHistoryCardComponent from '../../../Components/ProfileComponents/GameHistoryCardComponent';
 import SkeletonBookingCard from '../../../Components/SkeletonLoadingComponents/SkeletonBookingCard';
 
-const GameHistoryScreen = ({ navigation, route }: any) => {
-  const { userData, gameHistory, loadMoreGameHistory, isLoading } = useProfile(navigation); // Add isLoading from useProfile
+const GameHistoryScreen = ({ navigation, route }:any) => {
+  const { t } = useTranslation();  // i18next hook
+  const { userData, gameHistory, loadMoreGameHistory, isLoading } = useProfile(navigation);
   const palette = usePalette();
   const { user } = route.params;
 
@@ -29,18 +26,19 @@ const GameHistoryScreen = ({ navigation, route }: any) => {
     <ContainerApp palette={palette}>
       <NavigateBack
         navigation={navigation}
-        headerTitle={'Game history'}
+        headerTitle={t('profile.gameHistory.header')}
         color={palette.darkBackgroundColor}
       />
       
       <ProfileHeaderContainer palette={palette}>
-        <ImageProfile palette={palette}
+        <ImageProfile
+          palette={palette}
           source={
             user.image
               ? { uri: user.image }
               : require('../../../assets/Images/userAnonymousImage.png')
-          }></ImageProfile>
-
+          }
+        />
         <GameHistoryHeaderContainer palette={palette}>
           <TextNameProfile palette={palette}>
             {user.firstName} {user.lastName}
@@ -48,11 +46,13 @@ const GameHistoryScreen = ({ navigation, route }: any) => {
           <TextNameProfile palette={palette}>{user?.email}</TextNameProfile>
         </GameHistoryHeaderContainer>
       </ProfileHeaderContainer>
-      <GameHistoryPropertiesContainer palette={palette}
+      <GameHistoryPropertiesContainer
+        palette={palette}
         contentContainerStyle={{
           alignItems: 'center',
           justifyContent: 'space-between',
-        }}>
+        }}
+      >
         <GamePropertyContent style={{ alignContent: "center" }}>
           {isLoading ? (
             [1, 2, 3, 4].map((_, index) => (
@@ -87,7 +87,7 @@ const GameHistoryScreen = ({ navigation, route }: any) => {
                   marginTop: 20,
                   textAlign: 'center',
                 }}>
-                No Game History Yet
+                {t('profile.gameHistory.noGameHistory')}
               </Text>
               <Text
                 style={{
@@ -97,7 +97,7 @@ const GameHistoryScreen = ({ navigation, route }: any) => {
                   textAlign: 'center',
                   paddingHorizontal: 20,
                 }}>
-                You haven't played any games yet. Start exploring our stadiums and book your favorite time slot now!
+                {t('profile.gameHistory.noGameHistoryDetail')}
               </Text>
               <TouchableOpacity
                 style={{
@@ -109,13 +109,15 @@ const GameHistoryScreen = ({ navigation, route }: any) => {
                 }}
                 onPress={() => navigation.navigate('HomeTab', { Screen: "Home" })}
               >
-                <Text style={{ color: 'white', fontSize: 16 }}>Explore Stadiums</Text>
+                <Text style={{ color: 'white', fontSize: 16 }}>{t('profile.gameHistory.exploreStadiums')}</Text>
               </TouchableOpacity>
             </View>
           )}
           {!isLoading && gameHistory && gameHistory.length > 0 && gameHistory.length % 4 === 0 && (
             <TouchableOpacity onPress={loadMoreGameHistory}>
-              <Text style={{ color: palette.primaryColor, marginBottom: 60, fontSize: 18, fontWeight: "600" }}>More detail...</Text>
+              <Text style={{ color: palette.primaryColor, marginBottom: 60, fontSize: 18, fontWeight: "600" }}>
+                {t('profile.gameHistory.moreDetail')}
+              </Text>
             </TouchableOpacity>
           )}
         </GamePropertyContent>

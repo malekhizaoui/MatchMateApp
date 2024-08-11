@@ -29,11 +29,12 @@ import ModalQrCodeGenerateComponent from '../../../Components/HomeComponents/Mod
 import CardBookingComponents from '../../../Components/HomeComponents/CardBookingComponents';
 import SkeletonBookingCard from '../../../Components/SkeletonLoadingComponents/SkeletonBookingCard';
 import BookingIconSVG from '../../../assets/Icons/svg/TabsIcon/BookingIconSVG';
+import { useTranslation } from 'react-i18next';
 export const BookingScreen = ({navigation, route}: any) => {
   const {BookingList, removeBookingFromUser} = useBooking(route);
   const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
   const palette = usePalette();
-
+  const {t} =useTranslation()
   const navigate = (timeSlotId: string) => {
 
     navigation.navigate('BookingDetail', {
@@ -51,7 +52,7 @@ export const BookingScreen = ({navigation, route}: any) => {
           fontWeight: '700',
           paddingBottom: 20,
         }}>
-        Stadiums Booking
+       {t('booking.bookingScreen.title')}
       </Text>
       <ScrollView
         style={{width: '100%'}}
@@ -115,7 +116,8 @@ export const BookingScreen = ({navigation, route}: any) => {
                   textAlign: 'center',
                 }}
               >
-                No Bookings Yet
+                       {t('booking.bookingScreen.noBookingsTitle')}
+
               </Text>
               <Text
                 style={{
@@ -126,8 +128,8 @@ export const BookingScreen = ({navigation, route}: any) => {
                   paddingHorizontal: 20,
                 }}
               >
-                You haven't made any bookings yet or delay is over. Start exploring our stadiums and book your favorite time slot now!
-              </Text>
+                       {t('booking.bookingScreen.noBookingsMessage')}
+                       </Text>
               <TouchableOpacity
                 style={{
                   marginTop: 30,
@@ -138,7 +140,7 @@ export const BookingScreen = ({navigation, route}: any) => {
                 }}
                 onPress={() => navigation.navigate('HomeTab',{Screen:"Home"})}
               >
-                <Text style={{ color: 'white', fontSize: 16 }}>Explore Stadiums</Text>
+                <Text style={{ color: 'white', fontSize: 16 }}>{t('booking.bookingScreen.exploreButton')}</Text>
               </TouchableOpacity>
             </View>)
           : [1, 2, 3, 4].map((_, index) => (

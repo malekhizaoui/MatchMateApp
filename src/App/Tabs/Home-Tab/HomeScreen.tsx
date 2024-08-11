@@ -13,8 +13,6 @@ import {
   ExploreRegionContainer,
   RegionExploreTxt,
   RegionTxt,
-  InputContainer,
-  TextInputStyle,
   ListContainer,
   TextContainer,
   TextTitleList,
@@ -24,7 +22,6 @@ import {Dropdown} from 'react-native-element-dropdown';
 import {useHome} from './useHome';
 import PinIconSVG from '../../../assets/Icons/svg/PinIconSVG';
 import {usePalette} from '../../../assets/color-palette/ThemeApp';
-import SearchIconSVG from '../../../assets/Icons/svg/SearchIconSVG';
 import FieldsCardComponent from '../../../Components/HomeComponents/FieldsCardComponent';
 import StadiumCardComponent from '../../../Components/HomeComponents/StadiumCardComponent';
 import {useColorScheme} from 'react-native';
@@ -157,7 +154,7 @@ export const HomeScreen = ({navigation}: any) => {
             </View>
           </HeaderContainer>
         )}
-        <InputContainer palette={palette}>
+        {/* <InputContainer palette={palette}>
           <SearchIconSVG color="grey" />
           <TextInputStyle
             placeholder={t('home.homeScreen.searchPlaceholder')}
@@ -167,7 +164,7 @@ export const HomeScreen = ({navigation}: any) => {
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
           />
-        </InputContainer>
+        </InputContainer> */}
         
         {!isInputFocused && (
           <>

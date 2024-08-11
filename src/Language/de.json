@@ -1,0 +1,228 @@
+{
+    "translation": {
+        "tabs": {
+            "home": "Startseite",
+            "leaderboard": "Bestenliste",
+            "booking": "Buchung",
+            "profile": "Profil"
+        },
+        "authentication": {
+            "welcome": "Willkommen bei MatchMate",
+            "signInWithGoogle": "Mit Google anmelden",
+            "signInWithMatchMate": "Mit MatchMate anmelden",
+            "signUpOrSignInWith": "Melden Sie sich an oder registrieren Sie sich mit einer dieser Anmeldemethoden",
+            "signInToMatchMate": "Bei MatchMate anmelden",
+            "emailPlaceholder": "z.B., email@example.com",
+            "emailAddress": "E-Mail-Adresse",
+            "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+            "password": "Passwort",
+            "signIn": "Anmelden",
+            "forgotPassword": "Passwort vergessen?",
+            "or": "oder",
+            "createAccount": "Konto erstellen",
+            "signUp": "Registrieren",
+            "quickAndEasy": "Schnell und einfach",
+            "firstName": "Vorname",
+            "lastName": "Nachname",
+            "age": "Alter",
+            "newPassword": "Neues Passwort",
+            "continue": "Weiter",
+            "passwordChanged": "Ihr Passwort wurde erfolgreich geändert!",
+            "connectWithNewPassword": "Bitte melden Sie sich jetzt mit Ihrem neuen Passwort an",
+            "confirmationCode": "Bestätigungscode",
+            "verificationMailSent": "Eine E-Mail wurde an die folgende Adresse gesendet",
+            "verifyEmailPrompt": "Wenn Sie nichts erhalten haben, gehen Sie bitte zurück und überprüfen Sie Ihre E-Mail-Adresse",
+            "validate": "Validieren",
+            "chooseProfilePicture": "Wählen Sie ein schönes Profilbild oder machen Sie ein Selfie!",
+            "communityTrustSafety": "MatchMate ist in erster Linie eine Gemeinschaft, in der Vertrauen und Sicherheit im Vordergrund stehen. Daher möchten wir, dass alle Mitglieder durch ein Profilbild identifiziert werden!",
+            "takeSelfie": "Ein Selfie machen",
+            "choosePicture": "Bild auswählen",
+            "skip": "Überspringen",
+            "step1of2": "Schritt 1 von 2",
+            "step2of2": "Schritt 2 von 2",
+            "enterYourInfo": "Bitte geben Sie Ihre Informationen ein:",
+            "confirmationCodeDescription": "Sie erhalten einen Bestätigungscode per E-Mail, um Ihr Konto wiederherzustellen.",
+            "enterNewPassword": "Bitte geben Sie Ihr neues Passwort ein:",
+            "newPasswordDescription": "Sobald Sie ein neues Passwort erstellt haben, erhalten Sie wieder Zugriff auf Ihr Konto.",
+            "errors": {
+                "invalidEmailPassword": "E-Mail oder Passwort ist ungültig",
+                "enterEmailPassword": "Bitte geben Sie Ihre E-Mail und Ihr Passwort ein",
+                "verificationCodeWrong": "Der Bestätigungscode ist falsch",
+                "passwordsDontMatch": "Ihre Passwörter stimmen nicht überein"
+            },
+            "messages": {
+                "confirmationCodeSent": "Ein Bestätigungscode wurde an Ihre E-Mail gesendet.",
+                "accountCreated": "Ihr Konto wurde erfolgreich erstellt.",
+                "passwordChanged": "Ihr Passwort wurde erfolgreich geändert"
+            }
+        },
+        "profile": {
+            "profile": {
+                "header": "Profil",
+                "personalInfo": "Persönliche Informationen",
+                "reviews": "Ihre Bewertungen",
+                "gameHistory": "Spielverlauf",
+                "logout": "Abmelden"
+            },
+            "editProfile": {
+                "header": "Profil bearbeiten",
+                "firstName": "Vorname",
+                "lastName": "Nachname",
+                "age": "Alter",
+                "password": "Passwort",
+                "saveChanges": "Änderungen speichern",
+                "takeSelfie": "Ein Selfie machen",
+                "chooseFromGallery": "Aus der Galerie auswählen",
+                "cancel": "Abbrechen"
+            },
+            "settings": {
+                "header": "Einstellungen",
+                "lightModes": "Helligkeitsmodi",
+                "lightMode": "Heller Modus",
+                "languages": "Sprachen",
+                "aboutApp": "Über die App",
+                "darkMode": "Dunkler Modus",
+                "automatic": "Automatisch",
+                "languageOptions": {
+                    "french": "Französisch",
+                    "english": "Englisch",
+                    "italian": "Italienisch",
+                    "spanish": "Spanisch",
+                    "german": "Deutsch",
+                    "automatic": "Automatisch"
+                }
+                
+            },
+
+            "reviews": {
+                "header": "Ihre Bewertungen",
+                "readyForReview": "Bereit für Bewertung",
+                "reviewed": "Bewertet",
+                "noReviews": "Keine Bewertungen verfügbar.",
+                "noReviewsDetail": "Wenn Sie ein Stadion bewerten, wird es hier angezeigt. Erkunden Sie Stadien und hinterlassen Sie Bewertungen!",
+                "exploreStadiums": "Stadien erkunden",
+                "leaveReview": "Eine Bewertung hinterlassen",
+                "peopleWaiting": "Leute warten auf Ihre Bewertung",
+                "modalReview": {
+                    "successMessage": "Ihr Feedback wurde erfolgreich hinzugefügt",
+                    "selectStarsAndTags": "Wählen Sie Sterne und Tags, um eine schnelle Bewertung abzugeben.",
+                    "writeReview": "Schreiben Sie Ihre Bewertung hier...",
+                    "submit": "Einreichen"
+                }
+            },
+            "gameHistory": {
+                "header": "Spielverlauf",
+                "noGameHistory": "Noch keine Spielverläufe",
+                "noGameHistoryDetail": "Sie haben noch keine Spiele gespielt. Erkunden Sie unsere Stadien und buchen Sie jetzt Ihren bevorzugten Slot!",
+                "exploreStadiums": "Stadien erkunden",
+                "moreDetail": "Mehr Details..."
+            },
+            "aboutScreen": {
+                "headerTitle": "Über die App",
+                "appName": "MatchMate",
+                "description": "MatchMate ist Ihr ultimativer Begleiter, um Sportaktivitäten in Ihrer Nähe zu finden und daran teilzunehmen. Egal, ob Sie Basketball, Fußball oder Volleyball spielen möchten, MatchMate verbindet Sie mit lokalen Spielen und Teams. Buchen Sie Stadionzeiten, erstellen Sie QR-Codes für den Eintritt und verfolgen Sie Ihre Sportaktivitäten alles an einem Ort.",
+                "keyFeaturesTitle": "Hauptmerkmale:",
+                "features": {
+                    "joinTeams": "• Teams beitreten und Sport treiben: Finden und treten Sie Teams bei, um Basketball, Fußball, Volleyball und mehr mit Menschen in Ihrer Nähe zu spielen.",
+                    "bookSlots": "• Stadionzeiten buchen: Buchen Sie verfügbare Zeitfenster in lokalen Stadien direkt über die App.",
+                    "generateQR": "• QR-Codes generieren: Erstellen Sie einen QR-Code für Ihre Buchungen, um den Einlass in das Stadion zu erleichtern.",
+                    "profileManagement": "• Profilverwaltung: Anzeigen und Verwalten Ihres Profils, einschließlich Ihrer persönlichen Daten und Sportvorlieben.",
+                    "gameHistory": "• Spielverlauf: Verfolgen Sie alle Spiele, die Sie gespielt haben, mit detaillierter Historie und Statistiken.",
+                    "userReviews": "• Benutzerbewertungen: Lesen und schreiben Sie Bewertungen für Spieler und Spiele, um eine vertrauenswürdige Gemeinschaft aufzubauen.",
+                    "leaderboard": "• Bestenliste: Sehen Sie, wer die aktivsten Spieler sind, mit unserer Bestenliste, die die besten Spieler basierend auf gespielten Spielen zeigt."
+                },
+                "contactUsTitle": "Kontaktieren Sie uns:",
+                "contactUs": "Für Unterstützung, Feedback oder Anfragen kontaktieren Sie uns bitte unter:",
+                "contactDetails": {
+                    "email": "E-Mail: support@matchmate.com",
+                    "phone": "Telefon: +123-456-7890"
+                },
+                "versionTitle": "Version:",
+                "version": "App-Version: 1.0.0",
+                "legalTitle": "Rechtliches:",
+                "privacyPolicy": "Datenschutzerklärung",
+                "termsOfService": "Nutzungsbedingungen",
+                "links": {
+                    "privacyPolicy": "https://www.matchmate.com/privacy-policy",
+                    "termsOfService": "https://www.matchmate.com/terms-of-service"
+                }
+            }
+        },
+        "leaderboard": {
+            "leaderboard": "Bestenliste"
+        },
+        "booking": {
+            "bookingScreen": {
+                "title": "Stadionbuchung",
+                "noBookingsTitle": "Noch keine Buchungen",
+                "noBookingsMessage": "Sie haben noch keine Buchungen vorgenommen oder die Zeit ist abgelaufen. Erkunden Sie unsere Stadien und buchen Sie jetzt Ihren bevorzugten Slot!",
+                "exploreButton": "Stadien erkunden",
+                "showQr": "QR-Code anzeigen",
+                "detail": "Detail"
+            },
+            "bookingDetailScreen": {
+                "headerTitle": "Buchungsdetails",
+                "cancelButton": "Buchung stornieren",
+                "loading": "Laden..."
+            }
+        },
+        "home": {
+            "homeScreen": {
+                "explore": "Erkunden",
+                "mostFields": "Felder",
+                "discoverAll": "Alles entdecken",
+                "recommended": "Empfohlen",
+                "searchPlaceholder": "Suchen...",
+                "nearCourt": "In der Nähe des Spielfelds",
+                "Lausanne": "Lausanne",
+                "geneva": "Genf"
+            },
+            "stadiumDetail": {
+                "headerTitle": "Stadiondetails",
+                "facilities": "Einrichtungen",
+                "reviews": "Bewertungen",
+                "addReview": "Eine Bewertung hinzufügen",
+                "noReviews": "Keine Bewertungen vorhanden",
+                "checkAvailability": "Verfügbarkeit prüfen",
+                "show_map": "Karte anzeigen",
+                "stadium_description": "Aspen ist so nah dran, wie es in Amerika nur möglich ist. Die Möglichkeiten, Ihr eigenes Abenteuer zu wählen: Skifahren, Wandern, Essen, Einkaufen und...",
+                "read_more": "Mehr lesen",
+                "selectStarsAndTags": "Wählen Sie Sterne und Tags, um eine schnelle Bewertung abzugeben.",
+                "writeReview": "Schreiben Sie Ihre Bewertung hier...",
+                "submit": "Einreichen",
+                "successMessage": "Ihr Feedback wurde erfolgreich hinzugefügt"
+            },
+            "stadiumAvailability": {
+                "headerTitle": "Stadionverfügbarkeit",
+                "noTimeSlotsTitle": "Noch keine Zeitfenster",
+                "noTimeSlotsMessage": "Für {{selectedDay}} sind keine Zeitfenster verfügbar. Überprüfen Sie andere Tage.",
+                "defaultImageDescription": "Standardbild für Stadion",
+                "duration": "Dauer:",
+                "teams": "Teams:",
+                "playersLeft": "Verbleibende Spieler:",
+                "seeDetails": "Details anzeigen",
+                "mins": "Minuten",
+                "teamsFormat": "2 Teams mit {{teamSize}} Spielern",
+                "numberOfPlayersLeft": "{{count}} Spieler übrig",
+                "court": "Spielfeld",
+                "qrCodeMessage": "Ihr QR-Code für diese Buchung wurde erfolgreich erstellt",
+                "today": "Heute",
+                "tomorrow": "Morgen"
+            },
+            "fieldListScreen": {
+                "headerTitle": "Feldliste",
+                "explore": "Erkunden"
+            },
+            "listStadiumScreen": {
+                "search": "Suchen...",  
+                "listingCourt": "Auflistungen Spielfeld",
+                "map": "Karte",
+                "rental": "Miete",
+                "list": "Liste"
+            },
+            "matchDetailScreen":{
+                "joinTeam":"Team beitreten"
+            }
+        }
+    }
+}

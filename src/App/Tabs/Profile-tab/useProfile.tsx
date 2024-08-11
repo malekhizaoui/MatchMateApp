@@ -34,6 +34,7 @@ const useProfile = ({ navigation }: any) => {
   const [currentLanguage, setCurrentLanguage] = useState(i18n.language); // Add this state
 
   console.log('i18n.language',i18n.language);
+  console.log('currentLanguage',currentLanguage);
   
   const palette = usePalette();
   const ITEMS_PER_PAGE = 4;
@@ -44,9 +45,10 @@ const useProfile = ({ navigation }: any) => {
   ];
   const languages = [
     { label: t('profile.settings.languageOptions.french'), value: 'fr',image:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ensign_of_France.svg/langfr-225px-Ensign_of_France.svg.png" },
-    { label: t('profile.settings.languageOptions.english'), value: 'eng' ,image:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/langfr-225px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"},
+    { label: t('profile.settings.languageOptions.english'), value: 'en' ,image:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/langfr-225px-Flag_of_the_United_Kingdom_%283-5%29.svg.png"},
     { label: t('profile.settings.languageOptions.italian'), value: 'it' ,image:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/langfr-225px-Flag_of_Italy.svg.png"},
     { label: t('profile.settings.languageOptions.spanish'), value: 'esp' ,image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkcsp-2jdFFPJLWdKfEXsPmzzZE3FlDsFFRBEmbdng11uKOml1NOlfH832Ok7GatwZ9AI&usqp=CAU"},
+    { label: t('profile.settings.languageOptions.german'), value: 'de' ,image:"https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1280px-Flag_of_Germany.svg.png"},
     // { label: 'Italian', value: 'it' },
   ];
 

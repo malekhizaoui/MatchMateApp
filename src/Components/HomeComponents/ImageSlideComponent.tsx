@@ -61,11 +61,11 @@ const ImageSlideComponent = ({
           justifyContent: 'center',
           height: 40,
           borderRadius: 15,
-          width: 60,
+          width: 80,
           flexDirection: 'row',
         }}>
-        <StarIconSVG color={palette.primaryColor} />
-        <Text style={{color: palette.whiteColor}}>{reviewStars}</Text>
+        {/* <StarIconSVG color={palette.primaryColor} /> */}
+        <Text style={{color: palette.whiteColor,textAlign:"center"}}>Rental {stadium?.price} CHF</Text>
       </TouchableOpacity>
     </ImagesStadiumContainer>
   );

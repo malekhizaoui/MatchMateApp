@@ -86,6 +86,10 @@ export const StadiumDetailScreen = ({
     const url = `https://www.google.com/maps/dir/?api=1&destination=${stadium.latitude},${stadium.longitude}`;
     Linking.openURL(url);
 };
+
+console.log('stadium?.status',stadium?.status === 'private');
+console.log('stadium?.status',stadium?.status);
+
   return (
     <ContainerApp palette={palette}>
       <NavigateBack
@@ -138,7 +142,7 @@ export const StadiumDetailScreen = ({
                 marginBottom: 10,
               }}>
               <TxtContainer palette={palette}>
-                {t('home.stadiumDetail.reviews')} {feedbacks && getStarsReviw(feedbacks)}
+                {t('home.stadiumDetail.reviews')} {feedbacks && getStarsReviw(feedbacks)!=="NaN"&&getStarsReviw(feedbacks)}
               </TxtContainer>
               <StarIconSVG color={palette.primaryColor} />
             </View>

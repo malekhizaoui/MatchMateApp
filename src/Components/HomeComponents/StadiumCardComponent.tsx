@@ -35,7 +35,8 @@ const StadiumCardComponent = ({
 
   const defaultImage =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpusOZAX4leJSqoJ6grIZPYdoDTgNfgKZXAA&s'; 
-
+  const starsReview = getStarsReviw(feedback);
+  
   return (
     <>
       {isLoading ? ( 
@@ -48,10 +49,10 @@ const StadiumCardComponent = ({
               <TitleDescription palette={palette}>{t('home.homeScreen.explore')} {titleDescription}</TitleDescription>
               <TextDescription palette={palette}>{t('home.homeScreen.nearCourt')}</TextDescription>
             </StadiumDescription>
-            <StarsReviewContainer palette={palette}>
+            {starsReview!=="NaN"&&<StarsReviewContainer palette={palette}>
               <StarIconSVG color='yellow' size='17' />
-              <Text style={{ color: palette.whiteColor }}>{getStarsReviw(feedback)}</Text>
-            </StarsReviewContainer>
+              <Text style={{ color: palette.whiteColor }}>{starsReview}</Text>
+            </StarsReviewContainer>}
           </StadiumContainer>
         </>
       )}

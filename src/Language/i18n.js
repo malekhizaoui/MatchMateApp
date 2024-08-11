@@ -1,19 +1,21 @@
 import 'intl-pluralrules';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import eng from './eng.json';
+import en from './eng.json';
 import fr from './fr.json';
 import it from './it.json'
 import esp from "./esp.json"
+import de from "./de.json"
 i18n.use(initReactI18next).init({
   resources: {
     fr,
-    eng,
+    en,
     it,
-    esp
+    esp,
+    de
   },
-  lng: 'eng', // Set the default language
-  fallbackLng: 'eng', // Set the fallback language
+  lng: 'en', // Set the default language
+  fallbackLng: 'en', // Set the fallback language
   keySeparator: '.', // Set the key separator character
   interpolation: {
     escapeValue: false, // React already escapes the values, so no need to escape again
