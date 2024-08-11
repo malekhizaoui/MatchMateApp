@@ -23,35 +23,52 @@ import NavigateBack from '../../../Components/NavigateBack';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../../../services/Context/AuthContext';
 
-const SignInScreen = ({ navigation }:any) => {
+// Functional component for the SignInScreen
+const SignInScreen = ({ navigation }: any) => {
+  // Retrieve color palette for styling
   const palette = usePalette();
+  // Determine the current color scheme (light or dark)
   const colorScheme = useColorScheme();
-  const { t, i18n } = useTranslation();
-  const{lightModeStatus}=useContext(AuthContext)
+  // Translation functions
+  const { t } = useTranslation();
+  // Retrieve light mode status from context
+  const { lightModeStatus } = useContext(AuthContext);
 
+  // Destructure authentication-related methods and properties
   const { email, setEmail, password, setPassword, loginUser, loading } = useAuth(navigation);
 
   return (
+    // Main container with styling
     <ContainerApp palette={palette}>
       <ContainerScreen showsVerticalScrollIndicator={false}>
+        {/* Back navigation button */}
         <View>
           <NavigateBack navigation={navigation} />
         </View>
+        
+        {/* Header section with logo and title */}
         <HeaderConnexionScreen>
           <LogoApp
-           source={
-            !lightModeStatus
-              ? colorScheme === 'light'
+            // Conditional logo based on color scheme and light mode status
+            source={
+              !lightModeStatus
+                ? colorScheme === 'light'
+                  ? require('../../../assets/Logos/MatchMate.png')
+                  : require('../../../assets/Logos/MatchMateDarkWhite.png')
+                : lightModeStatus === 'light'
                 ? require('../../../assets/Logos/MatchMate.png')
                 : require('../../../assets/Logos/MatchMateDarkWhite.png')
-              : lightModeStatus === 'light'
-              ? require('../../../assets/Logos/MatchMate.png')
-              : require('../../../assets/Logos/MatchMateDarkWhite.png')
-          }
+            }
           />
-          <HeaderTitleText palette={palette}>{t("authentication.signInToMatchMate")}</HeaderTitleText>
+          <HeaderTitleText palette={palette}>
+            {/* Translated text for sign-in header */}
+            {t("authentication.signInToMatchMate")}
+          </HeaderTitleText>
         </HeaderConnexionScreen>
+        
+        {/* Form container for authentication inputs and buttons */}
         <ContainerForm>
+          {/* Email input field */}
           <InputAuthComponent
             placeholder={t("authentication.emailPlaceholder")}
             inputName={t("authentication.emailAddress")}
@@ -59,6 +76,8 @@ const SignInScreen = ({ navigation }:any) => {
             valueInput={email}
             iconComponent={<MailIconSVG color={palette.primaryColor} />}
           />
+          
+          {/* Password input field */}
           <InputAuthComponent
             placeholder={t("authentication.passwordPlaceholder")}
             inputName={t("authentication.password")}
@@ -67,6 +86,8 @@ const SignInScreen = ({ navigation }:any) => {
             secureTextEntry={true}
             iconComponent={<PasswordIconSVG color={palette.primaryColor} />}
           />
+          
+          {/* Sign-in button */}
           <ButtonAuthComponent
             btnText={t("authentication.signIn")}
             backgroundColor={palette.primaryColor}
@@ -75,14 +96,24 @@ const SignInScreen = ({ navigation }:any) => {
             iconComponent={''}
             loading={loading}
           />
+          
+          {/* Forgot password link */}
           <TouchableOpacity onPress={() => { navigation.navigate('PasswordForgotten') }}>
-            <TextpasswordForgotten palette={palette}>{t("authentication.forgotPassword")}</TextpasswordForgotten>
+            <TextpasswordForgotten palette={palette}>
+              {t("authentication.forgotPassword")}
+            </TextpasswordForgotten>
           </TouchableOpacity>
+          
+          {/* Divider with text "or" */}
           <ContainerDivideText>
             <LineStyle palette={palette}></LineStyle>
-            <TextDivide palette={palette}>{t("authentication.or")}</TextDivide>
+            <TextDivide palette={palette}>
+              {t("authentication.or")}
+            </TextDivide>
             <LineStyle palette={palette}></LineStyle>
           </ContainerDivideText>
+          
+          {/* Button to navigate to sign-up screen */}
           <ButtonAuthComponent
             btnText={t("authentication.createAccount")}
             backgroundColor={palette.primaryColor}

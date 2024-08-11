@@ -24,9 +24,15 @@ import {
 import useAuth from './useAuth/useAuth';
 import { useTranslation } from 'react-i18next';
 
-const CodeVerificationScreen = ({ navigation, route }:any) => {
+// Functional component for the CodeVerificationScreen
+const CodeVerificationScreen = ({ navigation, route }: any) => {
+  // Retrieve color palette for styling
   const palette = usePalette();
+  
+  // Extract email from route parameters
   const email = route?.params.email;
+  
+  // Destructure authentication-related methods and properties
   const {
     verifyCode,
     ref,
@@ -36,10 +42,16 @@ const CodeVerificationScreen = ({ navigation, route }:any) => {
     getCellOnLayoutHandler,
     CELL_COUNT,
   } = useAuth(navigation, route);
-  const { t, i18n } = useTranslation();
 
+  // Retrieve translation functions
+  const { t } = useTranslation();
+
+  // Define styles for code field
   const styles = StyleSheet.create({
-    codeFieldRoot: { marginTop: 40, marginBottom: 20 },
+    codeFieldRoot: { 
+      marginTop: 40, 
+      marginBottom: 20 
+    },
     cell: {
       width: 50,
       height: 50,
@@ -57,18 +69,28 @@ const CodeVerificationScreen = ({ navigation, route }:any) => {
       borderColor: palette.secondaryTextColor,
     },
   });
+
   return (
+    // Main container with styling
     <ContainerApp palette={palette}>
       <ContainerScreen showsVerticalScrollIndicator={false}>
+        {/* Back navigation button */}
         <View style={{ marginTop: 20 }}>
           <NavigateBack navigation={navigation} />
         </View>
+        
+        {/* Header section with logo and title */}
         <HeaderConnexionScreen>
           <LogoAppStyle palette={palette}>
             <TickIconSVG color={palette.whiteColor} />
           </LogoAppStyle>
-          <HeaderTitleText palette={palette}>{t("authentication.confirmationCode")}</HeaderTitleText>
+          <HeaderTitleText palette={palette}>
+            {/* Translated text for confirmation code header */}
+            {t("authentication.confirmationCode")}
+          </HeaderTitleText>
         </HeaderConnexionScreen>
+        
+        {/* Code input field */}
         <CodeField
           ref={ref}
           {...props}
@@ -88,9 +110,13 @@ const CodeVerificationScreen = ({ navigation, route }:any) => {
             </Text>
           )}
         />
+        
+        {/* Text displaying the email and prompt to verify */}
         <TextValidationCode palette={palette}>
           {t("authentication.verificationMailSent")} {email}. {t("authentication.verifyEmailPrompt")}
         </TextValidationCode>
+        
+        {/* Button to submit the verification code */}
         <ButtonAuthComponent
           btnText={t("authentication.validate")}
           backgroundColor={palette.primaryColor}

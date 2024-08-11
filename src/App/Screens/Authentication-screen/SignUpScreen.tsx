@@ -1,19 +1,11 @@
 import React, { useContext } from 'react';
-import { StatusBar, TouchableOpacity, useColorScheme, View } from 'react-native';
+import {  useColorScheme, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import {
   ContainerApp,
   ContainerScreen,
   ContainerForm,
-  HeaderConnexionScreen,
-  LogoAppStyle,
-  TextpasswordForgotten,
-  ContainerDivideText,
-  LineStyle,
-  HeaderTitleText,
-  TextDivide,
-  LogoApp,
   HeaderRegisterScreen,
   HeaderText,
   SeperateLine,
@@ -30,7 +22,7 @@ import { AuthContext } from '../../../services/Context/AuthContext';
 import UserNameIconSVG from '../../../assets/Icons/svg/UsernameIconSVG';
 import AgeIconSVG from '../../../assets/Icons/svg/AgeIconSV';
 
-const SignInScreen = ({ navigation }: any) => {
+const SignUpScreen = ({ navigation }: any) => {
   // Get color palette for theming
   const palette = usePalette();
   
@@ -105,4 +97,4 @@ const SignInScreen = ({ navigation }: any) => {
   );
 };
 
-export default SignInScreen;
+export default SignUpScreen;
