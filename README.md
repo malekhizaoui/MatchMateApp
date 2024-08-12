@@ -1,79 +1,103 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# MatchMate
 
-# Getting Started
+Welcome to MatchMate! MatchMate is your ultimate companion to find and participate in sports activities near you. Whether you want to play basketball, football, or volleyball, MatchMate connects you with local games and teams. Book stadium times, create QR codes for entry, and track your sports activities all in one place.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## About the App
 
-## Step 1: Start the Metro Server
+**MatchMate** is designed to help sports enthusiasts easily connect with local games and teams. The app provides a seamless experience for finding sports activities, booking stadium slots, and managing your sports profile.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+### Key Features:
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- **Join Teams and Play Sports:** Find and join teams to play basketball, football, volleyball, and more with people near you.
+- **Book Stadium Slots:** Book available time slots in local stadiums directly through the app.
+- **Generate QR Codes:** Create QR codes for your bookings to facilitate entry into the stadium.
+- **Profile Management:** View and manage your profile, including your personal information and sports preferences.
+- **Game History:** Track all the games you have played with detailed history and statistics.
+- **User Reviews:** Read and write reviews for players and games to build a trusted community.
+- **Leaderboard:** See who the most active players are with our leaderboard showing the top players based on games played.
 
-```bash
-# using npm
-npm start
+## Installation
 
-# OR using Yarn
-yarn start
-```
+Follow these steps to set up and start the project:
 
-## Step 2: Start your Application
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/malekhizaoui/MatchMateApp.git
+    cd matchmateapp
+    ```
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+2. Install dependencies using yarn:
+    ```bash
+    yarn
+    ```
 
-### For Android
+3. Configure the `BaseUrl`:
+    - Navigate to the `src/services/BaseUrl/index.tsx` file.
+    - Update the `BaseUrl` variable with your local IP address:
+      ```typescript
+      let BaseUrl = '';
 
-```bash
-# using npm
-npm run android
+      {
+        Platform.OS == 'android'
+          ? (BaseUrl = 'http://[provided address]:3009/api/v1')
+          : (BaseUrl = 'http://[provided address]:3009/api/v1');
+      }
+      ```
+    - To find your local IP address:
+      1. Open Command Prompt (cmd) and type `ipconfig`.
+      2. Look for the `IPv4 Address` in the output and replace `[provided address]` with this address in the `BaseUrl` configuration.
 
-# OR using Yarn
-yarn android
-```
+4. Start the development server:
+    ```bash
+    yarn start
+    ```
 
-### For iOS
+5. To run the app on an Android emulator or device:
+## Running on a Virtual Android Device
 
-```bash
-# using npm
-npm run ios
+    - Make sure you have Android Studio installed on your machine.
+    - Press `a` in the terminal where the development server is running to launch the app on the Android emulator or connected Android device.
 
-# OR using Yarn
-yarn ios
-```
+## Running on a Physical Android Device
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+To run the app on your Android smartphone, follow these steps:
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+1. Open Developer Mode on your Android device:
+    - Go to `Settings` > `About phone` and tap on `Build number` multiple times until Developer Mode is activated.
 
-## Step 3: Modifying your App
+2. Enable Developer Mode and configure it:
+    - Go to `Settings` > `System` > `Developer options`.
+    - Enable `Wireless debugging` or `ADB debugging` (depending on your Android version).
 
-Now that you have successfully run the app, let's modify it.
+3. Pair your device with your development machine:
+    - In Developer options, choose `Pair device with pairing code`.
+    - Click on the `Pair` button to get a 6-digit code.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+4. Open Command Prompt (cmd) and navigate to the Android SDK platform-tools directory:
+    ```bash
+    cd C:\Users\your-username\AppData\Local\Android\Sdk\platform-tools
+    ```
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+5. Pair and connect to your device:
+    ```bash
+    ./adb pair 192.168.1.102:[provided number]
+    ./adb connect 192.168.1.102:[provided number]
+    ```
 
-## Congratulations! :tada:
+6. Start the development server again (if needed) and press `a` to run the app on your connected Android device:
+    ```bash
+    yarn start
+    ```
+## Testing the App
 
-You've successfully run and modified your React Native App. :partying_face:
+For better testing, you can use the following account:
 
-### Now what?
+- **Email:** hizaoui.malek.habib@gmail.com
+- **Password:** 123456789
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+Use these credentials to log in and explore the app's features.
+## Contributors
 
-# Troubleshooting
+    - Malek habib hizaoui
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Feel free to contribute or report issues! Happy coding!
