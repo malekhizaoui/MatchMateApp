@@ -14,7 +14,7 @@ interface PaletteProps {
 // Input style
 export const ContainerInput = styled.View<PaletteProps>`
   width: 100%;
-  height: 70px;
+  height: 73px;
   border-radius: 10px;
   border: 1px solid ${({ palette  }) => palette .secondaryTextColor};
   margin-bottom: 20px;

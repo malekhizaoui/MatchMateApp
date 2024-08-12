@@ -91,6 +91,7 @@ export const HomeScreen = ({navigation}: any) => {
     setRegion,
   } = useHome(navigation);
   const [isInputFocused, setIsInputFocused] = useState(false);
+console.log("basketballField",basketballField);
 
   return (
     <ContainerApp palette={palette}>

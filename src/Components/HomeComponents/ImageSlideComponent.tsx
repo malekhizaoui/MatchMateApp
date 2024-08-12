@@ -50,7 +50,7 @@ const ImageSlideComponent = ({
         }}>
         <Text style={{color: palette.whiteColor}}>1/1</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      {stadium?.status!=="Public"&&<TouchableOpacity
         style={{
           position: 'absolute',
           bottom: '5%',
@@ -66,7 +66,7 @@ const ImageSlideComponent = ({
         }}>
         {/* <StarIconSVG color={palette.primaryColor} /> */}
         <Text style={{color: palette.whiteColor,textAlign:"center"}}>Rental {stadium?.price} CHF</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>}
     </ImagesStadiumContainer>
   );
 };

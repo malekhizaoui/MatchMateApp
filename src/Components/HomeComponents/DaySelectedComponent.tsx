@@ -12,11 +12,11 @@ import {
   MonthText,
 } from './StyledComponent/StyledComponent';
 
-import { usePalette } from '../../assets/color-palette/ThemeApp';
+import {usePalette} from '../../assets/color-palette/ThemeApp';
 interface DaySelectedComponentProps {
   selectedDay: object;
   item: any;
-  setSelectedDay: (item:any) => void;
+  setSelectedDay: (item: any) => void;
 }
 
 const DaySelectedComponent = ({
@@ -24,27 +24,26 @@ const DaySelectedComponent = ({
   setSelectedDay,
   item,
 }: DaySelectedComponentProps) => {
-  const palette=usePalette()
+  const palette = usePalette();
 
   return (
-    <DayContent onPress={() => {setSelectedDay(item)} 
-    }
-    palette={palette}
->
-      <DayText     palette={palette}
-      >{item.day}</DayText>
-      <MonthText     palette={palette}
-      > {item.date}</MonthText>
+    <DayContent
+      onPress={() => {
+        setSelectedDay(item);
+      }}
+      palette={palette}>
+      <DayText palette={palette}>{item.day}</DayText>
+      <MonthText palette={palette}> {item.date}</MonthText>
       <View
         style={[selectedDay === item && styles.selectedDayContainer]}></View>
-        </DayContent>
+    </DayContent>
   );
 };
-const styles=StyleSheet.create({
-    selectedDayContainer: {
-        width: '80%',
-        height: 2,
-        backgroundColor: '#04ADB3',
-      }
-})
+const styles = StyleSheet.create({
+  selectedDayContainer: {
+    width: '80%',
+    height: 2,
+    backgroundColor: '#04ADB3',
+  },
+});
 export default DaySelectedComponent;

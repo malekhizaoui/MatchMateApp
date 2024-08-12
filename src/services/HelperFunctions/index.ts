@@ -9,56 +9,106 @@ export const extractTimeFromDate=(dateString:Date)=> {
   
     return `${hours}:${minutes}`;
   }
-
-  export const formatDate = (dateString:Date) => {
+  export const formatDate = (dateString: Date) => {
     const date = new Date(dateString);
   
     const day = date.getUTCDate();
     const weekday = date.toLocaleDateString('en-GB', {
       weekday: 'long',
-      timeZone: 'Europe/Paris'
+      timeZone: 'Europe/Paris',
     });
     const year = date.getUTCFullYear();
   
     return `${day} ${weekday}, ${year}`;
   };
-
-  const capitalizeFirstLetter = (string:string) => {
+  
+  const capitalizeFirstLetter = (string: string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
- export const getWeekDaysInfo = () => {
-  const today = new Date();
-  const daysInfo = [];
   
-  const options = { month: 'long', weekday: 'long' };
-  const language = i18n.language ; 
-
-  daysInfo.push({
-    day: capitalizeFirstLetter(i18n.t('home.stadiumAvailability.today')),
-    date: `${today.getDate()} ${capitalizeFirstLetter(today.toLocaleDateString(language, { month: 'long' }))}`,
-    realDay: capitalizeFirstLetter(today.toLocaleDateString(language, { weekday: 'long' })), // Actual day of the week
-  });
-
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1);
-  daysInfo.push({
-    day: capitalizeFirstLetter(i18n.t('home.stadiumAvailability.tomorrow')),
-    date: `${tomorrow.getDate()} ${capitalizeFirstLetter(tomorrow.toLocaleDateString(language, { month: 'long' }))}`,
-    realDay: capitalizeFirstLetter(tomorrow.toLocaleDateString(language, { weekday: 'long' })), // Actual day of the week
-  });
-
-  for (let i = 2; i < 7; i++) {
-    const nextDay = new Date(today);
-    nextDay.setDate(today.getDate() + i);
+  export const getWeekDaysInfo = () => {
+    const today = new Date();
+    const daysInfo = [];
+  
+    const language = i18n.language;
+  
     daysInfo.push({
-      day: capitalizeFirstLetter(nextDay.toLocaleDateString(language, { weekday: 'long' })),
-      date: `${nextDay.getDate()} ${capitalizeFirstLetter(nextDay.toLocaleDateString(language, { month: 'long' }))}`,
-      realDay: capitalizeFirstLetter(nextDay.toLocaleDateString(language, { weekday: 'long' })), // Actual day of the week
+      day: capitalizeFirstLetter(i18n.t('home.stadiumAvailability.today')),
+      date: `${today.getDate()} ${capitalizeFirstLetter(today.toLocaleDateString(language, { month: 'long' }))}`,
+      realDay: capitalizeFirstLetter(today.toLocaleDateString('en-US', { weekday: 'long' })), // Always in English
     });
-  }
+  
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    daysInfo.push({
+      day: capitalizeFirstLetter(i18n.t('home.stadiumAvailability.tomorrow')),
+      date: `${tomorrow.getDate()} ${capitalizeFirstLetter(tomorrow.toLocaleDateString(language, { month: 'long' }))}`,
+      realDay: capitalizeFirstLetter(tomorrow.toLocaleDateString('en-US', { weekday: 'long' })), // Always in English
+    });
+  
+    for (let i = 2; i < 7; i++) {
+      const nextDay = new Date(today);
+      nextDay.setDate(today.getDate() + i);
+      daysInfo.push({
+        day: capitalizeFirstLetter(nextDay.toLocaleDateString(language, { weekday: 'long' })),
+        date: `${nextDay.getDate()} ${capitalizeFirstLetter(nextDay.toLocaleDateString(language, { month: 'long' }))}`,
+        realDay: capitalizeFirstLetter(nextDay.toLocaleDateString('en-US', { weekday: 'long' })), // Always in English
+      });
+    }
+  
+    return daysInfo;
+  };
+  
+  
+//   export const formatDate = (dateString:Date) => {
+//     const date = new Date(dateString);
+  
+//     const day = date.getUTCDate();
+//     const weekday = date.toLocaleDateString('en-GB', {
+//       weekday: 'long',
+//       timeZone: 'Europe/Paris'
+//     });
+//     const year = date.getUTCFullYear();
+  
+//     return `${day} ${weekday}, ${year}`;
+//   };
 
-  return daysInfo;
-};
+//   const capitalizeFirstLetter = (string:string) => {
+//     return string.charAt(0).toUpperCase() + string.slice(1);
+//   };
+//  export const getWeekDaysInfo = () => {
+//   const today = new Date();
+//   const daysInfo = [];
+  
+//   const options = { month: 'long', weekday: 'long' };
+//   const language = i18n.language ; 
+
+//   daysInfo.push({
+//     day: capitalizeFirstLetter(i18n.t('home.stadiumAvailability.today')),
+//     date: `${today.getDate()} ${capitalizeFirstLetter(today.toLocaleDateString(language, { month: 'long' }))}`,
+//     realDay: capitalizeFirstLetter(today.toLocaleDateString(language, { weekday: 'long' })), // Actual day of the week
+//   });
+
+//   const tomorrow = new Date(today);
+//   tomorrow.setDate(today.getDate() + 1);
+//   daysInfo.push({
+//     day: capitalizeFirstLetter(i18n.t('home.stadiumAvailability.tomorrow')),
+//     date: `${tomorrow.getDate()} ${capitalizeFirstLetter(tomorrow.toLocaleDateString(language, { month: 'long' }))}`,
+//     realDay: capitalizeFirstLetter(tomorrow.toLocaleDateString(language, { weekday: 'long' })), // Actual day of the week
+//   });
+
+//   for (let i = 2; i < 7; i++) {
+//     const nextDay = new Date(today);
+//     nextDay.setDate(today.getDate() + i);
+//     daysInfo.push({
+//       day: capitalizeFirstLetter(nextDay.toLocaleDateString(language, { weekday: 'long' })),
+//       date: `${nextDay.getDate()} ${capitalizeFirstLetter(nextDay.toLocaleDateString(language, { month: 'long' }))}`,
+//       realDay: capitalizeFirstLetter(nextDay.toLocaleDateString(language, { weekday: 'long' })), // Actual day of the week
+//     });
+//   }
+
+//   return daysInfo;
+// };
   
 
   export const getStarsReviw = (feedbacks: Feedback[]): string => {

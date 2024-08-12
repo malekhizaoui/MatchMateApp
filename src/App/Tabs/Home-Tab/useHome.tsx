@@ -70,6 +70,9 @@ export const useHome = (navigation:any, route: any=false) => {
       const res = await handleRequests('get', `fieldRegion/${region}`);
       res && setfieldData(res);
       setBasketballField(res[0].stadiums);
+      console.log("setBasketballField",basketballField);
+      console.log("fieldData",fieldData);
+      
       setFootballField(res[1].stadiums);
       setVolleyballField(res[2].stadiums);
     } catch (error) {

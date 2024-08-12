@@ -32,6 +32,8 @@ export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
             console.log('err', error);
         }
     };
+    const daysInEnglish=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+console.log("day",day);
 
     useFocusEffect(
         useCallback(() => {
@@ -90,7 +92,9 @@ export const StadiumAvailabilityScreen = ({ navigation, route }: any) => {
                 showsVerticalScrollIndicator={false}
                 style={{ width: '100%' }}>
                 {stadium && stadium.timeSlots.length > 0 ? (
-                    stadium?.timeSlots.some((timeSlot: any) => {
+                    stadium?.timeSlots.some((timeSlot: any,index) => {
+                        console.log("timeSlot.day ",timeSlot.day );
+                        
                         return timeSlot.day === selectedDay.realDay;
                     }) ? (
                         // Render time slots
